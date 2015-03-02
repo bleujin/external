@@ -70,14 +70,6 @@ public class TestScriptManager extends TestCase {
 		craken.login().pathBy("/sample").children().debugPrint();
 	}
 	
-
-	public void testPivot() throws Exception {
-		Object[] params = new Object[]{new Integer[]{1, 2, 3}, new String[]{"bleujin", "hero", "jin"}} ;
-		List<Object[]> result = ScriptManager.pivot(params) ;
-		
-		Debug.line(result.get(2), result.get(2));
-	}
-	
 	
 	public void testIFNotExist() throws Exception {
 		ScriptManager sm = ScriptManager.create(craken, Executors.newScheduledThreadPool(1), new File("./resource/js")) ;
