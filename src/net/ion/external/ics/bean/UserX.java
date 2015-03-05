@@ -2,18 +2,18 @@ package net.ion.external.ics.bean;
 
 import java.io.IOException;
 
-import net.ion.cms.env.ICSCraken;
 import net.ion.cms.rest.sync.Def;
 import net.ion.craken.node.ReadNode;
+import net.ion.external.domain.Domain;
 
 public class UserX extends BeanX{
 
-	public UserX(ICSCraken rc, ReadNode node) {
-		super(rc, node);
+	public UserX(Domain domain, ReadNode node) {
+		super(domain, node);
 	}
 	
-	public final static UserX create(ICSCraken rc, ReadNode node){
-		return new UserX(rc, node) ;
+	public final static UserX create(Domain domain, ReadNode node){
+		return new UserX(domain, node) ;
 	}
 
 	public String userId(){

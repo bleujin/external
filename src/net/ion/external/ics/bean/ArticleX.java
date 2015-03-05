@@ -1,39 +1,29 @@
 package net.ion.external.ics.bean;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
+import java.io.InputStream;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
-import javax.mail.Session;
-
-import net.ion.cms.env.ICSCraken;
 import net.ion.cms.rest.sync.Def;
-import net.ion.cms.rest.sync.Def.Article;
 import net.ion.craken.node.IteratorList;
 import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
-import net.ion.craken.node.crud.ReadChildren;
 import net.ion.craken.tree.PropertyId;
 import net.ion.craken.tree.PropertyId.PType;
-import net.ion.framework.parse.gson.stream.JsonWriter;
-import net.ion.framework.util.Debug;
+import net.ion.external.domain.Domain;
 import net.ion.framework.util.MapUtil;
 import net.ion.framework.util.SetUtil;
 
-import org.apache.lucene.queryparser.classic.ParseException;
-
 public class ArticleX extends BeanX{
 
-	private ArticleX(ICSCraken rc, ReadNode node) {
-		super(rc, node);
+	private ArticleX(Domain domain, ReadNode node) {
+		super(domain, node);
 	}
 
-	public static ArticleX create(ICSCraken rc, ReadNode node) {
-		return new ArticleX(rc, node);
+	public static ArticleX create(Domain domain, ReadNode node) {
+		return new ArticleX(domain, node);
 	}
 
 	public int artId() {
@@ -44,8 +34,18 @@ public class ArticleX extends BeanX{
 		return asString(Def.Article.CatId);
 	}
 	
+	public AfieldValueX asAfield(String afieldId) {
+		return AfieldValueX.create(domain(), session().ghostBy("/datas/avalue/" + artId() + "/" + afieldId));
+	}
+	
+	public XIterable<AfieldValueX> afields(){
+		return null ;
+	}
+
+
+	
 	public SiteCategoryX category() throws IOException {
-		return rc().findSiteCategory(catId());
+		return domain().scategory(catId());
 	}
 	
 	public int increasCount(final String propId) throws InterruptedException, ExecutionException{
@@ -62,8 +62,9 @@ public class ArticleX extends BeanX{
 	}
 
 	public XIterable<ArticleX> relateds() {
-		final IteratorList<ReadNode> relateds = node().refChildren(Article.Related).iterator() ;
-		return XIterable.create(rc(), relateds.toList(), MapUtil.<String, String>newMap(), ArticleX.class) ;
+//		final IteratorList<ReadNode> relateds = node().refChildren(Article.Related).iterator() ;
+		final IteratorList<ReadNode> relateds = node().refChildren("related").iterator() ;
+		return XIterable.create(domain(), relateds.toList(), MapUtil.<String, String>newMap(), ArticleX.class) ;
 	}
 
 	public Set<String> propKeys() {
@@ -77,6 +78,14 @@ public class ArticleX extends BeanX{
 
 	public String fileName(int tplId) {
 		return asBoolean(Def.Article.IsUsingUrlLoc) ? asString(Def.Article.ArtFileNm, tplId + "_" + artId() + ".html") : tplId + "_" + artId() + ".html";
+	}
+
+	public InputStream thumbnailStream() throws IOException {
+		return asStream("thumbimg");
+	}
+
+	public InputStream contentStream(String path) throws IOException {
+		return asStream("img" + path.toLowerCase().hashCode());
 	}
 
 

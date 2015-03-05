@@ -18,6 +18,7 @@
 	<classpathentry kind="lib" path="lib/search_util_fat.jar"/>
 	<classpathentry kind="lib" path="lib/aradon311_0.9.jar"/>
 	<classpathentry kind="lib" path="lib/netty-3.2.7.Final.jar"/>
+	<classpathentry kind="lib" path="lib/thumbnailator-0.4.3.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

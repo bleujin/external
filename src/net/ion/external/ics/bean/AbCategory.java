@@ -3,9 +3,9 @@ package net.ion.external.ics.bean;
 import java.io.IOException;
 import java.util.List;
 
-import net.ion.cms.env.ICSCraken;
 import net.ion.cms.rest.sync.Def;
 import net.ion.craken.node.ReadNode;
+import net.ion.external.domain.Domain;
 import net.ion.framework.parse.gson.stream.JsonWriter;
 import net.ion.framework.util.ListUtil;
 
@@ -14,8 +14,8 @@ import org.apache.lucene.analysis.kr.utils.StringUtil;
 public class AbCategory<T extends AbCategory> extends BeanX{
 
 	private String joiner = "/";
-	public AbCategory(ICSCraken rc, ReadNode node) {
-		super(rc, node);
+	public AbCategory(Domain domain, ReadNode node) {
+		super(domain, node);
 	}
 
 	public boolean exists(){
@@ -27,7 +27,7 @@ public class AbCategory<T extends AbCategory> extends BeanX{
 	}
 
 	public T parent() throws IOException {
-		return (T) rc().findSiteCategory(asString("parent"));
+		return (T) domain().scategory(asString("parent"));
 	}
 
 	public T joiner(String joiner) {
@@ -50,7 +50,7 @@ public class AbCategory<T extends AbCategory> extends BeanX{
 		AbCategory<T> current = this ;
 		while(StringUtil.isNotBlank(current.parent().asString("catid"))){
 			
-			names.add(0, current.asString(Def.Category.CatNm));
+			names.add(0, current.asString(Def.Category.Name));
 			current = current.parent();
 		}
 		

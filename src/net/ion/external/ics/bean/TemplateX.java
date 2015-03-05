@@ -2,18 +2,18 @@ package net.ion.external.ics.bean;
 
 import java.io.IOException;
 
-import net.ion.cms.env.ICSCraken;
 import net.ion.cms.rest.sync.Def;
 import net.ion.craken.node.ReadNode;
+import net.ion.external.domain.Domain;
 
 public class TemplateX extends BeanX{
 
-	private TemplateX(ICSCraken rc, ReadNode node) {
-		super(rc, node);
+	private TemplateX(Domain domain, ReadNode node) {
+		super(domain, node);
 	}
 	
-	public final static TemplateX create(ICSCraken rc, ReadNode node){
-		return new TemplateX(rc, node) ;
+	public final static TemplateX create(Domain domain, ReadNode node){
+		return new TemplateX(domain, node) ;
 	}
 	
 	public int tplId() {
@@ -29,7 +29,7 @@ public class TemplateX extends BeanX{
 	}
 
 	public String fileName() {
-		return asString(Def.Template.ListFileNm, tplId() + "_index.html") ;
+		return asString(Def.Template.FileName, tplId() + "_index.html") ;
 	}
 
 	public String fileName(int artId) throws IOException {
@@ -37,7 +37,11 @@ public class TemplateX extends BeanX{
 	}
 
 	public SiteCategoryX category() throws IOException {
-		return rc().findSiteCategory(catId());
+		return domain().scategory(catId());
+	}
+
+	public boolean isList() {
+		return "list".equals(asString("kindcd"));
 	}
 
 
