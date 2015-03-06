@@ -2,18 +2,16 @@ package net.ion.external.ics.bean;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import net.ion.cms.env.ICSCraken;
 import net.ion.craken.node.ReadNode;
-import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.convert.Functions;
 import net.ion.craken.node.convert.Predicates;
+import net.ion.external.domain.Domain;
 import net.ion.framework.parse.gson.JsonObject;
 import net.ion.framework.parse.gson.stream.JsonWriter;
 import net.ion.framework.util.Debug;
@@ -29,30 +27,30 @@ import com.google.common.collect.Lists;
 
 public class XIterable<T extends BeanX> implements Iterable<T>, Writable {
 
-	private ICSCraken rc;
+	private Domain domain;
 	private List<ReadNode> tnodes = null;
 	private Map<String, String> param;
 	private Class<T> clz = null;
 
-	public XIterable(ICSCraken rc, List<ReadNode> tnodes, Map<String, String> param, Class<T> clz) {
-		this.rc = rc;
+	public XIterable(Domain domain, List<ReadNode> tnodes, Map<String, String> param, Class<T> clz) {
+		this.domain = domain;
 		this.tnodes = tnodes;
 		this.param = param;
 		this.clz = clz;
 	}
 
-	public static <T extends BeanX> XIterable<T> create(ICSCraken rc, List<ReadNode> tnodes, Map<String, String> param, Class<T> clz) {
-		return new XIterable<T>(rc, tnodes, param, clz);
+	public static <T extends BeanX> XIterable<T> create(Domain domain, List<ReadNode> tnodes, Map<String, String> param, Class<T> clz) {
+		return new XIterable<T>(domain, tnodes, param, clz);
 	}
 
-	public static <T extends BeanX> XIterable<T> create(ICSCraken rc, List<ReadNode> tnodes, Class<T> clz) {
-		return new XIterable<T>(rc, tnodes, MapUtil.<String, String> newMap(), clz);
+	public static <T extends BeanX> XIterable<T> create(Domain domain, List<ReadNode> tnodes, Class<T> clz) {
+		return new XIterable<T>(domain, tnodes, MapUtil.<String, String> newMap(), clz);
 	}
 
 	public XIterable<T> match(String expression) {
 		Iterable<ReadNode> newiter = Iterables.filter(tnodes, Predicates.where(expression));
 		List<ReadNode> newlist = ListUtil.toList(Iterables.toArray(newiter, ReadNode.class));
-		return new XIterable<T>(rc, newlist, param, clz);
+		return new XIterable<T>(domain, newlist, param, clz);
 	}
 
 	@Override
@@ -68,7 +66,7 @@ public class XIterable<T extends BeanX> implements Iterable<T>, Writable {
 			@Override
 			public T next() {
 				try {
-					return (T) clz.getMethod("create", ICSCraken.class, ReadNode.class).invoke(null, rc, iterator.next());
+					return (T) clz.getMethod("create", Domain.class, ReadNode.class).invoke(null, domain, iterator.next());
 				} catch (Exception e) {
 					throw new IllegalStateException(e);
 				}
@@ -162,10 +160,10 @@ public class XIterable<T extends BeanX> implements Iterable<T>, Writable {
 		try {
 			for (ReadNode node : tnodes) {
 				if (ObjectUtil.toString(fqnName).equals(node.fqn().name())) {
-					return (T) clz.getMethod("create", ICSCraken.class, ReadNode.class).invoke(null, rc, node);
+					return (T) clz.getMethod("create", Domain.class, ReadNode.class).invoke(null, domain, node);
 				}
 			}
-			return (T) clz.getMethod("create", ICSCraken.class, ReadNode.class).invoke(null, rc, rc.session().ghostBy("/notfound"));
+			return (T) clz.getMethod("create", Domain.class, ReadNode.class).invoke(null, domain, domain.session().ghostBy("/notfound"));
 		} catch (Exception e) {
 			throw new IOException(e);
 		}

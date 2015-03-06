@@ -4,38 +4,35 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 
-import net.ion.cms.env.ICSCraken;
 import net.ion.craken.node.IteratorList;
 import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.crud.ChildQueryRequest;
 import net.ion.craken.node.crud.ChildQueryResponse;
-import net.ion.craken.node.crud.PredicatedResponse;
-import net.ion.craken.node.crud.util.ResponsePredicates;
+import net.ion.external.domain.Domain;
 import net.ion.framework.db.Page;
 import net.ion.framework.util.Debug;
 import net.ion.framework.util.MapUtil;
 import net.ion.framework.util.ObjectUtil;
 
 import org.apache.lucene.analysis.kr.utils.StringUtil;
-import org.apache.lucene.queryparser.classic.ParseException;
 
 import com.google.common.base.Function;
 
 public class GalleryChildrenX {
 
 
-	private ICSCraken rc;
+	private Domain domain;
 	private ChildQueryRequest queryRequest;
 	private Map<String, String> param = MapUtil.newMap() ;
 
-	private GalleryChildrenX(ICSCraken rc, String catId, ChildQueryRequest queryRequest) {
-		this.rc = rc ;
+	private GalleryChildrenX(Domain domain, ChildQueryRequest queryRequest) {
+		this.domain = domain ;
 		this.queryRequest = queryRequest;
-		param.put("catId", catId) ;
+		param.put("domain", domain.getId()) ;
 	}
 
-	public static GalleryChildrenX create(ICSCraken rc, String catId, ChildQueryRequest queryRequest) {
-		return new GalleryChildrenX(rc, catId, queryRequest);
+	public static GalleryChildrenX create(Domain domain, ChildQueryRequest queryRequest) {
+		return new GalleryChildrenX(domain, queryRequest);
 	}
 
 	public <T> T each(Function<Iterator<ArticleX>, T> fn) throws IOException {
@@ -48,7 +45,7 @@ public class GalleryChildrenX {
 
 			@Override
 			public ArticleX next() {
-				return ArticleX.create(rc, iter.next());
+				return ArticleX.create(domain, iter.next());
 			}
 
 			@Override
@@ -109,7 +106,7 @@ public class GalleryChildrenX {
 
 
 	public XIterable<GalleryX> find() throws IOException {
-		return XIterable.create(rc, requestFind().toList(), param, GalleryX.class);
+		return XIterable.create(domain, requestFind().toList(), param, GalleryX.class);
 	}
 
 	private ChildQueryResponse requestFind() throws IOException{

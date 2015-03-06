@@ -3,10 +3,9 @@ package net.ion.external.ics.bean;
 import java.io.IOException;
 import java.io.Writer;
 
-import org.apache.ecs.xml.XML;
-
-import net.ion.framework.parse.gson.JsonObject;
 import net.ion.framework.parse.gson.stream.JsonWriter;
+
+import org.apache.ecs.xml.XML;
 
 public interface Writable {
 

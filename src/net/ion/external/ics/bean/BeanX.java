@@ -1,20 +1,18 @@
 package net.ion.external.ics.bean;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
 import java.util.Set;
 
-import net.ion.cms.env.ICSCraken;
 import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.convert.Functions;
 import net.ion.craken.tree.Fqn;
 import net.ion.craken.tree.PropertyId;
-import net.ion.craken.tree.PropertyId.PType;
 import net.ion.craken.tree.PropertyValue;
 import net.ion.craken.tree.PropertyValue.VType;
+import net.ion.external.domain.Domain;
 import net.ion.framework.parse.gson.JsonObject;
 import net.ion.framework.parse.gson.stream.JsonWriter;
 import net.ion.framework.util.ArrayUtil;
@@ -29,10 +27,17 @@ import com.google.common.base.Function;
 public abstract class BeanX {
 
 	private ReadNode node;
-	private ICSCraken rc;
+	private Domain domain;
 
-	public BeanX(ICSCraken rc, ReadNode node) {
-		this.rc = rc;
+	public static InputStream BLANKSTREAM = new InputStream() {
+		@Override
+		public int read() throws IOException {
+			return -1;
+		}
+	}; 
+	
+	public BeanX(Domain domain, ReadNode node) {
+		this.domain = domain;
 		this.node = node;
 	}
 
@@ -40,8 +45,8 @@ public abstract class BeanX {
 		return node;
 	}
 
-	protected ICSCraken rc() {
-		return rc;
+	protected Domain domain() {
+		return domain;
 	}
 
 	public boolean exists(){
@@ -68,7 +73,11 @@ public abstract class BeanX {
 		return node.property(propId).defaultValue(dftString);
 	}
 
+	public boolean hasProperty(String pid) {
+		return node().hasProperty(pid);
+	}
 	public InputStream asStream(String propId) throws IOException{
+		if (! hasProperty(propId)) return BLANKSTREAM ;
 		return node.property(propId).asBlob().toInputStream() ;
 	}
 

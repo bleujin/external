@@ -1,21 +1,17 @@
 package net.ion.external.ics.bean;
 
 import java.io.IOException;
-import java.io.StringWriter;
 import java.io.Writer;
-import java.util.Set;
 
-import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.ecs.xml.XML;
-
-import net.ion.craken.tree.PropertyId;
 import net.ion.framework.parse.gson.GsonBuilder;
 import net.ion.framework.parse.gson.JsonObject;
 import net.ion.framework.parse.gson.stream.JsonWriter;
 import net.ion.framework.util.Debug;
 import net.ion.framework.util.IOUtil;
-import net.ion.framework.util.StringBuilderWriter;
 import net.ion.framework.util.StringUtil;
+
+import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.ecs.xml.XML;
 
 public abstract class OutputHandler {
 
