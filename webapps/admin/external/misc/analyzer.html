@@ -1,0 +1,184 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+		<h1 class="page-title txt-color-blueDark">
+			<i class="fa fa-edit fa-fw "></i>${m.asString("misc.analyzer.title")} 
+		</h1>
+	</div>
+</div>
+
+<section id="widget-grid" class="">
+
+	<div class="row">
+		<!-- NEW WIDGET START -->
+		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<!-- Widget ID (each widget will need unique ID)-->
+			<div class="jarviswidget jarviswidget-color-greenDark" id="analyzer-win" data-widget-editbutton="false" data-widget-deletebutton="false">
+				
+				<header>
+					<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+					<h2>${m.asString("misc.analyzer.table-header")}</h2>
+				</header>
+
+				<!-- widget div-->
+				<div>
+
+					<!-- widget edit box -->
+					<div class="jarviswidget-editbox"></div>
+
+					<!-- widget content -->
+					<div class="widget-body">
+
+						<div class="table-responsive">
+							<form class="smart-form" id="misc-analyzer-form" method="post" action="analysis" novalidate="novalidate">
+								<fieldset style="padding: 0px">					
+									<section>
+										<label class="label">${m.asString("misc.analyzer.value")}</label>
+										<label class="textarea textarea-resizable">
+											<textarea name="textvalue" rows="9">${m.asString("misc.analyzer.textvalue")}</textarea>
+										</label>
+									</section>
+									<section>
+										<label class="label">${m.asString("misc.analyzer.type")}</label>
+										<label class="select">
+											<select multiple style="width:100%" class="select2" name="target_analyzer">
+												<optgroup label="Target Indexer" id="list_analyzer">
+												</optgroup>
+											</select>
+										</label>
+									</section>
+									
+									<section>
+										<label class="label">${m.asString("misc.analyzer.stopword")}</label>
+										<label class="textarea textarea-resizable">
+											<textarea name="stopword" rows="5"></textarea>
+										</label>
+									</section>
+									
+									<div id="terms"></div>
+								</fieldset>
+								
+								<footer>
+									<button class="btn btn-primary" type="button" name="btn_analyzer" >${m.asString("misc.analyzer.buttons")}</button>
+								</footer>
+							</form>
+							
+						</div>
+					</div>
+
+				</div>
+				
+			</div>
+		</article>
+	</div>
+</section>
+
+
+<script type="text/javascript">
+
+	pageSetUp();
+	
+	String.prototype.substringBefore = function (separator){
+		var strArray = this.split(separator) ;
+		return strArray[0] ;
+	};
+	
+	String.prototype.substringAfter = function (separator){
+		var strArray = this.split(separator) ;
+		return this.substr(strArray[0].length+1) ;
+	};
+	
+	String.prototype.substringBeforeLast = function(separator){
+		var strArray = this.split(separator) ;
+		var result = '' ;
+		for(var i=0; i<strArray.length-1 ; i++){
+			result += (strArray[i] + separator) ;
+		}
+		return result.substring(0, (result.length - separator.length))  ;
+	};
+	
+	String.prototype.substringAfterLast = function (separator){
+		var strArray = this.split(separator) ;
+		return strArray[strArray.length - 1] ;
+	};
+
+	var pagefunction = function() {
+
+		
+		var _analyzerForm = $("#misc-analyzer-form") ;
+		var _target_analyzer = _analyzerForm.find("select[name=target_analyzer]") ;
+		var _textvalue = _analyzerForm.find("textarea[name=textvalue]") ;
+		var _stopword = _analyzerForm.find("textarea[name=stopword]") ;
+		var _btn_analyzer = _analyzerForm.find("button[name=btn_analyzer]") ; 
+
+		$.ajax({
+			url:'/ics/analysis',
+			dataType:'json',
+			success:function(data){
+				var analyzer = data['analyzer'] ;
+				
+				for(var idx in analyzer){
+					var a = analyzer[idx] ;
+					var option = $('<option value="'+a['clz']+'">'+a['name']+'</dd>') ;
+//					if (a['selected']) option.attr('selected', 'selected');
+					option.appendTo($("#list_analyzer")) ;
+				}
+			}, 
+			error:function(request,status,error){
+				console.log('response', request, status, error) ;
+			}
+		}) ;
+		
+		
+		_analyzerForm.validate({
+			rules : {
+				textvalue : { required : true },
+				target_analyzer : { required : true }
+			},
+
+			messages : {
+				textvalue : { required : "${m.asString('validation.required', 'text')}"},
+				target_analyzer : { required : "${m.asString('validation.select', 'analyzer[s]')}"}
+			},
+
+			submitHandler : function(form) {
+				var targets = [];
+				_target_analyzer.each(function(){ targets.push($(this).val()) });
+				$.ajax({
+					type: "POST",
+					url: "/ics/analysis",
+					dataType:'json', 
+					data: { content: _textvalue.val(), analyzer: targets.toString(), stopword: _stopword.val()}, 
+					success : function(data) {
+						$("#terms ol").remove();
+						
+						for(var clzName in data){
+							var terms = data[clzName] ;
+							var ulClz = $("<ol class='list-inline'>" + clzName.substringAfterLast('.')  + "</ol>");
+							for(var tidx in terms){
+								var term = terms[tidx] ;
+								$("<li class='text-success'>" + term["term"] + "("+ term["start"] + "," + term["end"] + ")</li>").appendTo(ulClz) ;
+							}
+							ulClz.appendTo($("#terms")) ;
+						}	
+					}, 
+					error:function(request, status, error){
+						console.log('response', request, status, error) ;
+					}
+				}) ;
+			},
+
+			errorPlacement : function(error, element) { // Do not change code below
+				error.insertAfter(element.parent());
+			}
+		});
+		
+		_btn_analyzer.click(function() {
+			_analyzerForm.submit() ;
+		});
+		
+	};
+
+	// run pagefunction on load
+	pagefunction();
+
+</script>

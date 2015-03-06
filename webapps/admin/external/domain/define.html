@@ -1,0 +1,196 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+        <h1 class="page-title txt-color-blueDark">
+            <i class="fa fa-edit fa-fw "></i>${m.asString("domain.defined")}
+        </h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="well">
+            <blockquote>
+                <div id="info" class="click2edit"></div>
+            </blockquote>
+            <div class="">
+                <button id="edit_explain" class="btn btn-sm" type="button">${m.asString("buttons.info.edit")}</button>
+                <button id="save_explain" class="btn btn-sm" type="button">${m.asString("buttons.info.save")}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div>
+                <div class="jarviswidget-editbox"></div>
+                <div class="widget-body">
+
+                    <div id="tabs">
+                        <ul>
+                            <li><a href="#s1" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> ${m.asString("domain.defined.scat")}</a></li>
+                            <li><a href="#s2" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> ${m.asString("domain.defined.gcat")}</a></li>
+                        </ul>
+
+                        <div id="s1">
+                            <table id="scats" class="table table-bordered table-hover" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>${m.asString("domain.defined.scat.catid")}</th>
+                                    <th>${m.asString("domain.defined.scat.path")}</th>
+                                    <th>${m.asString("domain.defined.scat.below")}</th>
+                                    <th>${m.asString("domain.defined.scat.link")}</th>
+                                </tr>
+                                </thead>
+                                <tbody id="scat_body">
+                                <tr>
+                                    <td>airkjh_cat</td>
+                                    <td>/external_test/airkjh_cat</td>
+                                    <td>T</td>
+                                    <td><button onclick="javascript:showListPages('airkjh_cat')">list pages</button></td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="4" class="col-xs-12">
+                                        <fieldset class="smart-form">
+                                            <div class="row">
+                                                <section class="col col-9">
+                                                    <input type="button" class="btn btn-primary btn-sm" name="btn_scat_create" value='${m.asString("domain.defined.scat.buttons.add")}' />
+                                                    <input type="button" class="btn btn-primary btn-sm" name="btn_scat_remove" value='${m.asString("domain.defined.scat.buttons.remove")}' disabled="disabled"/>
+                                                </section>
+                                            </div>
+                                        </fieldset>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div id="s2">
+                            <table id="gcats" class="table table-bordered table-hover" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>${m.asString("domain.defined.gcat.catid")}</th>
+                                    <th>${m.asString("domain.defined.gcat.path")}</th>
+                                    <th>${m.asString("domain.defined.gcat.below")}</th>
+                                </tr>
+                                </thead>
+                                <tbody id="gcat_body">
+                                <tr>
+                                    <td>airkjh_source</td>
+                                    <td>airkjh_cat</td>
+                                    <td>T</td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="4" class="col-xs-12">
+                                        <fieldset class="smart-form">
+                                            <div class="row">
+                                                <section class="col col-9">
+                                                    <input type="button" class="btn btn-primary btn-sm" name="btn_gcat_create" value='${m.asString("domain.defined.gcat.buttons.add")}' />
+                                                    <input type="button" class="btn btn-primary btn-sm" name="btn_gcat_remove" value='${m.asString("domain.defined.gcat.buttons.remove")}' disabled="disabled"/>
+                                                </section>
+                                            </div>
+                                        </fieldset>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+
+
+<script type="text/javascript">
+
+    pageSetUp();
+
+    // pagefunction
+    var pagefunction = function() {
+        $("#edit_explain").click(function () {
+            $('.click2edit').summernote({
+                focus: true, toolbar: [
+                    //['style', ['style']], // no style button
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']],
+                    //['insert', ['picture', 'link']], // no insert buttons
+                    ['table', ['table']], // no table button
+                    // ['help', ['help']] //no help button
+                ]
+            });
+        });
+
+        $("#save_explain").click(function () {
+            var aHTML = $('.click2edit').code();
+            $.ajax({
+                type: "POST",
+                url: "/admin/menus/scat",
+                data: { content: aHTML, field: "browsing" }
+            });
+            $('.click2edit').destroy();
+        });
+
+        var domainId = $("#domains option:selected").val() ;
+//        if (domainId == undefined) return ;
+
+        var _btn_scat_create = $(document).find("input[name=btn_scat_create]") ;
+        var _btn_scat_remove = $(document).find("input[name=btn_scat_remove]") ;
+        var _btn_gcat_create = $(document).find("input[name=btn_gcat_create]") ;
+        var _btn_gcat_remove = $(document).find("input[name=btn_gcat_remove]") ;
+
+
+        $('#tabs').tabs() ;
+
+        var scatsEl = $('#scats');
+        var gcatsEl = $('#gcats');
+
+        $('#scats tbody').on('click', 'tr', function() {
+            if($(this).hasClass('selected2')) {
+                $(this).removeClass('selected2');
+            } else {
+                $('#scats tr.selected2').removeClass('selected2');
+                $(this).addClass('selected2');
+            }
+            $('#scats tr.selected2').length > 0 ? _btn_scat_remove.removeAttr('disabled') : _btn_scat_remove.attr('disabled', 'disabled');
+        });
+
+        $('#gcats tbody').on('click', 'tr', function() {
+            if($(this).hasClass('selected2')) {
+                $(this).removeClass('selected2');
+            } else {
+                $('#gcats tr.selected2').removeClass('selected2');
+                $(this).addClass('selected2');
+            }
+            $('#gcats tr.selected2').length > 0 ? _btn_gcat_remove.removeAttr('disabled') : _btn_gcat_remove.attr('disabled', 'disabled');
+        });
+
+        _btn_scat_create.click(function(_catId) {
+            $('#create-domain-scat-modal').modal({catId: _catId});
+        });
+
+        _btn_gcat_create.click(function(_catId) {
+            $('#create-domain-gcat-modal').modal({catId: _catId});
+        });
+    }
+
+    var showListPages = function(_catId) {
+        $('#list-pages-modal').modal({catId: _catId});
+    }
+
+    loadScript("js/plugin/datatables/jquery.dataTables.min.js", function(){
+        loadScript("js/plugin/datatables/dataTables.bootstrap.min.js", function() {
+            loadScript("js/plugin/summernote/summernote.min.js", pagefunction);
+        });
+    });
+
+
+</script>

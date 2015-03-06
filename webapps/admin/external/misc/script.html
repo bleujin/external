@@ -1,0 +1,275 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+		<h1 class="page-title txt-color-blueDark">
+			<i class="fa fa-edit fa-fw "></i>${m.asString("misc.script.title")}
+		</h1>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="well">
+			<blockquote>
+			  <div id="info" class="click2edit"></div>
+			</blockquote>
+			<div class="">
+			<button id="edit_explain" class="btn btn-sm" type="button">${m.asString("buttons.info.edit")}</button>
+			<button id="save_explain" class="btn btn-sm" type="button">${m.asString("buttons.info.save")}</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<section id="widget-grid" class="">
+	<div class="row">
+
+		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="jarviswidget jarviswidget-color-greenDark" id="script-win" data-widget-editbutton="false" data-widget-deletebutton="false">
+				<header>
+					<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+					<h2>${m.asString("misc.script.table-header")}</h2>
+				</header>
+
+				<div>
+					<div class="jarviswidget-editbox"></div>
+					<div class="widget-body no-padding">
+						<table id="example" class="table table-bordered table-hover" width="100%">
+						</table>
+					</div>
+				</div>
+				
+				<div class="widget-body">
+					<form class="smart-form" method="post" action="misc/script" novalidate="novalidate">
+						<fieldset>
+							<section>
+								<label class="label">${m.asString("misc.script.output")}</label>
+								<label class="textarea textarea-resizable" readonly="readonly">
+									<textarea rows="12" class="custom-scroll" id="script_output"></textarea>
+								</label>
+							</section>
+							
+							<section>
+								<label class="label alert-info alert-block"><pre id="target_url"></pre></label>
+							</section>
+
+						</fieldset>
+						
+					</form>
+				</div>
+
+			</div>
+		</article>
+	</div>
+</section>
+
+<script type="text/javascript">
+
+
+	pageSetUp();
+	
+	// pagefunction	
+	var pagefunction = function() {
+		//console.log("cleared");
+		
+		$( "#edit_explain" ).click(function() {
+			$('.click2edit').summernote({
+				focus : true, toolbar: [
+				                        //['style', ['style']], // no style button
+				                        ['style', ['bold', 'italic', 'underline', 'clear']],
+				                        ['fontsize', ['fontsize']],
+				                        ['color', ['color']],
+				                        ['para', ['ul', 'ol', 'paragraph']],
+				                        ['height', ['height']],
+				                        //['insert', ['picture', 'link']], // no insert buttons
+				                        ['table', ['table']], // no table button
+				                        // ['help', ['help']] //no help button
+				                      ]
+			});
+		});
+
+		$( "#save_explain" ).click(function() {
+			var aHTML = $('.click2edit').code() ;
+			$.ajax({
+				type: "POST",
+				url: "/ics/menus/misc",
+				data: { content: aHTML, field: "script" }
+			});
+			$('.click2edit').destroy();
+		});
+		
+		$.browser.chrome = /chrom(e|ium)/.test(navigator.userAgent.toLowerCase());
+		
+		var msgCall = function(sid, eventId){
+			$.ajax({
+				type: "GET",
+				dataType : 'text', 
+				url: "/open/script/write/" + sid,
+				data: { 'eventid': eventId }, 
+				complete : function(){ 
+					var result_text = 'Path : ' + this.url + '<br/>';
+					result_text += 'Event Source : /event/' + eventId + '<br />' ;
+					result_text += 'Form parameter : <br />' ;
+					result_text += ' - eventid : ...<br />' ;
+					$("#target_url").html(result_text) ;
+				}, 
+				success :  function(data) {
+					// console.log(data) ;
+				}
+			}) ;
+		} ;
+
+		
+		$.ajax({
+			url:"/ics/scripts",
+			type:'GET', 
+			dataType:'json',
+			success:function(data){
+				$("#info").html(data['info']) ;
+
+				$("select[name=script_samples]").empty() ;
+				$('<option value="">View Sample Script</option>').appendTo($("select[name=script_samples]")) ;
+				var samples = data['samples'] ;				
+				for(var idx in samples ){
+					var sample = samples[idx] ; 
+					var option = $('<option value="'+sample+'">'+sample+'</option>') ;
+					option.appendTo($("select[name=script_samples]")) ;
+				}
+
+				var nodes = data['scripts'];
+				$("#example")
+					.dataTable({
+					"data":nodes,
+					"searching":false, 
+					"columns": [{"title":'${m.asString("misc.script.id")}'},{"title":'${m.asString("misc.script.run")}'},{"title":'${m.asString("misc.script.explain")}'}] // data['schemaName']
+				}) ;
+				
+				var tableFoot = '<tfoot><tr><td colspan="' + data['schemaName'].length + '" class="col-xs-12">' +
+				'						<section class="col col-12">' +
+				'						<a href="javascript:void(0);" class="btn btn-primary" name="create_script">${m.asString("misc.script.buttons.define")}</a>&nbsp;' +
+				'						<a href="javascript:void(0);" class="btn btn-default" disabled="disabled" name="run_script">${m.asString("misc.script.buttons.run")}</a>&nbsp;' +
+				'						<a href="javascript:void(0);" class="btn btn-default" disabled="disabled" name="remove_script">${m.asString("misc.script.buttons.remove")}</a></section>' +
+				'				</td></tr></tfoot>' ;
+				
+				$(tableFoot).appendTo($("#example")) ;
+
+				
+				var table = $('#example').DataTable() ;
+				
+				$('#example tbody').on( 'click', 'tr', function () {
+					if ( $(this).hasClass('selected2') ) {
+						$(this).removeClass('selected2');
+					} else {
+						 table.$('tr.selected2').removeClass('selected2');
+						$(this).addClass('selected2');
+					}
+					($('#example').DataTable().rows('.selected2').data().length > 0) ? $('#script-win a.btn-default').removeAttr("disabled") : $('#script-win a.btn-default').attr("disabled", "disabled") ;
+				} );
+
+
+				$('#script-win a[name=create_script]').click(function(){
+					$("#create_script_modal pre[name=script_response]").text("") ;
+					if ($('#example').DataTable().rows('.selected2').data().length > 0){
+						var sid = $('#example').DataTable().rows('.selected2').data()[0][0] ;
+						$.ajax({
+							type: "GET",
+							dataType:"json", 
+							url: "/ics/scripts/define/" + sid,
+							success : function(data){
+								$('#create_script_modal').modal({});
+								$('#create_script_form input[name=sid]').val(data['sid']) ;
+								$('#create_script_form textarea[name=content]').val(data['content']) ;
+							}
+						});
+					} else {
+						$('#create_script_modal').modal({});
+					}
+				});
+
+				var _btn_run = $('#script-win a[name=run_script]') ;
+				var _btn_remove = $('#script-win a[name=remove_script]') ;
+				
+				$('#script-win a[name=remove_script]').click( function () {
+					$sid = $('#example').DataTable().rows('.selected2').data()[0][0] ;
+					$("#remove-script-confirm" ).css('visibility', 'visible') ;
+					$("#removeScriptId").html($sid) ;
+					$("#remove-script-confirm" ).dialog({
+						modal: true,
+						buttons: {
+							"Remove Script": function() {
+								var win = $( this ) ;
+								$.ajax({
+									url:"/ics/scripts/remove/" + $sid,
+									type:'DELETE', 
+									dataType:'text', 
+									data : {}, 
+									complete : function(){ 
+										// $("#query_url").text(this.url) ;
+									}, 
+									success :  function(data) {
+										$('#example').DataTable().rows('.selected2').remove().draw(false) ;			
+										win.dialog( "close" );
+									}, 
+									fail:function(request,status,error){
+										console.log('response', request, status, error) ;
+									}
+								}) ;	
+							},
+							"Cancel": function() {
+								$( this ).dialog( "close" );
+							}
+						}
+					});
+				}) ;
+
+				_btn_run.click(function() {
+					var eventId =  Math.random().toString(36).substr(2, 9) + '_' + new Date().getTime() ;
+					var sid = $('#example').DataTable().rows('.selected2').data()[0][0] ;
+					var outputText = $('textarea#script_output');
+					if (typeof(EventSource) !== "undefined") {
+						var es = new EventSource('/event/' + eventId);
+						es.onopen = function() {
+							console.log('OPEN');
+							if ($.browser.chrome) msgCall(sid, eventId) ;
+						};
+						es.onmessage = function(e) {
+							if (e.data == eventId) {
+								 es.close();
+								 _btn_run.removeAttr("disabled");
+								 return ;
+							}
+							outputText.append(e.data + '\n');
+							outputText.scrollTop(outputText.scrollHeight);
+						};
+						es.onerror = function(e) {
+							_btn_run.removeAttr("disabled");
+							console.log('ERROR : ' + e);
+						};
+					}
+					
+					outputText.text('') ;
+					if(typeof(EventSource)=="undefined") outputText.text("Whoops! Your browser doesn't receive server-sent events.[support browser : ff, chrome, safari]") ;
+					
+					_btn_run.attr('disabled', 'disabled') ;
+					if (! $.browser.chrome) msgCall(sid, eventId) ;
+					
+				});
+				
+			}, 
+			error:function(request,status,error){
+				console.log('response', request, status, error) ;
+			}
+		}) ;
+		
+		
+		
+	};
+
+	// load related plugins
+	
+	loadScript("js/plugin/datatables/jquery.dataTables.min.js", function(){
+		loadScript("js/plugin/datatables/dataTables.bootstrap.min.js", pagefunction);
+	});
+
+
+</script>

@@ -81,6 +81,8 @@ public class Def {
 
 	public final static class User  {
 		public final static String UserId = "userid" ;
+        public final static String Name = "usernm";
+        public final static String Pwd = "pwd" ;
 		public final static String VerifyKey = "verifykey" ;
 		public final static String RetireDay = "retireday" ;
 		public final static String EnroleDay = "enroleday";

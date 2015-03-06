@@ -11,7 +11,8 @@ import net.ion.craken.node.crud.WorkspaceConfigBuilder;
 
 public class Craken {
 
-	private RepositoryImpl repository;
+    public static final String EntryName = "craken";
+    private RepositoryImpl repository;
 	private String wsName;
 	private Craken(RepositoryImpl repository, String wsName) {
 		this.repository = repository ;
