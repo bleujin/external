@@ -127,7 +127,6 @@ public class Def {
 		public final static String UserId = "userid" ;
 		public final static String Name = "name" ;
 		public final static String Password = "password" ;
-		
 		public final static String VerifyKey = "verifykey" ;
 		public final static String RetireDay = "retireday" ;
 		public final static String EnroleDay = "enroleday";

@@ -1,0 +1,198 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+        <h1 class="page-title txt-color-blueDark">
+            <i class="fa fa-edit fa-fw "></i>${m.asString("domain.query.title")}
+        </h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="well">
+            <blockquote>
+                <div id="info" class="click2edit"></div>
+            </blockquote>
+
+            <div class="">
+                <button id="edit_explain" class="btn btn-sm" type="button">${m.asString("buttons.info.edit")}</button>
+                <button id="save_explain" class="btn btn-sm" type="button">${m.asString("buttons.info.save")}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<section id="widget-grid" class="">
+
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-purple" id="domain-query-win" data-widget-editbutton="false" data-widget-deletebutton="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-comments"></i> </span>
+                    <h2>${m.asString("domain.query.table-header")}</h2>
+                </header>
+
+                <div>
+                    <div class="jarviswidget-editbox">
+                        <input class="form-control" type="text">
+                    </div>
+
+                    <div class="widget-body">
+
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                            <form class="smart-form" id="indexer-query-form" method="post" action="indexers/query" novalidate="novalidate">
+                                <fieldset style="padding: 0px">
+                                    <section>
+                                        <label class="label">${m.asString("domain.query.query")}<a href="http://lucene.apache.org/core/2_9_4/queryparsersyntax.html" target="_blank"><span class="label pull-right">operator</span></a></label>
+                                        <label class="textarea textarea-resizable">
+                                            <textarea name="query" rows="3">*:*</textarea>
+                                        </label>
+                                    </section>
+                                    <section>
+                                        <label class="label">${m.asString("domain.query.sort")}</label>
+                                        <label class="input">
+                                            <input type="text" name="sort"/>
+                                        </label>
+                                    </section>
+                                    <div class="row">
+                                        <section class="col col-6">
+                                            <label class="label">${m.asString("domain.query.skip")}</label>
+                                            <label class="input">
+                                                <input type="text" name="skip" placeholder="0" />
+                                            </label>
+                                        </section>
+                                        <section class="col col-6">
+                                            <label class="label">${m.asString("domain.query.offset")}</label>
+                                            <label class="input">
+                                                <input type="text" name="offset" placeholder="10" />
+                                            </label>
+                                        </section>
+                                    </div>
+                                    <section>
+                                        <label class="label">${m.asString("domain.query.query-parameter")}</label>
+                                        <label class="input">
+                                            <input type="text" name="parameter" placeholder="key1=val&key2=val2"/>
+                                        </label>
+                                    </section>
+                                    <section>
+                                        <label class="label">${m.asString("domain.query.document-type")}</label>
+                                        <label class="select">
+                                            <select name="rtype">
+                                                <option value="json">JSON</option>
+                                                <option value="csv">CSV</option>
+                                                <option value="xml">XML</option>
+                                            </select>
+                                        </label>
+                                    </section>
+                                    <section>
+                                        <label class="checkbox"><input type="checkbox" name="indent" checked="false" /><i></i>${m.asString("domain.query.indent")}</label>
+                                    </section>
+
+                                </fieldset>
+
+                                <footer>
+                                    <button class="btn btn-primary" type="button" name="btn_exec">${m.asString("domain.query.buttons.execute")}</button>
+                                </footer>
+
+                                <div class="message">
+                                    <i class="fa fa-thumbs-up"></i>
+                                    <p>Your message was successfully sent!</p>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                            <div class="alert alert-info alert-block" id="query_url"></div>
+                            <div><pre id="query_result"></pre></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </article>
+    </div>
+</section>
+
+
+<script type="text/javascript">
+
+    pageSetUp();
+
+    var pagefunction = function() {
+        $( "#edit_explain" ).click(function() {
+            $('.click2edit').summernote({
+                focus : true, toolbar: [
+                    //['style', ['style']], // no style button
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']],
+                    //['insert', ['picture', 'link']], // no insert buttons
+                    ['table', ['table']], // no table button
+                    // ['help', ['help']] //no help button
+                ]
+            });
+        });
+
+        $( "#save_explain" ).click(function() {
+            var aHTML = $('.click2edit').code() ;
+            $.ajax({
+                type: "POST",
+                url: "/admin/menus/indexers",
+                data: { content: aHTML, field: "query" }
+            });
+            $('.click2edit').destroy();
+        });
+
+        var domainId = $("#domains option:selected").val() ;
+//        if (indexerId == undefined) return ;
+
+        $.ajax({
+            url:'/ics/domain/' + domainId +'/query',
+            dataType:'json',
+            success:function(data){
+                var info = data['info'];
+                $("#info").html(info) ;
+            },
+            error:function(request,status,error){
+                console.log('response', request, status, error) ;
+            }
+        }) ;
+
+        var _queryForm = $("#domain-query-form") ;
+        var _rtype = _queryForm.find("select[name=rtype]") ;
+        var _parameter = _queryForm.find("input[name=parameter]") ;
+        var _query = _queryForm.find("textarea[name=query]") ;
+        var _sort = _queryForm.find("input[name=sort]") ;
+        var _skip = _queryForm.find("input[name=skip]") ;
+        var _offset = _queryForm.find("input[name=offset]") ;
+        var _indent = _queryForm.find("input[name=indent]") ;
+        var _debug = _queryForm.find("input[name=debug]") ;
+        var _btn_exec = _queryForm.find("button[name=btn_exec]") ;
+
+
+        _btn_exec.click(function() {
+            $.ajax({
+                type: "GET",
+                dataType : 'text',
+                url: "/ics/domain/" + domainId + "/query." + _rtype.val() + (  _parameter.val() ? "?" + _parameter.val() : ""),
+                data: { query: _query.val(), sort: _sort.val(), skip: _skip.val(), offset: _offset.val() , indent: _indent.is(":checked") ? true : false, debug: _debug.is(":checked") ? true : false},
+                complete : function(){
+                    var targetURL = "<a href='http://" + document.location.host +  this.url + "' target='_blank'>" + this.url + "</a>";
+                    $("#query_url").html(targetURL) ;
+                },
+                success :  function(data) {
+                    $("#query_result").text(data) ;
+                }
+            }) ;
+
+        });
+
+    };
+
+    // run pagefunction on load
+    pagefunction();
+
+</script>

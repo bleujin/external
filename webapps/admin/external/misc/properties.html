@@ -1,0 +1,71 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+		<h1 class="page-title txt-color-blueDark">
+			<i class="fa fa-edit fa-fw "></i>${m.asString("misc.properties.title")}
+		</h1>
+	</div>
+</div>
+
+
+<section id="widget-grid" class="">
+
+	<div class="row">
+
+		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+			<div class="jarviswidget jarviswidget-color-greenDark" id="properties-win" data-widget-editbutton="false" data-widget-deletebutton="false">
+				<header>
+					<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+					<h2>${m.asString("misc.properties.table-header")}</h2>
+				</header>
+
+				<div>
+
+					<div class="jarviswidget-editbox"></div>
+
+					<div class="widget-body">
+						<div class="table-responsive">
+							<table class="table table-bordered table-striped">
+								<thead>
+									<tr><th>${m.asString("misc.properties.name")}</th>
+										<th>${m.asString("misc.properties.value")}</th>
+									</tr>
+								</thead>
+								<tbody id="properties">
+								</tbody>
+							</table>
+							
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</article>
+	</div>
+
+</section>
+<!-- end widget grid -->
+
+<script type="text/javascript">
+
+	pageSetUp();
+
+	var pagefunction = function() {
+		$.ajax({
+			 url:'/ics/misc/properties',
+			 dataType:'json',
+			 success:function(data){
+				 for(var pid in data){
+					$("<tr><td>" + pid + "</td><td>" + data[pid] + "</td></tr>").appendTo($("#properties")) ;
+				}
+				
+			}, 
+			 error:function(request,status,error){
+				console.log('response', request, status, error) ;
+			}
+		}) ;
+	};
+
+	pagefunction();
+
+</script>

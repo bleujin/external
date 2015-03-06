@@ -1,0 +1,134 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+		<h1 class="page-title txt-color-blueDark">
+			<i class="fa fa-edit fa-fw "></i>${m.asString("misc.logging.title")}
+		</h1>
+	</div>
+</div>
+
+
+<section id="widget-grid" class="">
+
+	<div class="row">
+		
+		<!-- NEW WIDGET START -->
+		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<!-- Widget ID (each widget will need unique ID)-->
+			<div class="jarviswidget jarviswidget-color-greenDark" id="logging-win" data-widget-editbutton="false" data-widget-deletebutton="false">
+				<header>
+					<span class="widget-icon"> <i class="fa fa-comments"></i> </span>
+					<h2>${m.asString("misc.logging.table-header")}</h2>				
+				</header>
+
+				<div>
+					<div class="jarviswidget-editbox">
+						<input class="form-control" type="text">	
+					</div>
+					
+					<div class="widget-body">
+					<form class="smart-form" id="misc-logging-form" method="post" action="searchers/define" novalidate="novalidate">
+						<fieldset>
+							<section>
+							<div class="span3" style="height: 450px; overflow: auto;">
+								<table class="table table-bordered table-striped" id="mainTable">
+								<thead>
+									<tr>
+										<th> ${m.asString("misc.logging.time")}</th>
+										<th> <i class="fa fa-building"></i> ${m.asString("misc.logging.client")}</th>
+										<th> <i class="fa fa-calendar"></i> ${m.asString("misc.logging.type")}</th>
+										<th> <i class="glyphicon glyphicon-send"></i> ${m.asString("misc.logging.resource")}</th>
+										<th> <i class="glyphicon glyphicon-send"></i> ${m.asString("misc.logging.method")}</th>
+										<th> <i class="glyphicon glyphicon-send"></i> ${m.asString("misc.logging.elapsed")}</th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+							</div>
+							</section>
+							
+						</fieldset>
+						<footer>
+							<button class="btn btn-sm btn-success" type="button" name="btn_stop" disabled="disabled">
+								<i class="fa fa-check"></i> ${m.asString("misc.logging.buttons.stop")}
+							</button>	
+							<button class="btn btn-sm btn-primary" type="button" name="btn_monitor">
+								<i class="fa fa-times"></i> ${m.asString("misc.logging.buttons.monitor")}
+							</button>	
+						</footer>
+					</form>
+					</div>
+				</div>
+				
+			</div>
+		</article>
+		
+	</div>
+	
+
+
+
+</section>
+
+
+<script type="text/javascript">
+	
+	pageSetUp();
+	
+	var pagefunction = function() {
+
+		String.prototype.format = function() {
+			 var formatted = this;
+			 for (var i = 0; i < arguments.length; i++) {
+				 var regexp = new RegExp('\\{'+i+'\\}', 'gi');
+				 formatted = formatted.replace(regexp, arguments[i]);
+			}
+			 return formatted;
+		};
+
+		var _loggingForm = $("#misc-logging-form") ;
+		var _btn_monitor = _loggingForm.find("button[name=btn_monitor]") ;
+		var _btn_stop 	= _loggingForm.find("button[name=btn_stop]") ;
+		
+		_btn_monitor.click(function() {
+			var es = new EventSource('/logging/event/');
+			es.onopen = function() {
+				// console.log('OPEN');
+			};
+			es.onmessage = function(e) {
+				
+				if (! $("#mainTable").length) es.close() ;
+				
+				var msg = '' + e.data ;
+				var values = msg.split('	') ;
+				
+				var dtime = new Date(values[1] - 0).toISOString() ;
+				var dtimestr = dtime.substring(0,10) + ' ' + dtime.substring(11,19) ;
+				var client = values[4] ;
+				var type = values[5] ;
+				var method = values[6] ;
+				var elapsed = values[7] ;
+				var row = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td></tr>'.format(dtimestr, values[4], values[5], values[6], values[7], values[8]);
+				$(row).insertAfter("#mainTable tr:first");
+			};
+
+			es.onerror = function(e) {
+				console.log('ERROR : ' + e);
+			};
+			
+			_btn_monitor.attr("disabled", "disabled") ;
+			_btn_stop.removeAttr("disabled") ;
+			
+			_btn_stop.click(function() {
+				es.close() ;
+				_btn_monitor.removeAttr("disabled")
+				_btn_stop.attr("disabled", "disabled")
+			}) ;
+		}) ;
+
+	};
+
+	// run pagefunction on load
+	pagefunction();
+	
+</script>

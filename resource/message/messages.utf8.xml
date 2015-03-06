@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<messages>
+    <main>
+        <webapp>External</webapp>
+    </main>
+
+	<!-- menuname -->
+	<menu>
+		<domain kr="도메인">Domain
+			<overview kr="오버뷰">Overview</overview>
+			<define kr="정의">Define</define>
+			<article kr="아티클">Article</article>
+			<gallery kr="갤러리">Gallery</gallery>
+			<query kr="쿼리">Query</query>
+			<template kr="템플릿">Template</template>
+		</domain>
+		<scripter>Script
+			<overview>Overview</overview>
+			<defined>Defined</defined>
+			<create>Create script</create>
+			<choose>Choose script</choose>
+			<overview>Overview</overview>
+			<defined>Defined</defined>
+			<remove>Remove</remove>
+		</scripter>
+		<misc kr="기타">Miscellaneous
+			<properties kr="자바 속성">Java Properties</properties>
+			<threaddump kr="쓰레드 덤프">Thread Dump</threaddump>
+			<analyzer kr="분석기 확인">Analyzer Confirm</analyzer>
+			<history kr="로더 사용 내역">Loader History</history>
+			<logging kr="모니터링">Logging</logging>
+			<script kr="스크립트">Craken Script</script>
+			<user kr="사용자">System User</user>
+		</misc>
+
+	</menu>
+
+	<!-- page -->
+	<domain>
+		<id>Domain Id</id>
+		<create>Create Domain
+			<button>Create</button>
+		</create>
+		<overview>
+			<title>Domain Overview</title>
+			<status>Domain Status</status>
+		</overview>
+		<defined>Define Source
+			<scat>Site category
+				<catid>Category ID</catid>
+				<path>Category path</path>
+				<link>Link</link>
+				<template>
+					<tplid>Tpl Id</tplid>
+					<tplname>Tpl name</tplname>
+					<form>Form</form>
+					<link>Link</link>
+					<listpage>List pages</listpage>
+				</template>
+				<buttons>
+					<add>Add</add>
+					<remove>Remove</remove>
+				</buttons>
+				<below>Below</below>
+			</scat>
+			<gcat>Gallery category
+				<catid>category ID</catid>
+				<path>Category path</path>
+				<buttons>
+					<add>Add</add>
+					<remove>Remove</remove>
+				</buttons>
+				<below>Below</below>
+				<link>Link</link>
+			</gcat>
+			<below>Include sub categories</below>
+			<create>
+				<button>Create source</button>
+			</create>
+		</defined>
+		<choose>Choose Domain</choose>
+		<article>Article
+			<data>Data</data>
+			<title>Articles</title>
+			<related>Related</related>
+			<subject>Subject</subject>
+			<content>Content</content>
+			<storypage>Story pages</storypage>
+			<table-header>Detail</table-header>
+			<artid>Article Id</artid>
+			<catid>Category Id</catid>
+			<lastmodified>Last modified</lastmodified>
+			<link>Link</link>
+			<template>
+				<storypage>Story pages</storypage>
+				<tplid>Tpl Id</tplid>
+				<tplname>Tpl name</tplname>
+				<form>Form</form>
+				<link>Link</link>
+			</template>
+		</article>
+        <gallery>
+            <subject>Subject</subject>
+            <galid>Gallery Id</galid>
+            <catid>Category Id</catid>
+            <lastmodified>Last modified</lastmodified>
+            <width>Width</width>
+            <height>Height</height>
+            <filesize>File size</filesize>
+        </gallery>
+		<query>
+			<title>Query</title>
+			<table-header>Detail</table-header>
+			<query>Query</query>
+			<sort>Sort</sort>
+			<skip>Skip</skip>
+			<offset>Offset</offset>
+			<query-parameter>Parameter</query-parameter>
+			<document-type>Document Type</document-type>
+			<indent>Indent</indent>
+			<buttons>
+				<execute>Execute</execute>
+			</buttons>
+		</query>
+		<template>
+			<title>Template</title>
+			<view-sample>View sample</view-sample>
+            <table-header>Detail</table-header>
+			<content>Content</content>
+			<buttons>
+				<save>Save template</save>
+			</buttons>
+		</template>
+		<remove>Remove Domain</remove>
+	</domain>
+	
+	<scripter>
+		<choose>Choose script</choose>
+		<remove>Script to remove
+			<title>Remove script</title>
+		</remove>
+		<create>Create script
+			<id>Script Id</id>
+			<button>Create</button>
+		</create>
+		<defined>
+			<view-sample>View script sample</view-sample>
+			<content>Script content</content>
+			<output>Output</output>
+            <table-header>Detail</table-header>
+			<buttons>
+				<save>Save</save>
+				<run>Run</run>
+			</buttons>
+		</defined>
+		<overview>
+			<title>Script overview</title>
+			<status>Status</status>
+			<recent>Recent</recent>
+			<eventid>Event ID</eventid>
+			<time>Time</time>
+			<result>Result</result>
+			<buttons>
+				<view-detail>View detail</view-detail>
+			</buttons>
+		</overview>
+	</scripter>
+	
+	<misc>
+        <properties>
+            <title kr="자바 속성">Java Properties</title>
+            <table-header kr="속성">Properties</table-header>
+            <name kr="이름">Name</name>
+            <value kr="값">Value</value>
+        </properties>
+        <threaddump>
+            <title kr="쓰레드 덤프">Thread Dump</title>
+            <table-header kr="쓰레드">Threads</table-header>
+            <name kr="이름">Name</name>
+            <cputime kr="CPU">CPU</cputime>
+            <usertime kr="사용 시간">User Time</usertime>
+        </threaddump>
+        <analyzer>
+            <title kr="분석기 확인">Analyzer Confirm</title>
+            <table-header kr="분석기 확인">Analyzer Confirm</table-header>
+            <value kr="내용">Text Value To Analyze</value>
+            <textvalue>태극기가 바람에 펄럭입니다.</textvalue>
+            <type kr="분석기 타입">Analyzer Type</type>
+            <stopword kr="불용어">Stop Word</stopword>
+            <buttons kr="결과보기">Analyze Value</buttons>
+        </analyzer>
+        <history>
+            <title kr="로더 사용 내역">Loader History</title>
+            <table-header kr="로그 목록">Log Tables</table-header>
+            <id>ID</id>
+            <time kr="시간">Time</time>
+            <loaderid kr="로더 ID">Loader ID</loaderid>
+            <status kr="상태">Status</status>
+            <buttons>
+                <detail kr="자세히 보기">View Detail</detail>
+            </buttons>
+        </history>
+        <logging>
+            <title kr="모니터링">Logging</title>
+            <table-header kr="현재 진행중인 작업">Logging Monitor</table-header>
+            <time kr="시간">Time</time>
+            <client kr="클라이언트">Client</client>
+            <type kr="타입">Type</type>
+            <Resource kr="리소스">Resource</Resource>
+            <method kr="메소드">Method</method>
+            <elapsed kr="경과">Elapsed</elapsed>
+            <buttons>
+                <monitor kr="실행">Monitor</monitor>
+                <stop kr="정지">Stop</stop>
+            </buttons>
+        </logging>
+        <user>
+            <title kr="사용자">System User</title>
+            <table-header kr="사용자 목록">User Tables</table-header>
+            <id>ID</id>
+            <name kr="이름">Name</name>
+            <buttons>
+                <register kr="사용자 등록">Register User</register>
+                <remove kr="사용자 삭제">Remove User</remove>
+            </buttons>
+            <create kr="사용자 등록">Create User
+                <userid kr="사용자 ID">User ID</userid>
+                <name kr="사용자 이름">User Name</name>
+                <password kr="비밀번호">Password</password>
+            </create>
+        </user>
+	</misc>
+
+	<!-- button -->
+	<buttons>
+		<info>
+		    <edit kr="편집">Edit</edit>
+		    <save kr="저장">Save</save>
+    	</info>
+    	<modal>
+    	    <close kr="닫기">Close</close>
+    	    <cancel kr="취소">Cancel</cancel>
+    	</modal>
+	</buttons>
+	
+	
+	<validation>
+	    <minlength kr="%s개 이상의 문자를 입력해 주시기 바랍니다.">Please enter at least %s characters.</minlength>
+	    <maxlength kr="%s개 이하의 문자를 입력해 주시기 바랍니다.">Please enter no more than %s characters.</maxlength>
+	    <required kr="%s를 입력해 주시기 바랍니다.">Please enter %s.</required>
+	    <select kr="%s를 선택해 주시기 바랍니다.">Please select %s.</select>
+	    <idpattern><![CDATA[allowed pattern : ^[a-z][a-z0-9_]*$]]></idpattern>
+	</validation>
+</messages>
