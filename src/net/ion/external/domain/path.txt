@@ -1,0 +1,58 @@
+/datas/scat/{catid}
+/datas/article/{catid}/{artid}
+/datas/template/{catid}/{tplid}
+
+/datas/gcat/{gcatid}
+/datas/gallery/{gcatid}/{gid}
+
+/datas/avlaue/{artid}/{afieldid}
+
+/datas/afield/{afieldid}
+	{typecd, name, explain}
+
+/datas/user/{userid}
+	{userid, name, password}
+
+
+/datas/logs/{objectid|
+	{action : 'addcategory_start' || 'addgallery_start'}  
+
+
+
+
+
+before
+
+
+/scat/{catid}
+	....
+	@tree to children
+
+/article/{artid}
+	{artid, subject, content, filenm, afields..}
+	@rels
+	
+
+
+/template/{tplid}
+	{}
+
+
+
+
+/rcat/{catid}
+	{fqn, catId, parent, name}
+	@tree to children
+
+
+
+/user/{userid}
+	{userid, name, encrypt(password)}
+
+
+
+/afield/{afieldid}
+	{}
+
+
+

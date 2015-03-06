@@ -34,6 +34,11 @@ public abstract class BeanX {
 		public int read() throws IOException {
 			return -1;
 		}
+		
+		@Override
+		public String toString(){
+			return "[BLANKSTREAM]" ;
+		}
 	}; 
 	
 	public BeanX(Domain domain, ReadNode node) {
@@ -99,6 +104,26 @@ public abstract class BeanX {
 
 	public void debugPrint(){
 		Debug.line(node, node.transformer(Functions.READ_TOFLATMAP));
+	}
+	
+
+	@Override
+	public boolean equals(Object obj){
+		if (obj instanceof BeanX){
+			BeanX that = (BeanX) obj ;
+			return this.node().equals(that.node()) ;
+		} 
+		return false ;
+	}
+	
+	@Override
+	public int hashCode(){
+		return node().hashCode() + 31 ;
+	}
+	
+	@Override
+	public String toString(){
+		return getClass().getSimpleName() + " : " + node.fqn() ;
 	}
 	
 	public Writable toWritable() {

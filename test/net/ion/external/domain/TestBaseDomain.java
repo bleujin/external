@@ -6,7 +6,7 @@ import junit.framework.TestCase;
 import net.ion.craken.Craken;
 import net.ion.framework.db.manager.OracleDBManager;
 
-public class TestBaseDomain extends TestCase{
+public class TestBaseDomain extends TestCase {
 
 	private OracleDBManager dbm;
 	private DomainMaster dmaster;

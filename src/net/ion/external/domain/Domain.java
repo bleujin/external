@@ -7,12 +7,15 @@ import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
+import net.ion.external.ics.bean.AfieldMetaX;
 import net.ion.external.ics.bean.ArticleChildrenX;
 import net.ion.external.ics.bean.ArticleX;
 import net.ion.external.ics.bean.CategoryChildrenX;
 import net.ion.external.ics.bean.GalleryCategoryX;
 import net.ion.external.ics.bean.SiteCategoryX;
 import net.ion.external.ics.bean.TemplateChildrenX;
+import net.ion.external.ics.bean.UserX;
+import net.ion.external.ics.bean.XIterable;
 import net.ion.nsearcher.search.filter.TermFilter;
 
 public class Domain {
@@ -44,6 +47,18 @@ public class Domain {
 		return this ;
 	}
 	
+	public Domain removeSiteCategory(final String scatId, final boolean includeSub) {
+		session.tran(new TransactionJob<Void>() {
+			@Override
+			public Void handle(WriteSession wsession) throws Exception {
+				wsession.pathBy("/command/domain/removecategory").property("catid", scatId).property("includesub", includeSub).property("did", did) ;
+				return null;
+			}
+		}) ;
+		return this ;
+	}
+
+	
 	public Domain addGallery(final String gcatId, final boolean includeSub) {
 		session.tran(new TransactionJob<Void>() {
 			@Override
@@ -54,8 +69,22 @@ public class Domain {
 		}) ;
 		return this ;
 	}
+	
+	public Domain resetUser() {
+		session.tran(new TransactionJob<Void>() {
+			@Override
+			public Void handle(WriteSession wsession) throws Exception {
+				wsession.pathBy("/command/domain/resetuser") ;
+				return null;
+			}
+		}) ;
+		
+		return this ;
+	}
 
-	public CategoryChildrenX<SiteCategoryX> categorys() throws IOException {
+	
+
+	public CategoryChildrenX<SiteCategoryX> scategorys() throws IOException {
 		return CategoryChildrenX.siteCategory(this, session.ghostBy(dnode.fqn()).refsToMe("include").fqnFilter("/datas/scat")) ;
 	}
 
@@ -96,4 +125,15 @@ public class Domain {
 	public GalleryCategoryX gcategory(String catId) {
 		return GalleryCategoryX.create(this, session.ghostBy("/datas/gcat", catId));
 	}
+
+	public AfieldMetaX afieldMeta(String afieldid) {
+		return AfieldMetaX.create(this, session.ghostBy("/datas/afield", afieldid));
+	}
+
+	public UserX findUser(String userId) {
+		return UserX.create(this,  session.ghostBy("/datas/user", userId));
+	}
+
+
+
 }

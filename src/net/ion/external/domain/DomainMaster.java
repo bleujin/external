@@ -26,6 +26,7 @@ import net.ion.framework.db.bean.ResultSetHandler;
 import net.ion.framework.db.manager.OracleDBManager;
 import net.ion.framework.util.ArrayUtil;
 import net.ion.framework.util.Debug;
+import net.ion.framework.util.ObjectId;
 
 import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.kr.utils.StringUtil;
@@ -51,7 +52,7 @@ public class DomainMaster {
 	}
 
 	private void init() throws IOException {
-		ReadSession session = ic.login();
+		final ReadSession session = ic.login();
 
 		session.workspace().cddm().add(new CDDHandler() {
 			@Override
@@ -62,11 +63,31 @@ public class DomainMaster {
 			@Override
 			public TransactionJob<Void> modified(Map<String, String> resolveMap, CDDModifiedEvent cevent) {
 				try {
-					if ("addcategory".equals(resolveMap.get("action"))) {
+					final String action = resolveMap.get("action");
+					session.tran(new TransactionJob<Void>() {
+						public Void handle(WriteSession wsession) throws Exception {
+							wsession.pathBy("/datas/log", new ObjectId()).property("action", action + "_start").property("time", System.currentTimeMillis()) ;
+							return null;
+						}
+					}) ;
+					
+					if ("addcategory".equals(action)) {
 						whenAddCategory(cevent.property("catid").asString(), cevent.property("includesub").asBoolean(), cevent.property("did").asString());
-					} else if ("addgallery".equals(resolveMap.get("action"))) {
+					} else if ("addgallery".equals(action)) {
 						whenAddGallery(cevent.property("catid").asString(), cevent.property("includesub").asBoolean(), cevent.property("did").asString());
+					} else if ("resetuser".equals(action)){
+						whenResetUser() ;
+					} else if ("removecategory".equals(action)) {
+						whenRemoveCategory(cevent.property("catid").asString(), cevent.property("includesub").asBoolean(), cevent.property("did").asString());
 					}
+					
+					session.tran(new TransactionJob<Void>() {
+						public Void handle(WriteSession wsession) throws Exception {
+							wsession.pathBy("/datas/log", new ObjectId()).property("action", action + "_end").property("time", System.currentTimeMillis()) ;
+							return null;
+						}
+					}) ;
+					
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -85,6 +106,28 @@ public class DomainMaster {
 		return new DomainMaster(dbm, ic);
 	}
 
+	private void whenResetUser() {
+		session.tran(new TransactionJob<Void>() {
+			@Override
+			public Void handle(final WriteSession wsession) throws Exception {
+				sqlLoader.query(idc, "user").execHandlerQuery(new ResultSetHandler<Void>() {
+					public Void handle(ResultSet rs) throws SQLException {
+						while(rs.next()){
+							if (wsession.exists(rs.getString("fqn"))) continue ;
+							
+							WriteNode wnode = wsession.pathBy(rs.getString("fqn")) ;
+							Def.User.Properties(wnode, rs) ;
+						}
+						return null;
+					}
+				}) ;
+				return null;
+			}
+		}) ;
+	}
+
+
+	
 	private void whenAddCategory(final String catId, final Boolean includeSub, final String did) throws SQLException {
 		session.tran(new TransactionJob<Void>() {
 
@@ -92,6 +135,18 @@ public class DomainMaster {
 			public Void handle(final WriteSession wsession) throws Exception {
 				// category
 				sqlLoader.query(idc, "category").addParam("catId", catId).addParam("includeSub", includeSub ? "T" : "F").execHandlerQuery(createHandler(wsession, Def.Category.class, did, "orderLnNo", ""));
+				
+				// category_afield
+				sqlLoader.query(idc, "category_afield").addParam("catId", catId).addParam("includeSub", includeSub ? "T" : "F").execHandlerQuery(new ResultSetHandler<Void>() {
+					@Override
+					public Void handle(ResultSet rs) throws SQLException {
+						while(rs.next()){
+							wsession.pathBy(rs.getString("fqn")).refTos("afields", rs.getString("tfqn")) ;
+						}
+						return null;
+					}
+				});
+				
 
 				// article
 				sqlLoader.query(idc, "articles").addParam("catId", catId).addParam("includeSub", includeSub ? "T" : "F").execHandlerQuery(createHandler(wsession, Def.Article.class, did, "artid,modserno,orderno,partid,priority", "isusingurlloc"));
@@ -114,7 +169,7 @@ public class DomainMaster {
 					}
 				});
 
-				// afield
+				// article_afield
 				sqlLoader.query(idc, "articles_afield").addParam("catId", catId).addParam("includeSub", includeSub ? "T" : "F").execHandlerQuery(new ResultSetHandler<Void>() {
 					@Override
 					public Void handle(ResultSet rs) throws SQLException {
@@ -145,6 +200,25 @@ public class DomainMaster {
 				// template
 				sqlLoader.query(idc, "template").addParam("catId", catId).addParam("includeSub", includeSub ? "T" : "F").execHandlerQuery(createHandler(wsession, Def.Template.class, did, "tplid", ""));
 
+				
+				// afiled
+				if (! wsession.exists("/datas/afield")){
+					sqlLoader.query(idc, "afield").execHandlerQuery(new ResultSetHandler<Void>() {
+						@Override
+						public Void handle(ResultSet rs) throws SQLException {
+							while(rs.next()){
+								if (rs.getInt("lvl") > 1){
+									wsession.pathBy(rs.getString("fqn")).refTos("tree", "/datas/afield/" + rs.getString("lowerid")) ;
+								} else {
+									WriteNode wnode = wsession.pathBy(rs.getString("fqn")) ;
+									Def.Afield.Properties(wnode, rs) ;
+								}
+							}
+							return null;
+						}
+					});
+				} ;
+				
 				return null;
 			}
 		});
@@ -176,7 +250,6 @@ public class DomainMaster {
 									logger.warn(ignore.getMessage());
 								}
 							}
-							Debug.line(resource.getAbsolutePath());
 						}
 						return null;
 					}
@@ -212,6 +285,13 @@ public class DomainMaster {
 			}
 		};
 	}
+	
+	private void whenRemoveCategory(String catId, Boolean includeSub, String did) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 	public DomainMaster artImageRoot(File path) {
 		this.artImageDir = path;

@@ -1,12 +1,19 @@
 package net.ion.external.domain;
 
-import net.ion.external.ics.bean.CategoryChildrenX;
-import net.ion.external.ics.bean.SiteCategoryX;
+import java.io.StringWriter;
+import java.io.Writer;
 
-public class TestCategory extends TestBaseDomain{
+import net.ion.external.ics.bean.AfieldMetaX;
+import net.ion.external.ics.bean.CategoryChildrenX;
+import net.ion.external.ics.bean.OutputHandler;
+import net.ion.external.ics.bean.SiteCategoryX;
+import net.ion.external.ics.bean.XIterable;
+import net.ion.framework.util.Debug;
+
+public class TestSiteCategory extends TestBaseDomain{
 	
 	public void testFindCategory() throws Exception {
-		CategoryChildrenX<SiteCategoryX> categorys = domain.categorys() ;
+		CategoryChildrenX<SiteCategoryX> categorys = domain.scategorys() ;
 		
 		assertEquals(true, categorys != null);
 
@@ -42,6 +49,21 @@ public class TestCategory extends TestBaseDomain{
 		SiteCategoryX category = domain.scategory("dynamic") ;
 
 		assertEquals(true, category.articles().find().count() > 0) ;
+	}
+	
+	public void testAfields() throws Exception {
+		domain.addSiteCategory("dynamic_lyn", true) ;
+		
+		SiteCategoryX scategory = domain.scategory("dynamic_lyn");
+		XIterable<AfieldMetaX> afields = scategory.afieldMetas();
+		AfieldMetaX afield = afields.findByKey("num_lyn") ;
+		assertEquals("Number", afield.typeCd());
+		
+		assertEquals(2, scategory.article(1207020).afields().count()) ;
+		assertEquals(3, scategory.article(1207020).afields(true).count()) ;
+		
+		assertEquals("Date", scategory.article(1207020).afields(true).findByKey("date_lyn").typeCd()) ;
+		
 	}
 	
 	

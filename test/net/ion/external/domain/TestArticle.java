@@ -1,9 +1,13 @@
 package net.ion.external.domain;
 
 import java.io.InputStream;
+import java.io.StringWriter;
+import java.io.Writer;
 
 import net.ion.external.ics.bean.ArticleChildrenX;
 import net.ion.external.ics.bean.ArticleX;
+import net.ion.external.ics.bean.OutputHandler;
+import net.ion.framework.util.Debug;
 import net.ion.framework.util.IOUtil;
 
 public class TestArticle extends TestBaseDomain {
@@ -42,6 +46,14 @@ public class TestArticle extends TestBaseDomain {
 		InputStream input = a1207152.contentStream("/2014/12/12/ibr_test/IMG_1695.JPG") ;
 		assertEquals(true, input != ArticleX.BLANKSTREAM);
 		IOUtil.close(input);
+	}
+	
+	
+	public void testOutput() throws Exception {
+		Writer sw = new StringWriter();
+		OutputHandler ohandler = OutputHandler.createJson(sw);
+		domain.article("dynamic", 1207152).afields(true).out(ohandler) ; 
+		Debug.line(sw);
 	}
 	
 }

@@ -8,6 +8,7 @@ import org.jboss.logging.annotations.Pos;
 import oracle.net.aso.n;
 import net.ion.craken.node.WriteNode;
 import net.ion.craken.node.WriteSession;
+import net.ion.craken.tree.Fqn;
 
 public class Def {
 
@@ -79,6 +80,10 @@ public class Def {
 		public final static String ModDay = "modday";
 		public final static String CreDay = "creday";
 //		public static final String Related = "related";
+		
+		public static Fqn pathBy(String catId, int artId) {
+			return Fqn.fromString("/datas/article/" + catId + "/" + artId);
+		}
 	}
 	
 	public final static class Template {
@@ -90,19 +95,48 @@ public class Def {
 		public final static String Name = "name" ;
 		public final static String Explain = "explain" ;
 		public final static String RegUserId = "reguserid" ;
+		
+		public static Fqn pathBy(String catId, int tplId){
+			return Fqn.fromString("/datas/template/" + catId + "/" + tplId) ;
+		}
+		
 	}
 	
 	public final static class Afield {
 		public final static String AfieldId = "afieldid";
+		public final static String Name = "name";
+		public final static String Explain = "explain" ;
 		public final static String TypeCd = "typecd";
-		public final static String AfieldNm = "afieldnm";
+		public final static String IsMndt = "ismndt" ;
+		public final static String ExamId = "examid" ;
+		public final static String DefaultValue = "defaultvalue" ;
+
+		public static void Properties(WriteNode wnode, ResultSet rs) throws SQLException {
+			String[] sprops = new String[]{AfieldId, Name, Explain, TypeCd, IsMndt, ExamId, DefaultValue} ;
+			for(String prop : sprops){
+				wnode.property(prop, rs.getString(prop)) ;
+			}
+		}
+		
+		public static Fqn pathBy(String afieldId){
+			return Fqn.fromString("/datas/afield/" + afieldId) ;
+		}
 	}
 
 	public final static class User  {
 		public final static String UserId = "userid" ;
+		public final static String Name = "name" ;
+		public final static String Password = "password" ;
+		
 		public final static String VerifyKey = "verifykey" ;
 		public final static String RetireDay = "retireday" ;
 		public final static String EnroleDay = "enroleday";
+		public static void Properties(WriteNode wnode, ResultSet rs) throws SQLException {
+			wnode.property(UserId, rs.getString(UserId)).property(Name, rs.getString(Name)).property(Password, rs.getString(Password)) ;
+		}
+		public static Fqn pathBy(String userId) {
+			return Fqn.fromString("/datas/user/" + userId);
+		}
 	}
 
 	public static final class AfieldValue {
@@ -113,7 +147,9 @@ public class Def {
 		public final static String StringValue = "stringvalue" ;
 
 		public static void Properties(WriteNode afieldNode, ResultSet rs) throws SQLException {
-			afieldNode.property(CatId, rs.getString(CatId)).property(ArtId, rs.getInt(ArtId))
+			afieldNode
+				.property(CatId, rs.getString(CatId))
+				.property(ArtId, rs.getInt(ArtId))
 				.property(AfieldId, rs.getString(AfieldId))
 				.property(TypeCd, rs.getString(TypeCd))
 				.property(StringValue, rs.getString("dvalue") + rs.getString("clobvalue")) ;
