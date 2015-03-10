@@ -3,7 +3,7 @@ package net.ion.external.domain;
 import java.io.IOException;
 
 import oracle.net.aso.s;
-import net.ion.craken.Craken;
+import net.ion.craken.ICSCraken;
 import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
@@ -24,12 +24,12 @@ public class Domain {
 
 	private ReadNode dnode;
 	private ReadSession session;
-	private Craken ic ;
+	private ICSCraken ic ;
 	private String did;
 	private DomainInfo dinfo;
 	private DomainData ddata;
 	
-	private Domain(Craken ic, ReadNode dnode) {
+	private Domain(ICSCraken ic, ReadNode dnode) {
 		this.dnode = dnode;
 		this.session = dnode.session() ;
 		this.ic = ic ;
@@ -38,7 +38,7 @@ public class Domain {
 		this.ddata = new DomainData(this) ;
 	}
 
-	public static Domain by(Craken ic, ReadNode dnode) {
+	public static Domain by(ICSCraken ic, ReadNode dnode) {
 		return new Domain(ic, dnode);
 	}
 

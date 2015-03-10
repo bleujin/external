@@ -1,8 +1,14 @@
 package net.ion.external.ics.util;
 
-import net.ion.framework.util.FileUtil;
-
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import net.ion.external.ics.web.Webapp;
+import net.ion.framework.parse.gson.JsonArray;
+import net.ion.framework.parse.gson.JsonPrimitive;
+import net.ion.framework.util.FileUtil;
+import net.ion.framework.util.IOUtil;
 
 public class WebUtil {
 
@@ -22,7 +28,7 @@ public class WebUtil {
 	
 //	public static JsonArray findLoaderScripts(){
 //		JsonArray result = new JsonArray() ;
-//		for (File file : findFiles(WebApp.LOADER_SCRIPT_DIR, true, "script")) {
+//		for (File file : findFiles(Webapp.LOADER_SCRIPT_DIR, true, "script")) {
 //			result.add(new JsonPrimitive(file.getName())) ;
 //		}
 //		return result ;
@@ -31,21 +37,21 @@ public class WebUtil {
 //	public static String viewLoaderScript(String fileName) throws IOException {
 //		return IOUtil.toStringWithClose(new FileInputStream(new File(Webapp.LOADER_SCRIPT_DIR, fileName))) ;
 //	}
-//
-//
-//
-//	public static JsonArray findScripts(){
-//		JsonArray result = new JsonArray() ;
-//		for (File file : findFiles(Webapp.SCRIPT_DIR, true, "script")) {
-//			result.add(new JsonPrimitive(file.getName())) ;
-//		}
-//		return result ;
-//	}
-//
-//	public static String viewScript(String fileName) throws IOException{
-//		return IOUtil.toStringWithClose(new FileInputStream(new File(Webapp.SCRIPT_DIR, fileName))) ;
-//	}
-//
+
+
+
+	public static JsonArray findScripts(){
+		JsonArray result = new JsonArray() ;
+		for (File file : findFiles(Webapp.SCRIPT_DIR, true, "script")) {
+			result.add(new JsonPrimitive(file.getName())) ;
+		}
+		return result ;
+	}
+
+	public static String viewScript(String fileName) throws IOException{
+		return IOUtil.toStringWithClose(new FileInputStream(new File(Webapp.SCRIPT_DIR, fileName))) ;
+	}
+
 //	public static JsonArray findSearchHandlers(){
 //		JsonArray result = new JsonArray() ;
 //		for (File file : findFiles(Webapp.SEARCH_HANDLER_DIR, true, "handler")) {

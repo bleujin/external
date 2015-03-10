@@ -24,7 +24,7 @@ import net.ion.framework.parse.gson.JsonPrimitive;
 import net.ion.radon.core.ContextParam;
 
 @Path("/domain")
-public class DomainWeb implements WebApp {
+public class DomainWeb implements Webapp {
 
 	private DomainSub dsub;
 	public DomainWeb(@ContextParam(DomainEntry.EntryName) DomainEntry dentry){

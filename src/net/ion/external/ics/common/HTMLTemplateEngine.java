@@ -1,10 +1,10 @@
 package net.ion.external.ics.common;
 
-import net.ion.craken.Craken;
+import net.ion.craken.ICSCraken;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.util.StringInputStream;
 import net.ion.external.ics.util.WebUtil;
-import net.ion.external.ics.web.WebApp;
+import net.ion.external.ics.web.Webapp;
 import net.ion.framework.db.ThreadFactoryBuilder;
 import net.ion.framework.util.IOUtil;
 import net.ion.framework.util.ObjectUtil;
@@ -36,7 +36,7 @@ public class HTMLTemplateEngine implements TemplateEngine {
     private Charset utf8;
     private VelocityEngine ve;
     private ReadSession rsession;
-    private Craken craken;
+    private ICSCraken craken;
     private ToJsonHandler handler;
 
     public HTMLTemplateEngine(TreeContext tcontext) throws Exception {
@@ -44,7 +44,7 @@ public class HTMLTemplateEngine implements TemplateEngine {
         this.ve = new VelocityEngine();
         this.vcontext = new VelocityContext();
         vcontext.put(TreeContext.class.getCanonicalName(), tcontext);
-        this.craken = tcontext.getAttributeObject(Craken.EntryName, Craken.class);
+        this.craken = tcontext.getAttributeObject(ICSCraken.EntryName, ICSCraken.class);
         this.rsession = craken.login();
 
         ve.setProperty("resource.loader", "file");
@@ -58,7 +58,7 @@ public class HTMLTemplateEngine implements TemplateEngine {
         ve.init();
 
         XMLReader xreader = XMLReaderFactory.createXMLReader();
-        String xmlString = IOUtil.toStringWithClose(new FileInputStream(WebApp.MESSAGE_RESOURCE_FILE));
+        String xmlString = IOUtil.toStringWithClose(new FileInputStream(Webapp.MESSAGE_RESOURCE_FILE));
         InputSource input = new InputSource(new StringInputStream(xmlString));
 
         this.handler = new ToJsonHandler();
@@ -67,7 +67,7 @@ public class HTMLTemplateEngine implements TemplateEngine {
 
         final Logger logger = Logger.getLogger(HTMLTemplateEngine.class);
 
-        File messageDir = new File(WebApp.MESSAGE_RESOURCE_DIR);
+        File messageDir = new File(Webapp.MESSAGE_RESOURCE_DIR);
         FileAlterationObserver fo = new FileAlterationObserver(messageDir);
         fo.addListener(new AbstractListener() {
             @Override
@@ -75,7 +75,7 @@ public class HTMLTemplateEngine implements TemplateEngine {
                 try {
                     logger.info(file + " changed");
                     XMLReader xreader = XMLReaderFactory.createXMLReader();
-                    String xmlString = IOUtil.toStringWithClose(new FileInputStream(WebApp.MESSAGE_RESOURCE_FILE));
+                    String xmlString = IOUtil.toStringWithClose(new FileInputStream(Webapp.MESSAGE_RESOURCE_FILE));
                     InputSource input = new InputSource(new StringInputStream(xmlString));
 
                     ToJsonHandler newHandler = new ToJsonHandler();

@@ -11,7 +11,7 @@ import java.util.Map;
 
 import net.ion.cms.rest.sync.Def;
 import net.ion.cms.rest.sync.Def.Gallery;
-import net.ion.craken.Craken;
+import net.ion.craken.ICSCraken;
 import net.ion.craken.listener.CDDHandler;
 import net.ion.craken.listener.CDDModifiedEvent;
 import net.ion.craken.listener.CDDRemovedEvent;
@@ -31,7 +31,7 @@ import org.apache.lucene.analysis.kr.utils.StringUtil;
 public class DomainMaster {
 
 	private DBController idc;
-	private Craken ic;
+	private ICSCraken ic;
 	private SQLLoader sqlLoader;
 	private ReadSession session;
 	private File artImageDir;
@@ -40,7 +40,7 @@ public class DomainMaster {
 	private Logger logger = Logger.getLogger(DomainMaster.class);
 	private File afieldRoot;
 
-	public DomainMaster(OracleDBManager dbm, Craken ic) throws IOException {
+	public DomainMaster(OracleDBManager dbm, ICSCraken ic) throws IOException {
 		this.idc = new DBController(dbm);
 		this.ic = ic;
 		this.session = ic.login();
@@ -144,7 +144,7 @@ public class DomainMaster {
 	
 	
 
-	public static DomainMaster create(OracleDBManager dbm, Craken ic) throws IOException {
+	public static DomainMaster create(OracleDBManager dbm, ICSCraken ic) throws IOException {
 		return new DomainMaster(dbm, ic);
 	}
 

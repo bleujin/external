@@ -110,7 +110,7 @@
             var aHTML = $('.click2edit').code() ;
             $.ajax({
                 type: "POST",
-                url: "/ics/menus/domain",
+                url: "/admin/menus/domain",
                 data: { content: aHTML, field: "overview" }
             });
             $('.click2edit').destroy();

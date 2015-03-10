@@ -191,7 +191,7 @@
                 $.ajax({
                     type: 'POST',
                     dataType: 'text',
-                    url: '/ics/domain/' + domainId + '/scat/' + newId + '/create',
+                    url: '/admin/domain/' + domainId + '/scat/' + newId + '/create',
                     data: { },
                     complete: function() { },
                     success: function() {
@@ -218,7 +218,7 @@
         $.ajax({
             type: 'GET',
             dataType: 'json',
-            url: '/ics/domain/' + domainId + '/info',
+            url: '/admin/domain/' + domainId + '/info',
             data: { },
             complete: function() { },
             success: function(data) {

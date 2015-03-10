@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 import com.google.common.base.Function;
 
-import net.ion.craken.Craken;
+import net.ion.craken.ICSCraken;
 import net.ion.craken.node.IteratorList;
 import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.ReadSession;
@@ -16,20 +16,20 @@ import net.ion.craken.node.crud.ReadChildren;
 public class DomainSub {
 
 	private ReadSession session;
-	private Craken craken ;
+	private ICSCraken craken ;
 	
-	public DomainSub(Craken craken) throws IOException {
+	public DomainSub(ICSCraken craken) throws IOException {
 		this.craken = craken ;
 		this.session = craken.login() ;
 	}
 
 	
-	public Craken craken(){
+	public ICSCraken craken(){
 		return craken ;
 	}
 	
 	
-	public static DomainSub create(Craken ic) throws IOException {
+	public static DomainSub create(ICSCraken ic) throws IOException {
 		return new DomainSub(ic);
 	}
 

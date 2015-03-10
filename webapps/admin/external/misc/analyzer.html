@@ -111,7 +111,7 @@
 		var _btn_analyzer = _analyzerForm.find("button[name=btn_analyzer]") ; 
 
 		$.ajax({
-			url:'/ics/analysis',
+			url:'/admin/analysis',
 			dataType:'json',
 			success:function(data){
 				var analyzer = data['analyzer'] ;
@@ -145,7 +145,7 @@
 				_target_analyzer.each(function(){ targets.push($(this).val()) });
 				$.ajax({
 					type: "POST",
-					url: "/ics/analysis",
+					url: "/admin/analysis",
 					dataType:'json', 
 					data: { content: _textvalue.val(), analyzer: targets.toString(), stopword: _stopword.val()}, 
 					success : function(data) {

@@ -1,0 +1,14 @@
+// read from craken sample
+new function(){
+
+	importPackage(java.lang)
+	importPackage(net.ion.craken.node.convert) 
+
+
+	this.handle = function(writer, session, param){
+		
+		var json = session.ghostBy("/searchlogs").children().descending('count').offset(10).transform(Functions.CHILDLIST);
+		return json ;
+	}
+
+} ;

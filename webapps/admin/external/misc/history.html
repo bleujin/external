@@ -38,7 +38,7 @@
 	var pagefunction = function() {
 
 		$.ajax({
-			url:"/ics/misc/history",
+			url:"/admin/misc/history",
 			type:'GET', 
 			dataType:'json',
 			data : {'searchQuery':''}, 
@@ -83,7 +83,7 @@
 				$('#btn_detail_index').click( function () {
 					var targets = $('#example').DataTable().rows('.selected2') ;
 					var lid = targets.data()[0][0] ;
-					window.open('/ics/craken/events/loaders/' + lid + '.content','width=400,height=200,toolbar=yes, location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,copyhistory=yes, resizable=yes') ;
+					window.open('/admin/craken/events/loaders/' + lid + '.content','width=400,height=200,toolbar=yes, location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,copyhistory=yes, resizable=yes') ;
 				});
 				
 				$('#searchQuery').on('keypress', function (event) {
@@ -91,7 +91,7 @@
 						table.destroy();
 						
 						$.ajax({
-							url:"/ics/misc/history",
+							url:"/admin/misc/history",
 							type:'GET', 
 							dataType:'json',
 							data : {'searchQuery':$("#searchQuery").val()}, 

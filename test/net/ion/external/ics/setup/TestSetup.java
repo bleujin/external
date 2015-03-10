@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import junit.framework.TestCase;
-import net.ion.craken.Craken;
+import net.ion.craken.ICSCraken;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteNode;
@@ -18,14 +18,14 @@ import net.ion.framework.util.ListUtil;
 
 public class TestSetup extends TestCase {
 
-	protected Craken craken;
+	protected ICSCraken craken;
 	protected DBController dc;
 	protected ReadSession session;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		this.craken = Craken.create();
+		this.craken = ICSCraken.create();
 		this.session = craken.login();
 		OracleDBManager dbm = new OracleDBManager("jdbc:oracle:thin:@dev-oracle.i-on.net:1521:dev10g", "dev_ics6", "dev_ics6");
 		this.dc = new DBController(dbm);

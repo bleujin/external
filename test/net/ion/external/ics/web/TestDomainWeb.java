@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import junit.framework.TestCase;
-import net.ion.craken.Craken;
+import net.ion.craken.ICSCraken;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
@@ -20,7 +20,7 @@ public class TestDomainWeb extends TestCase {
 
 	private StubServer ss;
 	private OracleDBManager dbm;
-	private Craken icraken;
+	private ICSCraken icraken;
 	private DomainSub dsub;
 
 	@Override
@@ -30,7 +30,7 @@ public class TestDomainWeb extends TestCase {
 		
 		this.dbm = new OracleDBManager("jdbc:oracle:thin:@dev-oracle.i-on.net:1521:dev10g", "dev_ics6", "dev_ics6");
 		
-		this.icraken = Craken.test() ;
+		this.icraken = ICSCraken.test() ;
 		DomainMaster dmaster = DomainMaster.create(dbm, icraken)
 					.artImageRoot(new File("./resource/uploadfiles/artimage"))
 					.galleryRoot(new File("./resource/uploadfiles/gallery"))

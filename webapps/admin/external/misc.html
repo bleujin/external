@@ -159,7 +159,7 @@
 				$.ajax({
 					type: "POST",
 					dataType:"text", 
-					url: "/ics/misc/users/" + userid,
+					url: "/admin/misc/users/" + userid,
 					data: { 'name': $("#create_user_form input[name=name]").val(), 'password': $("#create_user_form input[name=password]").val() }, 
 					success : function(msg){
 						$("#create_user_form").modal('hide') ;
@@ -194,7 +194,7 @@
 				$.ajax({
 					type: "POST",
 					dataType:"text", 
-					url: "/ics/scripts/define/" + sid,
+					url: "/admin/scripts/define/" + sid,
 					data: { 'content': $("#create_script_form textarea[name=content]").val() }, 
 					success : function(msg){
 						$("#create_script_form").modal('hide') ;
@@ -221,7 +221,7 @@
 			$.ajax({
 				type: "POST",
 				dataType : 'text', 
-				url: "/ics/scripts/instantrun",
+				url: "/admin/scripts/instantrun",
 				data: {'content': $("#create_script_form textarea[name=content]").val()}, 
 				complete : function(){ 
 				}, 
@@ -242,7 +242,7 @@
 			$.ajax({
 				type: "GET",
 				dataType : 'text', 
-				url: "/ics/scripts/sample/" + fileName,
+				url: "/admin/scripts/sample/" + fileName,
 				data: {}, 
 				complete : function(){ 
 				}, 

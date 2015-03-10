@@ -315,7 +315,7 @@
         var lastDomainId = '' ;
 
         $.ajax({
-            url:'/ics/domain/list',
+            url:'/admin/domain/list',
             dataType:'json',
             success:function(data){
                 for(var idx in data){
@@ -348,7 +348,7 @@
                             $.ajax({
                                 type: "DELETE",
                                 dataType: 'text',
-                                url: "/ics/domain/" + $(".choose-sub").val(),
+                                url: "/admin/domain/" + $(".choose-sub").val(),
                                 data: { },
                                 complete: function () {
                                     // $("#query_url").text(this.url) ;
@@ -394,7 +394,7 @@
                 $.ajax({
                     type: 'POST',
                     dataType: 'text',
-                    url: '/ics/domain/' + newId + '/create',
+                    url: '/admin/domain/' + newId + '/create',
                     data: { },
                     complete: function() { },
                     success: function() {

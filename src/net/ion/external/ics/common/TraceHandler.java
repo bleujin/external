@@ -1,6 +1,6 @@
 package net.ion.external.ics.common;
 
-import net.ion.craken.Craken;
+import net.ion.craken.ICSCraken;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
@@ -22,8 +22,8 @@ import java.util.Set;
 public class TraceHandler extends AbstractHttpHandler {
 
 	private ReadSession rsession;
-	public TraceHandler(Craken rentry) throws IOException {
-		this.rsession = rentry.login() ;
+	public TraceHandler(ICSCraken craken) throws IOException {
+		this.rsession = craken.login() ;
 	}
 
 	public void handleHttpRequest(final HttpRequest request, final HttpResponse response, HttpControl control) throws Exception {
