@@ -27,7 +27,7 @@ public class AbCategory<T extends AbCategory> extends BeanX{
 	}
 
 	public T parent() throws IOException {
-		return (T) domain().scategory(asString("parent"));
+		return (T) domain().datas().scategory(asString("parent"));
 	}
 
 	public T joiner(String joiner) {

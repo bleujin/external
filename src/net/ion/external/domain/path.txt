@@ -1,12 +1,20 @@
-/datas/scat/{catid}
+/domain/{did}/
+			/scat/{catid} {includeSub}
+			/gcat/{catId} {includeSub}
+
+
+
+-- about domain
+/datas/scat/{catid, refTo}			
 /datas/article/{catid}/{artid}
 /datas/template/{catid}/{tplid}
 
 /datas/gcat/{gcatid}
 /datas/gallery/{gcatid}/{gid}
 
-/datas/avlaue/{artid}/{afieldid}
 
+-- 
+/datas/avlaue/{artid}/{afieldid}
 /datas/afield/{afieldid}
 	{typecd, name, explain}
 

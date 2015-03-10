@@ -3,7 +3,6 @@ package net.ion.external.domain;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
@@ -12,7 +11,6 @@ import java.util.Map;
 
 import net.ion.cms.rest.sync.Def;
 import net.ion.cms.rest.sync.Def.Gallery;
-import net.ion.cms.rest.sync.Def.GalleryCategory;
 import net.ion.craken.Craken;
 import net.ion.craken.listener.CDDHandler;
 import net.ion.craken.listener.CDDModifiedEvent;
@@ -25,7 +23,6 @@ import net.ion.framework.db.DBController;
 import net.ion.framework.db.bean.ResultSetHandler;
 import net.ion.framework.db.manager.OracleDBManager;
 import net.ion.framework.util.ArrayUtil;
-import net.ion.framework.util.Debug;
 import net.ion.framework.util.ObjectId;
 
 import org.apache.log4j.Logger;
@@ -54,6 +51,62 @@ public class DomainMaster {
 	private void init() throws IOException {
 		final ReadSession session = ic.login();
 
+		// when addCategory
+		session.workspace().cddm().add(new CDDHandler() {
+			@Override
+			public String pathPattern() {
+				return "/domain/{did}/scat/{catid}";
+			}
+
+			@Override
+			public TransactionJob<Void> modified(Map<String, String> resolveMap, CDDModifiedEvent cevent) {
+				final String action = "add site category";
+				final String did = resolveMap.get("did") ;
+				final String catId = resolveMap.get("catid") ;
+				startAction(session, action);
+				whenAddCategory(catId, cevent.property("includesub").asBoolean(), did);
+				endAction(session, action);
+				
+				return null;
+			}
+
+			@Override
+			public TransactionJob<Void> deleted(Map<String, String> resolveMap, CDDRemovedEvent cevent) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+		});
+		
+		
+		// when add Gallery Category
+		session.workspace().cddm().add(new CDDHandler() {
+			@Override
+			public String pathPattern() {
+				return "/domain/{did}/gcat/{catid}";
+			}
+
+			@Override
+			public TransactionJob<Void> modified(Map<String, String> resolveMap, CDDModifiedEvent cevent) {
+				final String action = "add gallery category";
+				final String did = resolveMap.get("did") ;
+				final String catId = resolveMap.get("catid") ;
+				
+				startAction(session, action);
+				whenAddGallery(catId, cevent.property("includesub").asBoolean(), did);
+				
+				endAction(session, action);
+				return null;
+			}
+
+			@Override
+			public TransactionJob<Void> deleted(Map<String, String> resolveMap, CDDRemovedEvent cevent) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+		});		
+		
+		
+		// etc
 		session.workspace().cddm().add(new CDDHandler() {
 			@Override
 			public String pathPattern() {
@@ -62,35 +115,21 @@ public class DomainMaster {
 
 			@Override
 			public TransactionJob<Void> modified(Map<String, String> resolveMap, CDDModifiedEvent cevent) {
-				try {
-					final String action = resolveMap.get("action");
-					session.tran(new TransactionJob<Void>() {
-						public Void handle(WriteSession wsession) throws Exception {
-							wsession.pathBy("/datas/log", new ObjectId()).property("action", action + "_start").property("time", System.currentTimeMillis()) ;
-							return null;
-						}
-					}) ;
-					
-					if ("addcategory".equals(action)) {
-						whenAddCategory(cevent.property("catid").asString(), cevent.property("includesub").asBoolean(), cevent.property("did").asString());
-					} else if ("addgallery".equals(action)) {
-						whenAddGallery(cevent.property("catid").asString(), cevent.property("includesub").asBoolean(), cevent.property("did").asString());
-					} else if ("resetuser".equals(action)){
-						whenResetUser() ;
-					} else if ("removecategory".equals(action)) {
-						whenRemoveCategory(cevent.property("catid").asString(), cevent.property("includesub").asBoolean(), cevent.property("did").asString());
-					}
-					
-					session.tran(new TransactionJob<Void>() {
-						public Void handle(WriteSession wsession) throws Exception {
-							wsession.pathBy("/datas/log", new ObjectId()).property("action", action + "_end").property("time", System.currentTimeMillis()) ;
-							return null;
-						}
-					}) ;
-					
-				} catch (SQLException e) {
-					e.printStackTrace();
+				final String action = resolveMap.get("action");
+				startAction(session, action);
+				
+				if ("addcategory".equals(action)) {
+					whenAddCategory(cevent.property("catid").asString(), cevent.property("includesub").asBoolean(), cevent.property("did").asString());
+				} else if ("addgallery".equals(action)) {
+					whenAddGallery(cevent.property("catid").asString(), cevent.property("includesub").asBoolean(), cevent.property("did").asString());
+				} else if ("resetuser".equals(action)){
+					whenResetUser() ;
+				} else if ("removecategory".equals(action)) {
+					whenRemoveCategory(cevent.property("catid").asString(), cevent.property("includesub").asBoolean(), cevent.property("did").asString());
 				}
+				
+				endAction(session, action);
+				
 				return null;
 			}
 
@@ -101,10 +140,40 @@ public class DomainMaster {
 			}
 		});
 	}
+	
+	
+	
 
 	public static DomainMaster create(OracleDBManager dbm, Craken ic) throws IOException {
 		return new DomainMaster(dbm, ic);
 	}
+
+	
+	
+	private void startAction(final ReadSession session, final String action) {
+		session.tran(new TransactionJob<Void>() {
+			public Void handle(WriteSession wsession) throws Exception {
+				wsession.pathBy("/datas/log", new ObjectId()).property("action", action).property("type", "start").property("time", System.currentTimeMillis()) ;
+				return null;
+			}
+		}) ;
+	}
+
+	private void endAction(final ReadSession session, final String action) {
+		session.tran(new TransactionJob<Void>() {
+			public Void handle(WriteSession wsession) throws Exception {
+				wsession.pathBy("/datas/log", new ObjectId()).property("action", action).property("type", "end").property("time", System.currentTimeMillis()) ;
+				return null;
+			}
+		}) ;
+	}
+
+
+	
+
+	
+	
+	
 
 	private void whenResetUser() {
 		session.tran(new TransactionJob<Void>() {
@@ -128,9 +197,8 @@ public class DomainMaster {
 
 
 	
-	private void whenAddCategory(final String catId, final Boolean includeSub, final String did) throws SQLException {
+	private void whenAddCategory(final String catId, final Boolean includeSub, final String did) {
 		session.tran(new TransactionJob<Void>() {
-
 			@Override
 			public Void handle(final WriteSession wsession) throws Exception {
 				// category

@@ -14,7 +14,7 @@ import net.ion.framework.util.IOUtil;
 public class TestAfieldValue extends TestBaseDomain{
 	
 	public void testAfield() throws Exception {
-		ArticleX a1206381 = domain.article("dynamic", 1206381) ;
+		ArticleX a1206381 = domain.datas().article("dynamic", 1206381) ;
 		
 		AfieldValueX afield = a1206381.asAfield("lyn_string");
 		afield.debugPrint();
@@ -23,7 +23,7 @@ public class TestAfieldValue extends TestBaseDomain{
 	}
 	
 	public void testFileAfeld() throws Exception {
-		ArticleX article = domain.article("dynamic", 1206380) ;
+		ArticleX article = domain.datas().article("dynamic", 1206380) ;
 		InputStream input = article.asAfield("lyn_image").dataStream() ;
 		
 		assertEquals(true, input != BeanX.BLANKSTREAM);
@@ -33,14 +33,14 @@ public class TestAfieldValue extends TestBaseDomain{
 	}
 	
 	public void testAtArticle() throws Exception {
-		ArticleX article = domain.article("dynamic", 1206380) ;
+		ArticleX article = domain.datas().article("dynamic", 1206380) ;
 		assertEquals(true, article.asBoolean("booltest")) ;
 		
 		assertEquals("/2014/06/13/IMG_1210_1.JPG", article.asString("lyn_image")) ;
 	}
 	
 	public void testAsObject() throws Exception {
-		ArticleX article = domain.article("dynamic", 1206380) ;
+		ArticleX article = domain.datas().article("dynamic", 1206380) ;
 		
 		assertEquals(Boolean.TRUE, article.asAfield("booltest").asObject()) ;
 		assertEquals(0L, article.asAfield("num_lyn").asObject()) ;
@@ -57,7 +57,7 @@ public class TestAfieldValue extends TestBaseDomain{
 	public void testAsObject2() throws Exception {
 		domain.addSiteCategory("sssc223", false) ;
 		
-		ArticleX article = domain.article("sssc223", 1206952) ; //sssc223 1206952
+		ArticleX article = domain.datas().article("sssc223", 1206952) ; //sssc223 1206952
 		
 		assertEquals("", article.asAfield("ssc_set").asString()) ;
 		assertEquals("13000", article.asAfield("ssc_2").asObject());

@@ -23,6 +23,7 @@ public class Def {
 		public final static String CatUrl = "caturl";
 		public final static String OrderLnNo = "orderlnno";
 		public final static String FileServerUrl = "fileserverurl";
+		public final static String CatPath = "catpath" ;
 	}
 
 	public final static class GalleryCategory {
@@ -30,6 +31,7 @@ public class Def {
 		public final static String Parent = "parent";
 		public final static String Name = "name";
 		public final static String RegUserId = "reguserid";
+		public final static String CatPath = "catpath" ;
 	}
 
 	public final static class Gallery {

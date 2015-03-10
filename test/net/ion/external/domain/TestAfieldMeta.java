@@ -7,7 +7,7 @@ public class TestAfieldMeta extends TestBaseDomain{
 
 	
 	public void testFindMetaInfo() throws Exception {
-		AfieldMetaX ameta = domain.afieldMeta("ssc_set") ;
+		AfieldMetaX ameta = domain.datas().afieldMeta("ssc_set") ;
 
 		assertEquals("Set", ameta.typeCd());
 		XIterable<AfieldMetaX> schildren = ameta.children() ;

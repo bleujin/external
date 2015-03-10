@@ -1,6 +1,5 @@
 package net.ion.external.domain;
 
-import java.io.FileOutputStream;
 import java.io.InputStream;
 
 import net.ion.external.ics.bean.BeanX;
@@ -15,20 +14,20 @@ public class TestGallery extends TestBaseDomain{
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		domain.addGallery("aaaa", true);
+		domain.addGalleryCategory("aaaa", true);
 	}
 	
 	public void testCategory() throws Exception {
-		CategoryChildrenX<GalleryCategoryX> children = domain.gcategorys() ;
+		CategoryChildrenX<GalleryCategoryX> children = domain.datas().gcategorys() ;
 		
 		assertEquals(2, children.find().count());
 		
-		GalleryCategoryX gcat = domain.gcategory("bbbb");
+		GalleryCategoryX gcat = domain.datas().gcategory("bbbb");
 		assertEquals("bbbb", gcat.catId());
 	}
 	
 	public void testGallery() throws Exception {
-		GalleryCategoryX gcat = domain.gcategory("bbbb");
+		GalleryCategoryX gcat = domain.datas().gcategory("bbbb");
 		GalleryChildrenX children = gcat.galleries() ;
 		
 		assertEquals(1, children.find().count()) ;
@@ -44,7 +43,7 @@ public class TestGallery extends TestBaseDomain{
 	}
 	
 	public void testResize() throws Exception {
-		GalleryCategoryX gcat = domain.gcategory("bbbb");
+		GalleryCategoryX gcat = domain.datas().gcategory("bbbb");
 		GalleryX gallery = gcat.gallery(11000) ;
 		
 		InputStream input = gallery.dataStreamWithSize(100, 100);
@@ -54,7 +53,7 @@ public class TestGallery extends TestBaseDomain{
 	}
 	
 	public void testCrop() throws Exception {
-		GalleryCategoryX gcat = domain.gcategory("bbbb");
+		GalleryCategoryX gcat = domain.datas().gcategory("bbbb");
 		GalleryX gallery = gcat.gallery(11000) ;
 		
 		gallery.dataStreamWithSize(100, 100);

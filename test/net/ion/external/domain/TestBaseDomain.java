@@ -30,8 +30,7 @@ public class TestBaseDomain extends TestCase {
 		dsub.createDomain("zdm") ;
 		
 		assertEquals(true, dsub.existDomain("zdm")) ;
-		this.domain = dsub.findDomain("zdm")
-					.addSiteCategory("dynamic", false);
+		this.domain = dsub.findDomain("zdm").addSiteCategory("dynamic", false);
 	}
 	
 	@Override
