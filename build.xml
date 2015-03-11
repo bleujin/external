@@ -11,12 +11,12 @@
 	  <format property="TODAY_MY" pattern="MM/dd/yyyy hh:mm"/>
 	</tstamp>
 	
-	<property name="manifest.main.class" value="net.ion.niss.Main" />
+	<property name="manifest.main.class" value="net.ion.external.Main" />
 	<property name="manifest.classpath" value="lib/ref/* lib/common/* lib/reflib/*" />
 	<property name="version.number" value="0" />
-	<property name="build.number" value="7" />
+	<property name="build.number" value="1" />
 	
-	<manifestclasspath property="dynamic.manifest.classpath" jarfile="niss_${version.number}.${build.number}.jar">
+	<manifestclasspath property="dynamic.manifest.classpath" jarfile="es_${version.number}.${build.number}.jar">
 		<classpath>
 	      <fileset dir="lib/common/" includes="*.jar" />
 	      <fileset dir="lib/ref/" includes="*.jar" />
@@ -25,8 +25,8 @@
 	</manifestclasspath>
 	
 	<target name="publish" >
-		<delete file="publish/niss_${version.number}.${build.number}.jar"></delete>
-		<jar destfile="publish/niss_${version.number}.${build.number}.jar">
+		<delete file="publish/es_${version.number}.${build.number}.jar"></delete>
+		<jar destfile="publish/es_${version.number}.${build.number}.jar">
 			<manifest>
 			  <attribute name="Built-By" value="${user.name}"/>
 			  <attribute name="Created-By" value="${user.name}"/>
@@ -34,7 +34,7 @@
 			  <attribute name="Built-Date" value="${TODAY_MY}" />
 			  <attribute name="Class-Path" value="${dynamic.manifest.classpath}" />
 			  <section name="common">
-			    <attribute name="Specification-Title" value="i-on new search server"/>
+			    <attribute name="Specification-Title" value="i-on external server"/>
 			    <attribute name="Specification-Version" value="${version.number}.${build.number}"/>
 			    <attribute name="Specification-Vendor" value="i-on"/>
 			  </section>
@@ -44,38 +44,10 @@
 		</jar>
 	</target>
 
-	
-	<target name="extractfile_lib_fat">
-    	<delete file="./lib/common/extractfile_fat_1.8.jar"></delete>
-        <fatjar.build output="./lib/common/extractfile_fat_1.8.jar">
-            <fatjar.manifest/>
-
-        	<fatjar.jarsource file="${extractLibDir}\bcmail-jdk15-1.45.jar" relpath=""/> 
-        	<fatjar.jarsource file="${extractLibDir}\bcprov-jdk15-1.45.jar" relpath=""/> 
-	        <fatjar.jarsource file="${extractLibDir}\commons-compress-1.5.jar" relpath=""/> 
-	        <fatjar.jarsource file="${extractLibDir}\dom4j-1.6.1.jar" relpath=""/> 
-	        <fatjar.jarsource file="${extractLibDir}\fontbox-1.8.4.jar" relpath=""/> 
-	        <fatjar.jarsource file="${extractLibDir}\geronimo-stax-api_1.0_spec-1.0.1.jar" relpath=""/> 
-	        <fatjar.jarsource file="${extractLibDir}\jempbox-1.8.4.jar" relpath=""/> 
-	        <fatjar.jarsource file="${extractLibDir}\metadata-extractor-2.6.2.jar" relpath=""/> 
-	        <fatjar.jarsource file="${extractLibDir}\pdfbox-1.8.4.jar" relpath=""/> 
-	        <fatjar.jarsource file="${extractLibDir}\poi-3.10-beta2.jar" relpath=""/> 
-	        <fatjar.jarsource file="${extractLibDir}\poi-ooxml-3.10-beta2.jar" relpath=""/> 
-	        <fatjar.jarsource file="${extractLibDir}\poi-ooxml-schemas-3.10-beta2.jar" relpath=""/> 
-	        <fatjar.jarsource file="${extractLibDir}\poi-scratchpad-3.10-beta2.jar" relpath=""/> 
-
-        	<fatjar.jarsource file="${extractLibDir}\rcc.h2tlib-1.0.1.jar" relpath=""/> 
-        	<fatjar.jarsource file="${extractLibDir}\tika-core-1.5.jar" relpath=""/> 
-        	<fatjar.jarsource file="${extractLibDir}\tika-parsers-1.5.jar" relpath=""/> 
-        	<fatjar.jarsource file="${extractLibDir}\xmlbeans-2.3.0.jar" relpath=""/> 
-       	</fatjar.build>
-    </target>
-	
-	
 	<target name="deploy_self" depends="publish">
 		<echo>Copy main lib</echo>
 		<copy todir="fordeploy" overwrite="true">
-			<fileset file="publish/niss_${version.number}.${build.number}.jar" />
+			<fileset file="publish/es_${version.number}.${build.number}.jar" />
 		</copy>
 	</target>
 	
@@ -87,17 +59,15 @@
 		
 		<echo>Copy main lib</echo>
 		<copy todir="fordeploy" overwrite="true">
-			<fileset file="publish/niss_${version.number}.${build.number}.jar" />
+			<fileset file="publish/es_${version.number}.${build.number}.jar" />
 		</copy>
 
 		<echo>Copy resource</echo>
 		<copy todir="fordeploy/resource" overwrite="true">
 			<fileset dir="resource/">
-			    <exclude name="admin/**"/>
-			    <exclude name="index/**"/>
+			    <exclude name="ics/**"/>
 			    <exclude name="removed/**"/>
 			    <exclude name="logs/**"/>
-			    <exclude name="store/**"/>
 			    <exclude name="temp/**"/>
 			    <exclude name="test/**"/>
 			</fileset>
@@ -112,10 +82,10 @@
 
 	
 	<target name="make_zip" depends="copy_for_deploy">
-	    <delete file="deploy/niss_${version.number}.${build.number}.zip"></delete>
+	    <delete file="deploy/es_${version.number}.${build.number}.zip"></delete>
 	    <delete dir="fordeploy/resource/admin" failonerror="false"/>
 	    <delete dir="fordeploy/resource/index" failonerror="false"/>
-	    <zip destfile="deploy/niss_${version.number}.${build.number}.zip" basedir="fordeploy/"></zip>
+	    <zip destfile="deploy/es_${version.number}.${build.number}.zip" basedir="fordeploy/"></zip>
 	    <delete dir="fordeploy/lib" failonerror="false" /> 
 	    <delete dir="fordeploy/resource" failonerror="false" /> 
 	    <delete dir="fordeploy/webapps" failonerror="false" /> 
