@@ -17,139 +17,249 @@
 
 <!-- row -->
 <div class="row">
-    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <gallery class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="widget-body">
+            <ul id="myTab1" class="nav nav-tabs bordered">
+                <li class="active"><a href="#list" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> ${m.asString("domain.gallery.list")}</a></li>
+                <li><a href="#query" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> ${m.asString("domain.gallery.query")}</a></li>
+                <li><a href="#template" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> ${m.asString("domain.gallery.template")}</a></li>
+            </ul>
 
-            <div class="btn-group" style="margin-bottom: 10px">
-                <button type="button" class="btn btn-default view-list"><i class="fa fa-list"></i></button>
-                <button type="button" class="btn btn-default view-icon"><i class="fa fa-picture-o"></i></button>
+            <div id="myContent1" class="tab-content padding-10">
+                <div class="tab-pane fade in active" id="list">
+                    <div class="jarviswidget jarviswidget-color-purple" id="gallery-list-win" data-widget-editbutton="false" data-widget-deletebutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>${m.asString("domain.gallery.list.table-header")}</h2>
+                        </header>
+
+                        <div>
+                            <div class="btn-group" style="margin-bottom: 10px">
+                                <button type="button" class="btn btn-default view-list"><i class="fa fa-list"></i></button>
+                                <button type="button" class="btn btn-default view-icon"><i class="fa fa-picture-o"></i></button>
+                            </div>
+
+                            <!-- SuperBox -->
+                            <div id="table_list">
+                                <table id="gallerys" class="table table-bordered table-hover" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>${m.asString("domain.gallery.galid")}</th>
+                                        <th>${m.asString("domain.gallery.catid")}</th>
+                                        <th>${m.asString("domain.gallery.subject")}</th>
+                                        <th>${m.asString("domain.gallery.width")}</th>
+                                        <th>${m.asString("domain.gallery.height")}</th>
+                                        <th>${m.asString("domain.gallery.filesize")}</th>
+                                        <th>${m.asString("domain.gallery.lastmodified")}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="gallerys-body">
+                                    <tr>
+                                        <td>100</td>
+                                        <td>/ics/external/airkjh1</td>
+                                        <td>This is gallery subject</td>
+                                        <td>200</td>
+                                        <td>200</td>
+                                        <td>300kb</td>
+                                        <td>2015.03.06</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="icon_list" style="display: none;">
+                                <div class="superbox col-sm-12">
+                                    <div class="superbox-list">
+                                        <img src="img/superbox/superbox-thumb-1.jpg" data-img="img/superbox/superbox-full-1.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Miller Cine" class="superbox-img">
+                                    </div><!--
+                            --><div class="superbox-list">
+                                    <img src="img/superbox/superbox-thumb-2.jpg" data-img="img/superbox/superbox-full-2.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Bridge of Edgen" class="superbox-img">
+                                </div><!--
+                            --><div class="superbox-list">
+                                    <img src="img/superbox/superbox-thumb-3.jpg" data-img="img/superbox/superbox-full-3.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Lines of Friendship" class="superbox-img">
+                                </div><!--
+                            --><div class="superbox-list">
+                                    <img src="img/superbox/superbox-thumb-4.jpg" data-img="img/superbox/superbox-full-4.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="My new car!" class="superbox-img">
+                                </div><!--
+                            --><div class="superbox-list">
+                                    <img src="img/superbox/superbox-thumb-5.jpg" data-img="img/superbox/superbox-full-5.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Study Time" class="superbox-img">
+                                </div><!--
+                            --><div class="superbox-list">
+                                    <img src="img/superbox/superbox-thumb-6.jpg" data-img="img/superbox/superbox-full-6.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="San Francisco Bridge"  class="superbox-img">
+                                </div><!--
+                            --><div class="superbox-list">
+                                    <img src="img/superbox/superbox-thumb-7.jpg" data-img="img/superbox/superbox-full-7.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="New Styla"  class="superbox-img">
+                                </div><!--
+                            --><div class="superbox-list">
+                                    <img src="img/superbox/superbox-thumb-8.jpg" data-img="img/superbox/superbox-full-8.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Cristpta"  class="superbox-img">
+                                </div><!--
+                            --><div class="superbox-list">
+                                    <img src="img/superbox/superbox-thumb-9.jpg" data-img="img/superbox/superbox-full-9.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Cristine Dine"  class="superbox-img">
+                                </div><!--
+                            --><div class="superbox-list">
+                                    <img src="img/superbox/superbox-thumb-10.jpg" data-img="img/superbox/superbox-full-10.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Mosaic Clock"  class="superbox-img">
+                                </div><!--
+                            --><div class="superbox-list">
+                                    <img src="img/superbox/superbox-thumb-11.jpg" data-img="img/superbox/superbox-full-11.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Elegance"  class="superbox-img">
+                                </div><!--
+                            --><div class="superbox-list">
+                                    <img src="img/superbox/superbox-thumb-12.jpg" data-img="img/superbox/superbox-full-12.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="China Town"  class="superbox-img">
+                                </div><!--
+                            --><div class="superbox-list">
+                                    <img src="img/superbox/superbox-thumb-13.jpg" data-img="img/superbox/superbox-full-13.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Sky Diving"  class="superbox-img">
+                                </div><!--
+                            --><div class="superbox-list">
+                                    <img src="img/superbox/superbox-thumb-14.jpg" data-img="img/superbox/superbox-full-14.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Country Music"  class="superbox-img">
+                                </div><!--
+                            --><div class="superbox-list">
+                                    <img src="img/superbox/superbox-thumb-15.jpg" data-img="img/superbox/superbox-full-15.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="You are late!" class="superbox-img">
+                                </div><!--
+                            --><div class="superbox-list">
+                                    <img src="img/superbox/superbox-thumb-16.jpg" data-img="img/superbox/superbox-full-16.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Royal Bengle Tiger" class="superbox-img">
+                                </div><!--
+                            --><div class="superbox-list">
+                                    <img src="img/superbox/superbox-thumb-17.jpg" data-img="img/superbox/superbox-full-17.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Snowpine" class="superbox-img">
+                                </div><!--
+                            --><div class="superbox-list">
+                                    <img src="img/superbox/superbox-thumb-18.jpg" data-img="img/superbox/superbox-full-18.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Hop Jop Mop" class="superbox-img">
+                                </div><!--
+                            --><div class="superbox-list">
+                                    <img src="img/superbox/superbox-thumb-19.jpg" data-img="img/superbox/superbox-full-19.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Party Girls" class="superbox-img">
+                                </div><!--
+                            --><div class="superbox-list">
+                                    <img src="img/superbox/superbox-thumb-20.jpg" data-img="img/superbox/superbox-full-20.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Dragon Fly" class="superbox-img">
+                                </div><!--
+                            --><div class="superbox-list">
+                                    <img src="img/superbox/superbox-thumb-21.jpg" data-img="img/superbox/superbox-full-21.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Kinds Road" class="superbox-img">
+                                </div><!--
+                            --><div class="superbox-list">
+                                    <img src="img/superbox/superbox-thumb-22.jpg" data-img="img/superbox/superbox-full-22.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Tokyo" class="superbox-img">
+                                </div><!--
+                            --><div class="superbox-list">
+                                    <img src="img/superbox/superbox-thumb-23.jpg" data-img="img/superbox/superbox-full-23.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Rome" class="superbox-img">
+                                </div><!--
+                            --><div class="superbox-list">
+                                    <img src="img/superbox/superbox-thumb-24.jpg" data-img="img/superbox/superbox-full-24.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Traning" class="superbox-img">
+                                </div>
+                                    <div class="superbox-float"></div>
+                                </div>
+                                <div class="superbox-show" style="height:300px; display: none"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="query">
+                    <div class="jarviswidget jarviswidget-color-purple" id="gallery-query-win" data-widget-editbutton="false" data-widget-deletebutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>${m.asString("domain.gallery.query.table-header")}</h2>
+                        </header>
+                        <div>
+                            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                                <form class="smart-form" id="gallery-query-form" method="post" action="gallery/query" novalidate="novalidate">
+                                    <fieldset style="padding: 0px">
+                                        <section>
+                                            <label class="label">${m.asString("domain.gallery.query.query")}<a href="http://lucene.apache.org/core/2_9_4/queryparsersyntax.html" target="_blank"><span class="label pull-right">operator</span></a></label>
+                                            <label class="textarea textarea-resizable">
+                                                <textarea name="query" rows="3">*:*</textarea>
+                                            </label>
+                                        </section>
+                                        <section>
+                                            <label class="label">${m.asString("domain.gallery.query.sort")}</label>
+                                            <label class="input">
+                                                <input type="text" name="sort"/>
+                                            </label>
+                                        </section>
+                                        <div class="row">
+                                            <section class="col col-6">
+                                                <label class="label">${m.asString("domain.gallery.query.skip")}</label>
+                                                <label class="input">
+                                                    <input type="text" name="skip" placeholder="0" />
+                                                </label>
+                                            </section>
+                                            <section class="col col-6">
+                                                <label class="label">${m.asString("domain.gallery.query.offset")}</label>
+                                                <label class="input">
+                                                    <input type="text" name="offset" placeholder="10" />
+                                                </label>
+                                            </section>
+                                        </div>
+                                        <section>
+                                            <label class="label">${m.asString("domain.gallery.query.query-parameter")}</label>
+                                            <label class="input">
+                                                <input type="text" name="parameter" placeholder="key1=val&key2=val2"/>
+                                            </label>
+                                        </section>
+                                        <section>
+                                            <label class="label">${m.asString("domain.gallery.query.document-type")}</label>
+                                            <label class="select">
+                                                <select name="rtype">
+                                                    <option value="json">JSON</option>
+                                                    <option value="csv">CSV</option>
+                                                    <option value="xml">XML</option>
+                                                </select>
+                                            </label>
+                                        </section>
+                                        <section>
+                                            <label class="checkbox"><input type="checkbox" name="indent" checked="false" /><i></i>${m.asString("domain.gallery.query.indent")}</label>
+                                        </section>
+
+                                    </fieldset>
+
+                                    <footer>
+                                        <button class="btn btn-primary" type="button" name="btn_exec">${m.asString("domain.gallery.query.buttons.execute")}</button>
+                                    </footer>
+
+                                    <div class="message">
+                                        <i class="fa fa-thumbs-up"></i>
+                                        <p>Your message was successfully sent!</p>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                <div class="alert alert-info alert-block" id="query-url"></div>
+                                <div><pre id="query-result"></pre></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="template">
+                    <div class="jarviswidget jarviswidget-color-purple" id="gallery-template-win" data-widget-editbutton="false" data-widget-deletebutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>${m.asString("domain.gallery.template.table-header")}</h2>
+                        </header>
+                        <form class="smart-form" id="gallery-template-form" method="post" action="gallery/template" novalidate="novalidate">
+                            <fieldset>
+                                <section>
+                                    <label class="select">
+                                        <select name="template_samples"><option value=''>${m.asString("domain.gallery.template.view-sample")}</option></select>
+                                    </label>
+                                </section>
+
+                                <section>
+                                    <label class="label">${m.asString("domain.gallery.template.content")}</label>
+                                    <label class="textarea textarea-resizable"><textarea name="template" rows="20"></textarea></label>
+                                </section>
+                            </fieldset>
+
+                            <div id="save-message" class="alert alert-success fade in message">
+                                <i class="fa-fw fa fa-check"></i>
+                                <strong>Success</strong> <span></span>
+                            </div>
+                            <footer>
+                                <button class="btn btn-success" type="button" name="btn_save"><i class="fa fa-check"></i> ${m.asString("domain.gallery.template.buttons.save")}</button>
+                            </footer>
+                        </form>
+                    </div>
+                </div>
             </div>
 
-            <!-- SuperBox -->
-            <div id="table_list">
-                <table id="articles" class="table table-bordered table-hover" width="100%">
-                    <thead>
-                    <tr>
-                        <th>${m.asString("domain.gallery.galid")}</th>
-                        <th>${m.asString("domain.gallery.catid")}</th>
-                        <th>${m.asString("domain.gallery.subject")}</th>
-                        <th>${m.asString("domain.gallery.width")}</th>
-                        <th>${m.asString("domain.gallery.height")}</th>
-                        <th>${m.asString("domain.gallery.filesize")}</th>
-                        <th>${m.asString("domain.gallery.lastmodified")}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>100</td>
-                        <td>/ics/external/airkjh1</td>
-                        <td>This is article subject</td>
-                        <td>200</td>
-                        <td>200</td>
-                        <td>300kb</td>
-                        <td>2015.03.06</td>
-                    </tr>
-                    <tr>
-                        <td>101</td>
-                        <td>/ics/external/airkjh2</td>
-                        <td>This is article subject</td>
-                        <td>200</td>
-                        <td>200</td>
-                        <td>300kb</td>
-                        <td>2015.03.06</td>
-                    </tr>
-                    <tr>
-                        <td>102</td>
-                        <td>/ics/external/airkjh3</td>
-                        <td>This is article subject</td>
-                        <td>200</td>
-                        <td>200</td>
-                        <td>300kb</td>
-                        <td>2015.03.06</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div id="icon_list" style="display: none;">
-                <div class="superbox col-sm-12">
-                    <div class="superbox-list">
-                        <img src="img/superbox/superbox-thumb-1.jpg" data-img="img/superbox/superbox-full-1.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Miller Cine" class="superbox-img">
-                    </div><!--
-                    --><div class="superbox-list">
-                    <img src="img/superbox/superbox-thumb-2.jpg" data-img="img/superbox/superbox-full-2.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Bridge of Edgen" class="superbox-img">
-                </div><!--
-                    --><div class="superbox-list">
-                    <img src="img/superbox/superbox-thumb-3.jpg" data-img="img/superbox/superbox-full-3.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Lines of Friendship" class="superbox-img">
-                </div><!--
-                    --><div class="superbox-list">
-                    <img src="img/superbox/superbox-thumb-4.jpg" data-img="img/superbox/superbox-full-4.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="My new car!" class="superbox-img">
-                </div><!--
-                    --><div class="superbox-list">
-                    <img src="img/superbox/superbox-thumb-5.jpg" data-img="img/superbox/superbox-full-5.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Study Time" class="superbox-img">
-                </div><!--
-                    --><div class="superbox-list">
-                    <img src="img/superbox/superbox-thumb-6.jpg" data-img="img/superbox/superbox-full-6.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="San Francisco Bridge"  class="superbox-img">
-                </div><!--
-                    --><div class="superbox-list">
-                    <img src="img/superbox/superbox-thumb-7.jpg" data-img="img/superbox/superbox-full-7.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="New Styla"  class="superbox-img">
-                </div><!--
-                    --><div class="superbox-list">
-                    <img src="img/superbox/superbox-thumb-8.jpg" data-img="img/superbox/superbox-full-8.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Cristpta"  class="superbox-img">
-                </div><!--
-                    --><div class="superbox-list">
-                    <img src="img/superbox/superbox-thumb-9.jpg" data-img="img/superbox/superbox-full-9.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Cristine Dine"  class="superbox-img">
-                </div><!--
-                    --><div class="superbox-list">
-                    <img src="img/superbox/superbox-thumb-10.jpg" data-img="img/superbox/superbox-full-10.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Mosaic Clock"  class="superbox-img">
-                </div><!--
-                    --><div class="superbox-list">
-                    <img src="img/superbox/superbox-thumb-11.jpg" data-img="img/superbox/superbox-full-11.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Elegance"  class="superbox-img">
-                </div><!--
-                    --><div class="superbox-list">
-                    <img src="img/superbox/superbox-thumb-12.jpg" data-img="img/superbox/superbox-full-12.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="China Town"  class="superbox-img">
-                </div><!--
-                    --><div class="superbox-list">
-                    <img src="img/superbox/superbox-thumb-13.jpg" data-img="img/superbox/superbox-full-13.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Sky Diving"  class="superbox-img">
-                </div><!--
-                    --><div class="superbox-list">
-                    <img src="img/superbox/superbox-thumb-14.jpg" data-img="img/superbox/superbox-full-14.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Country Music"  class="superbox-img">
-                </div><!--
-                    --><div class="superbox-list">
-                    <img src="img/superbox/superbox-thumb-15.jpg" data-img="img/superbox/superbox-full-15.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="You are late!" class="superbox-img">
-                </div><!--
-                    --><div class="superbox-list">
-                    <img src="img/superbox/superbox-thumb-16.jpg" data-img="img/superbox/superbox-full-16.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Royal Bengle Tiger" class="superbox-img">
-                </div><!--
-                    --><div class="superbox-list">
-                    <img src="img/superbox/superbox-thumb-17.jpg" data-img="img/superbox/superbox-full-17.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Snowpine" class="superbox-img">
-                </div><!--
-                    --><div class="superbox-list">
-                    <img src="img/superbox/superbox-thumb-18.jpg" data-img="img/superbox/superbox-full-18.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Hop Jop Mop" class="superbox-img">
-                </div><!--
-                    --><div class="superbox-list">
-                    <img src="img/superbox/superbox-thumb-19.jpg" data-img="img/superbox/superbox-full-19.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Party Girls" class="superbox-img">
-                </div><!--
-                    --><div class="superbox-list">
-                    <img src="img/superbox/superbox-thumb-20.jpg" data-img="img/superbox/superbox-full-20.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Dragon Fly" class="superbox-img">
-                </div><!--
-                    --><div class="superbox-list">
-                    <img src="img/superbox/superbox-thumb-21.jpg" data-img="img/superbox/superbox-full-21.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Kinds Road" class="superbox-img">
-                </div><!--
-                    --><div class="superbox-list">
-                    <img src="img/superbox/superbox-thumb-22.jpg" data-img="img/superbox/superbox-full-22.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Tokyo" class="superbox-img">
-                </div><!--
-                    --><div class="superbox-list">
-                    <img src="img/superbox/superbox-thumb-23.jpg" data-img="img/superbox/superbox-full-23.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Rome" class="superbox-img">
-                </div><!--
-                    --><div class="superbox-list">
-                    <img src="img/superbox/superbox-thumb-24.jpg" data-img="img/superbox/superbox-full-24.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Traning" class="superbox-img">
-                </div>
-                    <div class="superbox-float"></div>
-                </div>
-                <div class="superbox-show" style="height:300px; display: none"></div>
-            </div>
+
+
         </div>
-    </article>
+    </gallery>
     <!-- /SuperBox -->
 
 
@@ -159,60 +269,8 @@
 <!-- end row -->
 
 <script type="text/javascript">
-    /* DO NOT REMOVE : GLOBAL FUNCTIONS!
-     *
-     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
-     *
-     * // activate tooltips
-     * $("[rel=tooltip]").tooltip();
-     *
-     * // activate popovers
-     * $("[rel=popover]").popover();
-     *
-     * // activate popovers with hover states
-     * $("[rel=popover-hover]").popover({ trigger: "hover" });
-     *
-     * // activate inline charts
-     * runAllCharts();
-     *
-     * // setup widgets
-     * setup_widgets_desktop();
-     *
-     * // run form elements
-     * runAllForms();
-     *
-     ********************************
-     *
-     * pageSetUp() is needed whenever you load a page.
-     * It initializes and checks for all basic elements of the page
-     * and makes rendering easier.
-     *
-     */
 
     pageSetUp();
-
-    /*
-     * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
-     * eg alert("my home function");
-     *
-     * var pagefunction = function() {
-     *	...
-     * }
-     * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
-     *
-     * TO LOAD A SCRIPT:
-     * var pagefunction = function (){
-     *  loadScript(".../plugin.js", run_after_loaded);
-     * }
-     *
-     * OR
-     *
-     * loadScript(".../plugin.js", run_after_loaded);
-     */
-
-    // PAGE RELATED SCRIPTS
-
-    // pagefunction
 
     var superBoxInitized = false;
 
@@ -241,14 +299,162 @@
             $('#icon_list').hide();
             $('#table_list').show();
         });
+
+        $( "#edit_explain" ).click(function() {
+            $('.click2edit').summernote({
+                focus : true, toolbar: [
+                    //['style', ['style']], // no style button
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']],
+                    //['insert', ['picture', 'link']], // no insert buttons
+                    ['table', ['table']], // no table button
+                    // ['help', ['help']] //no help button
+                ]
+            });
+        });
+
+        $( "#save_explain" ).click(function() {
+            var aHTML = $('.click2edit').code() ;
+            $.ajax({
+                type: "POST",
+                url: "/admin/menus/domain",
+                data: { content: aHTML, field: "gallery" }
+            });
+            $('.click2edit').destroy();
+        });
+
+        // change to ajax version when ready...
+        $('#gallerys').dataTable();
+
+        var domainId = $("#domains option:selected").val() ;
+        if (domainId == undefined) return ;
+
+        $.ajax({
+            url:'/admin/menus/domain?field=gallery',
+            dataType:'text',
+            success:function(data){
+                $("#info").html(data) ;
+            },
+            error:function(request,status,error){
+                console.log('response', request, status, error) ;
+            }
+        }) ;
+
+        var _queryForm = $("#gallery-query-form") ;
+        var _rtype = _queryForm.find("select[name=rtype]") ;
+        var _parameter = _queryForm.find("input[name=parameter]") ;
+        var _query = _queryForm.find("textarea[name=query]") ;
+        var _sort = _queryForm.find("input[name=sort]") ;
+        var _skip = _queryForm.find("input[name=skip]") ;
+        var _offset = _queryForm.find("input[name=offset]") ;
+        var _indent = _queryForm.find("input[name=indent]") ;
+        var _debug = _queryForm.find("input[name=debug]") ;
+        var _btn_exec = _queryForm.find("button[name=btn_exec]") ;
+
+        _btn_exec.click(function() {
+            $.ajax({
+                type: "GET",
+                dataType : 'text',
+                url: "/open/search/" + domainId + "/gallery/query." + _rtype.val() + (  _parameter.val() ? "?" + _parameter.val() : ""),
+                data: { query: _query.val(), sort: _sort.val(), skip: _skip.val(), offset: _offset.val() , indent: _indent.is(":checked") ? true : false, debug: _debug.is(":checked") ? true : false},
+                complete : function(){
+                    var targetURL = "<a href='http://" + document.location.host +  this.url + "' target='_blank'>" + this.url + "</a>";
+                    $("#query-url").html(targetURL) ;
+                },
+                success :  function(data) {
+                    $("#query-result").text(data) ;
+                }
+            }) ;
+        });
+
+        var _templateForm = $("#gallery-template-form") ;
+        var _template = _templateForm.find("textarea[name=template]") ;
+        var _template_samples = _templateForm.find("select[name=template_samples]") ;
+        var _btn_save = _templateForm.find("button[name=btn_save]") ;
+
+        $.ajax({
+            url:'/admin/domain/' + domainId +'/gallery/template',
+            dataType:'json',
+            success:function(data){
+                var info = data['info'];
+                var samples = data['samples'];
+                var template = data['template'] ;
+
+                for(var idx in samples ){
+                    var sample = samples[idx] ;
+                    var option = $('<option value="'+sample+'">'+sample+'</option>') ;
+                    option.appendTo(_template_samples) ;
+                }
+
+                $("#info").html(info) ;
+                _template.val(template);
+            },
+            error:function(request,status,error){
+                console.log('response', request, status, error) ;
+            }
+        }) ;
+
+        _template_samples.change(function(){
+            var fileName = _template_samples.val() ;
+            if (fileName < ' ') return ;
+            $.ajax({
+                type: "GET",
+                dataType : 'text',
+                url: "/admin/domain/" + domainId + "/gallery/sampletemplate/" + fileName,
+                data: {},
+                complete : function(){
+                },
+                success :  function(data) {
+                    _template.val(data) ;
+                }
+            }) ;
+        }) ;
+
+        _templateForm.validate({
+            rules : {
+                template : { required : true }
+            },
+
+            messages : {
+                template : { required : "${m.asString('validation.required', 'template content')}"}
+            },
+
+            submitHandler : function(form) {
+                $.ajax({
+                            type: "POST",
+                            url: "/admin/domain/" + domainId + "/gallery/template",
+                            data: { template: _template.val() },
+                            success :  function(data) {
+                                $("#save-message span").html(data) ;
+                                $("#save-message").removeClass("message") ;
+                                setTimeout(function() {
+                                    $("#save-message").addClass("message") ;
+                                }, 2000);
+                            }}
+                ).done(function( msg ) {
+                        });
+            },
+
+            errorPlacement : function(error, element) { // Do not change code below
+                error.insertAfter(element.parent());
+            }
+        });
+
+        _btn_save.click(function() {
+            command = 'save' ;
+            _templateForm.submit() ;
+        });
     };
 
-    // end pagefunction
-
-    // run pagefunction on load
-
-    // load bootstrap-progress bar script
-    loadScript("js/plugin/superbox/superbox.min.js", pagefunction);
-
+    loadScript("js/plugin/datatables/jquery.dataTables.min.js", function(){
+        loadScript("js/plugin/datatables/dataTables.bootstrap.min.js", function() {
+            loadScript("js/plugin/summernote/summernote.min.js", function() {
+                loadScript("js/plugin/superbox/superbox.min.js", pagefunction);
+            });
+        });
+    });
 
 </script>

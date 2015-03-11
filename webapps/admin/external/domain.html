@@ -21,8 +21,6 @@
             <li class="submenu"><a class="define-load" href="javascript:void(0);">${m.asString("menu.domain.define")}</a></li>
             <li class="submenu"><a class="article-load" href="javascript:void(0);">${m.asString("menu.domain.article")}</a></li>
             <li class="submenu"><a class="gallery-load" href="javascript:void(0);">${m.asString("menu.domain.gallery")}</a></li>
-            <li class="submenu"><a class="query-load" href="javascript:void(0);">${m.asString("menu.domain.query")}</a></li>
-            <li class="submenu"><a class="template-load" href="javascript:void(0);">${m.asString("menu.domain.template")}</a></li>
 
             <li><br/><br/>
             <li>
@@ -326,7 +324,6 @@
 
                 loadURL("external/domain/overview.html", $('#inbox-content > .table-wrap'));
                 lastDomainId = $("#domains").val() ;
-
             },
             error:function(request,status,error){
                 console.log('response', request, status, error) ;
@@ -344,6 +341,7 @@
                     "${m.asString('domain.remove')}": function () {
                         var removeId = lastDomainId;
                         var win = $(this);
+
                         if (removeId > ' ') {
                             $.ajax({
                                 type: "DELETE",
@@ -394,7 +392,7 @@
                 $.ajax({
                     type: 'POST',
                     dataType: 'text',
-                    url: '/admin/domain/' + newId + '/create',
+                    url: '/admin/domain/' + newId,
                     data: { },
                     complete: function() { },
                     success: function() {
@@ -438,16 +436,6 @@
         $(".gallery-load").click(function () {
             loadURL("external/domain/gallery.html", $('#inbox-content > .table-wrap'));
             lastMenuHTML = "gallery.html";
-        });
-
-        $(".query-load").click(function () {
-            loadURL("external/domain/query.html", $('#inbox-content > .table-wrap'));
-            lastMenuHTML = "query.html";
-        });
-
-        $(".template-load").click(function () {
-            loadURL("external/domain/template.html", $('#inbox-content > .table-wrap'));
-            lastMenuHTML = "template.html";
         });
     };
 

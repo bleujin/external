@@ -128,19 +128,17 @@
             $('.click2edit').destroy();
         });
 
+        $('#tabs').tabs() ;
+
         var domainId = $("#domains option:selected").val() ;
         if (domainId == undefined) return ;
         
         loadInfo(domainId) ;
-        
 
         var _btn_scat_create = $(document).find("input[name=btn_scat_create]") ;
         var _btn_scat_remove = $(document).find("input[name=btn_scat_remove]") ;
         var _btn_gcat_create = $(document).find("input[name=btn_gcat_create]") ;
         var _btn_gcat_remove = $(document).find("input[name=btn_gcat_remove]") ;
-
-
-        $('#tabs').tabs() ;
 
         var scatsEl = $('#scats');
         var gcatsEl = $('#gcats');

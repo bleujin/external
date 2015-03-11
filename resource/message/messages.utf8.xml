@@ -92,7 +92,21 @@
 			<catid>Category Id</catid>
 			<lastmodified>Last modified</lastmodified>
 			<link>Link</link>
-			<template>
+            <query>
+    			<title>Query</title>
+    			<table-header>Detail</table-header>
+    			<query>Query</query>
+    			<sort>Sort</sort>
+    			<skip>Skip</skip>
+    			<offset>Offset</offset>
+    			<query-parameter>Parameter</query-parameter>
+    			<document-type>Document Type</document-type>
+    			<indent>Indent</indent>
+    			<buttons>
+    				<execute>Execute</execute>
+    			</buttons>
+    		</query>
+			<template>Template
 				<storypage>Story pages</storypage>
 				<tplid>Tpl Id</tplid>
 				<tplname>Tpl name</tplname>
@@ -109,20 +123,6 @@
             <height>Height</height>
             <filesize>File size</filesize>
         </gallery>
-		<query>
-			<title>Query</title>
-			<table-header>Detail</table-header>
-			<query>Query</query>
-			<sort>Sort</sort>
-			<skip>Skip</skip>
-			<offset>Offset</offset>
-			<query-parameter>Parameter</query-parameter>
-			<document-type>Document Type</document-type>
-			<indent>Indent</indent>
-			<buttons>
-				<execute>Execute</execute>
-			</buttons>
-		</query>
 		<template>
 			<title>Template</title>
 			<view-sample>View sample</view-sample>
@@ -134,7 +134,7 @@
 		</template>
 		<remove>Remove Domain</remove>
 	</domain>
-	
+
 	<scripter>
 		<choose>Choose script</choose>
 		<remove>Script to remove
@@ -166,7 +166,7 @@
 			</buttons>
 		</overview>
 	</scripter>
-	
+
 	<misc>
         <properties>
             <title kr="자바 속성">Java Properties</title>
@@ -243,8 +243,8 @@
     	    <cancel kr="취소">Cancel</cancel>
     	</modal>
 	</buttons>
-	
-	
+
+
 	<validation>
 	    <minlength kr="%s개 이상의 문자를 입력해 주시기 바랍니다.">Please enter at least %s characters.</minlength>
 	    <maxlength kr="%s개 이하의 문자를 입력해 주시기 바랍니다.">Please enter no more than %s characters.</maxlength>

@@ -2,6 +2,7 @@ package net.ion.external.ics.util;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import net.ion.external.ics.web.Webapp;
@@ -51,6 +52,18 @@ public class WebUtil {
 	public static String viewScript(String fileName) throws IOException{
 		return IOUtil.toStringWithClose(new FileInputStream(new File(Webapp.SCRIPT_DIR, fileName))) ;
 	}
+
+    public static String viewArticleTemplate(String fileName) throws IOException {
+        return IOUtil.toStringWithClose(new FileInputStream(new File(Webapp.ARTICLE_TEMPLAGE_DIR, fileName))) ;
+    }
+
+    public static JsonArray findArticleTemplates(){
+        JsonArray result = new JsonArray() ;
+        for (File file : findFiles(Webapp.ARTICLE_TEMPLAGE_DIR, true, "template")) {
+            result.add(new JsonPrimitive(file.getName())) ;
+        }
+        return result ;
+    }
 
 //	public static JsonArray findSearchHandlers(){
 //		JsonArray result = new JsonArray() ;

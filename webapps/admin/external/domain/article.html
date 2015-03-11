@@ -25,52 +25,165 @@
 <section id="widget-grid" class="">
     <div class="row">
         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="jarviswidget jarviswidget-color-purple" id="domain-article-win" data-widget-editbutton="false" data-widget-deletebutton="false">
-                <header>
-                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                    <h2>${m.asString("domain.article.table-header")}</h2>
-                </header>
+            <!--<div class="jarviswidget jarviswidget-color-purple" id="domain-article-win" data-widget-editbutton="false" data-widget-deletebutton="false">-->
+                <!--<header>-->
+                    <!--<span class="widget-icon"> <i class="fa fa-table"></i> </span>-->
+                    <!--<h2>${m.asString("domain.article.table-header")}</h2>-->
+                <!--</header>-->
 
                 <div>
                     <div class="jarviswidget-editbox"></div>
                     <div class="widget-body">
-                        <table id="articles" class="table table-bordered table-hover" width="100%">
-                            <thead>
-                            <tr>
-                                <th>${m.asString("domain.article.artid")}</th>
-                                <th>${m.asString("domain.article.catid")}</th>
-                                <th>${m.asString("domain.article.subject")}</th>
-                                <th>${m.asString("domain.article.lastmodified")}</th>
-                                <th>${m.asString("domain.article.link")}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>100</td>
-                                <td>/ics/external/airkjh1</td>
-                                <td>This is article subject</td>
-                                <td>airkjh</td>
-                                <td><button onclick="javascript:showStoryPages('airkjh1', 100);">story pages</button></td>
-                            </tr>
-                            <tr>
-                                <td>101</td>
-                                <td>/ics/external/airkjh2</td>
-                                <td>This is article subject</td>
-                                <td>airkjh</td>
-                                <td><button onclick="javascript:showStoryPages('airkjh2', 101);">story pages</button></td>
-                            </tr>
-                            <tr>
-                                <td>102</td>
-                                <td>/ics/external/airkjh3</td>
-                                <td>This is article subject</td>
-                                <td>bleujin</td>
-                                <td><button onclick="javascript:showStoryPages('airkjh3', 102);">story pages</button></td>
-                            </tr>
-                            </tbody>
-                        </table>
+
+                        <ul id="myTab1" class="nav nav-tabs bordered">
+                            <li class="active"><a href="#list" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> ${m.asString("domain.article.list")}</a></li>
+                            <li><a href="#query" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> ${m.asString("domain.article.query")}</a></li>
+                            <li><a href="#template" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> ${m.asString("domain.article.template")}</a></li>
+                        </ul>
+
+                        <div id="myContent1" class="tab-content padding-10">
+                            <div class="tab-pane fade in active" id="list">
+                                <div class="jarviswidget jarviswidget-color-purple" id="article-list-win" data-widget-editbutton="false" data-widget-deletebutton="false">
+                                    <header>
+                                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                        <h2>${m.asString("domain.gallery.list.table-header")}</h2>
+                                    </header>
+                                    <div>
+                                        <table id="articles" class="table table-bordered table-hover" width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th>${m.asString("domain.article.artid")}</th>
+                                                <th>${m.asString("domain.article.catid")}</th>
+                                                <th>${m.asString("domain.article.subject")}</th>
+                                                <th>${m.asString("domain.article.lastmodified")}</th>
+                                                <th>${m.asString("domain.article.link")}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="articles-body">
+                                            <tr>
+                                                <td>100</td>
+                                                <td>/ics/external/airkjh1</td>
+                                                <td>This is article subject</td>
+                                                <td>airkjh</td>
+                                                <td><button onclick="javascript:showStoryPages(event, 'airkjh1', 100);">story pages</button></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="query">
+                                <div class="jarviswidget jarviswidget-color-purple" id="article-query-win" data-widget-editbutton="false" data-widget-deletebutton="false">
+                                    <header>
+                                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                        <h2>${m.asString("domain.article.query.table-header")}</h2>
+                                    </header>
+                                    <div>
+                                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                                            <form class="smart-form" id="article-query-form" method="post" action="article/query" novalidate="novalidate">
+                                                <fieldset style="padding: 0px">
+                                                    <section>
+                                                        <label class="label">${m.asString("domain.article.query.query")}<a href="http://lucene.apache.org/core/2_9_4/queryparsersyntax.html" target="_blank"><span class="label pull-right">operator</span></a></label>
+                                                        <label class="textarea textarea-resizable">
+                                                            <textarea name="query" rows="3">*:*</textarea>
+                                                        </label>
+                                                    </section>
+                                                    <section>
+                                                        <label class="label">${m.asString("domain.article.query.sort")}</label>
+                                                        <label class="input">
+                                                            <input type="text" name="sort"/>
+                                                        </label>
+                                                    </section>
+                                                    <div class="row">
+                                                        <section class="col col-6">
+                                                            <label class="label">${m.asString("domain.article.query.skip")}</label>
+                                                            <label class="input">
+                                                                <input type="text" name="skip" placeholder="0" />
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-6">
+                                                            <label class="label">${m.asString("domain.article.query.offset")}</label>
+                                                            <label class="input">
+                                                                <input type="text" name="offset" placeholder="10" />
+                                                            </label>
+                                                        </section>
+                                                    </div>
+                                                    <section>
+                                                        <label class="label">${m.asString("domain.article.query.query-parameter")}</label>
+                                                        <label class="input">
+                                                            <input type="text" name="parameter" placeholder="key1=val&key2=val2"/>
+                                                        </label>
+                                                    </section>
+                                                    <section>
+                                                        <label class="label">${m.asString("domain.article.query.document-type")}</label>
+                                                        <label class="select">
+                                                            <select name="rtype">
+                                                                <option value="json">JSON</option>
+                                                                <option value="csv">CSV</option>
+                                                                <option value="xml">XML</option>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+                                                    <section>
+                                                        <label class="checkbox"><input type="checkbox" name="indent" checked="false" /><i></i>${m.asString("domain.article.query.indent")}</label>
+                                                    </section>
+
+                                                </fieldset>
+
+                                                <footer>
+                                                    <button class="btn btn-primary" type="button" name="btn_exec">${m.asString("domain.article.query.buttons.execute")}</button>
+                                                </footer>
+
+                                                <div class="message">
+                                                    <i class="fa fa-thumbs-up"></i>
+                                                    <p>Your message was successfully sent!</p>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                            <div class="alert alert-info alert-block" id="query-url"></div>
+                                            <div><pre id="query-result"></pre></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="template">
+                                <div class="jarviswidget jarviswidget-color-purple" id="article-template-win" data-widget-editbutton="false" data-widget-deletebutton="false">
+                                    <header>
+                                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                        <h2>${m.asString("domain.article.template.table-header")}</h2>
+                                    </header>
+                                    <form class="smart-form" id="article-template-form" method="post" action="article/template" novalidate="novalidate">
+                                        <fieldset>
+                                            <section>
+                                                <label class="select">
+                                                    <select name="template_samples"><option value=''>${m.asString("domain.article.template.view-sample")}</option></select>
+                                                </label>
+                                            </section>
+
+                                            <section>
+                                                <label class="label">${m.asString("domain.article.template.content")}</label>
+                                                <label class="textarea textarea-resizable"><textarea name="template" rows="20"></textarea></label>
+                                            </section>
+                                        </fieldset>
+
+                                        <div id="save-message" class="alert alert-success fade in message">
+                                            <i class="fa-fw fa fa-check"></i>
+                                            <strong>Success</strong> <span></span>
+                                        </div>
+                                        <footer>
+                                            <button class="btn btn-success" type="button" name="btn_save"><i class="fa fa-check"></i> ${m.asString("domain.article.template.buttons.save")}</button>
+                                        </footer>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <!--</div>-->
         </article>
     </div>
 </section>
@@ -81,12 +194,6 @@
 
     // pagefunction
     var pagefunction = function() {
-        var articles_table = $('#articles') ;
-
-        articles_table.find('tbody').on('click', 'tr', function () {
-            $(this).toggleClass('selected2');
-            $('#article_view_modal').modal({});
-        });
 
         $( "#edit_explain" ).click(function() {
             $('.click2edit').summernote({
@@ -108,22 +215,147 @@
             var aHTML = $('.click2edit').code() ;
             $.ajax({
                 type: "POST",
-                url: "/admin/menus/indexers",
-                data: { content: aHTML, field: "browsing" }
+                url: "/admin/menus/domain",
+                data: { content: aHTML, field: "article" }
             });
             $('.click2edit').destroy();
         });
 
+        // change to ajax version when ready...
+        var articles_table = $('#articles') ;
+
+        articles_table.find('tbody').on('click', 'tr', function (event) {
+            $(this).toggleClass('selected2');
+            $('#article_view_modal').modal({});
+            console.log(event.stopPropagation);
+            event.stopPropagation() ;
+        });
+
         articles_table.dataTable();
+
+        var domainId = $("#domains option:selected").val() ;
+        if (domainId == undefined) return ;
+
+        $.ajax({
+            url:'/admin/menus/domain?field=article',
+            dataType:'text',
+            success:function(data){
+                $("#info").html(data) ;
+            },
+            error:function(request,status,error){
+                console.log('response', request, status, error) ;
+            }
+        }) ;
+
+        var _queryForm = $("#article-query-form") ;
+        var _rtype = _queryForm.find("select[name=rtype]") ;
+        var _parameter = _queryForm.find("input[name=parameter]") ;
+        var _query = _queryForm.find("textarea[name=query]") ;
+        var _sort = _queryForm.find("input[name=sort]") ;
+        var _skip = _queryForm.find("input[name=skip]") ;
+        var _offset = _queryForm.find("input[name=offset]") ;
+        var _indent = _queryForm.find("input[name=indent]") ;
+        var _debug = _queryForm.find("input[name=debug]") ;
+        var _btn_exec = _queryForm.find("button[name=btn_exec]") ;
+
+        _btn_exec.click(function() {
+            console.log('here') ;
+            $.ajax({
+                type: "GET",
+                dataType : 'text',
+                url: "/open/search/" + domainId + "/article/query." + _rtype.val() + (  _parameter.val() ? "?" + _parameter.val() : ""),
+                data: { query: _query.val(), sort: _sort.val(), skip: _skip.val(), offset: _offset.val() , indent: _indent.is(":checked") ? true : false, debug: _debug.is(":checked") ? true : false},
+                complete : function(){
+                    var targetURL = "<a href='http://" + document.location.host +  this.url + "' target='_blank'>" + this.url + "</a>";
+                    $("#query-url").html(targetURL) ;
+                },
+                success :  function(data) {
+                    $("#query-result").text(data) ;
+                }
+            }) ;
+        });
+
+        var _templateForm = $("#article-template-form") ;
+        var _template = _templateForm.find("textarea[name=template]") ;
+        var _template_samples = _templateForm.find("select[name=template_samples]") ;
+        var _btn_save = _templateForm.find("button[name=btn_save]") ;
+
+        $.ajax({
+            url:'/admin/domain/' + domainId +'/article/template',
+            dataType:'json',
+            success:function(data){
+                var info = data['info'];
+                var samples = data['samples'];
+                var template = data['template'] ;
+
+                for(var idx in samples ){
+                    var sample = samples[idx] ;
+                    var option = $('<option value="'+sample+'">'+sample+'</option>') ;
+                    option.appendTo(_template_samples) ;
+                }
+
+                $("#info").html(info) ;
+                _template.val(template);
+            },
+            error:function(request,status,error){
+                console.log('response', request, status, error) ;
+            }
+        }) ;
+
+        _template_samples.change(function(){
+            var fileName = _template_samples.val() ;
+            if (fileName < ' ') return ;
+            $.ajax({
+                type: "GET",
+                dataType : 'text',
+                url: "/admin/domain/" + domainId + "/article/sampletemplate/" + fileName,
+                data: {},
+                complete : function(){
+                },
+                success :  function(data) {
+                    _template.val(data) ;
+                }
+            }) ;
+        }) ;
+
+        _templateForm.validate({
+            rules : {
+                template : { required : true }
+            },
+
+            messages : {
+                template : { required : "${m.asString('validation.required', 'template content')}"}
+            },
+
+            submitHandler : function(form) {
+                $.ajax({
+                            type: "POST",
+                            url: "/admin/domain/" + domainId + "/article/template",
+                            data: { template: _template.val() },
+                            success :  function(data) {
+                                $("#save-message span").html(data) ;
+                                $("#save-message").removeClass("message") ;
+                                setTimeout(function() {
+                                    $("#save-message").addClass("message") ;
+                                }, 2000);
+                            }}
+                ).done(function( msg ) {
+                        });
+            },
+
+            errorPlacement : function(error, element) { // Do not change code below
+                error.insertAfter(element.parent());
+            }
+        });
+
+        _btn_save.click(function() {
+            command = 'save' ;
+            _templateForm.submit() ;
+        });
     };
 
-    var showStoryPages = function(_catId, _artId) {
+    var showStoryPages = function(event, _catId, _artId) {
         $('#story-pages-modal').modal({catId: _catId, artId: _artId});
-        event.stopPropagation() ;
-    }
-
-    var showListPages = function(_catId) {
-        $('#list-pages-modal').modal({catId: _catId});
         event.stopPropagation() ;
     }
 

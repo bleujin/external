@@ -1,5 +1,6 @@
 package net.ion.external.ics.web;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 
@@ -12,16 +13,20 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import net.ion.craken.node.ReadNode;
+import net.ion.cms.rest.sync.Def;
+import net.ion.craken.node.*;
 import net.ion.craken.node.crud.ReadChildren;
+import net.ion.craken.tree.Fqn;
 import net.ion.external.domain.Domain;
 import net.ion.external.domain.DomainHandler;
 import net.ion.external.domain.DomainInfoHandler;
 import net.ion.external.domain.DomainSub;
 import net.ion.external.ics.common.ExtMediaType;
+import net.ion.external.ics.util.WebUtil;
 import net.ion.framework.parse.gson.JsonArray;
 import net.ion.framework.parse.gson.JsonObject;
 import net.ion.framework.parse.gson.JsonPrimitive;
+import net.ion.framework.util.FileUtil;
 import net.ion.radon.core.ContextParam;
 
 @Path("/domain")
@@ -40,7 +45,7 @@ public class DomainWeb implements Webapp {
 		dsub.createDomain(did);
 		return did + " created" ;
 	}
-	
+
 	@Path("/{did}")
 	@DELETE
 	public String removeDomain(@PathParam("did") String did) {
@@ -117,6 +122,49 @@ public class DomainWeb implements Webapp {
 		domain(did).addGalleryCategory(catId, includeSub) ;
 		return catId + " created" ;
 	}
+
+    // templates
+    @GET
+    @Path("/{did}/article/template")
+    @Produces(ExtMediaType.APPLICATION_JSON_UTF8)
+    public JsonObject viewTemplate(@PathParam("did") final String did) throws IOException {
+
+        JsonObject result = new JsonObject();
+        ReadSession session = dsub.craken().login();
+
+        result.put("info", session.ghostBy("/menus/domain").property("article").asString());
+        result.put("samples", WebUtil.findArticleTemplates()) ;
+        result.put("template", session.ghostBy(fqnBy(did, "/article/template")).property("template").asString());
+        return result;
+    }
+
+    @POST
+    @Path("/{did}/article/template")
+    public String editTemplate(@PathParam("did") final String did, @FormParam("template") final String template) throws IOException {
+        dsub.craken().login().tran(new TransactionJob<Void>() {
+            @Override
+            public Void handle(WriteSession wsession) throws Exception {
+                WriteNode found = wsession.pathBy(fqnBy(did, "/article/template"));
+                FileUtil.forceWriteUTF8(new File(Webapp.REMOVED_DIR, did + ".searcher.template.bak"), found.property("template").asString());
+
+                found.property("template", template);
+                return null;
+            }
+        });
+        return "modified template : " + did;
+    }
+
+    private Fqn fqnBy(String did, String rest) {
+        return Fqn.fromString("/domain/" + did + rest);
+    }
+
+    @GET
+    @Path("/{did}/article/sampletemplate/{filename}")
+    @Produces(ExtMediaType.TEXT_PLAIN_UTF8)
+    public String viewArticleSampleTemplate(@PathParam("did") String did, @PathParam("filename") String fileName) throws IOException {
+        return WebUtil.viewArticleTemplate(fileName) ;
+    }
+
 
 	private Domain domain(String did){
 		return dsub.findDomain(did) ;
