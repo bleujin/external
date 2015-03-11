@@ -57,6 +57,10 @@ public class WebUtil {
         return IOUtil.toStringWithClose(new FileInputStream(new File(Webapp.ARTICLE_TEMPLAGE_DIR, fileName))) ;
     }
 
+    public static String viewGalleryTemplate(String fileName) throws IOException {
+        return IOUtil.toStringWithClose(new FileInputStream(new File(Webapp.GALLERY_TEMPLAGE_DIR, fileName))) ;
+    }
+
     public static JsonArray findArticleTemplates(){
         JsonArray result = new JsonArray() ;
         for (File file : findFiles(Webapp.ARTICLE_TEMPLAGE_DIR, true, "template")) {
@@ -64,6 +68,15 @@ public class WebUtil {
         }
         return result ;
     }
+
+    public static JsonArray findGalleryTemplates() {
+        JsonArray result = new JsonArray() ;
+        for (File file : findFiles(Webapp.GALLERY_TEMPLAGE_DIR, true, "template")) {
+            result.add(new JsonPrimitive(file.getName())) ;
+        }
+        return result ;
+    }
+
 
 //	public static JsonArray findSearchHandlers(){
 //		JsonArray result = new JsonArray() ;

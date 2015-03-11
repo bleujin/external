@@ -127,7 +127,7 @@ public class DomainWeb implements Webapp {
     @GET
     @Path("/{did}/article/template")
     @Produces(ExtMediaType.APPLICATION_JSON_UTF8)
-    public JsonObject viewTemplate(@PathParam("did") final String did) throws IOException {
+    public JsonObject viewArticleTemplate(@PathParam("did") final String did) throws IOException {
 
         JsonObject result = new JsonObject();
         ReadSession session = dsub.craken().login();
@@ -138,20 +138,50 @@ public class DomainWeb implements Webapp {
         return result;
     }
 
+    @GET
+    @Path("/{did}/gallery/template")
+    @Produces(ExtMediaType.APPLICATION_JSON_UTF8)
+    public JsonObject viewGalleryTemplate(@PathParam("did") final String did) throws IOException {
+
+        JsonObject result = new JsonObject();
+        ReadSession session = dsub.craken().login();
+
+        result.put("info", session.ghostBy("/menus/domain").property("gallery").asString());
+        result.put("samples", WebUtil.findGalleryTemplates()) ;
+        result.put("template", session.ghostBy(fqnBy(did, "/gallery/template")).property("template").asString());
+        return result;
+    }
+
     @POST
     @Path("/{did}/article/template")
-    public String editTemplate(@PathParam("did") final String did, @FormParam("template") final String template) throws IOException {
+    public String editArticleTemplate(@PathParam("did") final String did, @FormParam("template") final String template) throws IOException {
         dsub.craken().login().tran(new TransactionJob<Void>() {
             @Override
             public Void handle(WriteSession wsession) throws Exception {
                 WriteNode found = wsession.pathBy(fqnBy(did, "/article/template"));
-                FileUtil.forceWriteUTF8(new File(Webapp.REMOVED_DIR, did + ".searcher.template.bak"), found.property("template").asString());
+                FileUtil.forceWriteUTF8(new File(Webapp.REMOVED_DIR, did + ".article.template.bak"), found.property("template").asString());
 
                 found.property("template", template);
                 return null;
             }
         });
-        return "modified template : " + did;
+        return "modified article template : " + did;
+    }
+
+    @POST
+    @Path("/{did}/gallery/template")
+    public String editGalleryTemplate(@PathParam("did") final String did, @FormParam("template") final String template) throws IOException {
+        dsub.craken().login().tran(new TransactionJob<Void>() {
+            @Override
+            public Void handle(WriteSession wsession) throws Exception {
+                WriteNode found = wsession.pathBy(fqnBy(did, "/gallery/template"));
+                FileUtil.forceWriteUTF8(new File(Webapp.REMOVED_DIR, did + ".article.template.bak"), found.property("template").asString());
+
+                found.property("template", template);
+                return null;
+            }
+        });
+        return "modified gallery template : " + did;
     }
 
     private Fqn fqnBy(String did, String rest) {
@@ -165,8 +195,17 @@ public class DomainWeb implements Webapp {
         return WebUtil.viewArticleTemplate(fileName) ;
     }
 
+    @GET
+    @Path("/{did}/gallery/sampletemplate/{filename}")
+    @Produces(ExtMediaType.TEXT_PLAIN_UTF8)
+    public String viewGallerySampleTemplate(@PathParam("did") String did, @PathParam("filename") String fileName) throws IOException {
+        return WebUtil.viewGalleryTemplate(fileName) ;
+    }
+
 
 	private Domain domain(String did){
 		return dsub.findDomain(did) ;
 	}
+
+
 }

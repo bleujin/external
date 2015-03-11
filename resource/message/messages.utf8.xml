@@ -81,6 +81,9 @@
 		</defined>
 		<choose>Choose Domain</choose>
 		<article>Article
+            <list>Articles
+                <table-header>Articles</table-header>
+            </list>
 			<data>Data</data>
 			<title>Articles</title>
 			<related>Related</related>
@@ -92,7 +95,7 @@
 			<catid>Category Id</catid>
 			<lastmodified>Last modified</lastmodified>
 			<link>Link</link>
-            <query>
+            <query>Query
     			<title>Query</title>
     			<table-header>Detail</table-header>
     			<query>Query</query>
@@ -107,14 +110,20 @@
     			</buttons>
     		</query>
 			<template>Template
-				<storypage>Story pages</storypage>
+                <table-header>Edit Template(Velocity)</table-header>
+                <view-sample>View samples</view-sample>
+                <storypage>Story pages</storypage>
 				<tplid>Tpl Id</tplid>
 				<tplname>Tpl name</tplname>
 				<form>Form</form>
 				<link>Link</link>
+                <content>Content</content>
 			</template>
 		</article>
         <gallery>
+            <list>Galleries
+                <table-header>Galleries</table-header>
+            </list>
             <subject>Subject</subject>
             <galid>Gallery Id</galid>
             <catid>Category Id</catid>
@@ -122,6 +131,30 @@
             <width>Width</width>
             <height>Height</height>
             <filesize>File size</filesize>
+            <query>Query
+    			<title>Query</title>
+    			<table-header>Detail</table-header>
+    			<query>Query</query>
+    			<sort>Sort</sort>
+    			<skip>Skip</skip>
+    			<offset>Offset</offset>
+    			<query-parameter>Parameter</query-parameter>
+    			<document-type>Document Type</document-type>
+    			<indent>Indent</indent>
+    			<buttons>
+    				<execute>Execute</execute>
+    			</buttons>
+    		</query>
+			<template>Template
+                <table-header>Edit Template(Velocity)</table-header>
+                <view-sample>View samples</view-sample>
+				<storypage>Story pages</storypage>
+				<tplid>Tpl Id</tplid>
+				<tplname>Tpl name</tplname>
+				<form>Form</form>
+				<link>Link</link>
+                <content>Content</content>
+			</template>
         </gallery>
 		<template>
 			<title>Template</title>
