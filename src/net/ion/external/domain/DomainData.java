@@ -30,24 +30,24 @@ public class DomainData {
 	
 	
 	public CategoryChildrenX<SiteCategoryX> scategorys() throws IOException {
-		return CategoryChildrenX.siteCategory(domain, domainNode().refsToMe("include").fqnFilter("/datas/scat")) ;
+		return CategoryChildrenX.siteCategory(domain, domainNode().refsToChildren("include").fqnFilter("/datas/scat")) ;
 	}
 
 	public CategoryChildrenX<GalleryCategoryX> gcategorys() throws IOException {
-		return CategoryChildrenX.galleryCategory(domain, domainNode().refsToMe("include").fqnFilter("/datas/gcat")) ;
+		return CategoryChildrenX.galleryCategory(domain, domainNode().refsToChildren("include").fqnFilter("/datas/gcat")) ;
 	}
 	
 	public ArticleChildrenX articles() throws IOException {
 		// /datas/article/{catid}/{artid}
-		return ArticleChildrenX.create(domain, domainNode().refsToMe("include").fqnFilter("/datas/article"));
+		return ArticleChildrenX.create(domain, domainNode().refsToChildren("include").fqnFilter("/datas/article"));
 	}
 	
 	public ArticleChildrenX articles(String catId) throws IOException {
-		return ArticleChildrenX.create(domain, domainNode().refsToMe("include").fqnFilter("/datas/article").filter(new TermFilter("catid", catId)));
+		return ArticleChildrenX.create(domain, domainNode().refsToChildren("include").fqnFilter("/datas/article").filter(new TermFilter("catid", catId)));
 	}
 
 	public TemplateChildrenX templates() throws IOException {
-		return TemplateChildrenX.create(domain, domainNode().refsToMe("include").fqnFilter("/datas/template")) ;
+		return TemplateChildrenX.create(domain, domainNode().refsToChildren("include").fqnFilter("/datas/template")) ;
 	}
 
 	

@@ -3,6 +3,7 @@ package net.ion.external.ics.web;
 import java.io.IOException;
 import java.util.Iterator;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -33,12 +34,22 @@ public class DomainWeb implements Webapp {
 	
 
 	
-	@Path("/{did}/create")
+	@Path("/{did}")
 	@POST
-	public String create(@PathParam("did") String did) {
+	public String createDomain(@PathParam("did") String did) {
 		dsub.createDomain(did);
 		return did + " created" ;
 	}
+	
+	@Path("/{did}")
+	@DELETE
+	public String removeDomain(@PathParam("did") String did) {
+		dsub.removeDomain(did);
+		return did + " removed" ;
+	}
+	
+	
+	
 	
 	@Path("/list")
 	@GET
@@ -91,19 +102,19 @@ public class DomainWeb implements Webapp {
 		return result ;
 	}
 	
-	@Path("/{did}/scat/{catid}/create")
+	@Path("/{did}/scat/{catid}")
 	@POST
 	@Produces(ExtMediaType.APPLICATION_JSON_UTF8)
-	public String addSiteCategory(@PathParam("did") final String did, @PathParam("catid") final String catId, @DefaultValue("F") @FormParam("includeSub") String includeSub) {
-		domain(did).addSiteCategory(catId, "T".equals(includeSub) ? true : false) ;
+	public String addSiteCategory(@PathParam("did") final String did, @PathParam("catid") final String catId, @DefaultValue("false") @FormParam("includeSub") boolean includeSub) {
+		domain(did).addSiteCategory(catId, includeSub) ;
 		return catId + " created" ;
 	}
 	
-	@Path("/{did}/gcat/{catid}/create")
+	@Path("/{did}/gcat/{catid}")
 	@POST
 	@Produces(ExtMediaType.APPLICATION_JSON_UTF8)
-	public String addGalleryCategory(@PathParam("did") final String did, @PathParam("catid") final String catId, @DefaultValue("F") @FormParam("includeSub") String includeSub) {
-		domain(did).addGalleryCategory(catId, "T".equals(includeSub) ? true : false) ;
+	public String addGalleryCategory(@PathParam("did") final String did, @PathParam("catid") final String catId, @DefaultValue("false") @FormParam("includeSub") boolean includeSub) {
+		domain(did).addGalleryCategory(catId, includeSub) ;
 		return catId + " created" ;
 	}
 

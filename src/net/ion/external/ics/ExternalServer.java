@@ -16,6 +16,7 @@ import net.ion.external.ics.common.MyEventLog;
 import net.ion.external.ics.common.MyStaticFileHandler;
 import net.ion.external.ics.common.MyVerifier;
 import net.ion.external.ics.common.TraceHandler;
+import net.ion.external.ics.misc.MenuWeb;
 import net.ion.external.ics.openweb.OpenDomainWeb;
 import net.ion.external.ics.openweb.OpenScriptWeb;
 import net.ion.external.ics.web.DomainEntry;
@@ -24,6 +25,7 @@ import net.ion.external.ics.web.ScriptWeb;
 import net.ion.external.ics.web.misc.CrakenLet;
 import net.ion.external.ics.web.misc.ExportWeb;
 import net.ion.external.ics.web.misc.MiscWeb;
+import net.ion.external.ics.web.misc.TraceWeb;
 import net.ion.framework.db.ThreadFactoryBuilder;
 import net.ion.framework.db.manager.OracleDBManager;
 import net.ion.framework.db.manager.script.JScriptEngine;
@@ -84,7 +86,7 @@ public class ExternalServer {
 			.add("/favicon.ico", new FavIconHandler())
 			.add(new LoggingHandler(new AppLogSink(elogger)))
 			.add(new MyStaticFileHandler("./webapps/admin/", Executors.newCachedThreadPool(ThreadFactoryBuilder.createThreadFactory("static-io-thread-%d")), new HTMLTemplateEngine(radon.getConfig().getServiceContext())).welcomeFile("index.html"))
-            .add("/admin/*", new PathHandler(DomainWeb.class, ScriptWeb.class, MiscWeb.class, CrakenLet.class, ExportWeb.class).prefixURI("/admin"))
+            .add("/admin/*", new PathHandler(DomainWeb.class, ScriptWeb.class, MiscWeb.class, TraceWeb.class, MenuWeb.class, CrakenLet.class, ExportWeb.class).prefixURI("/admin"))
             .add("/open/*", new PathHandler(OpenDomainWeb.class, OpenScriptWeb.class).prefixURI("open"))
             .add("/logging/event/*", new EventSourceHandler() {
 					@Override

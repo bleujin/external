@@ -131,14 +131,15 @@
         var lastMenuHTML = 'overview.html';
 
         $.ajax({
-            url: '/admin/category.json',
+            url: '/admin/scripts',
             dataType: 'json',
             success: function (data) {
-                for (var idx in data) {
-                    var col = data[idx];
-                    var option = $('<option value="' + col['iid'] + '">' + col['name'] + '</option>');
-                    option.appendTo($("#scripts"));
-                }
+            	var scripters = data['scripters'] ;
+				for(var idx in scripters ){
+					var scripter = scripters [idx] ;
+					var option = $('<option value="'+scripter[0]+'">'+scripter[0]+'</option>') ;
+					option.appendTo($("select.choose-sub")) ;
+				}
 
                 //LOAD INBOX MESSAGES
                 loadURL("external/script/overview.html", $('#inbox-content > .table-wrap'));
@@ -149,8 +150,6 @@
                 console.log('response', request, status, error);
             }
         });
-
-        loadURL("external/script/overview.html", $('#inbox-content > .table-wrap'));
 
         $(".choose-sub").change(function () {
             loadURL("external/script/" + lastMenuHTML, $('#inbox-content > .table-wrap'));
@@ -170,7 +169,7 @@
                             $.ajax({
                                 type: "DELETE",
                                 dataType: 'text',
-                                url: "/admin/script/" + $(".choose-sub").val(),
+                                url: "/admin/scripts/" + $(".choose-sub").val(),
                                 data: { },
                                 complete: function () {
                                     // $("#query_url").text(this.url) ;
@@ -233,7 +232,7 @@
 						if ($('#scripts option[value="' + newId + '"]').length > 0) $("#scripts").val(newId);
 						else $("#scripts").append('<option value="'+newId+'" selected="selected">'+newId+'</option>');
 						loadURL("external/script/" + lastMenuHTML, $('#inbox-content > .table-wrap')) ;
-						$('#create_script_modal').modal('hide');
+						$('#create-script-modal').modal('hide');
 					}
 				}) ;
 			},

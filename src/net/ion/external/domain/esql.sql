@@ -1,5 +1,5 @@
 	category
-	select '/datas/scat/' || catId fqn,  catId, catnm name, upperCatId parent, phyDirNm, catExp explain, charSetCd, catUrl, orderLnNo, fileServerUrl, '/'||CATEGORY.pathByCatId(catId, '/') catPath
+	select '/datas/scat/' || catId fqn,  catId, catnm name, upperCatId parent, phyDirNm, catExp explain, charSetCd, catUrl, orderLnNo, fileServerUrl
 	from category_tblc connect by isRemoved = 'F' and  :includeSub = 'T' and prior  catId = upperCatId start with catId = :catId
   
   
@@ -43,7 +43,7 @@
 
 	
 	gcategory
-	select '/datas/gcat/' || galcatId fqn , galcatid catid, galuppercatid parent, galcatnm name, reguserid, replace(Gallery.pathByCatId(galCatId, '/'), 'root', '') catPath from gallery_category_tblc
+	select '/datas/gcat/' || galcatId fqn , galcatid catid, galuppercatid parent, galcatnm name, reguserid from gallery_category_tblc
 	connect by :includeSub = 'T' and galUpperCatId = prior galCatId start with galCatId = :catId
 
 	

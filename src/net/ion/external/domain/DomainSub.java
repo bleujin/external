@@ -70,6 +70,17 @@ public class DomainSub {
 			}
 		}) ;
 	}
+
+
+	public void removeDomain(final String did) {
+		session.tran(new TransactionJob<Void>() {
+			@Override
+			public Void handle(WriteSession wsession) throws Exception {
+				wsession.pathBy("/domain/" + did).removeSelf() ;
+				return null;
+			}
+		}) ;
+	}
 	
 
 }

@@ -50,10 +50,17 @@ public class TestDomain extends TestBaseDomain{
 	public void testWhenRemoveCategory() throws Exception {
 		domain.addSiteCategory("dynamic", true) ;
 		
+		
 		ArticleChildrenX articles = domain.datas().articles() ;
 		assertEquals(11, articles.find().count());	
 
+		assertEquals(1, domain.datas().scategorys().find().count()) ;
+		
+		
 		domain.removeSiteCategory("dynamic", false) ;
+		assertEquals(0, domain.datas().scategorys().find().count()) ;
+		assertEquals(0, domain.datas().articles().find().count()) ;
+		assertEquals(0, domain.datas().templates().find().count()) ;
 	}
 	
 	

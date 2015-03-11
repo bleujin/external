@@ -5,9 +5,18 @@
 
 
 -- about domain
-/datas/scat/{catid, refTo}			
+/datas/scat/{catId}
+	props : {catid, parent, name, phydirnm, explain .... }
+	ref : {include() : /domain/{did}, afields() : /datas/afields/{afieldId}}
+				
 /datas/article/{catid}/{artid}
+	props : {catid, artid, partid, modserno, ...., thumbimg, img+hashcode }
+	ref : {include() : /domain/{did}
+
 /datas/template/{catid}/{tplid}
+	props : {catid, tplid, kindcd, typecd, name ....}
+	ref : (include() : /domain/{did}
+
 
 /datas/gcat/{gcatid}
 /datas/gallery/{gcatid}/{gid}

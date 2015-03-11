@@ -21,38 +21,26 @@
     </div>
 </div>
 
-
 <section id="widget-grid" class="">
 
-    <div class="row">
-        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-            <div class="jarviswidget jarviswidget-color-darken" id="script-logs-win" data-widget-editbutton="false" data-widget-deletebutton="false">
-                <div>
-                    <div class="jarviswidget-editbox"></div>
-                    <div class="widget-body">
-                        <ul id="myTab1" class="nav nav-tabs bordered">
-                            <li class="active"><a href="#s1" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> ${m.asString("script.overview.status")}</a></li>
-                            <li><a href="#s2" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> ${m.asString("script.overview.recent")}</a></li>
-                        </ul>
-
-                        <div id="myTabContent1" class="tab-content padding-10">
-                            <div class="tab-pane fade in active" id="s1">
-                                <dl class="dl-horizontal" id="overview_status">
-                                    <dt>URL</dt><dd>/ics/script/script_id</dd>
-                                </dl>
-                            </div>
-
-                            <div class="tab-pane fade" id="s2">
-                                <table id="recent_logs" class="table table-bordered table-hover">
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </article>
-    </div>
+	<div class="row">
+		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="jarviswidget jarviswidget-color-blueLight" id="script-logs-win" data-widget-editbutton="false" data-widget-deletebutton="false">
+				<header>
+					<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+					<h2>${m.asString("scripters.overview.table-header")}</h2>
+				</header>
+				
+				<div>
+					<div class="jarviswidget-editbox"></div>
+					<div class="widget-body">
+						<table id="recent_logs" class="table table-bordered table-hover">
+						</table>
+					</div>
+				</div>
+			</div>
+		</article>
+	</div>
 </section>
 
 
@@ -104,13 +92,14 @@
         if (scriptId == undefined) return ;
 
         $.ajax({
-            url:'/admin/script/' + scriptId + "/overview",
+            url:'/admin/scripts/' + scriptId + "/overview",
             dataType:'json',
             success:function(data){
                 $("#info").html(data['info']) ;
                 var nodes = data['slogs'];
-                $("#recent_logs").dataTable({
+                var table = $("#recent_logs").dataTable({
                     "data":nodes,
+                    "paging":false,
                     "searching":false,
                     "columns": [{'title':'${m.asString("script.overview.eventid")}'},{'title':'${m.asString("script.overview.time")}'},{'title':'${m.asString("script.overview.status")}'},{'title':'${m.asString("script.overview.result")}'}],
                     "order" : [[1, "desc"]]
@@ -125,6 +114,7 @@
                         '				</td></tr></tfoot>' ;
 
                 // $(tableFoot).appendTo($("#recent_logs")) ;
+                console.log(table) ;
             },
             error:function(request,status,error){
                 console.log('response', request, status, error) ;

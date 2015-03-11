@@ -96,7 +96,8 @@ public class ScriptWeb implements Webapp {
 				return result;
 			}
 		});
-		return new JsonObject().put("info", rsession.ghostBy("/menus/misc").property("script").asString()).put("schemaName", JsonParser.fromString("[{'title':'Id'},{'title':'Run Path'},{'title':'Explain'}]").getAsJsonArray())
+		return new JsonObject().put("info", rsession.ghostBy("/menus/script").property("overview").asString())
+				.put("schemaName", JsonParser.fromString("[{'title':'Id'},{'title':'Run Path'},{'title':'Explain'}]").getAsJsonArray())
 		// .put("samples", WebUtil.findScripts())
 				.put("scripters", jarray);
 	}
@@ -126,8 +127,8 @@ public class ScriptWeb implements Webapp {
 
 		JsonObject result = new JsonObject();
 		result.add("slogs", slogs);
-		result.put("schemaName", JsonParser.fromString("[{'title':'Id'},{'title':'Run Time'},{'title':'Status'}]").getAsJsonArray());
-		result.put("info", rsession.ghostBy("/menus/scripters").property("overview").asString());
+		result.put("schemaName", JsonParser.fromString("[{'title':'Id'},{'title':'Run Time'},{'title':'Status'},{'title':'Result'}]").getAsJsonArray());
+		result.put("info", rsession.ghostBy("/menus/script").property("overview").asString());
 
 		return result;
 	}
@@ -152,7 +153,7 @@ public class ScriptWeb implements Webapp {
 	@Produces(ExtMediaType.APPLICATION_JSON_UTF8)
 	public JsonObject viewScript(@PathParam(Def.Script.Sid) final String sid) {
 		ReadNode found = rsession.ghostBy("/scripts/" + sid);
-		return new JsonObject().put("sid", found.fqn().name()).put("samples", WebUtil.findScripts()).put("info", rsession.ghostBy("/menus/scripters").property("define").asString()).put("content", found.property("content").asString());
+		return new JsonObject().put("sid", found.fqn().name()).put("samples", WebUtil.findScripts()).put("info", rsession.ghostBy("/menus/script").property("define").asString()).put("content", found.property("content").asString());
 	}
 
 	@Path("/{sid}/define")
@@ -352,7 +353,7 @@ public class ScriptWeb implements Webapp {
 				return result;
 			}
 		});
-		return new JsonObject().put("info", rsession.ghostBy("/menus/scripters").property("schedule").asString()).put("sinfo", sinfoJson).put("schemaName", JsonParser.fromString("[{'title':'Id'},{'title':'Run Time'}]").getAsJsonArray()).put("slogs", slogs);
+		return new JsonObject().put("info", rsession.ghostBy("/menus/script").property("schedule").asString()).put("sinfo", sinfoJson).put("schemaName", JsonParser.fromString("[{'title':'Id'},{'title':'Run Time'}]").getAsJsonArray()).put("slogs", slogs);
 	}
 
 	@Path("/{sid}/schedule")

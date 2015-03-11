@@ -15,14 +15,19 @@ import net.ion.craken.ICSCraken;
 import net.ion.craken.listener.CDDHandler;
 import net.ion.craken.listener.CDDModifiedEvent;
 import net.ion.craken.listener.CDDRemovedEvent;
+import net.ion.craken.node.IteratorList;
+import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteNode;
 import net.ion.craken.node.WriteSession;
+import net.ion.craken.node.crud.ChildQueryResponse;
+import net.ion.craken.tree.Fqn;
 import net.ion.framework.db.DBController;
 import net.ion.framework.db.bean.ResultSetHandler;
 import net.ion.framework.db.manager.OracleDBManager;
 import net.ion.framework.util.ArrayUtil;
+import net.ion.framework.util.Debug;
 import net.ion.framework.util.ObjectId;
 
 import org.apache.log4j.Logger;
@@ -72,7 +77,25 @@ public class DomainMaster {
 
 			@Override
 			public TransactionJob<Void> deleted(Map<String, String> resolveMap, CDDRemovedEvent cevent) {
-				// TODO Auto-generated method stub
+				final String action = "remove site category";
+				final String did = resolveMap.get("did") ;
+				final String catId = resolveMap.get("catid") ;
+				startAction(session, action);
+				
+				session.tran(new TransactionJob<Void>() {
+					@Override
+					public Void handle(WriteSession wsession) throws Exception {
+						ReadNode scatNode = wsession.readSession().ghostBy("/domain", did, "scat", catId);
+						IteratorList<ReadNode> iter = scatNode.refsToMe("include").fqnFilter("/datas").find().iterator() ;
+						while(iter.hasNext()){
+							ReadNode node = iter.next() ;
+							wsession.pathBy(node.fqn()).unRefTos("include", scatNode.fqn().toString()) ;
+						}
+						return null;
+					}
+				}) ;
+				
+				endAction(session, action);
 				return null;
 			}
 		});
@@ -100,10 +123,50 @@ public class DomainMaster {
 
 			@Override
 			public TransactionJob<Void> deleted(Map<String, String> resolveMap, CDDRemovedEvent cevent) {
-				// TODO Auto-generated method stub
+				final String action = "remove gallery category";
+				final String did = resolveMap.get("did") ;
+				final String catId = resolveMap.get("catid") ;
+				
+				startAction(session, action);
+				session.tran(new TransactionJob<Void>() {
+					@Override
+					public Void handle(WriteSession wsession) throws Exception {
+						ReadNode gcatNode = wsession.readSession().ghostBy("/domain", did, "gcat", catId);
+						IteratorList<ReadNode> iter = gcatNode.refsToMe("include").fqnFilter("/datas").find().iterator() ;
+						while(iter.hasNext()){
+							ReadNode node = iter.next() ;
+							wsession.pathBy(node.fqn()).unRefTos("include", gcatNode.fqn().toString()) ;
+						}
+						return null;
+					}
+				}) ;
+				
+				endAction(session, action);
 				return null;
 			}
 		});		
+		
+		
+		session.workspace().cddm().add(new CDDHandler() {
+			@Override
+			public String pathPattern() {
+				return "/domain/{did}";
+			}
+			
+			@Override
+			public TransactionJob<Void> modified(Map<String, String> map, CDDModifiedEvent cddmodifiedevent) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public TransactionJob<Void> deleted(Map<String, String> map, CDDRemovedEvent cddremovedevent) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+		}) ;
+		
+		
 		
 		
 		// etc
@@ -118,11 +181,7 @@ public class DomainMaster {
 				final String action = resolveMap.get("action");
 				startAction(session, action);
 				
-				if ("addcategory".equals(action)) {
-					whenAddCategory(cevent.property("catid").asString(), cevent.property("includesub").asBoolean(), cevent.property("did").asString());
-				} else if ("addgallery".equals(action)) {
-					whenAddGallery(cevent.property("catid").asString(), cevent.property("includesub").asBoolean(), cevent.property("did").asString());
-				} else if ("resetuser".equals(action)){
+				if ("resetuser".equals(action)){
 					whenResetUser() ;
 				} else if ("removecategory".equals(action)) {
 					whenRemoveCategory(cevent.property("catid").asString(), cevent.property("includesub").asBoolean(), cevent.property("did").asString());
@@ -202,7 +261,7 @@ public class DomainMaster {
 			@Override
 			public Void handle(final WriteSession wsession) throws Exception {
 				// category
-				sqlLoader.query(idc, "category").addParam("catId", catId).addParam("includeSub", includeSub ? "T" : "F").execHandlerQuery(createHandler(wsession, Def.Category.class, did, "orderLnNo", ""));
+				sqlLoader.query(idc, "category").addParam("catId", catId).addParam("includeSub", includeSub ? "T" : "F").execHandlerQuery(createHandler(wsession, did, "/scat/" + catId, Def.Category.class, "orderLnNo", ""));
 				
 				// category_afield
 				sqlLoader.query(idc, "category_afield").addParam("catId", catId).addParam("includeSub", includeSub ? "T" : "F").execHandlerQuery(new ResultSetHandler<Void>() {
@@ -217,7 +276,7 @@ public class DomainMaster {
 				
 
 				// article
-				sqlLoader.query(idc, "articles").addParam("catId", catId).addParam("includeSub", includeSub ? "T" : "F").execHandlerQuery(createHandler(wsession, Def.Article.class, did, "artid,modserno,orderno,partid,priority", "isusingurlloc"));
+				sqlLoader.query(idc, "articles").addParam("catId", catId).addParam("includeSub", includeSub ? "T" : "F").execHandlerQuery(createHandler(wsession, did, "/scat/" + catId, Def.Article.class, "artid,modserno,orderno,partid,priority", "isusingurlloc"));
 
 				// article_image
 				sqlLoader.query(idc, "articles_image").addParam("catId", catId).addParam("includeSub", includeSub ? "T" : "F").execHandlerQuery(new ResultSetHandler<Void>() {
@@ -266,7 +325,7 @@ public class DomainMaster {
 				});
 
 				// template
-				sqlLoader.query(idc, "template").addParam("catId", catId).addParam("includeSub", includeSub ? "T" : "F").execHandlerQuery(createHandler(wsession, Def.Template.class, did, "tplid", ""));
+				sqlLoader.query(idc, "template").addParam("catId", catId).addParam("includeSub", includeSub ? "T" : "F").execHandlerQuery(createHandler(wsession, did, "/scat/" + catId, Def.Template.class, "tplid", ""));
 
 				
 				// afiled
@@ -296,7 +355,7 @@ public class DomainMaster {
 		session.tran(new TransactionJob<Void>() {
 			@Override
 			public Void handle(final WriteSession wsession) throws Exception {
-				sqlLoader.query(idc, "gcategory").addParam("catId", catId).addParam("includeSub", includeSub ? "T" : "F").execHandlerQuery(createHandler(wsession, Def.GalleryCategory.class, did, "", ""));
+				sqlLoader.query(idc, "gcategory").addParam("catId", catId).addParam("includeSub", includeSub ? "T" : "F").execHandlerQuery(createHandler(wsession, did, "/gcat/" + catId, Def.GalleryCategory.class, "", ""));
 				sqlLoader.query(idc, "gallery").addParam("catId", catId).addParam("includeSub", includeSub ? "T" : "F").execHandlerQuery(new ResultSetHandler<Void>() {
 					@Override
 					public Void handle(ResultSet rs) throws SQLException {
@@ -327,7 +386,7 @@ public class DomainMaster {
 		});
 	}
 
-	private ResultSetHandler<Void> createHandler(final WriteSession wsession, final Class clz, final String did, final String ncols, final String bcols) {
+	private ResultSetHandler<Void> createHandler(final WriteSession wsession, final String did, final String refPath, final Class clz, final String ncols, final String bcols) {
 		return new ResultSetHandler<Void>() {
 			@Override
 			public Void handle(final ResultSet rs) throws SQLException {
@@ -347,7 +406,7 @@ public class DomainMaster {
 							continue;
 						wnode.property(colName, rs.getString(colName));
 					}
-					wnode.refTo("include", "/domain/" + did);
+					wnode.refTo("include", "/domain/" + did + refPath);
 				}
 				return null;
 			}

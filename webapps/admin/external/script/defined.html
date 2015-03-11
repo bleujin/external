@@ -30,7 +30,7 @@
 		<!-- NEW WIDGET START -->
 		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<!-- Widget ID (each widget will need unique ID)-->
-			<div class="jarviswidget jarviswidget-color-darken" id="script-defined-win" data-widget-editbutton="false" data-widget-deletebutton="false">
+			<div class="jarviswidget jarviswidget-color-blueLight" id="script-defined-win" data-widget-editbutton="false" data-widget-deletebutton="false">
 				<header>
 					<span class="widget-icon"> <i class="fa fa-comments"></i> </span>
 					<h2>${m.asString("script.defined.table-header")}</h2>
@@ -44,7 +44,7 @@
 
 					
 					<div class="widget-body">
-					<form class="smart-form" id="script-define-form" method="post" action="script/define" novalidate="novalidate">
+					<form class="smart-form" id="script-define-form" method="post" action="scripts/define" novalidate="novalidate">
 						<fieldset>
 							<section>
 								<label class="select">
@@ -154,11 +154,11 @@
 			$.ajax({
 				type: "POST",
 				dataType : 'text', 
-				url: "/admin/script/" + sid + "/instantrun/" + eventId,
+				url: "/admin/scripts/" + sid + "/instantrun/" + eventId,
 				data: { content: _scontent.val()}, 
 				complete : function(){ 
 					var result_text = 'Path : ' + this.url + '<br/>';
-					result_text += '<strong>External Run Path : ' + "/open/script/run/" + sid + '</strong><br/>';
+					result_text += '<strong>External Run Path : ' + "/open/scripts/run/" + sid + '</strong><br/>';
 					result_text += 'Event Source : /event/' + eventId + '<br />' ;
 					result_text += 'Form parameter : <br />' ;
 					result_text += ' - paramname : ...<br />' ;
@@ -171,7 +171,7 @@
 		} ;
 		
 		$.ajax({
-			url:'/admin/script/' + scriptId + "/define",
+			url:'/admin/scripts/' + scriptId + "/define",
 			dataType:'json',
 			success:function(data){
 				var info = data['info'];
@@ -200,7 +200,7 @@
 			$.ajax({
 				type: "GET",
 				dataType : 'text', 
-				url: "/admin/script/" + scriptId + "/samplescript/" + fileName,
+				url: "/admin/scripts/" + scriptId + "/samplescript/" + fileName,
 				data: {}, 
 				complete : function(){ 
 				}, 
@@ -226,7 +226,7 @@
 					$.ajax({
 						type: "POST",
 						dataType : 'text', 
-						url: "/admin/script/" + scriptId + "/define",
+						url: "/admin/scripts/" + scriptId + "/define",
 						data: { content: _scontent.val()}, 
 						complete : function(){ 
 							

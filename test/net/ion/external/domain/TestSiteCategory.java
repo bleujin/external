@@ -31,7 +31,7 @@ public class TestSiteCategory extends TestBaseDomain{
 	public void testProperty() throws Exception {
 		SiteCategoryX category = domain.datas().scategory("dynamic") ;
 		assertEquals("dynamic", category.asString("phydirnm")) ;
-		assertEquals("/host_yucea/0_work/dynamic", category.asString("catpath")) ;
+		assertEquals("/dynamic", category.pathById()) ;
 	}
 	
 	

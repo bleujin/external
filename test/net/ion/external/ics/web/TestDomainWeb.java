@@ -59,7 +59,7 @@ public class TestDomainWeb extends TestCase {
 	}
 	
 	public void testCreateDomain() throws Exception {
-		StubHttpResponse response = ss.request("/domain/newdomain/create").post() ;
+		StubHttpResponse response = ss.request("/domain/newdomain").post() ;
 
 		assertEquals("newdomain created", response.contentsString()) ;
 		assertEquals("/domain/newdomain", this.dsub.findDomain("newdomain").domainNode().fqn().toString()) ;
@@ -92,14 +92,14 @@ public class TestDomainWeb extends TestCase {
 	}
 	
 	public void testAddSiteCategory() throws Exception {
-		StubHttpResponse response = ss.request("/domain/zzz/scat/dynamic/create").post();
+		StubHttpResponse response = ss.request("/domain/zzz/scat/dynamic").post();
 
 		assertEquals("dynamic created", response.contentsString()) ;
 		assertEquals(true, dsub.findDomain("zzz").datas().scategory("dynamic").exists()) ;
 	}
 	
 	public void testAddGalleryCategory() throws Exception {
-		StubHttpResponse response = ss.request("/domain/zzz/gcat/aaaa/create").postParam("includeSub", "T").post();
+		StubHttpResponse response = ss.request("/domain/zzz/gcat/aaaa").postParam("includeSub", "true").post();
 
 		assertEquals("aaaa created", response.contentsString()) ;
 		
