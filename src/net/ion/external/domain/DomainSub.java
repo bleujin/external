@@ -49,7 +49,7 @@ public class DomainSub {
 	}
 
 	public boolean existDomain(String did) {
-		return ! session.pathBy("/domain/" + did).isGhost();
+		return ! session.ghostBy("/domain/" + did).isGhost();
 	}
 
 

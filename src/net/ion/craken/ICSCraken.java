@@ -2,11 +2,12 @@ package net.ion.craken;
 
 import java.io.IOException;
 
-import org.apache.lucene.index.CorruptIndexException;
-
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.crud.RepositoryImpl;
 import net.ion.craken.node.crud.WorkspaceConfigBuilder;
+import net.ion.external.config.ESConfig;
+
+import org.apache.lucene.index.CorruptIndexException;
 
 
 public class ICSCraken {
@@ -17,6 +18,10 @@ public class ICSCraken {
 	private ICSCraken(RepositoryImpl repository, String wsName) {
 		this.repository = repository ;
 		this.wsName = wsName ;
+	}
+
+	public static ICSCraken create(RepositoryImpl repository, String wsName, ESConfig esConfig) {
+		return new ICSCraken(repository, wsName);
 	}
 
 	public static ICSCraken create() throws IOException{
@@ -38,6 +43,7 @@ public class ICSCraken {
 		repository.shutdown() ;
 		return this ;
 	}
+
 	
 }
 

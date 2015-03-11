@@ -1,11 +1,31 @@
 package net.ion.external.ics.web.misc;
 
-import com.google.common.base.Function;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MultivaluedMap;
 
 import net.ion.craken.ICSCraken;
-import net.ion.craken.node.*;
+import net.ion.craken.node.ReadNode;
+import net.ion.craken.node.ReadSession;
+import net.ion.craken.node.TransactionJob;
+import net.ion.craken.node.WriteNode;
+import net.ion.craken.node.WriteSession;
 import net.ion.craken.node.crud.ChildQueryResponse;
 import net.ion.craken.tree.PropertyId;
+import net.ion.external.ExternalServer;
 import net.ion.external.ics.common.ExtMediaType;
 import net.ion.external.ics.web.Webapp;
 import net.ion.framework.parse.gson.JsonArray;
@@ -19,14 +39,7 @@ import net.ion.radon.core.ContextParam;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.jboss.resteasy.spi.HttpRequest;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MultivaluedMap;
-
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
+import com.google.common.base.Function;
 
 @Path("/misc")
 public class MiscWeb implements Webapp{
@@ -51,32 +64,29 @@ public class MiscWeb implements Webapp{
 
     }
 
-//    @GET
-//    @Path("/shutdown")
-//    public String shutdown(@Context HttpRequest request,
-//                           @DefaultValue("") @QueryParam("password") String password,
-//                           @DefaultValue("1000") @QueryParam("time") final int time, @ContextParam("net.ion.niss.NissServer") final NissServer server){
-//
-//        if (! password.equals(server.config().serverConfig().password())) {
-//            return "not matched password" ;
-//        }
-//
-//        new Thread(){
-//            public void run(){
-//                try {
-//                    Thread.sleep(time);
-//                    server.shutdown() ;
-//
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                } catch (ExecutionException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }.start();
-//
-//        return "bye after " + time;
-//    }
+    @GET
+    @Path("/shutdown")
+    public String shutdown(@Context HttpRequest request,
+                           @DefaultValue("") @QueryParam("password") String password,
+                           @DefaultValue("1000") @QueryParam("time") final int time, @ContextParam("net.ion.external.ExternalServer") final ExternalServer server){
+
+        if (! password.equals(server.config().serverConfig().password())) {
+            return "not matched password" ;
+        }
+
+        new Thread(){
+            public void run(){
+                try {
+                    Thread.sleep(time);
+                    server.shutdown() ;
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+
+        return "bye after " + time;
+    }
 
 
     @GET

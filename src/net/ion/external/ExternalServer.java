@@ -1,13 +1,15 @@
-package net.ion.external.ics;
+package net.ion.external;
 
-import java.io.File;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import net.ion.craken.ICSCraken;
-import net.ion.external.domain.DomainMaster;
+import net.ion.external.config.ESConfig;
+import net.ion.external.config.builder.ConfigBuilder;
 import net.ion.external.domain.DomainSub;
+import net.ion.external.ics.EventSourceEntry;
+import net.ion.external.ics.QueryTemplateEngine;
 import net.ion.external.ics.common.AppLogSink;
 import net.ion.external.ics.common.FavIconHandler;
 import net.ion.external.ics.common.HTMLTemplateEngine;
@@ -27,7 +29,6 @@ import net.ion.external.ics.web.misc.ExportWeb;
 import net.ion.external.ics.web.misc.MiscWeb;
 import net.ion.external.ics.web.misc.TraceWeb;
 import net.ion.framework.db.ThreadFactoryBuilder;
-import net.ion.framework.db.manager.OracleDBManager;
 import net.ion.framework.db.manager.script.JScriptEngine;
 import net.ion.nradon.EventSourceConnection;
 import net.ion.nradon.EventSourceHandler;
@@ -47,26 +48,24 @@ public class ExternalServer {
 
 	private NettyWebServer radon;
 	private Status status ;
+	private ICSCraken craken ;
+	private ESConfig econfig;
 	
 	private enum Status {
 		INITED, STARTED, STOPED 
 	}
 	
-	
-	public ExternalServer(int port) throws Exception {
-		init(port) ;
+	public ExternalServer(ESConfig econfig) throws Exception {
+		init(econfig) ;
 	}
 
-	private void init(int port) throws Exception {
-        RadonConfigurationBuilder builder = RadonConfiguration.newBuilder(port);
-        ICSCraken craken = ICSCraken.create() ;
+	
+	private void init(ESConfig econfig) throws Exception {
+		this.econfig = econfig ;
+        RadonConfigurationBuilder builder = RadonConfiguration.newBuilder(econfig.serverConfig().port());
+        this.craken = ICSCraken.create() ;
         final EventSourceEntry esentry = builder.context(EventSourceEntry.EntryName, EventSourceEntry.create());
         DomainEntry dentry = DomainEntry.test(DomainSub.create(craken));
-		
-		DomainMaster dmaster = DomainMaster.create(new OracleDBManager("jdbc:oracle:thin:@dev-oracle.i-on.net:1521:dev10g", "dev_ics6", "dev_ics6"), craken)
-					.artImageRoot(new File("./resource/uploadfiles/artimage"))
-					.galleryRoot(new File("./resource/uploadfiles/gallery"))
-					.afieldFileRoot(new File("./resource/uploadfiles/afieldfile"));
         
         builder.context(ICSCraken.EntryName, craken);
         builder.context(DomainEntry.EntryName, dentry);
@@ -125,13 +124,18 @@ public class ExternalServer {
                 }
             });
 		
-		
+		radon.getConfig().getServiceContext().putAttribute(ExternalServer.class.getCanonicalName(), this);
 		this.status = Status.INITED ;
 	}
 
 	public static ExternalServer create(int port) throws Exception {
-		return new ExternalServer(port);
+		return new ExternalServer(ConfigBuilder.createDefault(port).build());
 	}
+
+	public static ExternalServer create(ESConfig econfig) throws Exception {
+		return new ExternalServer(econfig);
+	}
+
 
 	
 	public ExternalServer start() throws InterruptedException, ExecutionException {
@@ -163,6 +167,16 @@ public class ExternalServer {
 		
 		this.status = Status.STOPED ;
 		return this ;
+	}
+
+	public ICSCraken craken() {
+		return craken;
+	}
+
+
+
+	public ESConfig config() {
+		return econfig;
 	}
 
 	
