@@ -3,15 +3,15 @@ package net.ion.external.domain;
 import java.io.File;
 
 import junit.framework.TestCase;
-import net.ion.craken.Craken;
+import net.ion.craken.ICSCraken;
 import net.ion.framework.db.manager.OracleDBManager;
 
-public class TestBaseDomain extends TestCase{
+public class TestBaseDomain extends TestCase {
 
 	private OracleDBManager dbm;
 	private DomainMaster dmaster;
 	
-	protected Craken icraken ;
+	protected ICSCraken icraken ;
 	protected DomainSub dsub;
 	protected Domain domain;
 
@@ -20,7 +20,7 @@ public class TestBaseDomain extends TestCase{
 		super.setUp();
 		this.dbm = new OracleDBManager("jdbc:oracle:thin:@dev-oracle.i-on.net:1521:dev10g", "dev_ics6", "dev_ics6");
 		
-		this.icraken = Craken.test() ;
+		this.icraken = ICSCraken.test() ;
 		this.dmaster = DomainMaster.create(dbm, icraken)
 					.artImageRoot(new File("./resource/uploadfiles/artimage"))
 					.galleryRoot(new File("./resource/uploadfiles/gallery"))
@@ -30,8 +30,7 @@ public class TestBaseDomain extends TestCase{
 		dsub.createDomain("zdm") ;
 		
 		assertEquals(true, dsub.existDomain("zdm")) ;
-		this.domain = dsub.findDomain("zdm")
-					.addSiteCategory("dynamic", false);
+		this.domain = dsub.findDomain("zdm").addSiteCategory("dynamic", false);
 	}
 	
 	@Override

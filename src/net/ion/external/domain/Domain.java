@@ -2,34 +2,43 @@ package net.ion.external.domain;
 
 import java.io.IOException;
 
-import net.ion.craken.Craken;
+import oracle.net.aso.s;
+import net.ion.craken.ICSCraken;
 import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
+import net.ion.craken.tree.Fqn;
+import net.ion.external.ics.bean.AfieldMetaX;
 import net.ion.external.ics.bean.ArticleChildrenX;
 import net.ion.external.ics.bean.ArticleX;
 import net.ion.external.ics.bean.CategoryChildrenX;
 import net.ion.external.ics.bean.GalleryCategoryX;
 import net.ion.external.ics.bean.SiteCategoryX;
 import net.ion.external.ics.bean.TemplateChildrenX;
+import net.ion.external.ics.bean.UserX;
+import net.ion.external.ics.bean.XIterable;
 import net.ion.nsearcher.search.filter.TermFilter;
 
 public class Domain {
 
 	private ReadNode dnode;
 	private ReadSession session;
-	private Craken ic ;
+	private ICSCraken ic ;
 	private String did;
+	private DomainInfo dinfo;
+	private DomainData ddata;
 	
-	private Domain(Craken ic, ReadNode dnode) {
+	private Domain(ICSCraken ic, ReadNode dnode) {
 		this.dnode = dnode;
 		this.session = dnode.session() ;
 		this.ic = ic ;
 		this.did = dnode.fqn().name() ;
+		this.dinfo = new DomainInfo(this) ;
+		this.ddata = new DomainData(this) ;
 	}
 
-	public static Domain by(Craken ic, ReadNode dnode) {
+	public static Domain by(ICSCraken ic, ReadNode dnode) {
 		return new Domain(ic, dnode);
 	}
 
@@ -37,50 +46,50 @@ public class Domain {
 		session.tran(new TransactionJob<Void>() {
 			@Override
 			public Void handle(WriteSession wsession) throws Exception {
-				wsession.pathBy("/command/domain/addcategory").property("catid", scatId).property("includesub", includeSub).property("did", did) ;
+				wsession.pathBy("/domain/", did, "scat", scatId).property("includesub", includeSub) ;
 				return null;
 			}
 		}) ;
 		return this ;
 	}
 	
-	public Domain addGallery(final String gcatId, final boolean includeSub) {
+	public Domain removeSiteCategory(final String scatId, final boolean includeSub) {
 		session.tran(new TransactionJob<Void>() {
 			@Override
 			public Void handle(WriteSession wsession) throws Exception {
-				wsession.pathBy("/command/domain/addgallery").property("catid", gcatId).property("includesub", includeSub).property("did", did) ;
+				wsession.pathBy("/domain/", did, "scat", scatId).removeSelf() ;
 				return null;
 			}
 		}) ;
 		return this ;
 	}
 
-	public CategoryChildrenX<SiteCategoryX> categorys() throws IOException {
-		return CategoryChildrenX.siteCategory(this, session.ghostBy(dnode.fqn()).refsToMe("include").fqnFilter("/datas/scat")) ;
-	}
-
-	public CategoryChildrenX<GalleryCategoryX> gcategorys() throws IOException {
-		return CategoryChildrenX.galleryCategory(this, session.ghostBy(dnode.fqn()).refsToMe("include").fqnFilter("/datas/gcat")) ;
+	
+	public Domain addGalleryCategory(final String gcatId, final boolean includeSub) {
+		session.tran(new TransactionJob<Void>() {
+			@Override
+			public Void handle(WriteSession wsession) throws Exception {
+				wsession.pathBy("/domain", did, "gcat", gcatId).property("includesub", includeSub) ;
+				return null;
+			}
+		}) ;
+		return this ;
 	}
 	
-	public ArticleChildrenX articles() throws IOException {
-		// /datas/article/{catid}/{artid}
-		return ArticleChildrenX.create(this, session.ghostBy(dnode.fqn()).refsToMe("include").fqnFilter("/datas/article"));
-	}
-	
-	public ArticleChildrenX articles(String catId) throws IOException {
-		return ArticleChildrenX.create(this, session.ghostBy(dnode.fqn()).refsToMe("include").fqnFilter("/datas/article").filter(new TermFilter("catid", catId)));
-	}
-
-	public TemplateChildrenX templates() throws IOException {
-		return TemplateChildrenX.create(this, session.ghostBy(dnode.fqn()).refsToMe("include").fqnFilter("/datas/template")) ;
-	}
-
-	public ArticleX article(String catId, int artId) {
-		return ArticleX.create(this, session.ghostBy("/datas/article/" + catId + "/" + artId));
+	public Domain resetUser() {
+		session.tran(new TransactionJob<Void>() {
+			@Override
+			public Void handle(WriteSession wsession) throws Exception {
+				
+				wsession.pathBy("/command/domain/resetuser") ;
+				return null;
+			}
+		}) ;
+		
+		return this ;
 	}
 
-	
+
 	public String getId() {
 		return did;
 	}
@@ -89,11 +98,24 @@ public class Domain {
 		return session;
 	}
 
-	public SiteCategoryX scategory(String catId) {
-		return SiteCategoryX.create(this, session.ghostBy("/datas/scat", catId));
+	
+	public DomainInfo info() {
+		return this.dinfo;
 	}
 
-	public GalleryCategoryX gcategory(String catId) {
-		return GalleryCategoryX.create(this, session.ghostBy("/datas/gcat", catId));
+	public DomainData datas() {
+		return ddata;
+	}
+	
+	public ReadNode domainNode() {
+		return ghostBy(dnode.fqn());
+	}
+
+	ReadNode ghostBy(Fqn fqn) {
+		return session.ghostBy(fqn);
+	}
+	
+	ReadNode ghostBy(String base, String... sub) {
+		return session.ghostBy(base, sub) ;
 	}
 }

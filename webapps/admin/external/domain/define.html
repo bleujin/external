@@ -44,12 +44,6 @@
                                 </tr>
                                 </thead>
                                 <tbody id="scat_body">
-                                <tr>
-                                    <td>airkjh_cat</td>
-                                    <td>/external_test/airkjh_cat</td>
-                                    <td>T</td>
-                                    <td><button onclick="javascript:showListPages('airkjh_cat')">list pages</button></td>
-                                </tr>
                                 </tbody>
                                 <tfoot>
                                 <tr>
@@ -77,11 +71,6 @@
                                 </tr>
                                 </thead>
                                 <tbody id="gcat_body">
-                                <tr>
-                                    <td>airkjh_source</td>
-                                    <td>airkjh_cat</td>
-                                    <td>T</td>
-                                </tr>
                                 </tbody>
                                 <tfoot>
                                 <tr>
@@ -140,7 +129,10 @@
         });
 
         var domainId = $("#domains option:selected").val() ;
-//        if (domainId == undefined) return ;
+        if (domainId == undefined) return ;
+        
+        loadInfo(domainId) ;
+        
 
         var _btn_scat_create = $(document).find("input[name=btn_scat_create]") ;
         var _btn_scat_remove = $(document).find("input[name=btn_scat_remove]") ;
@@ -176,6 +168,42 @@
         _btn_scat_create.click(function(_catId) {
             $('#create-domain-scat-modal').modal({catId: _catId});
         });
+        
+        $("#create-domain-scat-modal button[name=create_scat]").click(function () {
+            $("#create-domain-scat-form").submit();
+        });
+        
+        
+		$('#create-domain-scat-form').validate({
+            rules : {
+            	scatid : { required: true, pattern: "^[a-z][a-z0-9_]*$", minlength:4, maxlength: 15}
+            },
+            messages: {
+                scat : {
+                    required: "${m.asString('validation.required', 'Site Category ID')}",
+                    pattern: "${m.asString('validation.idpattern')}",
+                    minlength: "${m.asString('validation.minlength', 4)}",
+                    maxlength: "${m.asString('validation.maxlength', 15)}"
+                }
+            },
+            submitHandler: function(form) {
+                var newId = $('#scatid').val() ;
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'text',
+                    url: '/admin/domain/' + domainId + '/scat/' + newId + '/create',
+                    data: { },
+                    complete: function() { },
+                    success: function() {
+                    	loadInfo(domainId) ;
+                    	$('#create-domain-scat-modal').modal('hide');
+                    }
+                });
+            },
+            errorPlacement: function(error, element) {
+                error.insertAfter(element.parent());
+            }
+        });
 
         _btn_gcat_create.click(function(_catId) {
             $('#create-domain-gcat-modal').modal({catId: _catId});
@@ -184,6 +212,34 @@
 
     var showListPages = function(_catId) {
         $('#list-pages-modal').modal({catId: _catId});
+    }
+    
+    var loadInfo = function(domainId) {
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: '/admin/domain/' + domainId + '/info',
+            data: { },
+            complete: function() { },
+            success: function(data) {
+            	if(data['scats']) {
+            		var scats = data['scats'] ;
+            		console.log(scats);
+					for(var idx in scats) {
+						var scat = scats[idx] ;
+						var rowEl = '<tr><td>' + scat['catid'] + '</td><td>' + scat['catpath'] + '</td><td>' + scat['includesub'] + '</td><td><button onclick="javascript:showListPages(\'' + scat['catid'] + '\')">list pages</button></td></tr>' ;
+						
+						$(rowEl).appendTo($('#scat_body'))
+					}            		
+            	}
+            	if(data['gcats']) {
+            		
+            	}
+            },
+            error: function(error) {
+            	console.log(error);
+            }
+        });
     }
 
     loadScript("js/plugin/datatables/jquery.dataTables.min.js", function(){

@@ -92,7 +92,7 @@
 			var aHTML = $('.click2edit').code() ;
 			$.ajax({
 				type: "POST",
-				url: "/ics/menus/misc",
+				url: "/admin/menus/misc",
 				data: { content: aHTML, field: "script" }
 			});
 			$('.click2edit').destroy();
@@ -121,7 +121,7 @@
 
 		
 		$.ajax({
-			url:"/ics/scripts",
+			url:"/admin/scripts",
 			type:'GET', 
 			dataType:'json',
 			success:function(data){
@@ -174,7 +174,7 @@
 						$.ajax({
 							type: "GET",
 							dataType:"json", 
-							url: "/ics/scripts/define/" + sid,
+							url: "/admin/scripts/define/" + sid,
 							success : function(data){
 								$('#create_script_modal').modal({});
 								$('#create_script_form input[name=sid]').val(data['sid']) ;
@@ -199,7 +199,7 @@
 							"Remove Script": function() {
 								var win = $( this ) ;
 								$.ajax({
-									url:"/ics/scripts/remove/" + $sid,
+									url:"/admin/scripts/remove/" + $sid,
 									type:'DELETE', 
 									dataType:'text', 
 									data : {}, 

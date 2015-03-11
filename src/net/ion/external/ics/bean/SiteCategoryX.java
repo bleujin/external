@@ -42,6 +42,11 @@ public class SiteCategoryX extends AbCategory<SiteCategoryX> {
 		return TemplateX.create(domain(), session().ghostBy("/datas/template/" + catId() + "/"+ tplId));
 	}
 
+	public XIterable<AfieldMetaX> afieldMetas() {
+		return XIterable.<AfieldMetaX>create(domain(), node().refs("afields").toList(), AfieldMetaX.class) ;
+		
+	}
+
 
 	
 }

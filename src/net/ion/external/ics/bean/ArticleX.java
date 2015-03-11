@@ -2,8 +2,11 @@ package net.ion.external.ics.bean;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
+
+import javax.swing.plaf.ListUI;
 
 import net.ion.cms.rest.sync.Def;
 import net.ion.craken.node.IteratorList;
@@ -13,6 +16,7 @@ import net.ion.craken.node.WriteSession;
 import net.ion.craken.tree.PropertyId;
 import net.ion.craken.tree.PropertyId.PType;
 import net.ion.external.domain.Domain;
+import net.ion.framework.util.ListUtil;
 import net.ion.framework.util.MapUtil;
 import net.ion.framework.util.SetUtil;
 
@@ -35,17 +39,44 @@ public class ArticleX extends BeanX{
 	}
 	
 	public AfieldValueX asAfield(String afieldId) {
-		return AfieldValueX.create(domain(), session().ghostBy("/datas/avalue/" + artId() + "/" + afieldId));
+		return AfieldValueX.create(domain(), session().ghostBy("/datas/avalue/" + artId() + "/" + afieldId), catId(), artId());
 	}
 	
 	public XIterable<AfieldValueX> afields(){
-		return null ;
+		return XIterable.<AfieldValueX>create(domain(), session().ghostBy("/datas/avalue/" + artId()).children().toList(), AfieldValueX.class) ;
+	}
+	
+	public XIterable<AfieldValueX> afields(boolean onlySetted) throws IOException{
+		if(! onlySetted) return afields() ;
+		
+		XIterable<AfieldMetaX> setted = category().afieldMetas() ;
+		
+		
+		List<ReadNode> result = ListUtil.newList() ;
+		List<ReadNode> haveafield = session().ghostBy("/datas/avalue/" + artId()).children().toList() ;
+		
+		List<String> haveIdForResult = ListUtil.newList() ;
+		for(ReadNode node : haveafield){
+			if (setted.hasKey(node.property("afieldid").asString())) {
+				result.add(node) ; 
+				haveIdForResult.add(node.property("afieldid").asString()) ;
+			}
+		}
+		
+		for(AfieldMetaX afield : setted){
+			if (! haveIdForResult.contains(afield.afieldId())){
+				result.add(session().ghostBy("/datas/avalue/" + artId() + "/" + afield.afieldId())) ;
+			}
+		}
+		
+		
+		return XIterable.<AfieldValueX>create(domain(), result, AfieldValueX.class) ; 
 	}
 
 
 	
 	public SiteCategoryX category() throws IOException {
-		return domain().scategory(catId());
+		return domain().datas().scategory(catId());
 	}
 	
 	public int increasCount(final String propId) throws InterruptedException, ExecutionException{
@@ -86,6 +117,10 @@ public class ArticleX extends BeanX{
 
 	public InputStream contentStream(String path) throws IOException {
 		return asStream("img" + path.toLowerCase().hashCode());
+	}
+
+	public UserX regUser() {
+		return UserX.create(domain(), session().ghostBy(Def.User.pathBy(asString("reguserid"))));
 	}
 
 

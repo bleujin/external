@@ -185,7 +185,7 @@
 			<nav>
 				<ul>
 					<li><a href="external/domain.html"><i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">${m.asString("menu.domain")}</span></a></li>
-                    <li><a href="external/scripter.html"><i class="fa fa-lg fa-fw fa-gavel"></i> <span class="menu-item-parent">${m.asString("menu.scripter")}</span></a></li>
+                    <li><a href="external/script.html"><i class="fa fa-lg fa-fw fa-gavel"></i> <span class="menu-item-parent">${m.asString("menu.script")}</span></a></li>
 					<li><a href="external/misc.html"><i class="fa fa-lg fa-fw fa-windows"></i> <span class="menu-item-parent">${m.asString("menu.misc")}</span></a></li>
 					
 					<li class="divider"></li>
@@ -251,7 +251,7 @@
 		<div id="shortcut">
 			<ul>
 				<li><a href="#external/domain.html" class="jarvismetro-tile big-cubes bg-color-blueDark"> <span class="iconbox"> <i class="fa fa-inbox fa-4x"></i> <span>${m.asString("menu.domain")}</span> </span> </a></li>
-				<li><a href="#external/scripter.html" class="jarvismetro-tile big-cubes bg-color-greenLight"> <span class="iconbox"> <i class="fa fa-windows fa-4x"></i> <span>${m.asString("menu.scripter")}</span> </span> </a></li>
+				<li><a href="#external/script.html" class="jarvismetro-tile big-cubes bg-color-greenLight"> <span class="iconbox"> <i class="fa fa-windows fa-4x"></i> <span>${m.asString("menu.script")}</span> </span> </a></li>
                 <li><a href="#external/misc.html" class="jarvismetro-tile big-cubes bg-color-magenta"> <span class="iconbox"> <i class="fa fa-windows fa-4x"></i> <span>${m.asString("menu.misc")}</span> </span> </a></li>
 			</ul>
 		</div>
@@ -321,7 +321,7 @@
 	$(document).ready(function() {
 		$("#recent_activity").on("show.bs.dropdown", function () {
 			$.ajax({
-				url:'/ics/traces/${request.data("user")}' ,
+				url:'/admin/traces/${request.data("user")}' ,
 				dataType:'json',
 				success:function(data){
 					$(".project-context .dropdown-menu").empty() ;
@@ -330,7 +330,22 @@
 						$(".project-context .dropdown-menu").append('<li><a href="javascript:void(0);">' + tlist[idx]['method'] + ' : ' + tlist[idx]['uri'] + '</a></li>');
 					}
 					$(".project-context .dropdown-menu").append('<li class="divider"></li>');
-					$(".project-context .dropdown-menu").append('<li><a href="javascript:void(0);"><i class="fa fa-power-off"></i> Clear</a></li>');
+					$(".project-context .dropdown-menu").append('<li><a href="javascript:void(0);" id="clearTrace"><i class="fa fa-power-off"></i> Clear</a></li>');
+					$("#clearTrace").click(function(){
+						$.ajax({
+							url:'/admin/traces/${request.data("user")}' ,
+							type:'DELETE',
+							dataType:'text',
+							data:{}, 
+							success:function(data){
+								// location.reload() ;
+							}, 
+							error:function(request,status,error){
+								console.log('response', request, status, error) ;
+							}
+						}) ;
+						// console.log('clear Trace') ;
+					}) ;
 				}, 
 				error:function(request,status,error){
 					console.log('response', request, status, error) ;
@@ -343,7 +358,7 @@
 			$(this).siblings().removeClass("active");
 			$(this).addClass("active");
 			$.ajax({
-				url:'/ics/misc/profile/${request.data("user")}' ,
+				url:'/admin/misc/profile/${request.data("user")}' ,
 				type:'POST',
 				dataType:'text',
 				data:{'langcode':selcode}, 

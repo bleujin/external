@@ -14,7 +14,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-import net.ion.craken.Craken;
+import net.ion.craken.ICSCraken;
 import net.ion.craken.node.ReadSession;
 import net.ion.framework.db.Rows;
 import net.ion.framework.db.manager.script.FileAlterationMonitor;
@@ -47,7 +47,7 @@ public class CrakenScript {
 		sengine.put("session", session);
 	}
 
-	public static CrakenScript create(Craken craken, ScheduledExecutorService ses) throws IOException {
+	public static CrakenScript create(ICSCraken craken, ScheduledExecutorService ses) throws IOException {
 		return new CrakenScript(craken.login(), ses);
 	}
 

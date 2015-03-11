@@ -29,8 +29,8 @@ public class MyVerifier implements PasswordAuthenticator {
 			session.tranSync(new TransactionJob<Void>() {
 				@Override
 				public Void handle(WriteSession wsession) throws Exception {
-					if (! wsession.exists("/users/" + userId)){
-						wsession.pathBy("/users/" + userId).property(Def.User.Name, name).property(Def.User.Pwd, password);
+					if (!wsession.exists("/users/" + userId)) {
+						wsession.pathBy("/users/" + userId).property(Def.User.Name, name).encrypt(Def.User.Password, password);
 					}
 					return null;
 				}
@@ -38,21 +38,26 @@ public class MyVerifier implements PasswordAuthenticator {
 		} catch (Exception ex) {
 			throw new IOException(ex);
 		}
-		session.workspace().wsName() ;
+		session.workspace().wsName();
 
 		return this;
 	}
 
 	public void authenticate(HttpRequest request, String username, String password, ResultCallback callback, Executor handlerExecutor) {
 		ReadNode found = session.ghostBy("/users/" + username);
-		String expectedPassword = found.property(Def.User.Pwd).stringValue();
-		if (expectedPassword != null && password.equals(expectedPassword)) {
-			String langcode = found.property(MyAuthenticationHandler.LANGCODE).defaultValue("us");
-			request.data(MyAuthenticationHandler.LANGCODE, langcode) ;
-			
-			callback.success();
-		} else {
-			callback.failure();
+		String expectedPassword = found.property(Def.User.Password).stringValue();
+		try {
+			if (expectedPassword != null && found.isMatch(Def.User.Password, password)) {
+				String langcode = found.property(MyAuthenticationHandler.LANGCODE).defaultValue("us");
+				request.data(MyAuthenticationHandler.LANGCODE, langcode);
+
+				callback.success();
+			} else {
+				callback.failure();
+			}
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			callback.failure(); 
 		}
 	}
 }

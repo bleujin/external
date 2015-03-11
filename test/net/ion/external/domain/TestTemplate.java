@@ -7,7 +7,7 @@ public class TestTemplate extends TestBaseDomain{
 
 	
 	public void testListTemplate() throws Exception {
-		TemplateChildrenX templates = domain.templates() ;
+		TemplateChildrenX templates = domain.datas().templates() ;
 		TemplateX template = templates.listTemplateBySeq(0) ;
 		
 		assertEquals("index.html", template.asString("filename"));

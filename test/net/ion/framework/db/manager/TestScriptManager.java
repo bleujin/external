@@ -12,7 +12,7 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Tables;
 
 import junit.framework.TestCase;
-import net.ion.craken.Craken;
+import net.ion.craken.ICSCraken;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
@@ -27,11 +27,11 @@ import net.ion.framework.util.Debug;
 public class TestScriptManager extends TestCase {
 
 	
-	private Craken craken;
+	private ICSCraken craken;
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		this.craken = Craken.test() ;
+		this.craken = ICSCraken.test() ;
 	}
 	
 	@Override

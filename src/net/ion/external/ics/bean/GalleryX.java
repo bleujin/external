@@ -32,7 +32,7 @@ public class GalleryX extends BeanX {
 	}
 
 	public GalleryCategoryX category() throws IOException {
-		return domain().gcategory(catId());
+		return domain().datas().gcategory(catId());
 	}
 
 	public InputStream dataStream() throws IOException {

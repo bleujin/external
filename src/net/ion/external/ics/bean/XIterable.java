@@ -156,6 +156,15 @@ public class XIterable<T extends BeanX> implements Iterable<T>, Writable {
 		return this;
 	}
 
+	public boolean hasKey(Object fqnName){
+		for (ReadNode node : tnodes) {
+			if (ObjectUtil.toString(fqnName).equals(node.fqn().name())) {
+				return true ;
+			}
+		}
+		return false ;
+	}
+	
 	public T findByKey(Object fqnName) throws IOException {
 		try {
 			for (ReadNode node : tnodes) {

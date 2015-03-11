@@ -37,7 +37,7 @@ public class TemplateX extends BeanX{
 	}
 
 	public SiteCategoryX category() throws IOException {
-		return domain().scategory(catId());
+		return domain().datas().scategory(catId());
 	}
 
 	public boolean isList() {

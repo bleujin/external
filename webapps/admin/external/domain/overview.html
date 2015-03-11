@@ -40,7 +40,7 @@
                             <dt>Galleries</dt><dd>10</dd>
                         </dl>
                     </div>
-                    <div clas="tab-pane fade" id="recent_article">
+                    <div class="tab-pane fade" id="recent_article">
                         <table id="articles" class="table table-bordered table-hover" width="100%">
                             <thead>
                             <tr>
@@ -110,12 +110,11 @@
             var aHTML = $('.click2edit').code() ;
             $.ajax({
                 type: "POST",
-                url: "/ics/menus/domain",
+                url: "/admin/menus/domain",
                 data: { content: aHTML, field: "overview" }
             });
             $('.click2edit').destroy();
         });
-
     };
 
     loadScript("/js/plugin/summernote/summernote.min.js", pagefunction) ;

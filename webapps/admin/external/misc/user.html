@@ -72,7 +72,7 @@
 			var aHTML = $('.click2edit').code() ;
 			$.ajax({
 				type: "POST",
-				url: "/ics/menus/misc",
+				url: "/admin/menus/misc",
 				data: { content: aHTML, field: "user" }
 			});
 			$('.click2edit').destroy();
@@ -80,7 +80,7 @@
 
 
 		$.ajax({
-			url:"/ics/misc/users",
+			url:"/admin/misc/users",
 			type:'GET', 
 			dataType:'json',
 			success:function(data){
@@ -119,7 +119,7 @@
 						users += targets.data()[i][0] + ',';
 					}
 					$.ajax({
-						url:"/ics/misc/users_remove",
+						url:"/admin/misc/users_remove",
 						type:'POST', 
 						dataType:'text', 
 						data : {'users':users}, 

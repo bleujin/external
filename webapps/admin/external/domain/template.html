@@ -108,7 +108,7 @@
         var _btn_save = _templateForm.find("button[name=btn_save]") ;
 
         $.ajax({
-            url:'/ics/domain/' + domainId +'/template',
+            url:'/admin/domain/' + domainId +'/template',
             dataType:'json',
             success:function(data){
                 var info = data['info'];
@@ -136,7 +136,7 @@
             $.ajax({
                 type: "GET",
                 dataType : 'text',
-                url: "/ics/domain/" + domainId + "/sampletemplate/" + fileName,
+                url: "/admin/domain/" + domainId + "/sampletemplate/" + fileName,
                 data: {},
                 complete : function(){
                 },
@@ -158,7 +158,7 @@
             submitHandler : function(form) {
                 $.ajax({
                             type: "POST",
-                            url: "/ics/domain/" + domainId + "/template",
+                            url: "/admin/domain/" + domainId + "/template",
                             data: { template: _template.val() },
                             success :  function(data) {
                                 $("#save-message span").html(data) ;

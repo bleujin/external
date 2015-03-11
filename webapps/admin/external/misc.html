@@ -64,71 +64,6 @@
 </div>
 
 
-<div id="remove-script-confirm" title='${m.asString("misc.script.remove.confirm")}' style="display:none">
-	<form class="smart-form" id="remove-script-form" method="post" action="misc/" novalidate="novalidate">
-		<fieldset style="padding: 0px">	
-			<section>
-				<label class="label">${m.asString("misc.script.remove.script")} : <span id="removeScriptId"></span></label>
-			</section>
-		</fieldset>
-	</form>
-</div>
-
-
-<div id="create_script_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			
-			<div class="modal-header"><h5 id="myModalLabel">${m.asString("misc.script.define")}</h5></div>
-
-			<div class="modal-body">
-			<form class="smart-form" id="create_script_form" method="post" action="misc/script" novalidate="novalidate">
-			<fieldset style="padding: 0px">					
-				<section>
-					<label class="label">${m.asString("misc.script.define.script-id")}</label>
-					<label class="input">
-						<input type="text" name="sid"/>
-					</label>
-				</section>
-				
-				<section>
-					<label class="select">
-						<select name="script_samples"><option value=''>${m.asString("misc.script.define.view-sample")}</option></select>
-					</label>
-				</section>
-				
-				<section>
-					<label class="label">${m.asString("misc.script.define.content")}</label>
-					<label class="textarea textarea-resizable">
-						<i class="icon-append fa fa-question-circle"/> 										
-						<textarea rows="10" class="custom-scroll" placeholder="script content" name="content"></textarea>
-						<b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"/>${m.asString("misc.script.define.content")}</b> 
-					</label>
-				</section>
-				
-				<section>
-					<label class="label">${m.asString("misc.script.define.response")}</label>
-					<div><pre name="script_response"></pre></div>
-					
-				</section>
-				
-			</fieldset>
-			</form>
-			</div>
-			
-			<div class="modal-footer">
-			  <button class="btn" data-dismiss="modal" aria-hidden="true">${m.asString("buttons.modal.close")}</button>
-			  <button class="btn btn-success" name="instant_run">${m.asString("misc.script.define.button-run")}</button>
-			  <button class="btn btn-primary" name="create_script">${m.asString("misc.script.define.button-define")}</button>
-			</div>  
-
-		</div>
-	</div>
-</div>
-
-
-
-
 <script type="text/javascript">
 
 	pageSetUp();
@@ -159,11 +94,11 @@
 				$.ajax({
 					type: "POST",
 					dataType:"text", 
-					url: "/ics/misc/users/" + userid,
+					url: "/admin/misc/users/" + userid,
 					data: { 'name': $("#create_user_form input[name=name]").val(), 'password': $("#create_user_form input[name=password]").val() }, 
 					success : function(msg){
 						$("#create_user_form").modal('hide') ;
-						loadURL("icss/misc/user.html", $('#inbox-content > .table-wrap')) ;
+						loadURL("external/misc/user.html", $('#inbox-content > .table-wrap')) ;
 						$('#create_user_modal').modal('hide');
 					}
 				});
@@ -175,85 +110,10 @@
 		});
 		
 
-		$("#create_script_form").validate({
-			rules : {
-				sid : { required : true, pattern:"^[a-z][a-z0-9_]*$", minlength : 4, maxlength : 25 }, 
-				content : { required : true} 
-			},
-
-			// Messages for form validation
-			messages : {
-				sid : { required : "${m.asString('validation.required', 'script id')}", pattern : "${m.asString('validation.idpattern')}", minlength : "${m.asString('validation.minlength', 4)}", maxlength:"${m.asString('validation.maxlength', 25)}"}, 
-				content : { required : "${m.asString('validation.required', 'script content')}"} 
-			},
-
-			// Ajax form submition
-			submitHandler : function(form) {
-				var sid = $("#create_script_form input[name=sid]").val() ;
-				
-				$.ajax({
-					type: "POST",
-					dataType:"text", 
-					url: "/ics/scripts/define/" + sid,
-					data: { 'content': $("#create_script_form textarea[name=content]").val() }, 
-					success : function(msg){
-						$("#create_script_form").modal('hide') ;
-						loadURL("icss/misc/script.html", $('#inbox-content > .table-wrap')) ;
-						$('#create_script_modal').modal('hide');
-					}
-				});
-			},
-
-			errorPlacement : function(error, element) { // Do not change code below
-				error.insertAfter(element.parent());
-			}
-		});
-
 		$("#create_user_modal button[name=create_user]").click(function(){
 			$("#create_user_form").submit() ;
 		});
 		
-		$("#create_script_modal button[name=create_script]").click(function(){
-			$("#create_script_form").submit() ;
-		});
-		
-		$("#create_script_modal button[name=instant_run]").click(function(){
-			$.ajax({
-				type: "POST",
-				dataType : 'text', 
-				url: "/ics/scripts/instantrun",
-				data: {'content': $("#create_script_form textarea[name=content]").val()}, 
-				complete : function(){ 
-				}, 
-				success :  function(data) {
-					$("#create_script_modal pre[name=script_response]").text(data) ;
-	// 				var win = window.open();
-	//				 win.document.write(data);
-				}, 
-				error:function(request,status,error){
-					console.log('response', request, status, error) ;
-				}
-			}) ;
-		}) ;
-		
-		$("select[name=script_samples]").change(function(){
-			var fileName = $("select[name=script_samples]").val() ;
-			if (fileName < ' ') return ;
-			$.ajax({
-				type: "GET",
-				dataType : 'text', 
-				url: "/ics/scripts/sample/" + fileName,
-				data: {}, 
-				complete : function(){ 
-				}, 
-				success :  function(data) {
-					$('#create_script_form textarea[name=content]').val(data) ;
-				}, 
-				error:function(request,status,error){
-					console.log('response', request, status, error) ;
-				}
-			}) ;
-		});
 
 		function tableHeightSize() {
 			if ($('body').hasClass('menu-on-top')) {
@@ -305,9 +165,6 @@
 		});
 		$(".logging-load").click(function() {
 			loadURL("external/misc/logging.html", $('#inbox-content > .table-wrap')) ;
-		});
-		$(".script-load").click(function() {
-			loadURL("external/misc/script.html", $('#inbox-content > .table-wrap')) ;
 		});
 		$(".user-load").click(function() {
 			loadURL("external/misc/user.html", $('#inbox-content > .table-wrap')) ;

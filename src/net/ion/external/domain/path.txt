@@ -1,0 +1,75 @@
+/domain/{did}/
+			/scat/{catid} {includeSub}
+			/gcat/{catId} {includeSub}
+
+
+
+-- about domain
+/datas/scat/{catId}
+	props : {catid, parent, name, phydirnm, explain .... }
+	ref : {include() : /domain/{did}, afields() : /datas/afields/{afieldId}}
+				
+/datas/article/{catid}/{artid}
+	props : {catid, artid, partid, modserno, ...., thumbimg, img+hashcode }
+	ref : {include() : /domain/{did}
+
+/datas/template/{catid}/{tplid}
+	props : {catid, tplid, kindcd, typecd, name ....}
+	ref : (include() : /domain/{did}
+
+
+/datas/gcat/{gcatid}
+/datas/gallery/{gcatid}/{gid}
+
+
+-- 
+/datas/avlaue/{artid}/{afieldid}
+/datas/afield/{afieldid}
+	{typecd, name, explain}
+
+/datas/user/{userid}
+	{userid, name, password}
+
+
+/datas/logs/{objectid|
+	{action : 'addcategory_start' || 'addgallery_start'}  
+
+
+
+
+
+before
+
+
+/scat/{catid}
+	....
+	@tree to children
+
+/article/{artid}
+	{artid, subject, content, filenm, afields..}
+	@rels
+	
+
+
+/template/{tplid}
+	{}
+
+
+
+
+/rcat/{catid}
+	{fqn, catId, parent, name}
+	@tree to children
+
+
+
+/user/{userid}
+	{userid, name, encrypt(password)}
+
+
+
+/afield/{afieldid}
+	{}
+
+
+

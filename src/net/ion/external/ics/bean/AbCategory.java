@@ -27,7 +27,7 @@ public class AbCategory<T extends AbCategory> extends BeanX{
 	}
 
 	public T parent() throws IOException {
-		return (T) domain().scategory(asString("parent"));
+		return (T) domain().datas().scategory(asString("parent"));
 	}
 
 	public T joiner(String joiner) {
@@ -38,7 +38,7 @@ public class AbCategory<T extends AbCategory> extends BeanX{
 	public String pathById() throws IOException {
 		List<String> names = ListUtil.newList();
 		AbCategory<T> current = this ;
-		while(StringUtil.isNotBlank(current.parent().catId())){
+		while(StringUtil.isNotBlank(current.catId())){
 			names.add(0, current.catId()) ;
 			current = current.parent() ;
 		}
@@ -48,7 +48,7 @@ public class AbCategory<T extends AbCategory> extends BeanX{
 	public String pathByName() throws IOException {
 		List<String> names = ListUtil.newList();
 		AbCategory<T> current = this ;
-		while(StringUtil.isNotBlank(current.parent().asString("catid"))){
+		while(StringUtil.isNotBlank(current.catId())){
 			
 			names.add(0, current.asString(Def.Category.Name));
 			current = current.parent();

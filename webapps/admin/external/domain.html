@@ -9,7 +9,6 @@
                         <label class="label">${m.asString("domain.choose")}</label>
                         <label class="select">
                             <select class="input-sm choose-sub form-control" id="domains">
-                                <option value="test">Test Domain</option>
                             </select>
                         </label>
                     </section>
@@ -227,7 +226,7 @@
         <div class="modal-content">
             <div class="modal-header"><h5 id="myModalLabel4">${m.asString("domain.source.scat")}</h5></div>
             <div class="modal-body">
-                <form class="smart-form" id="create-domain-scat-form" method="post" action="domain/source" novalidate="novalidate">
+                <form class="smart-form" id="create-domain-scat-form" method="post" action="domain/" novalidate="novalidate">
                     <fieldset style="padding: 0px">
                         <section>
                             <label class="label">${m.asString("domain.scat.catid")}</label>
@@ -236,14 +235,14 @@
                             </label>
                         </section>
                         <section>
-                            <label class="checkbox"><input type="checkbox" name="below"/><i></i>${m.asString("domain.source.below")}</label>
+                            <label class="checkbox"><input type="checkbox" name="includeSub" value="T" /><i></i>${m.asString("domain.source.below")}</label>
                         </section>
                     </fieldset>
                 </form>
             </div>
             <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">${m.asString("buttons.modal.close")}</button>
-                <button class="btn btn-primary" name="create_source">${m.asString("domain.source.create.button")}</button>
+                <button class="btn btn-primary" name="create_scat">${m.asString("domain.source.create.button")}</button>
             </div>
         </div>
     </div>
@@ -316,13 +315,13 @@
         var lastDomainId = '' ;
 
         $.ajax({
-            url:'/ics/domain',
+            url:'/admin/domain/list',
             dataType:'json',
             success:function(data){
                 for(var idx in data){
-                    var col = data[idx] ;
-                    var option = $('<option value="'+col['iid']+'">'+col['name']+'</option>') ;
-                    option.appendTo($("#indexers")) ;
+                    var did = data[idx] ;
+                    var option = $('<option value="' + did + '">' + did + '</option>') ;
+                    option.appendTo($("#domains")) ;
                 }
 
                 loadURL("external/domain/overview.html", $('#inbox-content > .table-wrap'));
@@ -349,7 +348,7 @@
                             $.ajax({
                                 type: "DELETE",
                                 dataType: 'text',
-                                url: "/ics/domain/" + $(".choose-sub").val(),
+                                url: "/admin/domain/" + $(".choose-sub").val(),
                                 data: { },
                                 complete: function () {
                                     // $("#query_url").text(this.url) ;
@@ -380,7 +379,7 @@
 
         $('#create-domain-form').validate({
             rules : {
-                did : { required: true, pattern: "^[a-z0-9_]*]$", minlength:4, maxlength: 15}
+                did : { required: true, pattern: "^[a-z][a-z0-9_]*$", minlength:4, maxlength: 15}
             },
             messages: {
                 did : {
@@ -395,7 +394,7 @@
                 $.ajax({
                     type: 'POST',
                     dataType: 'text',
-                    url: '/ics/domain/' + newId,
+                    url: '/admin/domain/' + newId + '/create',
                     data: { },
                     complete: function() { },
                     success: function() {
@@ -420,6 +419,11 @@
             $(this).siblings().removeClass("active");
             $(this).addClass("active");
         });
+        
+        $(".overview-load").click(function () {
+            loadURL("external/domain/overview.html", $('#inbox-content > .table-wrap'));
+            lastMenuHTML = "overview.html";
+        });        
 
         $(".define-load").click(function () {
             loadURL("external/domain/define.html", $('#inbox-content > .table-wrap'));
