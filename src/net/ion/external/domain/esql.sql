@@ -48,7 +48,7 @@
 
 	
 	gallery
-	select '/datas/gallery/' || t0.galCatId || '/' || galId fqn, galId, t0.galCatId catId, filenm filename, filesize, width, height, typeCd, regUserId, to_char(regDate, 'yyyymmdd-hh24miss') regDate, subject, content, filemeta
+	select '/datas/gallery/' || t0.galCatId || '/' || galId fqn, galId, t0.galCatId catId, filenm filename, filesize, width, height, typeCd, regUserId, to_char(regDate, 'yyyymmdd-hh24miss') regDay, to_char(modDate, 'yyyymmdd-hh24miss') modDay, subject, content, filemeta
 	from (select galcatId from gallery_category_tblc connect by :includeSub = 'T' and galUpperCatId = prior galCatId start with galCatId = :catId) t0, gallery_tblc t1
 	where t0.galCatId = t1.galcatId and isRemoved= 'F'
 	

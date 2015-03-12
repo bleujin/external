@@ -34,10 +34,7 @@
                 <div id="myContent1" class="tab-content padding-10">
                     <div class="tab-pane fade in active" id="summary">
                         <dl class="dl-horizontal" id="overview_status">
-                            <dt>Site category</dt><dd>1</dd>
-                            <dt>Gallery category</dt><dd>1</dd>
-                            <dt>Articles</dt><dd>100</dd>
-                            <dt>Galleries</dt><dd>10</dd>
+                           
                         </dl>
                     </div>
                     <div class="tab-pane fade" id="recent_article">
@@ -115,8 +112,33 @@
             });
             $('.click2edit').destroy();
         });
+
+    
+
+        var domainId = $("#domains option:selected").val() ;
+        if (domainId == undefined) return ;
+
+        $.ajax({
+            url:'/admin/domain/' + domainId + "/overview",
+            dataType:'json',
+            success:function(data){
+            	$("#info").html(data['info']) ;
+    			
+    			var target = data['status'];
+    			jQuery.each(target, function(key, val) {
+    				  $("#overview_status").append('<dt>' + key +'</dt><dd>' + val + '</dd>');
+    			});
+            },
+            error:function(request,status,error){
+                console.log('response', request, status, error) ;
+            }
+        }) ;
+
     };
 
-    loadScript("/js/plugin/summernote/summernote.min.js", pagefunction) ;
+    
+
+
+    loadScript("js/plugin/summernote/summernote.min.js", pagefunction) ;
 
 </script>

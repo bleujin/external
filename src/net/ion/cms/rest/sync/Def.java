@@ -42,6 +42,8 @@ public class Def {
 		public final static String Subject = "subject";
 		public final static String Content = "content";
 		public final static String RegUserId = "reguserid";
+		public final static String RegDay = "regday" ;
+		public final static String ModDay = "modday" ;
 		
 		public static void Properties(WriteNode wnode, ResultSet rs) throws SQLException {
 			String[] nprops = new String[]{GalId, FileSize, Width, Height} ;

@@ -1,8 +1,10 @@
 package net.ion.external.ics.bean;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
+import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.crud.ChildQueryRequest;
 import net.ion.craken.node.crud.ChildQueryResponse;
 import net.ion.external.domain.Domain;
@@ -75,7 +77,10 @@ public class ArticleChildrenX {
 	}
 	
 	public XIterable<ArticleX> find() throws IOException {
-		return XIterable.create(domain, requestFind().toList(), param, ArticleX.class);
+		long start = System.currentTimeMillis() ;
+		List<ReadNode> list = requestFind().toList();
+		putParam("elapsedTime", System.currentTimeMillis() - start);
+		return XIterable.create(domain, list, param, ArticleX.class);
 	}
 
 	private ChildQueryResponse requestFind() throws IOException{

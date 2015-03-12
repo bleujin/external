@@ -1,0 +1,281 @@
+WARNING|wrapper||15-02-02 16:21:21|YAJSW: yajsw-stable-11.11
+WARNING|wrapper||15-02-02 16:21:21|OS   : Windows 7/6.1/x86
+WARNING|wrapper||15-02-02 16:21:21|JVM  : Oracle Corporation/1.7.0_45/D:\Java\jdk1.7.0_45\jre/32
+INFO|wrapper||15-02-02 16:21:21|using java: D:\Java\jre7/bin/java.exe
+INFO|wrapper||15-02-02 16:21:21|working dir C:\temp\niss_0.7\service\.
+INFO|wrapper||15-02-02 16:21:21|started process with pid 23412
+INFO|23412/0||15-02-02 16:21:22|missing main class name or jar file or groovy file. please check configuration
+INFO|23412/0||15-02-02 16:21:22|[INFO] StandardFileSystemManager - Using "C:\Users\bleujin\AppData\Local\Temp\vfs_cache" as temporary files store.
+INFO|23412/0||15-02-02 16:21:22|no java main method found -> aborting
+INFO|wrapper||15-02-02 16:21:22|process not in state RUNNING -> Delaying stop
+INFO|wrapper||15-02-02 16:21:22|Shutting down Wrapper
+WARNING|wrapper|yajsw|15-02-02 16:29:54|YAJSW: yajsw-stable-11.11
+WARNING|wrapper|yajsw|15-02-02 16:29:54|OS   : Windows 7/6.1/x86
+WARNING|wrapper|yajsw|15-02-02 16:29:54|JVM  : Oracle Corporation/1.7.0_45/D:\Java\jdk1.7.0_45\jre/32
+INFO|wrapper|yajsw|15-02-02 16:29:54|ahessian jmx service bound to port 15002
+INFO|wrapper|yajsw|15-02-02 16:29:54|spawned system tray icon process with pid 126808
+INFO|wrapper|yajsw|15-02-02 16:29:54|using java: D:\Java\jre7/bin/java.exe
+INFO|wrapper|yajsw|15-02-02 16:29:54|working dir C:\temp\niss_0.7\service\..
+INFO|wrapper|yajsw|15-02-02 16:29:54|started process with pid 33088
+WARNING|wrapper|yajsw|15-02-02 16:29:55|[id: 0x732b20ad, /127.0.0.1:4398 => /127.0.0.1:15002] connected
+INFO|33088/0|yajsw|15-02-02 16:29:55|[INFO] StandardFileSystemManager - Using "C:\Users\bleujin\AppData\Local\Temp\vfs_cache" as temporary files store.
+INFO|33088/0|yajsw|15-02-02 16:29:55|java.lang.ClassNotFoundException: 
+INFO|33088/0|yajsw|15-02-02 16:29:55|	at java.net.URLClassLoader$1.run(Unknown Source)
+INFO|33088/0|yajsw|15-02-02 16:29:55|	at java.net.URLClassLoader$1.run(Unknown Source)
+INFO|33088/0|yajsw|15-02-02 16:29:55|error finding main method in class:  : 
+INFO|33088/0|yajsw|15-02-02 16:29:55|	at java.security.AccessController.doPrivileged(Native Method)
+INFO|33088/0|yajsw|15-02-02 16:29:55|	at java.net.URLClassLoader.findClass(Unknown Source)
+INFO|33088/0|yajsw|15-02-02 16:29:55|	at java.lang.ClassLoader.loadClass(Unknown Source)
+INFO|33088/0|yajsw|15-02-02 16:29:55|no java main method found -> aborting
+INFO|33088/0|yajsw|15-02-02 16:29:55|	at sun.misc.Launcher$AppClassLoader.loadClass(Unknown Source)
+INFO|33088/0|yajsw|15-02-02 16:29:55|	at java.lang.ClassLoader.loadClass(Unknown Source)
+INFO|33088/0|yajsw|15-02-02 16:29:55|	at org.rzo.yajsw.app.WrapperManagerImpl.init(WrapperManagerImpl.java:299)
+INFO|33088/0|yajsw|15-02-02 16:29:55|	at org.rzo.yajsw.app.WrapperManagerProxy.getWrapperManager(WrapperManagerProxy.java:46)
+INFO|33088/0|yajsw|15-02-02 16:29:55|	at org.rzo.yajsw.app.AbstractWrapperJVMMain$1.run(AbstractWrapperJVMMain.java:44)
+INFO|33088/0|yajsw|15-02-02 16:29:55|	at java.security.AccessController.doPrivileged(Native Method)
+INFO|33088/0|yajsw|15-02-02 16:29:55|	at org.rzo.yajsw.app.AbstractWrapperJVMMain.preExecute(AbstractWrapperJVMMain.java:38)
+INFO|33088/0|yajsw|15-02-02 16:29:55|	at org.rzo.yajsw.app.WrapperJVMMain.main(WrapperJVMMain.java:34)
+INFO|wrapper|yajsw|15-02-02 16:29:55|restart process due to default exit code rule
+INFO|wrapper|yajsw|15-02-02 16:29:55|restart internal RUNNING
+INFO|wrapper|yajsw|15-02-02 16:29:55|stopping process with pid/timeout 33088 45000
+INFO|wrapper|yajsw|15-02-02 16:29:56|process exit code: 999
+INFO|wrapper|yajsw|15-02-02 16:30:01|using java: D:\Java\jre7/bin/java.exe
+INFO|wrapper|yajsw|15-02-02 16:30:01|working dir C:\temp\niss_0.7\service\..
+INFO|wrapper|yajsw|15-02-02 16:30:01|started process with pid 126856
+INFO|126856/1|yajsw|15-02-02 16:30:02|[INFO] StandardFileSystemManager - Using "C:\Users\bleujin\AppData\Local\Temp\vfs_cache" as temporary files store.
+INFO|126856/1|yajsw|15-02-02 16:30:02|error finding main method in class:  : 
+INFO|126856/1|yajsw|15-02-02 16:30:02|java.lang.ClassNotFoundException: 
+INFO|126856/1|yajsw|15-02-02 16:30:02|no java main method found -> aborting
+INFO|126856/1|yajsw|15-02-02 16:30:02|	at java.net.URLClassLoader$1.run(Unknown Source)
+INFO|126856/1|yajsw|15-02-02 16:30:02|	at java.net.URLClassLoader$1.run(Unknown Source)
+INFO|126856/1|yajsw|15-02-02 16:30:02|	at java.security.AccessController.doPrivileged(Native Method)
+INFO|126856/1|yajsw|15-02-02 16:30:02|	at java.net.URLClassLoader.findClass(Unknown Source)
+INFO|126856/1|yajsw|15-02-02 16:30:02|	at java.lang.ClassLoader.loadClass(Unknown Source)
+INFO|126856/1|yajsw|15-02-02 16:30:02|	at sun.misc.Launcher$AppClassLoader.loadClass(Unknown Source)
+INFO|126856/1|yajsw|15-02-02 16:30:02|	at java.lang.ClassLoader.loadClass(Unknown Source)
+INFO|126856/1|yajsw|15-02-02 16:30:02|	at org.rzo.yajsw.app.WrapperManagerImpl.init(WrapperManagerImpl.java:299)
+INFO|126856/1|yajsw|15-02-02 16:30:02|	at org.rzo.yajsw.app.WrapperManagerProxy.getWrapperManager(WrapperManagerProxy.java:46)
+INFO|126856/1|yajsw|15-02-02 16:30:02|	at org.rzo.yajsw.app.AbstractWrapperJVMMain$1.run(AbstractWrapperJVMMain.java:44)
+INFO|126856/1|yajsw|15-02-02 16:30:02|	at java.security.AccessController.doPrivileged(Native Method)
+INFO|126856/1|yajsw|15-02-02 16:30:02|	at org.rzo.yajsw.app.AbstractWrapperJVMMain.preExecute(AbstractWrapperJVMMain.java:38)
+INFO|126856/1|yajsw|15-02-02 16:30:02|	at org.rzo.yajsw.app.WrapperJVMMain.main(WrapperJVMMain.java:34)
+INFO|wrapper|yajsw|15-02-02 16:30:02|restart process due to default exit code rule
+INFO|wrapper|yajsw|15-02-02 16:30:02|restart internal RUNNING
+INFO|wrapper|yajsw|15-02-02 16:30:02|stopping process with pid/timeout 126856 45000
+INFO|wrapper|yajsw|15-02-02 16:30:03|process exit code: 999
+WARNING|wrapper|yajsw|15-02-02 16:30:07|[id: 0x732b20ad, /127.0.0.1:4398 => /127.0.0.1:15002] exception java.io.IOException: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다
+WARNING|wrapper|yajsw|15-02-02 16:31:03|YAJSW: yajsw-stable-11.11
+WARNING|wrapper|yajsw|15-02-02 16:31:03|OS   : Windows 7/6.1/x86
+WARNING|wrapper|yajsw|15-02-02 16:31:03|JVM  : Oracle Corporation/1.7.0_45/D:\Java\jdk1.7.0_45\jre/32
+INFO|wrapper|yajsw|15-02-02 16:31:03|ahessian jmx service bound to port 15002
+INFO|wrapper|yajsw|15-02-02 16:31:04|spawned system tray icon process with pid 126088
+INFO|wrapper|yajsw|15-02-02 16:31:04|using java: D:\Java\jre7/bin/java.exe
+INFO|wrapper|yajsw|15-02-02 16:31:04|working dir C:\temp\niss_0.7\service\..
+INFO|wrapper|yajsw|15-02-02 16:31:04|started process with pid 124988
+WARNING|wrapper|yajsw|15-02-02 16:31:04|[id: 0x6ba8955a, /127.0.0.1:4444 => /127.0.0.1:15002] connected
+INFO|124988/0|yajsw|15-02-02 16:31:05|[INFO] StandardFileSystemManager - Using "C:\Users\bleujin\AppData\Local\Temp\vfs_cache" as temporary files store.
+INFO|124988/0|yajsw|15-02-02 16:31:05|error finding main method in class:  : 
+INFO|124988/0|yajsw|15-02-02 16:31:05|no java main method found -> aborting
+INFO|124988/0|yajsw|15-02-02 16:31:05|java.lang.ClassNotFoundException: 
+INFO|124988/0|yajsw|15-02-02 16:31:05|	at java.net.URLClassLoader$1.run(Unknown Source)
+INFO|124988/0|yajsw|15-02-02 16:31:05|	at java.net.URLClassLoader$1.run(Unknown Source)
+INFO|124988/0|yajsw|15-02-02 16:31:05|	at java.security.AccessController.doPrivileged(Native Method)
+INFO|124988/0|yajsw|15-02-02 16:31:05|	at java.net.URLClassLoader.findClass(Unknown Source)
+INFO|124988/0|yajsw|15-02-02 16:31:05|	at java.lang.ClassLoader.loadClass(Unknown Source)
+INFO|124988/0|yajsw|15-02-02 16:31:05|	at sun.misc.Launcher$AppClassLoader.loadClass(Unknown Source)
+INFO|124988/0|yajsw|15-02-02 16:31:05|	at java.lang.ClassLoader.loadClass(Unknown Source)
+INFO|124988/0|yajsw|15-02-02 16:31:05|	at org.rzo.yajsw.app.WrapperManagerImpl.init(WrapperManagerImpl.java:299)
+INFO|124988/0|yajsw|15-02-02 16:31:05|	at org.rzo.yajsw.app.WrapperManagerProxy.getWrapperManager(WrapperManagerProxy.java:46)
+INFO|124988/0|yajsw|15-02-02 16:31:05|	at org.rzo.yajsw.app.AbstractWrapperJVMMain$1.run(AbstractWrapperJVMMain.java:44)
+INFO|124988/0|yajsw|15-02-02 16:31:05|	at java.security.AccessController.doPrivileged(Native Method)
+INFO|124988/0|yajsw|15-02-02 16:31:05|	at org.rzo.yajsw.app.AbstractWrapperJVMMain.preExecute(AbstractWrapperJVMMain.java:38)
+INFO|124988/0|yajsw|15-02-02 16:31:05|	at org.rzo.yajsw.app.WrapperJVMMain.main(WrapperJVMMain.java:34)
+INFO|wrapper|yajsw|15-02-02 16:31:05|restart process due to default exit code rule
+INFO|wrapper|yajsw|15-02-02 16:31:05|restart internal RUNNING
+INFO|wrapper|yajsw|15-02-02 16:31:05|stopping process with pid/timeout 124988 45000
+INFO|wrapper|yajsw|15-02-02 16:31:06|process exit code: 999
+WARNING|wrapper|yajsw|15-02-02 16:31:08|[id: 0x6ba8955a, /127.0.0.1:4444 => /127.0.0.1:15002] exception java.io.IOException: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다
+WARNING|wrapper|yajsw|15-02-02 16:31:49|YAJSW: yajsw-stable-11.11
+WARNING|wrapper|yajsw|15-02-02 16:31:49|OS   : Windows 7/6.1/x86
+WARNING|wrapper|yajsw|15-02-02 16:31:49|JVM  : Oracle Corporation/1.7.0_45/D:\Java\jdk1.7.0_45\jre/32
+INFO|wrapper|yajsw|15-02-02 16:31:49|ahessian jmx service bound to port 15002
+INFO|wrapper|yajsw|15-02-02 16:31:49|spawned system tray icon process with pid 125288
+INFO|wrapper|yajsw|15-02-02 16:31:49|using java: D:\Java\jre7/bin/java.exe
+INFO|wrapper|yajsw|15-02-02 16:31:49|working dir C:\temp\niss_0.7\service\..
+INFO|wrapper|yajsw|15-02-02 16:31:49|started process with pid 126684
+WARNING|wrapper|yajsw|15-02-02 16:31:49|[id: 0xce400f1e, /127.0.0.1:10072 => /127.0.0.1:15002] connected
+INFO|126684/0|yajsw|15-02-02 16:31:50|[INFO] StandardFileSystemManager - Using "C:\Users\bleujin\AppData\Local\Temp\vfs_cache" as temporary files store.
+INFO|126684/0|yajsw|15-02-02 16:31:50|java.io.FileNotFoundException: ..\niss_0.7.jar (지정된 파일을 찾을 수 없습니다)
+INFO|126684/0|yajsw|15-02-02 16:31:50|!! WARNING !! Windows JDK7 should set -Djava.net.preferIPv4Stack=true (see java bug 7179799 )
+INFO|126684/0|yajsw|15-02-02 16:31:50|no java main method found -> aborting
+INFO|126684/0|yajsw|15-02-02 16:31:50|	at java.util.zip.ZipFile.open(Native Method)
+INFO|126684/0|yajsw|15-02-02 16:31:50|	at java.util.zip.ZipFile.<init>(Unknown Source)
+INFO|126684/0|yajsw|15-02-02 16:31:50|	at java.util.zip.ZipFile.<init>(Unknown Source)
+INFO|126684/0|yajsw|15-02-02 16:31:50|	at java.util.jar.JarFile.<init>(Unknown Source)
+INFO|126684/0|yajsw|15-02-02 16:31:50|	at java.util.jar.JarFile.<init>(Unknown Source)
+INFO|126684/0|yajsw|15-02-02 16:31:50|	at org.rzo.yajsw.app.WrapperManagerImpl.loadJar(WrapperManagerImpl.java:741)
+INFO|126684/0|yajsw|15-02-02 16:31:50|	at org.rzo.yajsw.app.WrapperManagerImpl.init(WrapperManagerImpl.java:294)
+INFO|126684/0|yajsw|15-02-02 16:31:50|	at org.rzo.yajsw.app.WrapperManagerProxy.getWrapperManager(WrapperManagerProxy.java:46)
+INFO|126684/0|yajsw|15-02-02 16:31:50|	at org.rzo.yajsw.app.AbstractWrapperJVMMain$1.run(AbstractWrapperJVMMain.java:44)
+INFO|126684/0|yajsw|15-02-02 16:31:50|	at java.security.AccessController.doPrivileged(Native Method)
+INFO|126684/0|yajsw|15-02-02 16:31:50|	at org.rzo.yajsw.app.AbstractWrapperJVMMain.preExecute(AbstractWrapperJVMMain.java:38)
+INFO|126684/0|yajsw|15-02-02 16:31:50|	at org.rzo.yajsw.app.WrapperJVMMain.main(WrapperJVMMain.java:34)
+INFO|wrapper|yajsw|15-02-02 16:31:50|restart process due to default exit code rule
+INFO|wrapper|yajsw|15-02-02 16:31:50|restart internal RUNNING
+INFO|wrapper|yajsw|15-02-02 16:31:50|stopping process with pid/timeout 126684 45000
+INFO|wrapper|yajsw|15-02-02 16:31:51|process exit code: 999
+INFO|wrapper|yajsw|15-02-02 16:31:56|using java: D:\Java\jre7/bin/java.exe
+INFO|wrapper|yajsw|15-02-02 16:31:56|working dir C:\temp\niss_0.7\service\..
+INFO|wrapper|yajsw|15-02-02 16:31:56|started process with pid 124932
+INFO|124932/1|yajsw|15-02-02 16:31:57|[INFO] StandardFileSystemManager - Using "C:\Users\bleujin\AppData\Local\Temp\vfs_cache" as temporary files store.
+INFO|124932/1|yajsw|15-02-02 16:31:57|java.io.FileNotFoundException: ..\niss_0.7.jar (지정된 파일을 찾을 수 없습니다)
+INFO|124932/1|yajsw|15-02-02 16:31:57|!! WARNING !! Windows JDK7 should set -Djava.net.preferIPv4Stack=true (see java bug 7179799 )
+INFO|124932/1|yajsw|15-02-02 16:31:57|	at java.util.zip.ZipFile.open(Native Method)
+INFO|124932/1|yajsw|15-02-02 16:31:57|no java main method found -> aborting
+INFO|124932/1|yajsw|15-02-02 16:31:57|	at java.util.zip.ZipFile.<init>(Unknown Source)
+INFO|124932/1|yajsw|15-02-02 16:31:57|	at java.util.zip.ZipFile.<init>(Unknown Source)
+INFO|124932/1|yajsw|15-02-02 16:31:57|	at java.util.jar.JarFile.<init>(Unknown Source)
+INFO|124932/1|yajsw|15-02-02 16:31:57|	at java.util.jar.JarFile.<init>(Unknown Source)
+INFO|124932/1|yajsw|15-02-02 16:31:57|	at org.rzo.yajsw.app.WrapperManagerImpl.loadJar(WrapperManagerImpl.java:741)
+INFO|124932/1|yajsw|15-02-02 16:31:57|	at org.rzo.yajsw.app.WrapperManagerImpl.init(WrapperManagerImpl.java:294)
+INFO|124932/1|yajsw|15-02-02 16:31:57|	at org.rzo.yajsw.app.WrapperManagerProxy.getWrapperManager(WrapperManagerProxy.java:46)
+INFO|124932/1|yajsw|15-02-02 16:31:57|	at org.rzo.yajsw.app.AbstractWrapperJVMMain$1.run(AbstractWrapperJVMMain.java:44)
+INFO|124932/1|yajsw|15-02-02 16:31:57|	at java.security.AccessController.doPrivileged(Native Method)
+INFO|124932/1|yajsw|15-02-02 16:31:57|	at org.rzo.yajsw.app.AbstractWrapperJVMMain.preExecute(AbstractWrapperJVMMain.java:38)
+INFO|124932/1|yajsw|15-02-02 16:31:57|	at org.rzo.yajsw.app.WrapperJVMMain.main(WrapperJVMMain.java:34)
+INFO|wrapper|yajsw|15-02-02 16:31:57|restart process due to default exit code rule
+INFO|wrapper|yajsw|15-02-02 16:31:57|restart internal RUNNING
+INFO|wrapper|yajsw|15-02-02 16:31:57|stopping process with pid/timeout 124932 45000
+INFO|wrapper|yajsw|15-02-02 16:31:58|process exit code: 999
+INFO|wrapper|yajsw|15-02-02 16:32:03|using java: D:\Java\jre7/bin/java.exe
+INFO|wrapper|yajsw|15-02-02 16:32:03|working dir C:\temp\niss_0.7\service\..
+INFO|wrapper|yajsw|15-02-02 16:32:03|started process with pid 122656
+INFO|wrapper|yajsw|15-02-02 16:32:03|Shutting down Wrapper
+INFO|wrapper|yajsw|15-02-02 16:32:03|stopping process with pid/timeout 122656 45000
+INFO|122656/2|yajsw|15-02-02 16:32:03|[INFO] StandardFileSystemManager - Using "C:\Users\bleujin\AppData\Local\Temp\vfs_cache" as temporary files store.
+INFO|122656/2|yajsw|15-02-02 16:32:03|!! WARNING !! Windows JDK7 should set -Djava.net.preferIPv4Stack=true (see java bug 7179799 )
+INFO|122656/2|yajsw|15-02-02 16:32:03|java.io.FileNotFoundException: ..\niss_0.7.jar (지정된 파일을 찾을 수 없습니다)
+INFO|122656/2|yajsw|15-02-02 16:32:03|no java main method found -> aborting
+INFO|122656/2|yajsw|15-02-02 16:32:03|	at java.util.zip.ZipFile.open(Native Method)
+INFO|122656/2|yajsw|15-02-02 16:32:03|	at java.util.zip.ZipFile.<init>(Unknown Source)
+INFO|122656/2|yajsw|15-02-02 16:32:03|	at java.util.zip.ZipFile.<init>(Unknown Source)
+INFO|122656/2|yajsw|15-02-02 16:32:03|	at java.util.jar.JarFile.<init>(Unknown Source)
+INFO|122656/2|yajsw|15-02-02 16:32:03|	at java.util.jar.JarFile.<init>(Unknown Source)
+INFO|122656/2|yajsw|15-02-02 16:32:03|	at org.rzo.yajsw.app.WrapperManagerImpl.loadJar(WrapperManagerImpl.java:741)
+INFO|122656/2|yajsw|15-02-02 16:32:03|	at org.rzo.yajsw.app.WrapperManagerImpl.init(WrapperManagerImpl.java:294)
+INFO|122656/2|yajsw|15-02-02 16:32:03|	at org.rzo.yajsw.app.WrapperManagerProxy.getWrapperManager(WrapperManagerProxy.java:46)
+INFO|122656/2|yajsw|15-02-02 16:32:03|	at org.rzo.yajsw.app.AbstractWrapperJVMMain$1.run(AbstractWrapperJVMMain.java:44)
+INFO|122656/2|yajsw|15-02-02 16:32:03|	at java.security.AccessController.doPrivileged(Native Method)
+INFO|122656/2|yajsw|15-02-02 16:32:03|	at org.rzo.yajsw.app.AbstractWrapperJVMMain.preExecute(AbstractWrapperJVMMain.java:38)
+INFO|122656/2|yajsw|15-02-02 16:32:03|	at org.rzo.yajsw.app.WrapperJVMMain.main(WrapperJVMMain.java:34)
+WARNING|wrapper|yajsw|15-02-02 16:32:03|[id: 0xce400f1e, /127.0.0.1:10072 => /127.0.0.1:15002] exception java.io.IOException: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다
+INFO|wrapper|yajsw|15-02-02 16:32:04|process exit code: 999
+WARNING|wrapper|yajsw|15-02-02 16:34:10|YAJSW: yajsw-stable-11.11
+WARNING|wrapper|yajsw|15-02-02 16:34:10|OS   : Windows 7/6.1/x86
+WARNING|wrapper|yajsw|15-02-02 16:34:10|JVM  : Oracle Corporation/1.7.0_45/D:\Java\jdk1.7.0_45\jre/32
+INFO|wrapper|yajsw|15-02-02 16:34:10|ahessian jmx service bound to port 15002
+INFO|wrapper|yajsw|15-02-02 16:34:10|spawned system tray icon process with pid 126148
+INFO|wrapper|yajsw|15-02-02 16:34:10|using java: D:\Java\jre7/bin/java.exe
+INFO|wrapper|yajsw|15-02-02 16:34:10|working dir C:\temp\niss_0.7\service\..
+INFO|wrapper|yajsw|15-02-02 16:34:10|started process with pid 126624
+WARNING|wrapper|yajsw|15-02-02 16:34:11|[id: 0xdf5ce27b, /127.0.0.1:10144 => /127.0.0.1:15002] connected
+INFO|126624/0|yajsw|15-02-02 16:34:11|[INFO] StandardFileSystemManager - Using "C:\Users\bleujin\AppData\Local\Temp\vfs_cache" as temporary files store.
+INFO|126624/0|yajsw|15-02-02 16:34:11|!! WARNING !! Windows JDK7 should set -Djava.net.preferIPv4Stack=true (see java bug 7179799 )
+INFO|126624/0|yajsw|15-02-02 16:34:13|[main] INFO  net.ion.craken.node.Repository  - Workspace[admin, LOCAL] defined
+INFO|126624/0|yajsw|15-02-02 16:34:13|[main] INFO  net.ion.craken.node.Repository  - niss started
+INFO|126624/0|yajsw|15-02-02 16:34:13|[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+INFO|126624/0|yajsw|15-02-02 16:34:13|[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+INFO|126624/0|yajsw|15-02-02 16:34:14|[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+INFO|126624/0|yajsw|15-02-02 16:34:14|[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+INFO|126624/0|yajsw|15-02-02 16:34:14|[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+INFO|126624/0|yajsw|15-02-02 16:34:14|[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+INFO|126624/0|yajsw|15-02-02 16:34:14|[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+INFO|126624/0|yajsw|15-02-02 16:34:14|[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+INFO|126624/0|yajsw|15-02-02 16:34:14|[main] INFO  net.ion.niss.webapp.REntry  - newindexer Index ClusterMode : LOCAL
+INFO|126624/0|yajsw|15-02-02 16:34:14|[main] INFO  net.ion.niss.webapp.REntry  - IdString:newindexer indexer loaded
+INFO|126624/0|yajsw|15-02-02 16:34:14|[main] INFO  net.ion.niss.webapp.REntry  - IdString:newsearcher searcher loaded
+INFO|126624/0|yajsw|15-02-02 16:34:14|[scripter] INFO  net.ion.framework.schedule.Scheduler  - Scheduler started. :{name=scripter,jobs={}}
+INFO|126624/0|yajsw|15-02-02 16:34:15|[main] INFO  net.ion.niss.webapp.loaders.JScriptEngine  - Has not Extension libPath : ./resource/loader/lib
+INFO|126624/0|yajsw|15-02-02 16:34:15|#Log started at Mon Feb 02 16:34:15 KST 2015 (1422862455119)
+INFO|126624/0|yajsw|15-02-02 16:34:15|#Date	Timestamp	MillsSinceRequestStart	RequestID	RemoteHost	Action	Path	Method	Payload	
+INFO|126624/0|yajsw|15-02-02 16:34:15|[RADON-STARTUP-THREAD] WARN  net.ion.nradon.netty.NettyWebServer  - PORT 9000
+INFO|126624/0|yajsw|15-02-02 16:34:32|Mon Feb 02 16:34:32 KST 2015	1422862472510	243	1	/61.250.201.157:10152	HTTP-END 200	/	GET	127	
+INFO|126624/0|yajsw|15-02-02 16:34:33|Mon Feb 02 16:34:33 KST 2015	1422862473905	1098	4	/61.250.201.157:10159	HTTP-END 200	/icss/indexers.html	GET	38	
+INFO|126624/0|yajsw|15-02-02 16:34:34|Mon Feb 02 16:34:34 KST 2015	1422862474188	1381	2	/61.250.201.157:10157	HTTP-END 200	/admin/indexers	GET	47	
+INFO|126624/0|yajsw|15-02-02 16:34:34|Mon Feb 02 16:34:34 KST 2015	1422862474283	1476	4	/61.250.201.157:10159	HTTP-END 200	/icss/indexers/overview.html	GET	35	
+INFO|126624/0|yajsw|15-02-02 16:34:34|Mon Feb 02 16:34:34 KST 2015	1422862474576	1769	4	/61.250.201.157:10159	HTTP-END 200	/admin/indexers/newindexer/overview	GET	47	
+INFO|126624/0|yajsw|15-02-02 16:34:36|Mon Feb 02 16:34:36 KST 2015	1422862476287	3480	4	/61.250.201.157:10159	HTTP-END 200	/icss/misc.html	GET	40	
+INFO|126624/0|yajsw|15-02-02 16:34:36|Mon Feb 02 16:34:36 KST 2015	1422862476388	3581	4	/61.250.201.157:10159	HTTP-END 200	/icss/misc/properties.html	GET	31	
+INFO|126624/0|yajsw|15-02-02 16:34:36|Mon Feb 02 16:34:36 KST 2015	1422862476462	3655	4	/61.250.201.157:10159	HTTP-END 200	/admin/misc/properties	GET	6	
+INFO|126624/0|yajsw|15-02-02 16:34:39|Mon Feb 02 16:34:39 KST 2015	1422862479025	6218	4	/61.250.201.157:10159	HTTP-END 200	/icss/misc/analyzer.html	GET	6	
+INFO|126624/0|yajsw|15-02-02 16:34:39|Mon Feb 02 16:34:39 KST 2015	1422862479314	6507	4	/61.250.201.157:10159	HTTP-END 200	/admin/analysis	GET	2	
+INFO|126624/0|yajsw|15-02-02 16:34:40|Mon Feb 02 16:34:40 KST 2015	1422862480718	7911	4	/61.250.201.157:10159	HTTP-END 200	/icss/searchers.html	GET	35	
+INFO|126624/0|yajsw|15-02-02 16:34:40|Mon Feb 02 16:34:40 KST 2015	1422862480860	8053	4	/61.250.201.157:10159	HTTP-END 200	/admin/searchers	GET	2	
+INFO|126624/0|yajsw|15-02-02 16:34:41|Mon Feb 02 16:34:41 KST 2015	1422862481392	8585	4	/61.250.201.157:10159	HTTP-END 200	/icss/searchers/overview.html	GET	35	
+INFO|126624/0|yajsw|15-02-02 16:34:41|Mon Feb 02 16:34:41 KST 2015	1422862481848	22	7	/61.250.201.157:10164	HTTP-END 200	/admin/searchers/newsearcher/popularquery	GET	21	
+INFO|126624/0|yajsw|15-02-02 16:34:41|Mon Feb 02 16:34:41 KST 2015	1422862481848	9041	4	/61.250.201.157:10159	HTTP-END 200	/admin/searchers/newsearcher/overview	GET	22	
+INFO|126624/0|yajsw|15-02-02 16:34:43|Mon Feb 02 16:34:43 KST 2015	1422862483351	10544	4	/61.250.201.157:10159	HTTP-END 200	/icss/indexers.html	GET	7	
+INFO|126624/0|yajsw|15-02-02 16:34:43|Mon Feb 02 16:34:43 KST 2015	1422862483461	10654	4	/61.250.201.157:10159	HTTP-END 200	/admin/indexers	GET	1	
+INFO|126624/0|yajsw|15-02-02 16:34:43|Mon Feb 02 16:34:43 KST 2015	1422862483518	10711	4	/61.250.201.157:10159	HTTP-END 200	/icss/indexers/overview.html	GET	2	
+INFO|126624/0|yajsw|15-02-02 16:34:43|Mon Feb 02 16:34:43 KST 2015	1422862483648	10841	4	/61.250.201.157:10159	HTTP-END 200	/admin/indexers/newindexer/overview	GET	3	
+INFO|wrapper|yajsw|15-02-02 16:36:40|Shutting down Wrapper
+INFO|wrapper|yajsw|15-02-02 16:36:40|stopping process with pid/timeout 126624 45000
+INFO|126624/0|yajsw|15-02-02 16:36:40|wrapper manager received stop command
+INFO|126624/0|yajsw|15-02-02 16:36:40|[Thread-5] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+WARNING|wrapper|yajsw|15-02-02 16:36:41|[id: 0xdf5ce27b, /127.0.0.1:10144 => /127.0.0.1:15002] exception java.io.IOException: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다
+INFO|126624/0|yajsw|15-02-02 16:36:41|[Thread-5] INFO  net.ion.craken.node.Repository  - niss shutdowned
+INFO|126624/0|yajsw|15-02-02 16:36:41|[Thread-2] INFO  net.ion.craken.node.Repository  - niss shutdowned
+INFO|wrapper|yajsw|15-02-02 16:36:42|shutdown wrapper due to exit code rule
+INFO|wrapper|yajsw|15-02-02 16:36:43|process exit code: 0
+WARNING|wrapper|yajsw|15-02-02 16:36:52|YAJSW: yajsw-stable-11.11
+WARNING|wrapper|yajsw|15-02-02 16:36:52|OS   : Windows 7/6.1/x86
+WARNING|wrapper|yajsw|15-02-02 16:36:52|JVM  : Oracle Corporation/1.7.0_45/D:\Java\jdk1.7.0_45\jre/32
+INFO|wrapper|yajsw|15-02-02 16:36:52|ahessian jmx service bound to port 15002
+INFO|wrapper|yajsw|15-02-02 16:36:52|spawned system tray icon process with pid 126324
+INFO|wrapper|yajsw|15-02-02 16:36:53|using java: D:\Java\jre7/bin/java.exe
+INFO|wrapper|yajsw|15-02-02 16:36:53|working dir C:\temp\niss_0.7\service\..
+INFO|wrapper|yajsw|15-02-02 16:36:53|started process with pid 127520
+WARNING|wrapper|yajsw|15-02-02 16:36:53|[id: 0x49ceec52, /127.0.0.1:10213 => /127.0.0.1:15002] connected
+INFO|127520/0|yajsw|15-02-02 16:36:54|[INFO] StandardFileSystemManager - Using "C:\Users\bleujin\AppData\Local\Temp\vfs_cache" as temporary files store.
+INFO|127520/0|yajsw|15-02-02 16:36:54|!! WARNING !! Windows JDK7 should set -Djava.net.preferIPv4Stack=true (see java bug 7179799 )
+INFO|127520/0|yajsw|15-02-02 16:36:55|[main] INFO  net.ion.craken.node.Repository  - Workspace[admin, LOCAL] defined
+INFO|127520/0|yajsw|15-02-02 16:36:55|[main] INFO  net.ion.craken.node.Repository  - niss started
+INFO|127520/0|yajsw|15-02-02 16:36:55|[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+INFO|127520/0|yajsw|15-02-02 16:36:55|[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+INFO|127520/0|yajsw|15-02-02 16:36:56|[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+INFO|127520/0|yajsw|15-02-02 16:36:56|[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+INFO|127520/0|yajsw|15-02-02 16:36:56|[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+INFO|127520/0|yajsw|15-02-02 16:36:56|[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+INFO|127520/0|yajsw|15-02-02 16:36:56|[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+INFO|127520/0|yajsw|15-02-02 16:36:56|[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+INFO|127520/0|yajsw|15-02-02 16:36:56|[main] INFO  net.ion.niss.webapp.REntry  - newindexer Index ClusterMode : LOCAL
+INFO|127520/0|yajsw|15-02-02 16:36:56|[main] INFO  net.ion.niss.webapp.REntry  - IdString:newindexer indexer loaded
+INFO|127520/0|yajsw|15-02-02 16:36:56|[main] INFO  net.ion.niss.webapp.REntry  - IdString:newsearcher searcher loaded
+INFO|127520/0|yajsw|15-02-02 16:36:56|[scripter] INFO  net.ion.framework.schedule.Scheduler  - Scheduler started. :{name=scripter,jobs={}}
+INFO|127520/0|yajsw|15-02-02 16:36:57|[main] INFO  net.ion.niss.webapp.loaders.JScriptEngine  - Has not Extension libPath : ./resource/loader/lib
+INFO|127520/0|yajsw|15-02-02 16:36:57|#Log started at Mon Feb 02 16:36:57 KST 2015 (1422862617088)
+INFO|127520/0|yajsw|15-02-02 16:36:57|#Date	Timestamp	MillsSinceRequestStart	RequestID	RemoteHost	Action	Path	Method	Payload	
+INFO|127520/0|yajsw|15-02-02 16:36:57|[RADON-STARTUP-THREAD] WARN  net.ion.nradon.netty.NettyWebServer  - PORT 9000
+INFO|127520/0|yajsw|15-02-02 16:37:06|Mon Feb 02 16:37:06 KST 2015	1422862626606	237	1	/61.250.201.157:10220	HTTP-END 200	/icss/searchers.html	GET	39	
+INFO|127520/0|yajsw|15-02-02 16:37:06|Mon Feb 02 16:37:06 KST 2015	1422862626736	367	1	/61.250.201.157:10220	HTTP-END 200	/admin/searchers	GET	17	
+INFO|127520/0|yajsw|15-02-02 16:37:06|Mon Feb 02 16:37:06 KST 2015	1422862626789	420	1	/61.250.201.157:10220	HTTP-END 200	/icss/searchers/overview.html	GET	7	
+INFO|127520/0|yajsw|15-02-02 16:37:07|Mon Feb 02 16:37:06 KST 2015	1422862626931	9	2	/61.250.201.157:10223	HTTP-END 200	/admin/searchers/newsearcher/popularquery	GET	8	
+INFO|127520/0|yajsw|15-02-02 16:37:07|Mon Feb 02 16:37:06 KST 2015	1422862626934	565	1	/61.250.201.157:10220	HTTP-END 200	/admin/searchers/newsearcher/overview	GET	12	
+INFO|127520/0|yajsw|15-02-02 16:37:09|Mon Feb 02 16:37:09 KST 2015	1422862629606	3237	1	/61.250.201.157:10220	HTTP-END 200	/icss/scripters.html	GET	29	
+INFO|127520/0|yajsw|15-02-02 16:37:09|Mon Feb 02 16:37:09 KST 2015	1422862629712	3343	1	/61.250.201.157:10220	HTTP-END 200	/admin/scripters	GET	4	
+INFO|127520/0|yajsw|15-02-02 16:37:09|Mon Feb 02 16:37:09 KST 2015	1422862629749	3380	1	/61.250.201.157:10220	HTTP-END 200	/icss/scripters/overview.html	GET	33	
+INFO|127520/0|yajsw|15-02-02 16:37:10|Mon Feb 02 16:37:10 KST 2015	1422862630164	3795	1	/61.250.201.157:10220	HTTP-END 200	/admin/scripters/crawl/overview	GET	42	
+INFO|127520/0|yajsw|15-02-02 16:37:10|Mon Feb 02 16:37:10 KST 2015	1422862630875	4506	1	/61.250.201.157:10220	HTTP-END 200	/icss/misc.html	GET	10	
+INFO|127520/0|yajsw|15-02-02 16:37:11|Mon Feb 02 16:37:11 KST 2015	1422862631020	4651	1	/61.250.201.157:10220	HTTP-END 200	/icss/misc/properties.html	GET	3	
+INFO|127520/0|yajsw|15-02-02 16:37:11|Mon Feb 02 16:37:11 KST 2015	1422862631115	4746	1	/61.250.201.157:10220	HTTP-END 200	/admin/misc/properties	GET	9	
+INFO|127520/0|yajsw|15-02-02 16:37:12|Mon Feb 02 16:37:12 KST 2015	1422862632404	6035	1	/61.250.201.157:10220	HTTP-END 200	/icss/misc/threaddump.html	GET	20	
+INFO|127520/0|yajsw|15-02-02 16:37:12|Mon Feb 02 16:37:12 KST 2015	1422862632513	6144	1	/61.250.201.157:10220	HTTP-END 200	/admin/misc/thread	GET	28	
+INFO|wrapper|yajsw|15-02-02 16:37:15|Shutting down Wrapper
+INFO|wrapper|yajsw|15-02-02 16:37:15|stopping process with pid/timeout 127520 45000
+INFO|127520/0|yajsw|15-02-02 16:37:15|wrapper manager received stop command
+INFO|127520/0|yajsw|15-02-02 16:37:15|[Thread-2] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+WARNING|wrapper|yajsw|15-02-02 16:37:15|[id: 0x49ceec52, /127.0.0.1:10213 => /127.0.0.1:15002] exception java.io.IOException: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다
+INFO|127520/0|yajsw|15-02-02 16:37:16|[Thread-5] INFO  net.ion.craken.node.Repository  - niss shutdowned
+INFO|127520/0|yajsw|15-02-02 16:37:16|[Thread-2] INFO  net.ion.craken.node.Repository  - niss shutdowned
+INFO|wrapper|yajsw|15-02-02 16:37:16|shutdown wrapper due to exit code rule
+INFO|wrapper|yajsw|15-02-02 16:37:17|process exit code: 0

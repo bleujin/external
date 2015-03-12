@@ -25,7 +25,7 @@ public class QueryTemplateEngine {
 
 	public static QueryTemplateEngine create(String name, ReadSession rsession) {
 		CrakenResourceRepository repo = new CrakenResourceRepository(rsession);
-		repo.putStringResource("/path/hello.vm", "Hi, ${username}... this is some template!");
+//		repo.putStringResource("/path/hello.vm", "Hi, ${username}... this is some template!");
 		
 		return new QueryTemplateEngine(name, repo);
 	} 
@@ -48,11 +48,11 @@ public class QueryTemplateEngine {
 	}
 	
 	public void merge(String resourceName, Map<String, Object> context, Writer writer) throws IOException{
-		Template template = ve.getTemplate(resourceName) ;
-		if (template == null) {
+		if (!hasTemplate(resourceName)) {
 			writer.write("has not template");
-			return;
+			return ;
 		}
+		Template template = ve.getTemplate(resourceName) ;
 		
 		VelocityContext vc = new VelocityContext(root) ;
 		for (Entry<String, Object> entry : context.entrySet()) {

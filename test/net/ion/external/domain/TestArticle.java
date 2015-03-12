@@ -51,7 +51,7 @@ public class TestArticle extends TestBaseDomain {
 	
 	public void testOutput() throws Exception {
 		Writer sw = new StringWriter();
-		OutputHandler ohandler = OutputHandler.createJson(sw);
+		OutputHandler ohandler = OutputHandler.createJson(sw, true);
 		domain.datas().article("dynamic", 1207152).afields(true).out(ohandler) ; 
 		Debug.line(sw);
 	}

@@ -56,13 +56,26 @@ public class TestDomain extends TestBaseDomain{
 
 		assertEquals(1, domain.datas().scategorys().find().count()) ;
 		
-		
-		domain.removeSiteCategory("dynamic", false) ;
+		domain.removeSiteCategory("dynamic") ;
 		assertEquals(0, domain.datas().scategorys().find().count()) ;
 		assertEquals(0, domain.datas().articles().find().count()) ;
 		assertEquals(0, domain.datas().templates().find().count()) ;
 	}
 	
+	
+	public void testWhenRemoveDomain() throws Exception {
+		domain.addSiteCategory("dynamic", true) ;
+		ArticleChildrenX articles = domain.datas().articles() ;
+		assertEquals(11, articles.find().count());	
+
+		dsub.removeDomain("zdm");
+		assertEquals(false, dsub.existDomain("zdm")) ;
+		
+		dsub.createDomain("zdm");
+		domain = dsub.findDomain("zdm") ;
+		assertEquals(0, domain.datas().scategorys().find().count()) ;
+		
+	}
 	
 
 }

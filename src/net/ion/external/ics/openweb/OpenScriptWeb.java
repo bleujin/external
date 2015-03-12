@@ -13,8 +13,8 @@ import javax.ws.rs.core.Response;
 import net.ion.craken.ICSCraken;
 import net.ion.craken.node.ReadSession;
 import net.ion.external.ics.EventSourceEntry;
-import net.ion.external.ics.web.ScriptWeb;
 import net.ion.external.ics.web.Webapp;
+import net.ion.external.ics.web.script.ScriptWeb;
 import net.ion.framework.db.manager.script.JScriptEngine;
 import net.ion.radon.core.ContextParam;
 

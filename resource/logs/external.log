@@ -3968,6 +3968,36 @@ org.jboss.resteasy.spi.InternalServerErrorException: Unknown @PathParam: did for
 [main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
 [main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
 [Thread-1] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
 [main] INFO  net.ion.craken.node.Repository  - Workspace[ics, LOCAL] defined
 [main] INFO  net.ion.craken.node.Repository  - emanon started
 [main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
@@ -4012,16 +4042,6 @@ org.jboss.resteasy.spi.InternalServerErrorException: Unknown @PathParam: did for
 [main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
 [main] INFO  net.ion.framework.db.manager.script.JScriptEngine  - Has not Extension libPath : ./resource/loader/lib
 [RADON-STARTUP-THREAD] WARN  net.ion.nradon.netty.NettyWebServer  - PORT 9001
-[monitor-message-thread-0] INFO  net.ion.external.ics.common.HTMLTemplateEngine  - ./resource/message/messages.utf8.xml changed
-[monitor-message-thread-0] INFO  net.ion.external.ics.common.HTMLTemplateEngine  - ./resource/message/messages.utf8.xml changed
-[monitor-message-thread-0] INFO  net.ion.external.ics.common.HTMLTemplateEngine  - ./resource/message/messages.utf8.xml changed
-[monitor-message-thread-0] INFO  net.ion.external.ics.common.HTMLTemplateEngine  - ./resource/message/messages.utf8.xml changed
-[monitor-message-thread-0] INFO  net.ion.external.ics.common.HTMLTemplateEngine  - ./resource/message/messages.utf8.xml changed
-[monitor-message-thread-0] INFO  net.ion.external.ics.common.HTMLTemplateEngine  - ./resource/message/messages.utf8.xml changed
-[monitor-message-thread-0] INFO  net.ion.external.ics.common.HTMLTemplateEngine  - ./resource/message/messages.utf8.xml changed
-[monitor-message-thread-0] INFO  net.ion.external.ics.common.HTMLTemplateEngine  - ./resource/message/messages.utf8.xml changed
-[monitor-message-thread-0] INFO  net.ion.external.ics.common.HTMLTemplateEngine  - ./resource/message/messages.utf8.xml changed
-[monitor-message-thread-0] INFO  net.ion.external.ics.common.HTMLTemplateEngine  - ./resource/message/messages.utf8.xml changed
 [main] INFO  net.ion.craken.node.Repository  - Workspace[ics, LOCAL] defined
 [main] INFO  net.ion.craken.node.Repository  - emanon started
 [main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
@@ -4044,7 +4064,7 @@ org.jboss.resteasy.spi.InternalServerErrorException: Unknown @PathParam: did for
 [main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
 [main] INFO  net.ion.framework.db.manager.script.JScriptEngine  - Has not Extension libPath : ./resource/loader/lib
 [RADON-STARTUP-THREAD] WARN  net.ion.nradon.netty.NettyWebServer  - PORT 9001
-[main] INFO  net.ion.craken.node.Repository  - Workspace[ics, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
 [main] INFO  net.ion.craken.node.Repository  - emanon started
 [main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
 [main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
@@ -4053,5 +4073,664 @@ org.jboss.resteasy.spi.InternalServerErrorException: Unknown @PathParam: did for
 [main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
 [main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
 [main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
-[main] INFO  net.ion.framework.db.manager.script.JScriptEngine  - Has not Extension libPath : ./resource/loader/lib
-[RADON-STARTUP-THREAD] WARN  net.ion.nradon.netty.NettyWebServer  - PORT 9001
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] WARN  org.jboss.resteasy.core.SynchronousDispatcher  - Failed executing GET /article/zdm/list
+org.jboss.resteasy.spi.WriterException: java.lang.IllegalStateException: JSON must have only one top-level value.
+	at org.jboss.resteasy.core.ServerResponse.writeTo(ServerResponse.java:219)
+	at org.jboss.resteasy.core.SynchronousDispatcher.writeJaxrsResponse(SynchronousDispatcher.java:493)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:433)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:114)
+	at net.ion.radon.core.let.PathHandler.handleHttpRequest(PathHandler.java:95)
+	at net.ion.radon.client.FakeRequest.handle(FakeRequest.java:66)
+	at net.ion.radon.client.FakeRequest.get(FakeRequest.java:25)
+	at net.ion.external.ics.web.domain.TestArticleWeb.testList(TestArticleWeb.java:57)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:131)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.lang.IllegalStateException: JSON must have only one top-level value.
+	at net.ion.framework.parse.gson.stream.JsonWriter.beforeValue(JsonWriter.java:572)
+	at net.ion.framework.parse.gson.stream.JsonWriter.open(JsonWriter.java:264)
+	at net.ion.framework.parse.gson.stream.JsonWriter.beginObject(JsonWriter.java:248)
+	at net.ion.external.ics.bean.BeanX$2.jsonSelf(BeanX.java:150)
+	at net.ion.external.ics.bean.XIterable.jsonSelf(XIterable.java:90)
+	at net.ion.external.ics.web.domain.ArticleWeb$4.write(ArticleWeb.java:168)
+	at org.jboss.resteasy.plugins.providers.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:29)
+	at org.jboss.resteasy.plugins.providers.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:1)
+	at org.jboss.resteasy.core.interception.MessageBodyWriterContextImpl.proceed(MessageBodyWriterContextImpl.java:98)
+	at org.jboss.resteasy.plugins.interceptors.encoding.GZIPEncodingInterceptor.write(GZIPEncodingInterceptor.java:87)
+	at org.jboss.resteasy.core.interception.MessageBodyWriterContextImpl.proceed(MessageBodyWriterContextImpl.java:101)
+	at org.jboss.resteasy.core.ServerResponse.writeTo(ServerResponse.java:212)
+	... 23 more
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned

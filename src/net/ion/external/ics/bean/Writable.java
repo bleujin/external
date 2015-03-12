@@ -12,4 +12,5 @@ public interface Writable {
 	public void jsonSelf(JsonWriter jwriter, String... fields) throws IOException ;
 	public void xmlSelf(XML xmlNodes, String... fields) throws IOException ;
 	public void htmlSelf(Writer writer, String... fields) throws IOException ;
+	public void csvSelf(Writer writer, String... fields) throws IOException ;
 }

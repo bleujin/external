@@ -8,6 +8,7 @@ import net.ion.external.ics.bean.ArticleChildrenX;
 import net.ion.external.ics.bean.ArticleX;
 import net.ion.external.ics.bean.CategoryChildrenX;
 import net.ion.external.ics.bean.GalleryCategoryX;
+import net.ion.external.ics.bean.GalleryChildrenX;
 import net.ion.external.ics.bean.SiteCategoryX;
 import net.ion.external.ics.bean.TemplateChildrenX;
 import net.ion.external.ics.bean.UserX;
@@ -46,6 +47,11 @@ public class DomainData {
 		return ArticleChildrenX.create(domain, domainNode().refsToChildren("include").fqnFilter("/datas/article").filter(new TermFilter("catid", catId)));
 	}
 
+	public GalleryChildrenX gallerys() throws IOException {
+		return GalleryChildrenX.create(domain, domainNode().refsToChildren("include").fqnFilter("/datas/gallery"));
+	}
+
+	
 	public TemplateChildrenX templates() throws IOException {
 		return TemplateChildrenX.create(domain, domainNode().refsToChildren("include").fqnFilter("/datas/template")) ;
 	}
@@ -74,5 +80,6 @@ public class DomainData {
 	public UserX findUser(String userId) {
 		return UserX.create(domain,  ghostBy("/datas/user", userId));
 	}
+
 
 }

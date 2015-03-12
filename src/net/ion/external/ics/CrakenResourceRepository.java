@@ -1,5 +1,6 @@
 package net.ion.external.ics;
 
+import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
@@ -18,7 +19,9 @@ public class CrakenResourceRepository implements StringResourceRepository {
 
 	public StringResource getStringResource(String path) {
 		final String[] vals = StringUtil.split(path, ".") ;
-		return new StringResource(session.ghostBy(vals[0]).property(vals[1]).asString(), encoding) ;
+		ReadNode found = session.ghostBy(vals[0]);
+		if (found.isGhost()) return null ;
+		return new StringResource(found.property(vals[1]).asString(), encoding) ;
 	}
 
 	public void removeStringResource(String path) {
