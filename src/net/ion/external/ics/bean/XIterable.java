@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.convert.Functions;
@@ -106,6 +107,16 @@ public class XIterable<T extends BeanX> implements Iterable<T>, Writable {
 		}
 	}
 
+	@Override
+	public void csvSelf(Writer writer, String... fields) throws IOException {
+		Iterator<T> iter = iterator();
+		while (iter.hasNext()) {
+			iter.next().toWritable().csvSelf(writer, fields);
+		}
+	}
+
+
+	
 	public OutputHandler out(OutputHandler ohandler, String... fields) throws IOException {
 		JsonObject request = JsonObject.fromObject(param);
 		JsonObject response = new JsonObject();
@@ -113,7 +124,11 @@ public class XIterable<T extends BeanX> implements Iterable<T>, Writable {
 		return ohandler.out(this, request, response, fields);
 	}
 
-	private String getParam(String name) {
+	public Set<String> paramKeys(){
+		return param.keySet() ;
+	}
+	
+	public String param(String name) {
 		return param.get(name);
 	}
 

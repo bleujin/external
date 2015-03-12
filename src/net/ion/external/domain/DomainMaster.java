@@ -68,10 +68,8 @@ public class DomainMaster {
 				final String action = "add site category";
 				final String did = resolveMap.get("did") ;
 				final String catId = resolveMap.get("catid") ;
-				startAction(session, action);
 				whenAddCategory(catId, cevent.property("includesub").asBoolean(), did);
-				endAction(session, action);
-				
+
 				return null;
 			}
 
@@ -80,8 +78,6 @@ public class DomainMaster {
 				final String action = "remove site category";
 				final String did = resolveMap.get("did") ;
 				final String catId = resolveMap.get("catid") ;
-				startAction(session, action);
-				
 				session.tran(new TransactionJob<Void>() {
 					@Override
 					public Void handle(WriteSession wsession) throws Exception {
@@ -94,8 +90,6 @@ public class DomainMaster {
 						return null;
 					}
 				}) ;
-				
-				endAction(session, action);
 				return null;
 			}
 		});
@@ -114,10 +108,7 @@ public class DomainMaster {
 				final String did = resolveMap.get("did") ;
 				final String catId = resolveMap.get("catid") ;
 				
-				startAction(session, action);
 				whenAddGallery(catId, cevent.property("includesub").asBoolean(), did);
-				
-				endAction(session, action);
 				return null;
 			}
 
@@ -127,7 +118,6 @@ public class DomainMaster {
 				final String did = resolveMap.get("did") ;
 				final String catId = resolveMap.get("catid") ;
 				
-				startAction(session, action);
 				session.tran(new TransactionJob<Void>() {
 					@Override
 					public Void handle(WriteSession wsession) throws Exception {
@@ -141,7 +131,6 @@ public class DomainMaster {
 					}
 				}) ;
 				
-				endAction(session, action);
 				return null;
 			}
 		});		
@@ -179,15 +168,12 @@ public class DomainMaster {
 			@Override
 			public TransactionJob<Void> modified(Map<String, String> resolveMap, CDDModifiedEvent cevent) {
 				final String action = resolveMap.get("action");
-				startAction(session, action);
 				
 				if ("resetuser".equals(action)){
 					whenResetUser() ;
 				} else if ("removecategory".equals(action)) {
 					whenRemoveCategory(cevent.property("catid").asString(), cevent.property("includesub").asBoolean(), cevent.property("did").asString());
 				}
-				
-				endAction(session, action);
 				
 				return null;
 			}
@@ -209,23 +195,23 @@ public class DomainMaster {
 
 	
 	
-	private void startAction(final ReadSession session, final String action) {
-		session.tran(new TransactionJob<Void>() {
-			public Void handle(WriteSession wsession) throws Exception {
-				wsession.pathBy("/datas/log", new ObjectId()).property("action", action).property("type", "start").property("time", System.currentTimeMillis()) ;
-				return null;
-			}
-		}) ;
-	}
-
-	private void endAction(final ReadSession session, final String action) {
-		session.tran(new TransactionJob<Void>() {
-			public Void handle(WriteSession wsession) throws Exception {
-				wsession.pathBy("/datas/log", new ObjectId()).property("action", action).property("type", "end").property("time", System.currentTimeMillis()) ;
-				return null;
-			}
-		}) ;
-	}
+//	private void startAction(final ReadSession session, final String action) {
+//		session.tran(new TransactionJob<Void>() {
+//			public Void handle(WriteSession wsession) throws Exception {
+//				wsession.pathBy("/datas/log", new ObjectId()).property("action", action).property("type", "start").property("time", System.currentTimeMillis()) ;
+//				return null;
+//			}
+//		}) ;
+//	}
+//
+//	private void endAction(final ReadSession session, final String action) {
+//		session.tran(new TransactionJob<Void>() {
+//			public Void handle(WriteSession wsession) throws Exception {
+//				wsession.pathBy("/datas/log", new ObjectId()).property("action", action).property("type", "end").property("time", System.currentTimeMillis()) ;
+//				return null;
+//			}
+//		}) ;
+//	}
 
 
 	
@@ -377,6 +363,7 @@ public class DomainMaster {
 									logger.warn(ignore.getMessage());
 								}
 							}
+							wnode.refTo("include", "/domain/" + did + "/gcat/" + catId) ;
 						}
 						return null;
 					}

@@ -1,24 +1,11 @@
 package net.ion.external.domain;
 
-import java.io.IOException;
-
-import oracle.net.aso.s;
 import net.ion.craken.ICSCraken;
 import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
 import net.ion.craken.tree.Fqn;
-import net.ion.external.ics.bean.AfieldMetaX;
-import net.ion.external.ics.bean.ArticleChildrenX;
-import net.ion.external.ics.bean.ArticleX;
-import net.ion.external.ics.bean.CategoryChildrenX;
-import net.ion.external.ics.bean.GalleryCategoryX;
-import net.ion.external.ics.bean.SiteCategoryX;
-import net.ion.external.ics.bean.TemplateChildrenX;
-import net.ion.external.ics.bean.UserX;
-import net.ion.external.ics.bean.XIterable;
-import net.ion.nsearcher.search.filter.TermFilter;
 
 public class Domain {
 
@@ -28,6 +15,21 @@ public class Domain {
 	private String did;
 	private DomainInfo dinfo;
 	private DomainData ddata;
+	public enum Target {
+		SiteCategory{
+			public String typeName(){
+				return "scat" ;
+			}
+		}, GalleryCategory {
+			public String typeName(){
+				return "gcat" ;
+			}
+		} ;
+		public abstract String typeName() ;
+		public static Target create(String typeName){
+			return "scat".equals(typeName) ? SiteCategory : GalleryCategory ;
+		}
+	}
 	
 	private Domain(ICSCraken ic, ReadNode dnode) {
 		this.dnode = dnode;
@@ -43,21 +45,35 @@ public class Domain {
 	}
 
 	public Domain addSiteCategory(final String scatId, final boolean includeSub) {
+		return addCategory(Target.SiteCategory, scatId, includeSub) ;
+	}
+	public Domain addGalleryCategory(final String gcatId, final boolean includeSub) {
+		return addCategory(Target.GalleryCategory, gcatId, includeSub) ;
+	}
+	public Domain addCategory(final Target target, final String catId, final boolean includeSub) {
 		session.tran(new TransactionJob<Void>() {
 			@Override
 			public Void handle(WriteSession wsession) throws Exception {
-				wsession.pathBy("/domain/", did, "scat", scatId).property("includesub", includeSub) ;
+				wsession.pathBy("/domain/", did, target.typeName(), catId).property("includesub", includeSub) ;
 				return null;
 			}
 		}) ;
 		return this ;
 	}
 	
-	public Domain removeSiteCategory(final String scatId, final boolean includeSub) {
+	
+	
+	public Domain removeSiteCategory(final String scatId) {
+		return removeCategory(Target.SiteCategory, scatId) ;
+	}
+	public Domain removeGalleryCategory(final String gcatId) {
+		return removeCategory(Target.GalleryCategory, gcatId) ;
+	}
+	public Domain removeCategory(final Target target, final String catId) {
 		session.tran(new TransactionJob<Void>() {
 			@Override
 			public Void handle(WriteSession wsession) throws Exception {
-				wsession.pathBy("/domain/", did, "scat", scatId).removeSelf() ;
+				wsession.pathBy("/domain/", did, target.typeName(), catId).removeSelf() ;
 				return null;
 			}
 		}) ;
@@ -65,16 +81,8 @@ public class Domain {
 	}
 
 	
-	public Domain addGalleryCategory(final String gcatId, final boolean includeSub) {
-		session.tran(new TransactionJob<Void>() {
-			@Override
-			public Void handle(WriteSession wsession) throws Exception {
-				wsession.pathBy("/domain", did, "gcat", gcatId).property("includesub", includeSub) ;
-				return null;
-			}
-		}) ;
-		return this ;
-	}
+	
+	
 	
 	public Domain resetUser() {
 		session.tran(new TransactionJob<Void>() {

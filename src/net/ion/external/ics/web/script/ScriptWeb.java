@@ -1,4 +1,4 @@
-package net.ion.external.ics.web;
+package net.ion.external.ics.web.script;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -36,6 +36,7 @@ import net.ion.craken.node.WriteSession;
 import net.ion.external.ics.EventSourceEntry;
 import net.ion.external.ics.common.ExtMediaType;
 import net.ion.external.ics.util.WebUtil;
+import net.ion.external.ics.web.Webapp;
 import net.ion.framework.db.manager.script.IdString;
 import net.ion.framework.db.manager.script.InstantJavaScript;
 import net.ion.framework.db.manager.script.JScriptEngine;

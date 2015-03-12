@@ -66,7 +66,7 @@ public class TestAfieldValue extends TestBaseDomain{
 		
 		
 		Writer sw = new StringWriter() ;
-		OutputHandler ohandler = OutputHandler.createJson(sw);
+		OutputHandler ohandler = OutputHandler.createJson(sw, true);
 		article.out(ohandler) ;
 		
 		Debug.line(sw);

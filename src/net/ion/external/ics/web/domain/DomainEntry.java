@@ -1,4 +1,4 @@
-package net.ion.external.ics.web;
+package net.ion.external.ics.web.domain;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class DomainEntry implements Closeable{
 		this.dsub = dsub ;
 	}
 
-	public static DomainEntry test(DomainSub dsub) throws CorruptIndexException, IOException {
+	public static DomainEntry test(DomainSub dsub) {
 		DomainEntry result = new DomainEntry(dsub);
 		return result;
 	}

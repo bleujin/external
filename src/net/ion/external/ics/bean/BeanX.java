@@ -3,6 +3,7 @@ package net.ion.external.ics.bean;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
+import java.util.List;
 import java.util.Set;
 
 import net.ion.craken.node.ReadNode;
@@ -17,8 +18,10 @@ import net.ion.framework.parse.gson.JsonObject;
 import net.ion.framework.parse.gson.stream.JsonWriter;
 import net.ion.framework.util.ArrayUtil;
 import net.ion.framework.util.Debug;
+import net.ion.framework.util.ListUtil;
 import net.ion.framework.util.SetUtil;
 import net.ion.framework.util.StringUtil;
+import net.ion.radon.util.csv.CsvWriter;
 
 import org.apache.ecs.xml.XML;
 
@@ -225,6 +228,28 @@ public abstract class BeanX {
 					}
 				});
 			}
+		
+			public void csvSelf(final Writer writer, final String... fields) throws IOException {
+				final CsvWriter cwriter = new CsvWriter(writer) ;
+				
+				readNode.transformer(new Function<ReadNode, Void>() {
+					@Override
+					public Void apply(ReadNode node) {
+						try {
+							List<String> fdata = ListUtil.newList() ;
+							for (PropertyId pid : targetPropKeys(node, fields)) {
+								PropertyValue pvalue = node.propertyId(pid);
+								fdata.add(pvalue.asString());
+							}
+							cwriter.writeLine(fdata.toArray(new String[0]));
+						} catch (IOException ignore) {
+						}
+						return null;
+					}
+				});
+			}
 		};
+
+		
 	}
 }

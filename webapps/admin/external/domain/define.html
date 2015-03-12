@@ -38,7 +38,6 @@
                                 <thead>
                                 <tr>
                                     <th>${m.asString("domain.defined.scat.catid")}</th>
-                                    <th>${m.asString("domain.defined.scat.path")}</th>
                                     <th>${m.asString("domain.defined.scat.below")}</th>
                                     <th>${m.asString("domain.defined.scat.link")}</th>
                                 </tr>
@@ -144,28 +143,27 @@
         var gcatsEl = $('#gcats');
 
         $('#scats tbody').on('click', 'tr', function() {
-            if($(this).hasClass('selected2')) {
-                $(this).removeClass('selected2');
-            } else {
-                $('#scats tr.selected2').removeClass('selected2');
-                $(this).addClass('selected2');
-            }
+            $(this).toggleClass('selected2');
             $('#scats tr.selected2').length > 0 ? _btn_scat_remove.removeAttr('disabled') : _btn_scat_remove.attr('disabled', 'disabled');
+
         });
 
         $('#gcats tbody').on('click', 'tr', function() {
-            if($(this).hasClass('selected2')) {
-                $(this).removeClass('selected2');
-            } else {
-                $('#gcats tr.selected2').removeClass('selected2');
-                $(this).addClass('selected2');
-            }
+            // $('#gcats tr.selected2').length > 0 ? _btn_gcat_remove.removeAttr('disabled') : _btn_gcat_remove.attr('disabled', 'disabled');
+
+            $(this).toggleClass('selected2');
             $('#gcats tr.selected2').length > 0 ? _btn_gcat_remove.removeAttr('disabled') : _btn_gcat_remove.attr('disabled', 'disabled');
         });
 
         _btn_scat_create.click(function(_catId) {
             $('#create-domain-scat-modal').modal({catId: _catId});
         });
+        
+        _btn_gcat_create.click(function(_catId) {
+            $('#create-domain-gcat-modal').modal({catId: _catId});
+        });
+        
+        
         
         $("#create-domain-scat-modal button[name=create_scat]").click(function () {
             $("#create-domain-scat-form").submit();
@@ -185,12 +183,11 @@
                 }
             },
             submitHandler: function(form) {
-                var newId = $('#scatid').val() ;
                 $.ajax({
                     type: 'POST',
                     dataType: 'text',
-                    url: '/admin/domain/' + domainId + '/scat/' + newId + '/create',
-                    data: { },
+                    url: '/admin/domain/' + domainId + '/define',
+                    data: {'includeSub':$('#create-domain-scat-form input[name=includeSub]').is(":checked"), 'catid':$('#scatid').val(), 'target':'scat'},
                     complete: function() { },
                     success: function() {
                     	loadInfo(domainId) ;
@@ -203,9 +200,6 @@
             }
         });
 
-        _btn_gcat_create.click(function(_catId) {
-            $('#create-domain-gcat-modal').modal({catId: _catId});
-        });
     }
 
     var showListPages = function(_catId) {
@@ -216,7 +210,7 @@
         $.ajax({
             type: 'GET',
             dataType: 'json',
-            url: '/admin/domain/' + domainId + '/info',
+            url: '/admin/domain/' + domainId + '/define',
             data: { },
             complete: function() { },
             success: function(data) {
@@ -225,7 +219,7 @@
             		console.log(scats);
 					for(var idx in scats) {
 						var scat = scats[idx] ;
-						var rowEl = '<tr><td>' + scat['catid'] + '</td><td>' + scat['catpath'] + '</td><td>' + scat['includesub'] + '</td><td><button onclick="javascript:showListPages(\'' + scat['catid'] + '\')">list pages</button></td></tr>' ;
+						var rowEl = '<tr><td>' + scat['catid'] + '</td><td>' + scat['includesub'] + '</td><td><button onclick="javascript:showListPages(\'' + scat['catid'] + '\')">list pages</button></td></tr>' ;
 						
 						$(rowEl).appendTo($('#scat_body'))
 					}            		

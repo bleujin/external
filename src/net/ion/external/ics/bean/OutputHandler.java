@@ -21,17 +21,24 @@ public abstract class OutputHandler {
 	}
 
 	
-	public static OutputHandler createJson(Writer writer) {
-		return new JsonOutputHandler(writer);
+	public static OutputHandler createJson(Writer writer, boolean indent) {
+		return new JsonOutputHandler(writer, indent);
 	}
-	public static OutputHandler createXml(Writer writer) {
-		return new XmlOutputHandler(writer);
+	public static OutputHandler createXml(Writer writer, boolean indent) {
+		return new XmlOutputHandler(writer, indent);
 	}
 
 	public static OutputHandler createHtml(Writer writer) {
 		return new HtmlOutputHandler(writer);
 	}
 
+
+	public static OutputHandler createCsv(Writer writer) {
+		return new CsvOutputHandler(writer);
+	}
+
+
+	
 	public abstract <T extends BeanX> OutputHandler out(Writable we, JsonObject request, JsonObject response, String... fields) throws IOException ;
 	
 	public void debugPrint() {
@@ -48,6 +55,20 @@ public abstract class OutputHandler {
 
 }
 
+
+class CsvOutputHandler extends OutputHandler {
+	
+	protected CsvOutputHandler(Writer inner) {
+		super(inner) ;
+	}
+
+	@Override
+	public <T extends BeanX> OutputHandler out(Writable we, JsonObject request, JsonObject response, String... fields) throws IOException {
+		Writer writer = inner() ;
+		we.csvSelf(writer, fields);
+		return this;
+	}
+}
 
 class HtmlOutputHandler extends OutputHandler {
 
@@ -80,13 +101,16 @@ class HtmlOutputHandler extends OutputHandler {
 
 class JsonOutputHandler extends OutputHandler {
 
-	protected JsonOutputHandler(Writer inner) {
+	private boolean indent;
+	protected JsonOutputHandler(Writer inner, boolean indent) {
 		super(inner) ;
+		this.indent = indent ;
 	}
 
 	@Override
 	public <T extends BeanX> OutputHandler out(Writable we, JsonObject request, JsonObject response, String... fields) throws IOException {
 		JsonWriter jwriter = new JsonWriter(inner()) ;
+		if (indent) jwriter.setIndent("\t");
 		
 		jwriter
 		.beginObject().name("result") 
@@ -112,8 +136,11 @@ class JsonOutputHandler extends OutputHandler {
 
 class XmlOutputHandler extends OutputHandler {
 
-	protected XmlOutputHandler(Writer inner) {
+	private boolean indent;
+
+	protected XmlOutputHandler(Writer inner, boolean indent) {
 		super(inner);
+		this.indent = indent ;
 	}
 
 	@Override
@@ -122,7 +149,7 @@ class XmlOutputHandler extends OutputHandler {
 		// <result> <request><property name="pid">value</property></request> <nodes><node><property type="String" name="catid"><![CDATA[bleujin]]></property>...</node>...</nodes>
 		inner().write("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n\n");
 		XML root = new XML("result");
-		root.setPrettyPrint(true);
+		if (indent) root.setPrettyPrint(true);
 		root.addElement(toXML("request", request));
 		root.addElement(toXML("response", response));
 

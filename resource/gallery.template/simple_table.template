@@ -1,9 +1,10 @@
 
 <ul>
-	<li>elapsedTime : $response.elapsedTime()
-	<li>size : $response.size()
-	<li>totalCount : $response.totalCount()
-	<li>params : $params
+#foreach($pkey in $gallerys.paramKeys().iterator())
+	<li>$pkey : $gallerys.param($pkey)
+#end
+	<li>count : $gallerys.count()
+	<li>request params : $params
 </ul>
 
 <table>
@@ -12,10 +13,10 @@
 	<th>Title</th>
 </tr>
 
-#foreach($doc in $response.getDocument())
+#foreach($gallery in $gallerys.iterator())
 <tr>
-	<td>$doc.getField("id").stringValue()</td>
-	<td>$doc.getField("title").stringValue()</td>
+	<td>$gallery.asInt("galid")</td>
+	<td>$gallery.asString("subject")</td>
 </tr>
 #end
 </table>

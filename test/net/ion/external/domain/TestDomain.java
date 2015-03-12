@@ -56,7 +56,7 @@ public class TestDomain extends TestBaseDomain{
 
 		assertEquals(1, domain.datas().scategorys().find().count()) ;
 		
-		domain.removeSiteCategory("dynamic", false) ;
+		domain.removeSiteCategory("dynamic") ;
 		assertEquals(0, domain.datas().scategorys().find().count()) ;
 		assertEquals(0, domain.datas().articles().find().count()) ;
 		assertEquals(0, domain.datas().templates().find().count()) ;
