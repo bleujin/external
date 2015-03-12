@@ -190,7 +190,7 @@ public class ArticleWeb implements Webapp {
 	
 	
 	@GET
-	@Path("/{did}/thubmnail/{artid}.jpg")
+	@Path("/{did}/thubmnail/{artid}.{type}")
 	public UncertainOutput viewResourceAsImage(){
 		return new UncertainOutput() {
 			@Override
@@ -199,7 +199,7 @@ public class ArticleWeb implements Webapp {
 			
 			@Override
 			public MediaType getMediaType() {
-				return null;
+				return ExtMediaType.IMAGE_PNG_TYPE;
 			}
 		} ;
 	}

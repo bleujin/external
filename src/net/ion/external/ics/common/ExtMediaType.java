@@ -15,5 +15,7 @@ public class ExtMediaType extends MediaType {
     public static final String IMAGE_TIFF = "image/tiff" ;
     public static final String IMAGE_JPEG = "image/jpeg" ;
     public static final String IMAGE_GIF = "image/gif" ;
+    
+    public static MediaType IMAGE_PNG_TYPE = new MediaType("image", "png") ;
 
 }
