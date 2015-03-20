@@ -32,7 +32,7 @@ import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteNode;
 import net.ion.craken.node.WriteSession;
-import net.ion.external.ICSSampleCraken;
+import net.ion.external.ICSSubCraken;
 import net.ion.external.ics.EventSourceEntry;
 import net.ion.external.ics.common.ExtMediaType;
 import net.ion.external.ics.util.WebUtil;
@@ -63,10 +63,10 @@ public class ScriptWeb implements Webapp {
 
 	private ReadSession rsession;
 	private JScriptEngine jengine;
-	private ICSSampleCraken rentry;
+	private ICSSubCraken rentry;
 	private EventSourceEntry esentry;
 
-	public ScriptWeb(@ContextParam(ICSSampleCraken.EntryName) ICSSampleCraken icraken, @ContextParam("jsentry") JScriptEngine jengine, @ContextParam("esentry") EventSourceEntry esentry) throws IOException {
+	public ScriptWeb(@ContextParam(ICSSubCraken.EntryName) ICSSubCraken icraken, @ContextParam("jsentry") JScriptEngine jengine, @ContextParam("esentry") EventSourceEntry esentry) throws IOException {
 		this.rentry = icraken;
 		this.rsession = icraken.login();
 		this.jengine = jengine;

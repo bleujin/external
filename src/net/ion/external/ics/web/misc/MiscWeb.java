@@ -25,7 +25,7 @@ import net.ion.craken.node.WriteSession;
 import net.ion.craken.node.crud.ChildQueryResponse;
 import net.ion.craken.tree.PropertyId;
 import net.ion.external.ExternalServer;
-import net.ion.external.ICSSampleCraken;
+import net.ion.external.ICSSubCraken;
 import net.ion.external.ics.common.ExtMediaType;
 import net.ion.external.ics.web.Webapp;
 import net.ion.framework.parse.gson.JsonArray;
@@ -46,7 +46,7 @@ public class MiscWeb implements Webapp{
 
 
     private ReadSession rsession;
-    public MiscWeb(@ContextParam(ICSSampleCraken.EntryName) ICSSampleCraken rentry) throws IOException {
+    public MiscWeb(@ContextParam(ICSSubCraken.EntryName) ICSSubCraken rentry) throws IOException {
         this.rsession = rentry.login() ;
     }
 

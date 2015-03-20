@@ -11,25 +11,25 @@ import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
 import net.ion.craken.node.crud.ReadChildren;
-import net.ion.external.ICSSampleCraken;
+import net.ion.external.ICSSubCraken;
 
 public class DomainSub {
 
 	private ReadSession session;
-	private ICSSampleCraken craken ;
+	private ICSSubCraken craken ;
 	
-	public DomainSub(ICSSampleCraken craken) throws IOException {
+	public DomainSub(ICSSubCraken craken) throws IOException {
 		this.craken = craken ;
 		this.session = craken.login() ;
 	}
 
 	
-	public ICSSampleCraken craken(){
+	public ICSSubCraken craken(){
 		return craken ;
 	}
 	
 	
-	public static DomainSub create(ICSSampleCraken ic) throws IOException {
+	public static DomainSub create(ICSSubCraken ic) throws IOException {
 		return new DomainSub(ic);
 	}
 

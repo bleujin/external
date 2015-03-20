@@ -16,7 +16,7 @@ import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
 import net.ion.craken.node.crud.util.TransactionJobs;
-import net.ion.external.ICSSampleCraken;
+import net.ion.external.ICSSubCraken;
 import net.ion.framework.db.DBController;
 import net.ion.framework.db.Rows;
 import net.ion.framework.db.procedure.IUserCommand;
@@ -27,11 +27,11 @@ import net.ion.framework.util.Debug;
 public class TestScriptManager extends TestCase {
 
 	
-	private ICSSampleCraken craken;
+	private ICSSubCraken craken;
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		this.craken = ICSSampleCraken.test() ;
+		this.craken = ICSSubCraken.test() ;
 	}
 	
 	@Override

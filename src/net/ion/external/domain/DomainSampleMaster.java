@@ -22,7 +22,7 @@ import net.ion.craken.node.WriteNode;
 import net.ion.craken.node.WriteSession;
 import net.ion.craken.node.crud.ChildQueryResponse;
 import net.ion.craken.tree.Fqn;
-import net.ion.external.ICSSampleCraken;
+import net.ion.external.ICSSubCraken;
 import net.ion.framework.db.DBController;
 import net.ion.framework.db.bean.ResultSetHandler;
 import net.ion.framework.db.manager.DBManager;
@@ -37,7 +37,7 @@ import org.apache.lucene.analysis.kr.utils.StringUtil;
 public class DomainSampleMaster {
 
 	private DBController idc;
-	private ICSSampleCraken ic;
+	private ICSSubCraken ic;
 	private SQLLoader sqlLoader;
 	private ReadSession session;
 	private File artImageDir;
@@ -46,7 +46,7 @@ public class DomainSampleMaster {
 	private Logger logger = Logger.getLogger(DomainSampleMaster.class);
 	private File afieldRoot;
 
-	public DomainSampleMaster(DBManager dbm, ICSSampleCraken ic) throws IOException {
+	public DomainSampleMaster(DBManager dbm, ICSSubCraken ic) throws IOException {
 		this.idc = new DBController(dbm);
 		this.ic = ic;
 		this.session = ic.login();
@@ -188,7 +188,7 @@ public class DomainSampleMaster {
 	
 	
 
-	public static DomainSampleMaster create(DBManager dbm, ICSSampleCraken ic) throws IOException {
+	public static DomainSampleMaster create(DBManager dbm, ICSSubCraken ic) throws IOException {
 		return new DomainSampleMaster(dbm, ic);
 	}
 

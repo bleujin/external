@@ -7,7 +7,7 @@ import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
-import net.ion.external.ICSSampleCraken;
+import net.ion.external.ICSSubCraken;
 import net.ion.framework.util.Debug;
 import junit.framework.TestCase;
 
@@ -19,7 +19,7 @@ public class TestDomainSearch extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		ICSSampleCraken ic = ICSSampleCraken.test() ;
+		ICSSubCraken ic = ICSSubCraken.test() ;
 		this.session = ic.login() ;
 	}
 	

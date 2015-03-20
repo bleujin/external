@@ -8,14 +8,14 @@ import net.ion.craken.listener.CDDRemovedEvent;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
-import net.ion.external.ICSSampleCraken;
+import net.ion.external.ICSSubCraken;
 import net.ion.framework.util.Debug;
 import junit.framework.TestCase;
 
 public class TestCDD extends TestCase {
 
 	public void testFirst() throws Exception {
-		ICSSampleCraken ics = ICSSampleCraken.test() ;
+		ICSSubCraken ics = ICSSubCraken.test() ;
 		final ReadSession session = ics.login() ;
 		
 		session.workspace().cddm().add(new CDDHandler() {

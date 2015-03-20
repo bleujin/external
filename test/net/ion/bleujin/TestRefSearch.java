@@ -3,13 +3,13 @@ package net.ion.bleujin;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
-import net.ion.external.ICSSampleCraken;
+import net.ion.external.ICSSubCraken;
 import junit.framework.TestCase;
 
 public class TestRefSearch extends TestCase {
 
 	public void testFirst() throws Exception {
-		ICSSampleCraken craken = ICSSampleCraken.test() ;
+		ICSSubCraken craken = ICSSubCraken.test() ;
 		ReadSession session = craken.login() ;
 		
 		session.tran(new TransactionJob<Void>() {

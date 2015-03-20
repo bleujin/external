@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import net.ion.craken.node.crud.RepositoryImpl;
 import net.ion.craken.node.crud.WorkspaceConfigBuilder;
-import net.ion.external.ICSSampleCraken;
+import net.ion.external.ICSSubCraken;
 
 import org.infinispan.manager.DefaultCacheManager;
 
@@ -36,17 +36,17 @@ public class ESConfig {
 	}
 
 	
-	public ICSSampleCraken createREntry() throws IOException{
+	public ICSSubCraken createREntry() throws IOException{
 		RepositoryImpl r = RepositoryImpl.create(new DefaultCacheManager(repoConfig.crakenConfig()), serverConfig.id());
 		r.createWorkspace(repoConfig.wsName(), WorkspaceConfigBuilder.directory(repoConfig.adminHomeDir()));
 		r.start();
 
-		return ICSSampleCraken.create(r, repoConfig.wsName(), this);
+		return ICSSubCraken.create(r, repoConfig.wsName(), this);
 	}
 
 
-	public ICSSampleCraken testREntry() throws IOException {
-		return ICSSampleCraken.test() ;
+	public ICSSubCraken testREntry() throws IOException {
+		return ICSSubCraken.test() ;
 	}
 	
 }

@@ -15,7 +15,7 @@ import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
 import net.ion.craken.tree.PropertyValue;
-import net.ion.external.ICSSampleCraken;
+import net.ion.external.ICSSubCraken;
 import net.ion.external.ics.common.ExtMediaType;
 import net.ion.external.ics.web.Webapp;
 import net.ion.framework.mte.Engine;
@@ -29,7 +29,7 @@ public class CrakenLet implements Webapp{
 	private ReadSession rsession;
 	private Engine engine;
 
-	public CrakenLet(@ContextParam(ICSSampleCraken.EntryName) ICSSampleCraken icraken) throws IOException{
+	public CrakenLet(@ContextParam(ICSSubCraken.EntryName) ICSSubCraken icraken) throws IOException{
 		this.rsession = icraken.login() ;
 		this.engine = rsession.workspace().parseEngine();
 	}

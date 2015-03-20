@@ -10,7 +10,7 @@ import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteNode;
 import net.ion.craken.node.WriteSession;
-import net.ion.external.ICSSampleCraken;
+import net.ion.external.ICSSubCraken;
 import net.ion.framework.db.DBController;
 import net.ion.framework.db.bean.ResultSetHandler;
 import net.ion.framework.db.manager.OracleDBManager;
@@ -18,14 +18,14 @@ import net.ion.framework.util.ListUtil;
 
 public class TestSetup extends TestCase {
 
-	protected ICSSampleCraken craken;
+	protected ICSSubCraken craken;
 	protected DBController dc;
 	protected ReadSession session;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		this.craken = ICSSampleCraken.create();
+		this.craken = ICSSubCraken.create();
 		this.session = craken.login();
 		OracleDBManager dbm = new OracleDBManager("jdbc:oracle:thin:@dev-oracle.i-on.net:1521:dev10g", "dev_ics6", "dev_ics6");
 		this.dc = new DBController(dbm);

@@ -4,14 +4,14 @@ import java.io.File;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
-import net.ion.external.ICSSampleCraken;
+import net.ion.external.ICSSubCraken;
 import junit.framework.TestCase;
 
 public class TestCrakenScript extends TestCase {
 
 	public void testHasFn() throws Exception {
 		
-		ICSSampleCraken craken = ICSSampleCraken.create();
+		ICSSubCraken craken = ICSSubCraken.create();
 		ScheduledExecutorService ses = Executors.newScheduledThreadPool(1);
 		CrakenScript cs = CrakenScript.create(craken, ses) ;
 		cs.readDir(new File("./resource/js")) ;

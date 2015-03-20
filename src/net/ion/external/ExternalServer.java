@@ -20,8 +20,10 @@ import net.ion.external.ics.common.TraceHandler;
 import net.ion.external.ics.misc.MenuWeb;
 import net.ion.external.ics.openweb.OpenDomainWeb;
 import net.ion.external.ics.openweb.OpenScriptWeb;
+import net.ion.external.ics.web.domain.ArticleWeb;
 import net.ion.external.ics.web.domain.DomainEntry;
 import net.ion.external.ics.web.domain.DomainWeb;
+import net.ion.external.ics.web.domain.GalleryWeb;
 import net.ion.external.ics.web.misc.CrakenLet;
 import net.ion.external.ics.web.misc.ExportWeb;
 import net.ion.external.ics.web.misc.MiscWeb;
@@ -47,7 +49,7 @@ public class ExternalServer {
 
 	private NettyWebServer radon;
 	private Status status ;
-	private ICSSampleCraken craken ;
+	private ICSSubCraken craken ;
 	private ESConfig econfig;
 	
 	private enum Status {
@@ -62,11 +64,11 @@ public class ExternalServer {
 	private void init(ESConfig econfig) throws Exception {
 		this.econfig = econfig ;
         RadonConfigurationBuilder builder = RadonConfiguration.newBuilder(econfig.serverConfig().port());
-        this.craken = ICSSampleCraken.create() ;
+        this.craken = ICSSubCraken.create() ;
         final EventSourceEntry esentry = builder.context(EventSourceEntry.EntryName, EventSourceEntry.create());
         DomainEntry dentry = DomainEntry.test(DomainSub.create(craken));
         
-        builder.context(ICSSampleCraken.EntryName, craken);
+        builder.context(ICSSubCraken.EntryName, craken);
         builder.context(DomainEntry.EntryName, dentry);
         
         final JScriptEngine jsentry = builder.context(JScriptEngine.EntryName, JScriptEngine.create("./resource/loader/lib", Executors.newSingleThreadScheduledExecutor(ThreadFactoryBuilder.createThreadFactory("script-monitor-thread-%d")), true));
@@ -84,7 +86,7 @@ public class ExternalServer {
 			.add("/favicon.ico", new FavIconHandler())
 			.add(new LoggingHandler(new AppLogSink(elogger)))
 			.add(new MyStaticFileHandler("./webapps/admin/", Executors.newCachedThreadPool(ThreadFactoryBuilder.createThreadFactory("static-io-thread-%d")), new HTMLTemplateEngine(radon.getConfig().getServiceContext())).welcomeFile("index.html"))
-            .add("/admin/*", new PathHandler(DomainWeb.class, ScriptWeb.class, MiscWeb.class, TraceWeb.class, MenuWeb.class, CrakenLet.class, ExportWeb.class).prefixURI("/admin"))
+            .add("/admin/*", new PathHandler(DomainWeb.class, ArticleWeb.class, GalleryWeb.class, ScriptWeb.class, MiscWeb.class, TraceWeb.class, MenuWeb.class, CrakenLet.class, ExportWeb.class).prefixURI("/admin"))
             .add("/open/*", new PathHandler(OpenDomainWeb.class, OpenScriptWeb.class).prefixURI("open"))
             .add("/logging/event/*", new EventSourceHandler() {
 					@Override
@@ -168,7 +170,7 @@ public class ExternalServer {
 		return this ;
 	}
 
-	public ICSSampleCraken craken() {
+	public ICSSubCraken craken() {
 		return craken;
 	}
 

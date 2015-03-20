@@ -14,7 +14,7 @@ import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
-import net.ion.external.ICSSampleCraken;
+import net.ion.external.ICSSubCraken;
 import net.ion.external.ics.web.Webapp;
 import net.ion.framework.parse.gson.JsonArray;
 import net.ion.framework.parse.gson.JsonObject;
@@ -26,7 +26,7 @@ import com.google.common.base.Function;
 public class TraceWeb implements Webapp {
 
 	private ReadSession rsession;
-	public TraceWeb(@ContextParam(ICSSampleCraken.EntryName) ICSSampleCraken icraken) throws IOException{
+	public TraceWeb(@ContextParam(ICSSubCraken.EntryName) ICSSubCraken icraken) throws IOException{
 		this.rsession = icraken.login() ;
 	}
 	
