@@ -12,10 +12,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.StreamingOutput;
 
-import net.ion.craken.ICSCraken;
 import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.crud.util.TraversalStrategy;
+import net.ion.external.ICSSampleCraken;
 import net.ion.external.ics.common.ExtMediaType;
 import net.ion.external.ics.web.Webapp;
 import net.ion.framework.parse.gson.stream.JsonWriter;
@@ -28,7 +28,7 @@ public class ExportWeb implements Webapp {
 
 	private ReadSession rsession;
 
-	public ExportWeb(@ContextParam(ICSCraken.EntryName) ICSCraken icraken) throws IOException {
+	public ExportWeb(@ContextParam(ICSSampleCraken.EntryName) ICSSampleCraken icraken) throws IOException {
 		this.rsession = icraken.login();
 	}
 

@@ -10,8 +10,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
-import net.ion.craken.ICSCraken;
 import net.ion.craken.node.ReadSession;
+import net.ion.external.ICSSampleCraken;
 import net.ion.external.ics.EventSourceEntry;
 import net.ion.external.ics.web.Webapp;
 import net.ion.external.ics.web.script.ScriptWeb;
@@ -24,12 +24,12 @@ import org.jboss.resteasy.spi.HttpRequest;
 public class OpenScriptWeb implements Webapp{
 
 	private ScriptWeb refWeb;
-	private ICSCraken icraken;
+	private ICSSampleCraken icraken;
 	private ReadSession rsession;
 	private JScriptEngine jengine;
 	private EventSourceEntry esentry;
 
-	public OpenScriptWeb(@ContextParam(ICSCraken.EntryName) ICSCraken icraken, @ContextParam("jsentry") JScriptEngine jengine, @ContextParam("esentry") EventSourceEntry esentry ) throws IOException{
+	public OpenScriptWeb(@ContextParam(ICSSampleCraken.EntryName) ICSSampleCraken icraken, @ContextParam("jsentry") JScriptEngine jengine, @ContextParam("esentry") EventSourceEntry esentry ) throws IOException{
 		this.refWeb = new ScriptWeb(icraken, jengine, esentry) ;
 		this.icraken = icraken ;
 		this.rsession = icraken.login() ;

@@ -10,10 +10,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 
-import net.ion.craken.ICSCraken;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
+import net.ion.external.ICSSampleCraken;
 import net.ion.external.ics.web.Webapp;
 import net.ion.radon.core.ContextParam;
 
@@ -23,7 +23,7 @@ public class MenuWeb implements Webapp{
 	
 	private ReadSession rsession;
 
-	public MenuWeb(@ContextParam(ICSCraken.EntryName) ICSCraken rentry) throws IOException{
+	public MenuWeb(@ContextParam(ICSSampleCraken.EntryName) ICSSampleCraken rentry) throws IOException{
 		this.rsession = rentry.login() ;
 	}
 

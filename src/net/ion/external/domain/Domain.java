@@ -1,17 +1,17 @@
 package net.ion.external.domain;
 
-import net.ion.craken.ICSCraken;
 import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
 import net.ion.craken.tree.Fqn;
+import net.ion.external.ICSSampleCraken;
 
 public class Domain {
 
 	private ReadNode dnode;
 	private ReadSession session;
-	private ICSCraken ic ;
+	private ICSSampleCraken ic ;
 	private String did;
 	private DomainInfo dinfo;
 	private DomainData ddata;
@@ -31,7 +31,7 @@ public class Domain {
 		}
 	}
 	
-	private Domain(ICSCraken ic, ReadNode dnode) {
+	private Domain(ICSSampleCraken ic, ReadNode dnode) {
 		this.dnode = dnode;
 		this.session = dnode.session() ;
 		this.ic = ic ;
@@ -40,7 +40,7 @@ public class Domain {
 		this.ddata = new DomainData(this) ;
 	}
 
-	public static Domain by(ICSCraken ic, ReadNode dnode) {
+	public static Domain by(ICSSampleCraken ic, ReadNode dnode) {
 		return new Domain(ic, dnode);
 	}
 

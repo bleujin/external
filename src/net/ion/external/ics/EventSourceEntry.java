@@ -9,10 +9,10 @@ import java.io.Writer;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
-import net.ion.craken.ICSCraken;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
+import net.ion.external.ICSSampleCraken;
 import net.ion.external.ics.util.CopyOnWriteMap;
 import net.ion.framework.util.IOUtil;
 import net.ion.framework.util.MapUtil;
@@ -54,7 +54,7 @@ public class EventSourceEntry implements Closeable{
 		return this ;
 	}
 
-	public Writer newWriter(ICSCraken craken, String lid, String eventId) throws IOException {
+	public Writer newWriter(ICSSampleCraken craken, String lid, String eventId) throws IOException {
 		return new EventSourceWriter(this, craken, lid, eventId);
 	}
 
@@ -91,7 +91,7 @@ class EventSourceWriter extends Writer{
 	private File targetFile;
 	private FileWriter fwriter ;
 
-	public EventSourceWriter(EventSourceEntry ese, ICSCraken craken, String lid, String eventId) throws IOException {
+	public EventSourceWriter(EventSourceEntry ese, ICSSampleCraken craken, String lid, String eventId) throws IOException {
 		this.ese = ese ;
 		this.lid = lid ;
 		this.eventId = eventId ;

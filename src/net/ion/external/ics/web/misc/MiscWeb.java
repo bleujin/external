@@ -17,7 +17,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MultivaluedMap;
 
-import net.ion.craken.ICSCraken;
 import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
@@ -26,6 +25,7 @@ import net.ion.craken.node.WriteSession;
 import net.ion.craken.node.crud.ChildQueryResponse;
 import net.ion.craken.tree.PropertyId;
 import net.ion.external.ExternalServer;
+import net.ion.external.ICSSampleCraken;
 import net.ion.external.ics.common.ExtMediaType;
 import net.ion.external.ics.web.Webapp;
 import net.ion.framework.parse.gson.JsonArray;
@@ -46,7 +46,7 @@ public class MiscWeb implements Webapp{
 
 
     private ReadSession rsession;
-    public MiscWeb(@ContextParam(ICSCraken.EntryName) ICSCraken rentry) throws IOException {
+    public MiscWeb(@ContextParam(ICSSampleCraken.EntryName) ICSSampleCraken rentry) throws IOException {
         this.rsession = rentry.login() ;
     }
 

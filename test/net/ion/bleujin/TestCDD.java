@@ -2,20 +2,20 @@ package net.ion.bleujin;
 
 import java.util.Map;
 
-import net.ion.craken.ICSCraken;
 import net.ion.craken.listener.CDDHandler;
 import net.ion.craken.listener.CDDModifiedEvent;
 import net.ion.craken.listener.CDDRemovedEvent;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
+import net.ion.external.ICSSampleCraken;
 import net.ion.framework.util.Debug;
 import junit.framework.TestCase;
 
 public class TestCDD extends TestCase {
 
 	public void testFirst() throws Exception {
-		ICSCraken ics = ICSCraken.test() ;
+		ICSSampleCraken ics = ICSSampleCraken.test() ;
 		final ReadSession session = ics.login() ;
 		
 		session.workspace().cddm().add(new CDDHandler() {

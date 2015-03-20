@@ -5,31 +5,31 @@ import java.util.Iterator;
 
 import com.google.common.base.Function;
 
-import net.ion.craken.ICSCraken;
 import net.ion.craken.node.IteratorList;
 import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
 import net.ion.craken.node.crud.ReadChildren;
+import net.ion.external.ICSSampleCraken;
 
 public class DomainSub {
 
 	private ReadSession session;
-	private ICSCraken craken ;
+	private ICSSampleCraken craken ;
 	
-	public DomainSub(ICSCraken craken) throws IOException {
+	public DomainSub(ICSSampleCraken craken) throws IOException {
 		this.craken = craken ;
 		this.session = craken.login() ;
 	}
 
 	
-	public ICSCraken craken(){
+	public ICSSampleCraken craken(){
 		return craken ;
 	}
 	
 	
-	public static DomainSub create(ICSCraken ic) throws IOException {
+	public static DomainSub create(ICSSampleCraken ic) throws IOException {
 		return new DomainSub(ic);
 	}
 

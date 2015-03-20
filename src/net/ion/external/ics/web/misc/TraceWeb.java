@@ -10,11 +10,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 
-import net.ion.craken.ICSCraken;
 import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
+import net.ion.external.ICSSampleCraken;
 import net.ion.external.ics.web.Webapp;
 import net.ion.framework.parse.gson.JsonArray;
 import net.ion.framework.parse.gson.JsonObject;
@@ -26,7 +26,7 @@ import com.google.common.base.Function;
 public class TraceWeb implements Webapp {
 
 	private ReadSession rsession;
-	public TraceWeb(@ContextParam(ICSCraken.EntryName) ICSCraken icraken) throws IOException{
+	public TraceWeb(@ContextParam(ICSSampleCraken.EntryName) ICSSampleCraken icraken) throws IOException{
 		this.rsession = icraken.login() ;
 	}
 	

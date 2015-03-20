@@ -1,15 +1,15 @@
 package net.ion.bleujin;
 
-import net.ion.craken.ICSCraken;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
+import net.ion.external.ICSSampleCraken;
 import junit.framework.TestCase;
 
 public class TestRefSearch extends TestCase {
 
 	public void testFirst() throws Exception {
-		ICSCraken craken = ICSCraken.test() ;
+		ICSSampleCraken craken = ICSSampleCraken.test() ;
 		ReadSession session = craken.login() ;
 		
 		session.tran(new TransactionJob<Void>() {
