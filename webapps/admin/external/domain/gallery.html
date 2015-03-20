@@ -4,15 +4,21 @@
             <i class="fa-fw fa fa-picture-o"></i>
             ${m.asString("domain.gallery.title")}</h1>
     </div>
+</div>
 
-    <!--
-    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-align-right">
-        <div class="page-title">
-            <a href="javascript:void(0);" class="btn btn-default">Upload</a>
-            <a href="javascript:void(0);" class="btn btn-default">Load Library</a>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="well">
+            <blockquote>
+                <div id="info" class="click2edit"></div>
+            </blockquote>
+
+            <div class="">
+                <button id="edit_explain" class="btn btn-sm" type="button">${m.asString("buttons.info.edit")}</button>
+                <button id="save_explain" class="btn btn-sm" type="button">${m.asString("buttons.info.save")}</button>
+            </div>
         </div>
     </div>
-    -->
 </div>
 
 <!-- row -->
@@ -42,104 +48,11 @@
                             <!-- SuperBox -->
                             <div id="table_list">
                                 <table id="gallerys" class="table table-bordered table-hover" width="100%">
-                                    <thead>
-                                    <tr>
-                                        <th>${m.asString("domain.gallery.galid")}</th>
-                                        <th>${m.asString("domain.gallery.catid")}</th>
-                                        <th>${m.asString("domain.gallery.subject")}</th>
-                                        <th>${m.asString("domain.gallery.width")}</th>
-                                        <th>${m.asString("domain.gallery.height")}</th>
-                                        <th>${m.asString("domain.gallery.filesize")}</th>
-                                        <th>${m.asString("domain.gallery.lastmodified")}</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="gallerys-body">
-                                    <tr>
-                                        <td>100</td>
-                                        <td>/ics/external/airkjh1</td>
-                                        <td>This is gallery subject</td>
-                                        <td>200</td>
-                                        <td>200</td>
-                                        <td>300kb</td>
-                                        <td>2015.03.06</td>
-                                    </tr>
-                                    </tbody>
                                 </table>
                             </div>
                             <div id="icon_list" style="display: none;">
-                                <div class="superbox col-sm-12">
-                                    <div class="superbox-list">
-                                        <img src="img/superbox/superbox-thumb-1.jpg" data-img="img/superbox/superbox-full-1.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Miller Cine" class="superbox-img">
-                                    </div><!--
-                            --><div class="superbox-list">
-                                    <img src="img/superbox/superbox-thumb-2.jpg" data-img="img/superbox/superbox-full-2.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Bridge of Edgen" class="superbox-img">
-                                </div><!--
-                            --><div class="superbox-list">
-                                    <img src="img/superbox/superbox-thumb-3.jpg" data-img="img/superbox/superbox-full-3.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Lines of Friendship" class="superbox-img">
-                                </div><!--
-                            --><div class="superbox-list">
-                                    <img src="img/superbox/superbox-thumb-4.jpg" data-img="img/superbox/superbox-full-4.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="My new car!" class="superbox-img">
-                                </div><!--
-                            --><div class="superbox-list">
-                                    <img src="img/superbox/superbox-thumb-5.jpg" data-img="img/superbox/superbox-full-5.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Study Time" class="superbox-img">
-                                </div><!--
-                            --><div class="superbox-list">
-                                    <img src="img/superbox/superbox-thumb-6.jpg" data-img="img/superbox/superbox-full-6.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="San Francisco Bridge"  class="superbox-img">
-                                </div><!--
-                            --><div class="superbox-list">
-                                    <img src="img/superbox/superbox-thumb-7.jpg" data-img="img/superbox/superbox-full-7.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="New Styla"  class="superbox-img">
-                                </div><!--
-                            --><div class="superbox-list">
-                                    <img src="img/superbox/superbox-thumb-8.jpg" data-img="img/superbox/superbox-full-8.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Cristpta"  class="superbox-img">
-                                </div><!--
-                            --><div class="superbox-list">
-                                    <img src="img/superbox/superbox-thumb-9.jpg" data-img="img/superbox/superbox-full-9.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Cristine Dine"  class="superbox-img">
-                                </div><!--
-                            --><div class="superbox-list">
-                                    <img src="img/superbox/superbox-thumb-10.jpg" data-img="img/superbox/superbox-full-10.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Mosaic Clock"  class="superbox-img">
-                                </div><!--
-                            --><div class="superbox-list">
-                                    <img src="img/superbox/superbox-thumb-11.jpg" data-img="img/superbox/superbox-full-11.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Elegance"  class="superbox-img">
-                                </div><!--
-                            --><div class="superbox-list">
-                                    <img src="img/superbox/superbox-thumb-12.jpg" data-img="img/superbox/superbox-full-12.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="China Town"  class="superbox-img">
-                                </div><!--
-                            --><div class="superbox-list">
-                                    <img src="img/superbox/superbox-thumb-13.jpg" data-img="img/superbox/superbox-full-13.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Sky Diving"  class="superbox-img">
-                                </div><!--
-                            --><div class="superbox-list">
-                                    <img src="img/superbox/superbox-thumb-14.jpg" data-img="img/superbox/superbox-full-14.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Country Music"  class="superbox-img">
-                                </div><!--
-                            --><div class="superbox-list">
-                                    <img src="img/superbox/superbox-thumb-15.jpg" data-img="img/superbox/superbox-full-15.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="You are late!" class="superbox-img">
-                                </div><!--
-                            --><div class="superbox-list">
-                                    <img src="img/superbox/superbox-thumb-16.jpg" data-img="img/superbox/superbox-full-16.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Royal Bengle Tiger" class="superbox-img">
-                                </div><!--
-                            --><div class="superbox-list">
-                                    <img src="img/superbox/superbox-thumb-17.jpg" data-img="img/superbox/superbox-full-17.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Snowpine" class="superbox-img">
-                                </div><!--
-                            --><div class="superbox-list">
-                                    <img src="img/superbox/superbox-thumb-18.jpg" data-img="img/superbox/superbox-full-18.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Hop Jop Mop" class="superbox-img">
-                                </div><!--
-                            --><div class="superbox-list">
-                                    <img src="img/superbox/superbox-thumb-19.jpg" data-img="img/superbox/superbox-full-19.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Party Girls" class="superbox-img">
-                                </div><!--
-                            --><div class="superbox-list">
-                                    <img src="img/superbox/superbox-thumb-20.jpg" data-img="img/superbox/superbox-full-20.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Dragon Fly" class="superbox-img">
-                                </div><!--
-                            --><div class="superbox-list">
-                                    <img src="img/superbox/superbox-thumb-21.jpg" data-img="img/superbox/superbox-full-21.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Kinds Road" class="superbox-img">
-                                </div><!--
-                            --><div class="superbox-list">
-                                    <img src="img/superbox/superbox-thumb-22.jpg" data-img="img/superbox/superbox-full-22.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Tokyo" class="superbox-img">
-                                </div><!--
-                            --><div class="superbox-list">
-                                    <img src="img/superbox/superbox-thumb-23.jpg" data-img="img/superbox/superbox-full-23.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Rome" class="superbox-img">
-                                </div><!--
-                            --><div class="superbox-list">
-                                    <img src="img/superbox/superbox-thumb-24.jpg" data-img="img/superbox/superbox-full-24.jpg" alt="My first photoshop layer mask on a high end PSD template theme" title="Traning" class="superbox-img">
-                                </div>
+                                <div class="superbox col-sm-12" id="superbox_body">
+
                                     <div class="superbox-float"></div>
                                 </div>
                                 <div class="superbox-show" style="height:300px; display: none"></div>
@@ -160,7 +73,7 @@
                                         <section>
                                             <label class="label">${m.asString("domain.gallery.query.query")}<a href="http://lucene.apache.org/core/2_9_4/queryparsersyntax.html" target="_blank"><span class="label pull-right">operator</span></a></label>
                                             <label class="textarea textarea-resizable">
-                                                <textarea name="query" rows="3">*:*</textarea>
+                                                <textarea name="query" rows="3"></textarea>
                                             </label>
                                         </section>
                                         <section>
@@ -196,6 +109,7 @@
                                                     <option value="json">JSON</option>
                                                     <option value="csv">CSV</option>
                                                     <option value="xml">XML</option>
+                                                    <option value="template">Template</option>
                                                 </select>
                                             </label>
                                         </section>
@@ -274,22 +188,12 @@
 
     var superBoxInitized = false;
 
-    var initSuperBox = function() {
-        $.ajax({
-            type: 'GET',
-            url : '/admin/domain/gallery',
-            success: function() {
-                $('.superbox').SuperBox();
-                superBoxInitized = true ;
-            }
-        }) ;
-    }
-
     var pagefunction = function() {
 
         $('.view-icon').click(function() {
             if(!superBoxInitized) {
-                initSuperBox() ;
+                $('.superbox').SuperBox();
+                superBoxInitized = true ;
             }
             $('#table_list').hide();
             $('#icon_list').show();
@@ -326,9 +230,6 @@
             $('.click2edit').destroy();
         });
 
-        // change to ajax version when ready...
-        $('#gallerys').dataTable();
-
         var domainId = $("#domains option:selected").val() ;
         if (domainId == undefined) return ;
 
@@ -342,6 +243,36 @@
                 console.log('response', request, status, error) ;
             }
         }) ;
+
+        $.ajax({
+            type: 'GET',
+            url: '/admin/gallery/' + domainId + '/list',
+            dataType: 'json',
+            success: function(data) {
+                var nodes = data['result'] ;
+
+                $('#gallerys').DataTable({
+                    'data': nodes,
+                    'columns': [
+                        {'title':'galid'},
+                        {'title':'catid'},
+                        {'title':'subject'},
+                        {'title':'width'},
+                        {'title':'height'},
+                        {'title':'filesize'},
+                        {'title':'modday'}
+                    ]
+                });
+
+                var superbox = $('#superbox_body') ;
+                $.each(nodes, function(index) {
+                    var gallery = nodes[index], galId = gallery[0], catId = gallery[1], fileName = gallery[2], type = fileName.substr(fileName.lastIndexOf('.') + 1) ;
+                    var url = '/admin/gallery/' + domainId + '/' + catId + '/' + galId + '.' + type ;
+                    var el = '<div class="superbox-list"><img class="superbox-img" src="' + url + '" data-img="' + url + '" title="'+fileName+'"></div>' ;
+                    $(el).appendTo(superbox) ;
+                });
+            }
+        });
 
         var _queryForm = $("#gallery-query-form") ;
         var _rtype = _queryForm.find("select[name=rtype]") ;
@@ -358,7 +289,7 @@
             $.ajax({
                 type: "GET",
                 dataType : 'text',
-                url: "/open/search/" + domainId + "/gallery/query." + _rtype.val() + (  _parameter.val() ? "?" + _parameter.val() : ""),
+                url: "/admin/gallery/" + domainId + "/query." + _rtype.val() + (  _parameter.val() ? "?" + _parameter.val() : ""),
                 data: { query: _query.val(), sort: _sort.val(), skip: _skip.val(), offset: _offset.val() , indent: _indent.is(":checked") ? true : false, debug: _debug.is(":checked") ? true : false},
                 complete : function(){
                     var targetURL = "<a href='http://" + document.location.host +  this.url + "' target='_blank'>" + this.url + "</a>";
@@ -376,10 +307,9 @@
         var _btn_save = _templateForm.find("button[name=btn_save]") ;
 
         $.ajax({
-            url:'/admin/domain/' + domainId +'/gallery/template',
+            url:'/admin/gallery/' + domainId +'/template',
             dataType:'json',
             success:function(data){
-                var info = data['info'];
                 var samples = data['samples'];
                 var template = data['template'] ;
 
@@ -389,7 +319,6 @@
                     option.appendTo(_template_samples) ;
                 }
 
-                $("#info").html(info) ;
                 _template.val(template);
             },
             error:function(request,status,error){
@@ -403,7 +332,7 @@
             $.ajax({
                 type: "GET",
                 dataType : 'text',
-                url: "/admin/domain/" + domainId + "/gallery/sampletemplate/" + fileName,
+                url: "/admin/gallery/" + domainId + "/samples/" + fileName,
                 data: {},
                 complete : function(){
                 },
@@ -425,7 +354,7 @@
             submitHandler : function(form) {
                 $.ajax({
                             type: "POST",
-                            url: "/admin/domain/" + domainId + "/gallery/template",
+                            url: "/admin/gallery/" + domainId + "/template",
                             data: { template: _template.val() },
                             success :  function(data) {
                                 $("#save-message span").html(data) ;
@@ -447,12 +376,101 @@
             command = 'save' ;
             _templateForm.submit() ;
         });
+
+        // crop part
+        var image = $('#cropContainer > img'), container = $('#cropContainer'), canvasData, cropBoxData ;
+
+        image.on('load', function(event) {
+            var img = $(this), originalWidth = img.attr('data-width'), originalHeight = img.attr('data-height'), maxWidth = 800, maxHeight = 800 ;
+            var ratio = Math.min(maxWidth / originalWidth, maxHeight / originalHeight) ;
+
+            img.attr('width', originalWidth * ratio) ;
+            img.attr('height',originalHeight * ratio) ;
+        });
+
+        $('#gallery-crop-modal').on('shown.bs.modal', function(event) {
+            image.cropper({
+                autoCrop: false,
+                guides: true,
+                highlight: true,
+                movable: true,
+                resizable: true,
+                zoomable: false,
+                dragCrop: true,
+                built: function() {
+                    image.cropper('setCanvasData', canvasData);
+                    image.cropper('setCropBoxData', cropBoxData) ;
+                }
+            });
+        }).on('hidden.bs.modal', function(event) {
+            image.cropper('destroy') ;
+        });
+
+        var _cropForm = $('#gallery-crop-modal form[name=crop-form]') ;
+
+        _cropForm.validate({
+            rules : {
+                propId : { required : true }
+            },
+
+            messages : {
+                propId : { required : "${m.asString('validation.required', 'Property Id')}"}
+            },
+
+            submitHandler : function(form) {
+                var data = image.cropper('getData'), imageData = image.cropper('getImageData'), x = parseInt(data.x), y = parseInt(data.y), width = parseInt(data.width), height = parseInt(data.height);
+                var propId = $('#gallery-crop-modal input[name=propId]').val(), galId = image.attr('galid'), catId = image.attr('catid'), domainId = image.attr('did') ;
+
+                var url = '/admin/gallery/' + domainId + '/' + catId + '/' + galId + '/crop?propId=' + propId + '&x=' + x + '&y=' + y + '&width=' + width + '&height=' + height ;
+
+                $.ajax({
+                            type: "GET",
+                            url: url,
+                            data: { },
+                            success :  function(data) {
+                                $("#save-message span").html(data) ;
+                                $("#save-message").removeClass("message") ;
+                                setTimeout(function() {
+                                    $("#save-message").addClass("message") ;
+                                }, 2000);
+                            }}
+                ).done(function( msg ) {
+                });
+            },
+
+            errorPlacement : function(error, element) { // Do not change code below
+                error.insertAfter(element.parent());
+            }
+        }) ;
+
+        $('#gallery-crop-modal button[name=crop]').click(function(event) {
+            _cropForm.submit() ;
+        });
+
+        $('#gallery-crop-modal button[name=reset]').click(function(event) {
+            image.cropper('clear') ;
+        });
     };
+
+    var cropHandler = function(event) {
+        var _data = event.data, image = $('#cropContainer > img');
+
+        image.attr('src', _data.src) ;
+        image.attr('data-width', _data.originalWidth) ;
+        image.attr('data-height', _data.originalHeight) ;
+        image.attr('galid', _data.basic.galid) ;
+        image.attr('catid', _data.basic.catid) ;
+        image.attr('did', _data.basic.domainid) ;
+
+        $('#gallery-crop-modal').modal({});
+    }
 
     loadScript("js/plugin/datatables/jquery.dataTables.min.js", function(){
         loadScript("js/plugin/datatables/dataTables.bootstrap.min.js", function() {
             loadScript("js/plugin/summernote/summernote.min.js", function() {
-                loadScript("js/plugin/superbox/superbox.min.js", pagefunction);
+                loadScript("js/plugin/superbox/superbox.min.custom.js", function() {
+                    loadScript("js/plugin/cropper/cropper.js", pagefunction) ;
+                });
             });
         });
     });

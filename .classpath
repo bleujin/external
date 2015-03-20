@@ -22,5 +22,6 @@
 	<classpathentry kind="lib" path="lib/reflib/netty-3.2.7.Final.jar"/>
 	<classpathentry kind="lib" path="lib/reflib/search_util_fat.jar"/>
 	<classpathentry kind="lib" path="lib/reflib/search440_fat.jar"/>
+	<classpathentry kind="lib" path="lib/reflib/javaxt-core.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

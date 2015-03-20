@@ -1,40 +1,39 @@
 package net.ion.bleujin;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
-import java.net.URISyntaxException;
-
-import javax.imageio.ImageIO;
-
+import javaxt.io.Image;
 import junit.framework.TestCase;
 import net.coobird.thumbnailator.Thumbnails;
-import net.ion.framework.util.IOUtil;
+import net.ion.framework.util.StringUtil;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 
 public class TestThumbnail extends TestCase {
 
 	public void testFirst() throws Exception {
-		InputStream in = getClass().getResourceAsStream("aaa.jpg") ;
-		BufferedImage originalImage = ImageIO.read(in);
-
+        File src = new File("./resource/uploadfiles/afieldfile/2015/01/15/aaa.jpg");;
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		
-		Thumbnails.of(originalImage)
+		Thumbnails.of(src)
 		        .size(200, 200)
 		        .toOutputStream(out);
 		
 		ByteArrayInputStream input = new ByteArrayInputStream(out.toByteArray()) ;
-	}
-	
-	public void testPipe() throws Exception {
-		
 
+        assertEquals(true, input.read() > -1) ;
 	}
 	
+	public void testCrop() throws Exception {
+        File src = new File("./resource/uploadfiles/afieldfile/2015/01/15/aaa.jpg");;
+
+        String path = "./test/" + StringUtil.replace(StringUtil.substringBeforeLast(getClass().getName(), "."), ".", "/");
+        File cropped = new File(path, "aaa_croped.jpg");
+
+        Image srcImg = new Image(src);
+        srcImg.crop(50, 50, 200, 200) ;
+        srcImg.saveAs(cropped) ;
+
+        cropped.delete() ;
+    }
 }

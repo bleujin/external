@@ -1,5 +1,6 @@
 package net.ion.external.domain;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import net.ion.external.ics.bean.BeanX;
@@ -51,15 +52,14 @@ public class TestGallery extends TestBaseDomain{
 		assertEquals(true, input != BeanX.BLANKSTREAM) ;
 		IOUtil.close(input);
 	}
-	
-	public void testCrop() throws Exception {
-		GalleryCategoryX gcat = domain.datas().gcategory("bbbb");
-		GalleryX gallery = gcat.gallery(11000) ;
-		
-		gallery.dataStreamWithSize(100, 100);
-	}
-	
-	
-	
-	
+
+    public void testCrop() throws IOException {
+        GalleryCategoryX gcat = domain.datas().gcategory("bbbb");
+        GalleryX gallery = gcat.gallery(11000) ;
+
+        InputStream input = gallery.dataStreamWithCrop("cropId", 0, 0, 100, 100);
+
+        assertEquals(true, input != BeanX.BLANKSTREAM) ;
+        IOUtil.close(input);
+    }
 }

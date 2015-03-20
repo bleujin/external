@@ -50,24 +50,6 @@
                                     </header>
                                     <div>
                                         <table id="articles" class="table table-bordered table-hover" width="100%">
-                                            <thead>
-                                            <tr>
-                                                <th>${m.asString("domain.article.artid")}</th>
-                                                <th>${m.asString("domain.article.catid")}</th>
-                                                <th>${m.asString("domain.article.subject")}</th>
-                                                <th>${m.asString("domain.article.lastmodified")}</th>
-                                                <th>${m.asString("domain.article.link")}</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody id="articles-body">
-                                            <tr>
-                                                <td>100</td>
-                                                <td>/ics/external/airkjh1</td>
-                                                <td>This is article subject</td>
-                                                <td>airkjh</td>
-                                                <td><button onclick="javascript:showStoryPages(event, 'airkjh1', 100);">story pages</button></td>
-                                            </tr>
-                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -86,7 +68,7 @@
                                                     <section>
                                                         <label class="label">${m.asString("domain.article.query.query")}<a href="http://lucene.apache.org/core/2_9_4/queryparsersyntax.html" target="_blank"><span class="label pull-right">operator</span></a></label>
                                                         <label class="textarea textarea-resizable">
-                                                            <textarea name="query" rows="3">*:*</textarea>
+                                                            <textarea name="query" rows="3"></textarea>
                                                         </label>
                                                     </section>
                                                     <section>
@@ -122,6 +104,7 @@
                                                                 <option value="json">JSON</option>
                                                                 <option value="csv">CSV</option>
                                                                 <option value="xml">XML</option>
+                                                                <option value="template">Template</option>
                                                             </select>
                                                         </label>
                                                     </section>
@@ -221,18 +204,6 @@
             $('.click2edit').destroy();
         });
 
-        // change to ajax version when ready...
-        var articles_table = $('#articles') ;
-
-        articles_table.find('tbody').on('click', 'tr', function (event) {
-            $(this).toggleClass('selected2');
-            $('#article_view_modal').modal({});
-            console.log(event.stopPropagation);
-            event.stopPropagation() ;
-        });
-
-        articles_table.dataTable();
-
         var domainId = $("#domains option:selected").val() ;
         if (domainId == undefined) return ;
 
@@ -246,6 +217,92 @@
                 console.log('response', request, status, error) ;
             }
         }) ;
+
+        var articleData = function(table, trElement) {
+            var values = table.row(trElement).data();
+            return {
+                artid: values[0],
+                catid: values[1],
+                subject: values[2],
+                modday: values[3]
+            };
+        }
+
+        $.ajax({
+            type: 'GET',
+            url: '/admin/article/' + domainId + '/list',
+            dataType: 'json',
+            success: function(data) {
+                var nodes = data['result'] ;
+                var table = $('#articles').DataTable({
+                    data: nodes,
+                    order: [[3, 'desc']],
+                    columnDefs: [{
+                        targets: '_all',
+                        orderable: false
+                    }],
+                    'columns': [
+                        {'title':'artid'},
+                        {'title':'catid'},
+                        {'title':'subject'},
+                        {'title':'modday'},
+                        {
+                            data: '',
+                            defaultContent: '<button>link</button>'
+                        }
+                    ]
+                });
+
+                $('#articles tbody').on('click', 'button', function(event) {
+                    event.preventDefault();
+
+                    var artData = articleData(table, $(this).parents('tr')) ;
+                    $.ajax({
+                        type: 'GET',
+                        url: '/admin/article/' + domainId + '/storypage/' + artData.catid + '/' + artData.artid,
+                        dataType: 'json',
+                        success: function(data) {
+                            var tbody = $('#story-pages tbody');
+                            tbody.children('tr').remove();
+                            var nodes = data['nodes'] ;
+                            for(var i in nodes) {
+                                var node = nodes[i];
+                                var el = '<tr><td>'+node['tplid']+'</td><td>'+node['name']+'</td><td>'+node['form']+'</td><td>'+node['link']+'</td></tr>' ;
+
+                                $(el).appendTo(tbody) ;
+                            }
+                            $('#story-pages-modal').modal({});
+                        }
+                    });
+
+                    event.stopPropagation();
+                });
+
+                $('#articles tbody').on('click', 'tr', function (event) {
+                    event.preventDefault();
+                    var artData = articleData(table, $(this)) ;
+                    $.ajax({
+                        type: 'GET',
+                        url: '/admin/article/' + domainId + '/view/' + artData.catid + '/' + artData.artid,
+                        dataType: 'json',
+                        success: function(data) {
+                            var modal = $('#article-view-modal') ;
+                            modal.find('input[name=subject]').val(data.subject);
+                            modal.find('textarea[name=content]').text(data.content);
+                            $('#article-view-modal').modal({});
+                        }
+                    });
+
+                    event.stopPropagation() ;
+                });
+
+//                $('#article_view_modal').on('show.bs.modal', function(event) {
+//                    var modal = $(this) ;
+//                    var artData = articleData(table, $(this));
+//                    $.ajax()
+//                });
+            }
+        });
 
         var _queryForm = $("#article-query-form") ;
         var _rtype = _queryForm.find("select[name=rtype]") ;
@@ -263,7 +320,7 @@
             $.ajax({
                 type: "GET",
                 dataType : 'text',
-                url: "/open/search/" + domainId + "/article/query." + _rtype.val() + (  _parameter.val() ? "?" + _parameter.val() : ""),
+                url: "/admin/article/" + domainId + "/query." + _rtype.val() + (  _parameter.val() ? "?" + _parameter.val() : ""),
                 data: { query: _query.val(), sort: _sort.val(), skip: _skip.val(), offset: _offset.val() , indent: _indent.is(":checked") ? true : false, debug: _debug.is(":checked") ? true : false},
                 complete : function(){
                     var targetURL = "<a href='http://" + document.location.host +  this.url + "' target='_blank'>" + this.url + "</a>";
@@ -281,7 +338,7 @@
         var _btn_save = _templateForm.find("button[name=btn_save]") ;
 
         $.ajax({
-            url:'/admin/domain/' + domainId +'/article/template',
+            url:'/admin/article/' + domainId +'/template',
             dataType:'json',
             success:function(data){
                 var info = data['info'];
@@ -294,7 +351,6 @@
                     option.appendTo(_template_samples) ;
                 }
 
-                $("#info").html(info) ;
                 _template.val(template);
             },
             error:function(request,status,error){
@@ -308,7 +364,7 @@
             $.ajax({
                 type: "GET",
                 dataType : 'text',
-                url: "/admin/domain/" + domainId + "/article/sampletemplate/" + fileName,
+                url: "/admin/article/" + domainId + "/samples/" + fileName,
                 data: {},
                 complete : function(){
                 },
@@ -330,7 +386,7 @@
             submitHandler : function(form) {
                 $.ajax({
                             type: "POST",
-                            url: "/admin/domain/" + domainId + "/article/template",
+                            url: "/admin/article/" + domainId + "/template",
                             data: { template: _template.val() },
                             success :  function(data) {
                                 $("#save-message span").html(data) ;
