@@ -8,6 +8,7 @@ import net.ion.craken.ICSCraken;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
+import net.ion.external.domain.Domain;
 import net.ion.external.domain.DomainMaster;
 import net.ion.external.domain.DomainSub;
 import net.ion.external.ics.web.domain.DomainEntry;
@@ -24,8 +25,10 @@ public class TestDomainWeb extends TestCase {
 	private OracleDBManager dbm;
 	private ICSCraken icraken;
 	private DomainSub dsub;
+    private ReadSession session;
 
-	@Override
+
+    @Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		this.ss = StubServer.create(DomainWeb.class);
@@ -42,6 +45,7 @@ public class TestDomainWeb extends TestCase {
 		DomainEntry dentry = DomainEntry.test(dsub);
 
 		ss.treeContext().putAttribute("dentry", dentry) ;
+        this.session = icraken.login() ;
 	}
 	
 	@Override
@@ -94,14 +98,14 @@ public class TestDomainWeb extends TestCase {
 	}
 	
 	public void testAddSiteCategory() throws Exception {
-		StubHttpResponse response = ss.request("/domain/zzz/scat/dynamic").post();
+		StubHttpResponse response = ss.request("/domain/zzz/define").postParam("catid", "dynamic").postParam("includeSub", "true").postParam("target", "scat").post();
 
 		assertEquals("dynamic created", response.contentsString()) ;
 		assertEquals(true, dsub.findDomain("zzz").datas().scategory("dynamic").exists()) ;
 	}
 	
 	public void testAddGalleryCategory() throws Exception {
-		StubHttpResponse response = ss.request("/domain/zzz/gcat/aaaa").postParam("includeSub", "true").post();
+        StubHttpResponse response = ss.request("/domain/zzz/define").postParam("catid", "aaaa").postParam("includeSub", "true").postParam("target", "gcat").post();
 
 		assertEquals("aaaa created", response.contentsString()) ;
 		
@@ -109,9 +113,19 @@ public class TestDomainWeb extends TestCase {
 		assertEquals(true, dsub.findDomain("zzz").datas().gcategory("bbbb").exists()) ;
 	}
 	
-	public void testsRemoveSiteCategory() throws Exception {
-		StubHttpResponse response = ss.request("/domain/zzz/scat/dynamic/delete").post();
+	public void testRemoveSiteCategory() throws Exception {
+		StubHttpResponse response = ss.request("/domain/zzz/define").postParam("catid", "dynamic").postParam("target", "scat").delete();
 		
 		assertEquals("dynamic removed", response.contentsString()) ;
 	}
+
+    public void testMultipleCategory() throws Exception {
+        this.dsub.createDomain("zzz");
+        this.dsub.findDomain("zzz").addSiteCategory("abcd", false).addSiteCategory("def", false) ;
+
+        StubHttpResponse response = ss.request("/domain/zzz/define").postParam("catid", "abcd,def").postParam("target", "scat").delete();
+        assertEquals("abcd,def removed", response.contentsString()) ;
+        assertEquals(true, session.ghostBy("/domain/zzz/scat/abcd").isGhost());
+        assertEquals(true, session.ghostBy("/domain/zzz/scat/def").isGhost());
+    }
 }

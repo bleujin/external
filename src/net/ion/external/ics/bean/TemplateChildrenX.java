@@ -39,6 +39,11 @@ public class TemplateChildrenX {
 		return this;
 	}
 
+    public TemplateChildrenX category(String catId) {
+        wheres.add("catid = '" + catId + "'");
+        return this ;
+    }
+
 	public XIterable<TemplateX> find() throws IOException {
 		XIterable<TemplateX> result = XIterable.create(domain, request.find().toList(), MapUtil.<String,String>newMap(), TemplateX.class);
 		return wheres.size() > 0 ? result.match(StringUtil.join(wheres, " AND ")) : result;

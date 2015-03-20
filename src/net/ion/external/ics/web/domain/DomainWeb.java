@@ -21,11 +21,14 @@ import net.ion.external.domain.DomainData;
 import net.ion.external.domain.DomainHandler;
 import net.ion.external.domain.DomainInfoHandler;
 import net.ion.external.domain.DomainSub;
+import net.ion.external.ics.bean.TemplateX;
+import net.ion.external.ics.bean.XIterable;
 import net.ion.external.ics.common.ExtMediaType;
 import net.ion.external.ics.web.Webapp;
 import net.ion.framework.parse.gson.JsonArray;
 import net.ion.framework.parse.gson.JsonObject;
 import net.ion.framework.parse.gson.JsonPrimitive;
+import net.ion.framework.util.StringUtil;
 import net.ion.radon.core.ContextParam;
 
 @Path("/domain")
@@ -123,8 +126,7 @@ public class DomainWeb implements Webapp {
 			}
 		});
 		
-		result.put("scats", scats) ;
-		result.put("gcats", gcats) ;
+		result.put("scats", scats).put("gcats", gcats).put("info", session.ghostBy("/menus/domain").property("define").asString()) ;
 		
 		return result ;
 	}
@@ -141,11 +143,28 @@ public class DomainWeb implements Webapp {
 	@Path("/{did}/define")
 	@DELETE
 	public String removeCategory(@PathParam("did") final String did, @DefaultValue("scat") @FormParam("target") String target, @FormParam("catid") final String catId) {
-		domain(did).removeCategory(Target.create(target), catId) ;
+        domain(did).removeCategory(Target.create(target), StringUtil.split(catId, ",")) ;
 		return catId + " removed" ;
 	}
-	
-	
+
+    @GET
+    @Path("/{did}/listpage/{catid}")
+    @Produces(ExtMediaType.APPLICATION_JSON_UTF8)
+    public JsonObject storyPage(@PathParam("did") String did, @PathParam("catid") String catid) throws IOException {
+        XIterable<TemplateX> listpages = domain(did).datas().templates().selectList().category(catid).find();
+
+        Iterator<TemplateX> iter = listpages.iterator();
+        JsonObject result = JsonObject.create();
+
+        JsonArray nodes = new JsonArray();
+        int seq = 1;
+        while (iter.hasNext()) {
+            TemplateX template = iter.next();
+            nodes.add(new JsonObject().put("tplid", template.tplId()).put("name", template.asString("name")).put("form", seq++).put("link", template.fileName()));
+        }
+
+        return result.put("nodes", nodes);
+    }
 	
 	
 	

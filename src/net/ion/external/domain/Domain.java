@@ -6,6 +6,7 @@ import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
 import net.ion.craken.tree.Fqn;
+import net.ion.framework.util.StringUtil;
 
 public class Domain {
 
@@ -69,21 +70,22 @@ public class Domain {
 	public Domain removeGalleryCategory(final String gcatId) {
 		return removeCategory(Target.GalleryCategory, gcatId) ;
 	}
-	public Domain removeCategory(final Target target, final String catId) {
+
+	public Domain removeCategory(final Target target, final String... catIds) {
 		session.tran(new TransactionJob<Void>() {
 			@Override
 			public Void handle(WriteSession wsession) throws Exception {
-				wsession.pathBy("/domain/", did, target.typeName(), catId).removeSelf() ;
+                if(catIds != null) {
+                    for(String catId : catIds) {
+                        wsession.pathBy("/domain/", did, target.typeName(), catId).removeSelf();
+                    }
+                }
 				return null;
 			}
 		}) ;
 		return this ;
 	}
 
-	
-	
-	
-	
 	public Domain resetUser() {
 		session.tran(new TransactionJob<Void>() {
 			@Override

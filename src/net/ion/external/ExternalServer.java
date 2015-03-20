@@ -21,8 +21,10 @@ import net.ion.external.ics.common.TraceHandler;
 import net.ion.external.ics.misc.MenuWeb;
 import net.ion.external.ics.openweb.OpenDomainWeb;
 import net.ion.external.ics.openweb.OpenScriptWeb;
+import net.ion.external.ics.web.domain.ArticleWeb;
 import net.ion.external.ics.web.domain.DomainEntry;
 import net.ion.external.ics.web.domain.DomainWeb;
+import net.ion.external.ics.web.domain.GalleryWeb;
 import net.ion.external.ics.web.misc.CrakenLet;
 import net.ion.external.ics.web.misc.ExportWeb;
 import net.ion.external.ics.web.misc.MiscWeb;
@@ -85,7 +87,7 @@ public class ExternalServer {
 			.add("/favicon.ico", new FavIconHandler())
 			.add(new LoggingHandler(new AppLogSink(elogger)))
 			.add(new MyStaticFileHandler("./webapps/admin/", Executors.newCachedThreadPool(ThreadFactoryBuilder.createThreadFactory("static-io-thread-%d")), new HTMLTemplateEngine(radon.getConfig().getServiceContext())).welcomeFile("index.html"))
-            .add("/admin/*", new PathHandler(DomainWeb.class, ScriptWeb.class, MiscWeb.class, TraceWeb.class, MenuWeb.class, CrakenLet.class, ExportWeb.class).prefixURI("/admin"))
+            .add("/admin/*", new PathHandler(DomainWeb.class, ArticleWeb.class, GalleryWeb.class, ScriptWeb.class, MiscWeb.class, TraceWeb.class, MenuWeb.class, CrakenLet.class, ExportWeb.class).prefixURI("/admin"))
             .add("/open/*", new PathHandler(OpenDomainWeb.class, OpenScriptWeb.class).prefixURI("open"))
             .add("/logging/event/*", new EventSourceHandler() {
 					@Override

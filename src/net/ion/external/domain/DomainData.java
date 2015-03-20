@@ -3,15 +3,7 @@ package net.ion.external.domain;
 import java.io.IOException;
 
 import net.ion.craken.node.ReadNode;
-import net.ion.external.ics.bean.AfieldMetaX;
-import net.ion.external.ics.bean.ArticleChildrenX;
-import net.ion.external.ics.bean.ArticleX;
-import net.ion.external.ics.bean.CategoryChildrenX;
-import net.ion.external.ics.bean.GalleryCategoryX;
-import net.ion.external.ics.bean.GalleryChildrenX;
-import net.ion.external.ics.bean.SiteCategoryX;
-import net.ion.external.ics.bean.TemplateChildrenX;
-import net.ion.external.ics.bean.UserX;
+import net.ion.external.ics.bean.*;
 import net.ion.nsearcher.search.filter.TermFilter;
 
 public class DomainData {
@@ -51,7 +43,6 @@ public class DomainData {
 		return GalleryChildrenX.create(domain, domainNode().refsToChildren("include").fqnFilter("/datas/gallery"));
 	}
 
-	
 	public TemplateChildrenX templates() throws IOException {
 		return TemplateChildrenX.create(domain, domainNode().refsToChildren("include").fqnFilter("/datas/template")) ;
 	}
@@ -64,8 +55,12 @@ public class DomainData {
 	public ArticleX article(String catId, int artId) {
 		return ArticleX.create(domain, ghostBy("/datas/article/" + catId + "/" + artId));
 	}
-	
-	public SiteCategoryX scategory(String catId) {
+
+    public GalleryX gallery(String gcatId, int galId) throws IOException {
+        return GalleryX.create(domain, ghostBy("/datas/gallery/" + gcatId + "/" + galId)) ;
+    }
+
+    public SiteCategoryX scategory(String catId) {
 		return SiteCategoryX.create(domain, ghostBy("/datas/scat", catId));
 	}
 

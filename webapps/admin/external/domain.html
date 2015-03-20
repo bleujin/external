@@ -48,7 +48,7 @@
     </div>
 </div>
 
-<div id="article_view_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="article-view-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header"><h5 id="article_view_label">${m.asString("domain.article.data")}</h5></div>
@@ -61,18 +61,18 @@
                 </ul>
                 <div id="myTabContent1" class="tab-content padding-10">
                     <div class="tab-pane fade in active" id="s1">
-                        <form class="smart-form" id="article_view_form" method="post" action="domain/article" novalidate="novalidate">
+                        <form class="smart-form" id="article-view-form" method="post" action="domain/article" novalidate="novalidate">
                             <fieldset style="padding: 0px">
                                 <section>
                                     <label class="label">${m.asString("domain.article.subject")}</label>
                                     <label class="input">
-                                        <input type="text" id="subject" name="subject" value="This is article subject" readonly/>
+                                        <input type="text" name="subject" value="" readonly/>
                                     </label>
                                 </section>
                                 <section>
                                     <label class="label">${m.asString("domain.article.content")}</label>
                                     <label class="input">
-                                        <textarea id="content" name="content" style="width: 70%" rows="10" readonly>Content...</textarea>
+                                        <textarea name="content" style="width: 70%" rows="10" readonly></textarea>
                                     </label>
                                 </section>
                             </fieldset>
@@ -158,18 +158,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1000</td>
-                        <td>index.html</td>
-                        <td>1</td>
-                        <td>/scat/ninaninyo/external/airkjh/1000_100.html</td>
-                    </tr>
-                    <tr>
-                        <td>1001</td>
-                        <td>index2.html</td>
-                        <td>2</td>
-                        <td>/scat/ninaninyo/external/airkjh/1001_100.html</td>
-                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -184,30 +172,18 @@
 <div id="list-pages-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header"><h5 id="myModalLabel3">${m.asString("domain.source.scat.template.listpage")}</h5></div>
+            <div class="modal-header"><h5 id="myModalLabel3">${m.asString("domain.defined.scat.template.listpage")}</h5></div>
             <div class="modal-body">
                 <table id="list-pages" class="table table-bordered table-hover" width="100%">
                     <thead>
                     <tr>
-                        <th>${m.asString("domain.source.scat.template.tplid")}</th>
-                        <th>${m.asString("domain.source.scat.template.tplname")}</th>
-                        <th>${m.asString("domain.source.scat.template.form")}</th>
-                        <th>${m.asString("domain.source.scat.template.link")}</th>
+                        <th>${m.asString("domain.defined.scat.template.tplid")}</th>
+                        <th>${m.asString("domain.defined.scat.template.tplname")}</th>
+                        <th>${m.asString("domain.defined.scat.template.form")}</th>
+                        <th>${m.asString("domain.defined.scat.template.link")}</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1000</td>
-                        <td>index.html</td>
-                        <td>1</td>
-                        <td>/scat/ninaninyo/external/airkjh/index.html</td>
-                    </tr>
-                    <tr>
-                        <td>1001</td>
-                        <td>index2.html</td>
-                        <td>2</td>
-                        <td>/scat/ninaninyo/external/airkjh/index2.html</td>
-                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -219,55 +195,83 @@
     </div>
 </div>
 
-<div id="create-domain-scat-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" aria-hidden="true">
+<div id="create-domain-scat-modal" class="modal fade domain" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header"><h5 id="myModalLabel4">${m.asString("domain.source.scat")}</h5></div>
             <div class="modal-body">
-                <form class="smart-form" id="create-domain-scat-form" method="post" action="domain/" novalidate="novalidate">
+                <form class="smart-form" id="create-domain-scat-form" method="post" action="domain/" novalidate="novalidate" external-target="scat">
                     <fieldset style="padding: 0px">
                         <section>
                             <label class="label">${m.asString("domain.scat.catid")}</label>
                             <label class="input">
-                                <input type="text" id="scatid" name="scatid" placeholder="ics category id"/>
+                                <input type="text" name="catid" placeholder="site category id"/>
                             </label>
                         </section>
                         <section>
-                            <label class="checkbox"><input type="checkbox" name="includeSub" value="true" /><i></i>${m.asString("domain.source.below")}</label>
+                            <label class="checkbox"><input type="checkbox" name="includeSub"/><i></i>${m.asString("domain.source.below")}</label>
                         </section>
                     </fieldset>
                 </form>
             </div>
             <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">${m.asString("buttons.modal.close")}</button>
-                <button class="btn btn-primary" name="create_scat">${m.asString("domain.source.create.button")}</button>
+                <button class="btn btn-primary" name="create">${m.asString("domain.source.create.button")}</button>
             </div>
         </div>
     </div>
 </div>
 
-<div id="create-domain-gcat-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel5" aria-hidden="true">
+<div id="create-domain-gcat-modal" class="modal fade domain" tabindex="-1" role="dialog" aria-labelledby="myModalLabel5" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header"><h5 id="myModalLabel5">${m.asString("domain.source.gcat")}</h5></div>
             <div class="modal-body">
-                <form class="smart-form" id="create-domain-gcat-form" method="post" action="domain/source" novalidate="novalidate">
+                <form class="smart-form" id="create-domain-gcat-form" method="post" action="domain/source" novalidate="novalidate" external-target="gcat">
                     <fieldset style="padding: 0px">
                         <section>
                             <label class="label">${m.asString("domain.source.gcat.catid")}</label>
                             <label class="input">
-                                <input type="text" id="gcatid" name="gcatid" placeholder="ics category id"/>
+                                <input type="text" name="catid" placeholder="gallery category id"/>
                             </label>
                         </section>
                         <section>
-                            <label class="checkbox"><input type="checkbox" name="below"/><i></i>${m.asString("domain.source.below")}</label>
+                            <label class="checkbox"><input type="checkbox" name="includeSub"/><i></i>${m.asString("domain.source.below")}</label>
                         </section>
                     </fieldset>
                 </form>
             </div>
             <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">${m.asString("buttons.modal.close")}</button>
-                <button class="btn btn-primary" name="create_source">${m.asString("domain.source.create.button")}</button>
+                <button class="btn btn-primary" name="create">${m.asString("domain.source.create.button")}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="gallery-crop-modal" class="modal fade domain" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6" aria-hidden="true">
+    <div class="modal-dialog" style="width: 800px; height: 800px;">
+        <div class="modal-content">
+            <div class="modal-header"><h5 id="myModalLabel6">Crop</h5></div>
+            <div class="modal-body">
+                <form class="smart-form" name="crop-form" method="post" action="domain/" novalidate="novalidate">
+                    <fieldset style="padding: 0px">
+                        <section>
+                            <label class="label">Property Id</label>
+                            <label class="input">
+                                <input type="text" class="form-control" name="propId" placeholder="Property Id">
+                            </label>
+                        </section>
+                    </fieldset>
+                </form>
+                <div id="cropContainer">
+                    <img src="">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                <button class="btn btn-info" name="reset">Reset</button>
+                <button class="btn btn-primary" name="crop">Save</button>
             </div>
         </div>
     </div>
@@ -439,6 +443,6 @@
         });
     };
 
-    pagefunction();
+    pagefunction() ;
 
 </script>

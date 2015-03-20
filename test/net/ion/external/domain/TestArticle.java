@@ -1,5 +1,6 @@
 package net.ion.external.domain;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -55,5 +56,19 @@ public class TestArticle extends TestBaseDomain {
 		domain.datas().article("dynamic", 1207152).afields(true).out(ohandler) ; 
 		Debug.line(sw);
 	}
+
+    public void testArticleContent() throws IOException {
+        // given
+        ArticleX article = domain.datas().article("dynamic", 1207152);;
+
+        // when
+        StringWriter sw = new StringWriter();
+        OutputHandler ohandler = OutputHandler.createJson(sw, true);
+
+        article.out(ohandler) ;
+
+        // then
+        Debug.line(sw.toString());
+    }
 	
 }

@@ -6,6 +6,7 @@ import net.ion.framework.db.manager.OracleDBManager;
 import net.ion.framework.db.procedure.IParameterQueryable;
 import net.ion.framework.util.Debug;
 import junit.framework.TestCase;
+import net.ion.framework.util.StringUtil;
 
 public class TestUserCommand extends TestCase {
 	
@@ -20,5 +21,4 @@ public class TestUserCommand extends TestCase {
 		
 		dc.close();
 	}
-
 }

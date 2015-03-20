@@ -1,27 +1,5 @@
 package net.ion.external.ics.web.domain;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.StringWriter;
-
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.StreamingOutput;
-
-import org.apache.lucene.queryparser.classic.ParseException;
-import org.jboss.resteasy.spi.HttpRequest;
-
 import net.ion.cms.rest.sync.Def;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
@@ -30,8 +8,6 @@ import net.ion.craken.node.WriteSession;
 import net.ion.craken.tree.Fqn;
 import net.ion.external.domain.DomainSub;
 import net.ion.external.ics.QueryTemplateEngine;
-import net.ion.external.ics.bean.ArticleChildrenX;
-import net.ion.external.ics.bean.ArticleX;
 import net.ion.external.ics.bean.GalleryChildrenX;
 import net.ion.external.ics.bean.GalleryX;
 import net.ion.external.ics.bean.OutputHandler;
@@ -39,11 +15,24 @@ import net.ion.external.ics.bean.XIterable;
 import net.ion.external.ics.common.ExtMediaType;
 import net.ion.external.ics.util.WebUtil;
 import net.ion.external.ics.web.Webapp;
+import net.ion.framework.parse.gson.JsonArray;
 import net.ion.framework.parse.gson.JsonObject;
-import net.ion.framework.parse.gson.stream.JsonWriter;
+import net.ion.framework.parse.gson.JsonPrimitive;
 import net.ion.framework.util.FileUtil;
+import net.ion.framework.util.IOUtil;
 import net.ion.framework.util.MapUtil;
+import net.ion.framework.util.NumberUtil;
 import net.ion.radon.core.ContextParam;
+import org.apache.lucene.queryparser.classic.ParseException;
+import org.jboss.resteasy.plugins.providers.UncertainOutput;
+import org.jboss.resteasy.spi.HttpRequest;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.StreamingOutput;
+import java.io.*;
 
 @Path("/gallery")
 public class GalleryWeb {
@@ -57,15 +46,72 @@ public class GalleryWeb {
 		this.session = dsub.craken().login();
 		this.qengine = qengine ;
 	}
-	
-	
-	
+
+    @GET
+    @Path("/{did}/gallery")
+    @Produces(ExtMediaType.APPLICATION_JSON_UTF8)
+    public JsonObject query() throws IOException {
+        JsonObject result = new JsonObject();
+        result.put("info", session.ghostBy("/menus/domain").property("gallery").asString());
+        return result;
+    }
+
+    @GET
+    @Path("/{did}/list")
+    @Produces(ExtMediaType.APPLICATION_JSON_UTF8)
+    public JsonObject listGallery(@PathParam("did") final String did, @QueryParam("query") final String query, @DefaultValue("101") @QueryParam("offset") final int offset) throws IOException{
+        XIterable<GalleryX> gallerys = dsub.findDomain(did).datas().gallerys().where(query).offset(offset).find();;
+        JsonObject result = JsonObject.create() ;
+        JsonArray jarray = new JsonArray();
+        result.put("result", jarray) ;
+
+        for(GalleryX gallery : gallerys) {
+            JsonArray rowArray = new JsonArray().add(new JsonPrimitive(gallery.galId())).add(new JsonPrimitive(gallery.catId())).add(new JsonPrimitive(gallery.asString(Def.Gallery.Subject)))
+                    .add(new JsonPrimitive(gallery.asString(Def.Gallery.Width))).add(new JsonPrimitive(gallery.asString(Def.Gallery.Height))).add(new JsonPrimitive(gallery.asString(Def.Gallery.FileSize)))
+                    .add(new JsonPrimitive(gallery.asString(Def.Gallery.ModDay))) ;
+            jarray.add(rowArray) ;
+        }
+        return result ;
+    }
+
+    @GET
+    @Path("/{did}/{catid}/{galid}.{type}")
+    public UncertainOutput viewImage(@PathParam("did") final String did, @PathParam("catid") final String catid, @PathParam("galid") final int galid, @PathParam("type") final String type, @DefaultValue("data") @QueryParam("propId") final String propId){
+        return new UncertainOutput() {
+            @Override
+            public void write(OutputStream output) throws IOException, WebApplicationException {
+                GalleryX gallery = dsub.findDomain(did).datas().gallery(catid, galid) ;
+                InputStream input = gallery.asStream(propId) ;
+
+                try {
+                    IOUtil.copy(input, output);
+                } finally {
+                    IOUtil.close(input);
+                }
+            }
+
+            @Override
+            public MediaType getMediaType() {
+                return ExtMediaType.guessImageType(type) ;
+            }
+        } ;
+    }
+
+    @GET
+    @Path("/{did}/{catid}/{galid}/crop")
+    @Produces(ExtMediaType.TEXT_PLAIN_UTF8)
+    public String crop(@PathParam("did") String did, @PathParam("catid") String catid, @PathParam("galid") int galid, @QueryParam("x") int x, @QueryParam("y") int y, @QueryParam("width") int width, @QueryParam("height") int height, @QueryParam("propId") String propId) throws IOException {
+        GalleryX gallery = dsub.findDomain(did).datas().gallery(catid, galid) ;
+        gallery.dataStreamWithCrop(propId, x, y, width, height) ;
+
+        return galid + " cropped" ;
+    }
 
 	// query
 	@GET
 	@Path("/{did}/query.json")
 	@Produces(ExtMediaType.APPLICATION_JSON_UTF8)
-	public StreamingOutput jquery(@PathParam("did") String did, @DefaultValue("") @QueryParam("query") String query, @DefaultValue("") @QueryParam("sort") String sort, @DefaultValue("0") @QueryParam("skip") int skip, @DefaultValue("10") @QueryParam("offset") int offset,
+	public StreamingOutput jquery(@PathParam("did") String did, @DefaultValue("") @QueryParam("query") String query, @DefaultValue("") @QueryParam("sort") String sort, @DefaultValue("0") @QueryParam("skip") String skip, @DefaultValue("10") @QueryParam("offset") String offset,
 			@QueryParam("indent") final boolean indent, @QueryParam("debug") boolean debug, @Context HttpRequest request) throws IOException, ParseException {
 
 		MultivaluedMap<String, String> map = request.getUri().getQueryParameters();
@@ -82,17 +128,17 @@ public class GalleryWeb {
 		};
 	}
 
-	private GalleryChildrenX findGallery(String did, String query, String sort, int skip, int offset, HttpRequest request, MultivaluedMap<String, String> map) throws IOException, ParseException {
+	private GalleryChildrenX findGallery(String did, String query, String sort, String skip, String offset, HttpRequest request, MultivaluedMap<String, String> map) throws IOException, ParseException {
 		if (request.getHttpMethod().equalsIgnoreCase("POST") && request.getDecodedFormParameters().size() > 0)
 			map.putAll(request.getDecodedFormParameters());
 
-		return dsub.findDomain(did).datas().gallerys().where(query).sort(sort).skip(skip).offset(offset) ;
+		return dsub.findDomain(did).datas().gallerys().where(query).sort(sort).skip(NumberUtil.toInt(skip, 0)).offset(NumberUtil.toInt(offset, 10));
 	}
 
 	@GET
 	@Path("/{did}/query.xml")
 	@Produces(ExtMediaType.APPLICATION_XML_UTF8)
-	public StreamingOutput xquery(@PathParam("did") String did, @DefaultValue("") @QueryParam("query") String query, @DefaultValue("") @QueryParam("sort") String sort, @DefaultValue("0") @QueryParam("skip") int skip, @DefaultValue("10") @QueryParam("offset") int offset,
+	public StreamingOutput xquery(@PathParam("did") String did, @DefaultValue("") @QueryParam("query") String query, @DefaultValue("") @QueryParam("sort") String sort, @DefaultValue("0") @QueryParam("skip") String skip, @DefaultValue("10") @QueryParam("offset") String offset,
 			@QueryParam("indent") final boolean indent, @QueryParam("debug") boolean debug, @Context HttpRequest request) throws IOException, ParseException {
 
 		MultivaluedMap<String, String> map = request.getUri().getQueryParameters();
@@ -113,7 +159,7 @@ public class GalleryWeb {
 	@GET
 	@Path("/{did}/query.csv")
 	@Produces(ExtMediaType.TEXT_PLAIN_UTF8)
-	public StreamingOutput cquery(@PathParam("did") String did, @DefaultValue("") @QueryParam("query") String query, @DefaultValue("") @QueryParam("sort") String sort, @DefaultValue("0") @QueryParam("skip") int skip, @DefaultValue("10") @QueryParam("offset") int offset,
+	public StreamingOutput cquery(@PathParam("did") String did, @DefaultValue("") @QueryParam("query") String query, @DefaultValue("") @QueryParam("sort") String sort, @DefaultValue("0") @QueryParam("skip") String skip, @DefaultValue("10") @QueryParam("offset") String offset,
 			@QueryParam("indent") boolean indent, @QueryParam("debug") boolean debug, @Context HttpRequest request) throws IOException, ParseException {
 
 		MultivaluedMap<String, String> map = request.getUri().getQueryParameters();
@@ -133,7 +179,7 @@ public class GalleryWeb {
 	@GET
 	@Path("/{did}/query.template")
 	@Produces(ExtMediaType.TEXT_PLAIN_UTF8)
-	public String tquery(@PathParam("did") String did, @DefaultValue("") @QueryParam("query") String query, @DefaultValue("") @QueryParam("sort") String sort, @DefaultValue("0") @QueryParam("skip") int skip, @DefaultValue("10") @QueryParam("offset") int offset,
+	public String tquery(@PathParam("did") String did, @DefaultValue("") @QueryParam("query") String query, @DefaultValue("") @QueryParam("sort") String sort, @DefaultValue("0") @QueryParam("skip") String skip, @DefaultValue("10") @QueryParam("offset") String offset,
 			@QueryParam("indent") boolean indent, @QueryParam("debug") boolean debug, @Context HttpRequest request) throws IOException, ParseException {
 
 		try {
@@ -141,8 +187,8 @@ public class GalleryWeb {
 			final XIterable<GalleryX> gallerys = findGallery(did, query, sort, skip, offset, request, map).find();
 
 			StringWriter writer = new StringWriter();
-			String resourceName = "/domain/"+ did + "/article" + ".template" ;
-			qengine.merge(resourceName, MapUtil.<String, Object> chainMap().put("articles", gallerys).put("params", map).toMap(), writer);
+			String resourceName = "/domain/"+ did + "/gallery" + ".template" ;
+			qengine.merge(resourceName, MapUtil.<String, Object> chainMap().put("gallerys", gallerys).put("params", map).toMap(), writer);
 			
 			return writer.toString() ;
 		} catch (org.apache.velocity.exception.ParseErrorException tex) {
@@ -150,31 +196,7 @@ public class GalleryWeb {
 			return tex.getMessage();
 		}
 	}	
-	
-	
-	@GET
-	@Path("/{did}/list")
-	@Produces(ExtMediaType.APPLICATION_JSON_UTF8) 
-	public StreamingOutput listGallery(@PathParam("did") final String did, @QueryParam("query") final String query, @DefaultValue("101") @QueryParam("offset") final int offset) throws IOException{
-		return new StreamingOutput() {
-			@Override
-			public void write(OutputStream output) throws IOException, WebApplicationException {
-				GalleryChildrenX gallerys = dsub.findDomain(did).datas().gallerys().where(query).offset(offset) ;
-				JsonWriter jwriter = new JsonWriter(new OutputStreamWriter(output)) ;
-				
-				jwriter.beginObject().name("result").beginArray() ;
-				gallerys.find().jsonSelf(jwriter, Def.Gallery.GalId, Def.Gallery.CatId, Def.Gallery.Subject, Def.Gallery.Width);
-				jwriter.endArray().endObject() ;
-				jwriter.flush();
-			}
-		};
-	}
-	
-	
-	
-	
-	
-	
+
 	// template
 	
 	@GET
@@ -198,7 +220,7 @@ public class GalleryWeb {
 			@Override
 			public Void handle(WriteSession wsession) throws Exception {
 				WriteNode found = wsession.pathBy(fqnBy(did, "/gallery/template"));
-				FileUtil.forceWriteUTF8(new File(Webapp.REMOVED_DIR, did + ".article.template.bak"), found.property("template").asString());
+				FileUtil.forceWriteUTF8(new File(Webapp.REMOVED_DIR, did + ".gallery.template.bak"), found.property("template").asString());
 
 				found.property("template", template);
 				return null;
