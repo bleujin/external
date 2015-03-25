@@ -56,6 +56,11 @@ public abstract class BeanX {
 	protected Domain domain() {
 		return domain;
 	}
+	
+	
+	public String domainId(){
+		return domain.getId() ;
+	}
 
 	public boolean exists(){
 		return ! node.isGhost() ;

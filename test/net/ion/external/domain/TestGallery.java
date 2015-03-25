@@ -1,5 +1,6 @@
 package net.ion.external.domain;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -47,9 +48,10 @@ public class TestGallery extends TestBaseDomain{
 		GalleryCategoryX gcat = domain.datas().gcategory("bbbb");
 		GalleryX gallery = gcat.gallery(11000) ;
 		
-		InputStream input = gallery.dataStreamWithSize(100, 100);
+		InputStream input = gallery.resizeWith(3000, 3000);
 		
 		assertEquals(true, input != BeanX.BLANKSTREAM) ;
+//		IOUtil.copyNClose(input, new FileOutputStream("./resource/temp/1.jpg"));
 		IOUtil.close(input);
 	}
 
@@ -57,9 +59,19 @@ public class TestGallery extends TestBaseDomain{
         GalleryCategoryX gcat = domain.datas().gcategory("bbbb");
         GalleryX gallery = gcat.gallery(11000) ;
 
-        InputStream input = gallery.dataStreamWithCrop("cropId", 0, 0, 100, 100);
+        InputStream input = gallery.cropWith(0, 0, 100, 100);
 
         assertEquals(true, input != BeanX.BLANKSTREAM) ;
         IOUtil.close(input);
     }
+    
+    public void testValidCrop() throws Exception {
+        GalleryCategoryX gcat = domain.datas().gcategory("bbbb");
+        GalleryX gallery = gcat.gallery(11000) ;
+
+        InputStream input = gallery.cropWith(1000, 1000, 10000, 10000);
+
+        assertEquals(true, input != BeanX.BLANKSTREAM) ;
+        IOUtil.close(input);
+	}
 }

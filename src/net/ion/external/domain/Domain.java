@@ -29,6 +29,10 @@ public class Domain {
 		public static Target create(String typeName){
 			return "scat".equals(typeName) ? SiteCategory : GalleryCategory ;
 		}
+		
+		public String toString(){
+			return typeName() ;
+		}
 	}
 	
 	private Domain(ICSSubCraken ic, ReadNode dnode) {

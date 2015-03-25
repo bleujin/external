@@ -135,7 +135,9 @@ public class TestScriptManager extends TestCase {
 		uptcol.add(dc.createUserProcedureBatch("sample@addBatchWith(?,?)").addParam(new int[]{300}).addParam(new String[]{"jin"})).execUpdate() ;
 		
 	
-		craken.login().pathBy("/sample").children().debugPrint();  
+		craken.login().pathBy("/sample").children().ascending("a").debugPrint();  
+		
+		
 		dc.close(); 
 
 		

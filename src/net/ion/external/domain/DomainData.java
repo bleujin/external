@@ -65,6 +65,14 @@ public class DomainData {
 		return ArticleX.create(domain, ghostBy("/datas/article/" + catId + "/" + artId));
 	}
 
+	
+	public GalleryX findGallery(int galId) throws IOException{
+		ReadNode found = domain.session().ghostBy("/datas/gallery").childQuery("galid:" + galId, true).findOne() ;
+		if (found == null) {
+			return GalleryX.create(domain, ghostBy("/datas/gallery/notfound/" + galId)) ;
+		} return GalleryX.create(domain, found) ;
+	}
+	
     public GalleryX gallery(String gcatId, int galId) throws IOException {
         return GalleryX.create(domain, ghostBy("/datas/gallery/" + gcatId + "/" + galId)) ;
     }
@@ -73,8 +81,8 @@ public class DomainData {
 		return SiteCategoryX.create(domain, ghostBy("/datas/scat", catId));
 	}
 
-	public GalleryCategoryX gcategory(String catId) {
-		return GalleryCategoryX.create(domain, ghostBy("/datas/gcat", catId));
+	public GalleryCategoryX gcategory(String gcatId) {
+		return GalleryCategoryX.create(domain, ghostBy("/datas/gcat", gcatId));
 	}
 
 	public AfieldMetaX afieldMeta(String afieldid) {

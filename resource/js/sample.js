@@ -8,7 +8,7 @@ new function(){
 	}, 
 	
 	
-	this.selectby = function(_a){
+	this.selectBY = function(_a){
 		return session.ghostBy('/sample/'+ _a).toRows("a, b") ;
 	}, 
 	
