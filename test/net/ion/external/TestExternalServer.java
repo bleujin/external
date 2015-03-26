@@ -25,4 +25,12 @@ public class TestExternalServer extends TestCase {
 		server.start() ;
         new InfinityThread().startNJoin();
     }
+    
+    
+    public void testDistRun() throws Exception {
+		final ExternalServer server = ExternalServer.create(ConfigBuilder.create("./resource/config/es-config.xml").build()) ;
+
+		server.start() ;
+        new InfinityThread().startNJoin();
+	}
 }

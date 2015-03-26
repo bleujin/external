@@ -11,7 +11,7 @@ public class TestCrakenScript extends TestCase {
 
 	public void testHasFn() throws Exception {
 		
-		ICSSubCraken craken = ICSSubCraken.create();
+		ICSSubCraken craken = ICSSubCraken.single();
 		ScheduledExecutorService ses = Executors.newScheduledThreadPool(1);
 		CrakenScript cs = CrakenScript.create(craken, ses) ;
 		cs.readDir(new File("./resource/js")) ;

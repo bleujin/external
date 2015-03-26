@@ -8,6 +8,11 @@ import net.ion.craken.node.crud.WorkspaceConfigBuilder;
 import net.ion.external.config.ESConfig;
 
 import org.apache.lucene.index.CorruptIndexException;
+import org.infinispan.configuration.cache.CacheMode;
+import org.infinispan.configuration.cache.Configuration;
+import org.infinispan.configuration.global.GlobalConfiguration;
+import org.infinispan.configuration.global.GlobalConfigurationBuilder;
+import org.infinispan.manager.DefaultCacheManager;
 
 
 public class ICSSubCraken {
@@ -24,13 +29,30 @@ public class ICSSubCraken {
 		return new ICSSubCraken(repository, wsName);
 	}
 
-	public static ICSSubCraken create() throws IOException{
+	public static ICSSubCraken single() throws IOException{
 		RepositoryImpl r = RepositoryImpl.create();
 		r.createWorkspace("ics", WorkspaceConfigBuilder.directory("./resource/ics")) ;
 		
 		return new ICSSubCraken(r, "ics") ;
 	}
+
 	
+	public static ICSSubCraken create(ESConfig econfig) throws IOException{
+		GlobalConfiguration gconfig = new GlobalConfigurationBuilder()
+		.transport().defaultTransport()
+				.clusterName(econfig.serverConfig().clusterName())
+				.nodeName("ics")
+				.addProperty("location", "./resource/config/craken-udp.xml")
+			.build();
+		DefaultCacheManager dcm = new DefaultCacheManager(gconfig);
+		
+		RepositoryImpl r = RepositoryImpl.create(dcm, "emanon");
+		r.createWorkspace("ics", WorkspaceConfigBuilder.directory("./resource/ics").distMode(econfig.serverConfig().cacheMode())) ;
+		
+		return new ICSSubCraken(r, "ics") ;
+	}
+	
+
 	public static ICSSubCraken test() throws CorruptIndexException, IOException{
 		return new ICSSubCraken(RepositoryImpl.inmemoryCreateWithTest(), "test") ;
 	}

@@ -58,7 +58,7 @@ public class Domain {
 		session.tran(new TransactionJob<Void>() {
 			@Override
 			public Void handle(WriteSession wsession) throws Exception {
-				wsession.pathBy("/domain/", did, target.typeName(), catId).property("includesub", includeSub) ;
+				wsession.pathBy("/domain/", did, target.typeName(), catId).property("catid", catId).property("includesub", includeSub) ;
 				return null;
 			}
 		}) ;

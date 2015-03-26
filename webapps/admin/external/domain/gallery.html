@@ -267,7 +267,7 @@
                 var superbox = $('#superbox_body') ;
                 $.each(nodes, function(index) {
                     var gallery = nodes[index], galId = gallery[0], catId = gallery[1], fileName = gallery[2], type = fileName.substr(fileName.lastIndexOf('.') + 1) ;
-                    var url = '/admin/gallery/' + domainId + '/view/' + galId ;
+                    var url = '/admin/gallery/' + domainId + '/resize/' + galId + '?width=137&height=137';
                     var el = '<div class="superbox-list"><img class="superbox-img" src="' + url + '" data-img="' + url + '" title="'+fileName+'"></div>' ;
                     $(el).appendTo(superbox) ;
                 });

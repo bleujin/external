@@ -25,7 +25,7 @@ public class TestSetup extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		this.craken = ICSSubCraken.create();
+		this.craken = ICSSubCraken.single();
 		this.session = craken.login();
 		OracleDBManager dbm = new OracleDBManager("jdbc:oracle:thin:@dev-oracle.i-on.net:1521:dev10g", "dev_ics6", "dev_ics6");
 		this.dc = new DBController(dbm);

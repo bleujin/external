@@ -64,7 +64,7 @@ public class ExternalServer {
 	private void init(ESConfig econfig) throws Exception {
 		this.econfig = econfig ;
         RadonConfigurationBuilder builder = RadonConfiguration.newBuilder(econfig.serverConfig().port());
-        this.craken = ICSSubCraken.create() ;
+        this.craken = ICSSubCraken.create(econfig) ;
         final EventSourceEntry esentry = builder.context(EventSourceEntry.EntryName, EventSourceEntry.create());
         DomainEntry dentry = DomainEntry.test(DomainSub.create(craken));
         
