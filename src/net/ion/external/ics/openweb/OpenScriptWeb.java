@@ -20,7 +20,7 @@ import net.ion.radon.core.ContextParam;
 
 import org.jboss.resteasy.spi.HttpRequest;
 
-@Path("/script")
+@Path("/scripts")
 public class OpenScriptWeb implements Webapp{
 
 	private ScriptWeb refWeb;

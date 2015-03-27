@@ -41,11 +41,11 @@ public class DomainData {
 	
 	public ArticleChildrenX articles() throws IOException {
 		// /datas/article/{catid}/{artid}
-		return ArticleChildrenX.create(domain, domainNode().refsToChildren("include").fqnFilter("/datas/article"));
+		return ArticleChildrenX.create(domain, domainNode().refsToChildren("include").fqnFilter("/datas/article"));   // @TODO confirm oeprday, expireday
 	}
 	
 	public ArticleChildrenX articles(String catId) throws IOException {
-		return ArticleChildrenX.create(domain, domainNode().refsToChildren("include").fqnFilter("/datas/article").filter(new TermFilter("catid", catId)));
+		return ArticleChildrenX.create(domain, domainNode().refsToChildren("include").fqnFilter("/datas/article").filter(new TermFilter("catid", catId))); // @TODO confirm oeprday, expireday
 	}
 
 	public GalleryChildrenX gallerys() throws IOException {

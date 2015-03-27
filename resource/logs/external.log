@@ -5795,3 +5795,187 @@ Caused by: java.lang.NullPointerException
 	at org.jboss.resteasy.core.interception.MessageBodyWriterContextImpl.proceed(MessageBodyWriterContextImpl.java:101)
 	at org.jboss.resteasy.core.ServerResponse.writeTo(ServerResponse.java:212)
 	... 12 more
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] INFO  net.ion.craken.node.Repository  - Workspace[ics, REPL_SYNC] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000078: Starting JGroups Channel
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000088: Unable to use any JGroups configuration mechanisms provided in properties {location=./resource/config/craken-udp.xml}. Using default JGroups configuration!
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000094: Received new cluster view: [ics-24024|1] (2) [ics-24024, ics-64930]
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000079: Cache local address is ics-64930, physical addresses are [fe80:0:0:0:d526:dc42:25d8:88b9%10:52594]
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.framework.db.manager.script.JScriptEngine  - Has not Extension libPath : ./resource/loader/lib
+[RADON-STARTUP-THREAD] WARN  net.ion.nradon.netty.NettyWebServer  - PORT 9001
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] INFO  net.ion.craken.node.Repository  - Workspace[ics, REPL_SYNC] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000078: Starting JGroups Channel
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000088: Unable to use any JGroups configuration mechanisms provided in properties {location=./resource/config/craken-udp.xml}. Using default JGroups configuration!
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000094: Received new cluster view: [ics-30413|1] (2) [ics-30413, ics-46633]
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000079: Cache local address is ics-46633, physical addresses are [fe80:0:0:0:d526:dc42:25d8:88b9%10:62722]
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.framework.db.manager.script.JScriptEngine  - Has not Extension libPath : ./resource/loader/lib
+[RADON-STARTUP-THREAD] WARN  net.ion.nradon.netty.NettyWebServer  - PORT 9001
+[Thread-1] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000080: Disconnecting JGroups Channel
+[Thread-1] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000082: Stopping the RpcDispatcher
+[Thread-1] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] INFO  net.ion.craken.node.Repository  - Workspace[ics, REPL_SYNC] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000078: Starting JGroups Channel
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000088: Unable to use any JGroups configuration mechanisms provided in properties {location=./resource/config/craken-udp.xml}. Using default JGroups configuration!
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000094: Received new cluster view: [ics-30413|3] (2) [ics-30413, ics-36532]
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000079: Cache local address is ics-36532, physical addresses are [fe80:0:0:0:d526:dc42:25d8:88b9%10:55171]
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.framework.db.manager.script.JScriptEngine  - Has not Extension libPath : ./resource/loader/lib
+[RADON-STARTUP-THREAD] WARN  net.ion.nradon.netty.NettyWebServer  - PORT 9001
+[Thread-1] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000080: Disconnecting JGroups Channel
+[Thread-1] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000082: Stopping the RpcDispatcher
+[Thread-1] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] INFO  net.ion.craken.node.Repository  - Workspace[ics, REPL_SYNC] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000078: Starting JGroups Channel
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000088: Unable to use any JGroups configuration mechanisms provided in properties {location=./resource/config/craken-udp.xml}. Using default JGroups configuration!
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000094: Received new cluster view: [ics-47098|0] (1) [ics-47098]
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000079: Cache local address is ics-47098, physical addresses are [fe80:0:0:0:d526:dc42:25d8:88b9%10:56317]
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.framework.db.manager.script.JScriptEngine  - Has not Extension libPath : ./resource/loader/lib
+[RADON-STARTUP-THREAD] WARN  net.ion.nradon.netty.NettyWebServer  - PORT 9001
+[Incoming-1,ics-47098] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000094: Received new cluster view: [ics-47098|1] (2) [ics-47098, ics-63118]
+[radon-thread-11] ERROR org.infinispan.interceptors.InvocationContextInterceptor  - ISPN000136: Execution error
+org.apache.lucene.store.AlreadyClosedException: this IndexReader is closed
+	at org.apache.lucene.index.IndexReader.ensureOpen(IndexReader.java:252)
+	at org.apache.lucene.index.SegmentReader.fields(SegmentReader.java:138)
+	at org.apache.lucene.index.TermContext.build(TermContext.java:90)
+	at org.apache.lucene.search.TermQuery.createWeight(TermQuery.java:166)
+	at org.apache.lucene.search.IndexSearcher.createNormalizedWeight(IndexSearcher.java:687)
+	at org.apache.lucene.search.IndexSearcher.search(IndexSearcher.java:326)
+	at net.ion.nsearcher.search.SingleSearcher.search(SingleSearcher.java:57)
+	at net.ion.nsearcher.search.SearcherImpl.search(SearcherImpl.java:79)
+	at net.ion.nsearcher.search.SearchRequest.find(SearchRequest.java:136)
+	at net.ion.nsearcher.search.SearchRequest.findOne(SearchRequest.java:140)
+	at net.ion.craken.loaders.CrakenStore._load(CrakenStore.java:148)
+	at net.ion.craken.loaders.CrakenStore.load(CrakenStore.java:128)
+	at org.infinispan.persistence.manager.PersistenceManagerImpl.loadFromAllStores(PersistenceManagerImpl.java:430)
+	at org.infinispan.interceptors.CacheLoaderInterceptor.loadIfNeeded(CacheLoaderInterceptor.java:263)
+	at org.infinispan.interceptors.CacheLoaderInterceptor.loadIfNeededAndUpdateStats(CacheLoaderInterceptor.java:335)
+	at org.infinispan.interceptors.CacheLoaderInterceptor.visitGetKeyValueCommand(CacheLoaderInterceptor.java:105)
+	at org.infinispan.commands.read.GetKeyValueCommand.acceptVisitor(GetKeyValueCommand.java:40)
+	at org.infinispan.interceptors.base.CommandInterceptor.invokeNextInterceptor(CommandInterceptor.java:98)
+	at org.infinispan.interceptors.EntryWrappingInterceptor.visitGetKeyValueCommand(EntryWrappingInterceptor.java:116)
+	at org.infinispan.commands.read.GetKeyValueCommand.acceptVisitor(GetKeyValueCommand.java:40)
+	at org.infinispan.interceptors.base.CommandInterceptor.invokeNextInterceptor(CommandInterceptor.java:98)
+	at org.infinispan.interceptors.base.CommandInterceptor.handleDefault(CommandInterceptor.java:112)
+	at org.infinispan.commands.AbstractVisitor.visitGetKeyValueCommand(AbstractVisitor.java:74)
+	at org.infinispan.interceptors.locking.AbstractTxLockingInterceptor.visitGetKeyValueCommand(AbstractTxLockingInterceptor.java:60)
+	at org.infinispan.interceptors.locking.OptimisticLockingInterceptor.visitGetKeyValueCommand(OptimisticLockingInterceptor.java:108)
+	at org.infinispan.commands.read.GetKeyValueCommand.acceptVisitor(GetKeyValueCommand.java:40)
+	at org.infinispan.interceptors.base.CommandInterceptor.invokeNextInterceptor(CommandInterceptor.java:98)
+	at org.infinispan.interceptors.base.CommandInterceptor.handleDefault(CommandInterceptor.java:112)
+	at org.infinispan.commands.AbstractVisitor.visitGetKeyValueCommand(AbstractVisitor.java:74)
+	at org.infinispan.commands.read.GetKeyValueCommand.acceptVisitor(GetKeyValueCommand.java:40)
+	at org.infinispan.interceptors.base.CommandInterceptor.invokeNextInterceptor(CommandInterceptor.java:98)
+	at org.infinispan.interceptors.TxInterceptor.enlistReadAndInvokeNext(TxInterceptor.java:226)
+	at org.infinispan.interceptors.TxInterceptor.visitGetKeyValueCommand(TxInterceptor.java:221)
+	at org.infinispan.commands.read.GetKeyValueCommand.acceptVisitor(GetKeyValueCommand.java:40)
+	at org.infinispan.interceptors.base.CommandInterceptor.invokeNextInterceptor(CommandInterceptor.java:98)
+	at org.infinispan.interceptors.base.CommandInterceptor.handleDefault(CommandInterceptor.java:112)
+	at org.infinispan.commands.AbstractVisitor.visitGetKeyValueCommand(AbstractVisitor.java:74)
+	at org.infinispan.commands.read.GetKeyValueCommand.acceptVisitor(GetKeyValueCommand.java:40)
+	at org.infinispan.interceptors.base.CommandInterceptor.invokeNextInterceptor(CommandInterceptor.java:98)
+	at org.infinispan.statetransfer.StateTransferInterceptor.handleTopologyAffectedCommand(StateTransferInterceptor.java:263)
+	at org.infinispan.statetransfer.StateTransferInterceptor.handleDefault(StateTransferInterceptor.java:247)
+	at org.infinispan.commands.AbstractVisitor.visitGetKeyValueCommand(AbstractVisitor.java:74)
+	at org.infinispan.commands.read.GetKeyValueCommand.acceptVisitor(GetKeyValueCommand.java:40)
+	at org.infinispan.interceptors.base.CommandInterceptor.invokeNextInterceptor(CommandInterceptor.java:98)
+	at org.infinispan.interceptors.CacheMgmtInterceptor.visitGetKeyValueCommand(CacheMgmtInterceptor.java:92)
+	at org.infinispan.commands.read.GetKeyValueCommand.acceptVisitor(GetKeyValueCommand.java:40)
+	at org.infinispan.interceptors.base.CommandInterceptor.invokeNextInterceptor(CommandInterceptor.java:98)
+	at org.infinispan.interceptors.InvocationContextInterceptor.handleAll(InvocationContextInterceptor.java:110)
+	at org.infinispan.interceptors.InvocationContextInterceptor.handleDefault(InvocationContextInterceptor.java:73)
+	at org.infinispan.commands.AbstractVisitor.visitGetKeyValueCommand(AbstractVisitor.java:74)
+	at org.infinispan.commands.read.GetKeyValueCommand.acceptVisitor(GetKeyValueCommand.java:40)
+	at org.infinispan.interceptors.base.CommandInterceptor.invokeNextInterceptor(CommandInterceptor.java:98)
+	at org.infinispan.interceptors.BatchingInterceptor.handleDefault(BatchingInterceptor.java:66)
+	at org.infinispan.commands.AbstractVisitor.visitGetKeyValueCommand(AbstractVisitor.java:74)
+	at org.infinispan.commands.read.GetKeyValueCommand.acceptVisitor(GetKeyValueCommand.java:40)
+	at org.infinispan.interceptors.InterceptorChain.invoke(InterceptorChain.java:333)
+	at org.infinispan.CacheImpl.containsKey(CacheImpl.java:358)
+	at org.infinispan.CacheImpl.containsKey(CacheImpl.java:351)
+	at net.ion.craken.node.Workspace.exists(Workspace.java:255)
+	at net.ion.craken.node.AbstractReadSession.exists(AbstractReadSession.java:70)
+	at net.ion.craken.node.AbstractReadSession.pathBy(AbstractReadSession.java:48)
+	at net.ion.craken.node.AbstractReadSession.ghostBy(AbstractReadSession.java:36)
+	at net.ion.external.ics.web.domain.ArticleWeb.viewTemplate(ArticleWeb.java:224)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at net.ion.radon.core.RadonMethodInjectorImpl.invoke(RadonMethodInjectorImpl.java:142)
+	at org.jboss.resteasy.core.ResourceMethod.invokeOnTarget(ResourceMethod.java:241)
+	at org.jboss.resteasy.core.ResourceMethod.invoke(ResourceMethod.java:208)
+	at org.jboss.resteasy.core.ResourceMethod.invoke(ResourceMethod.java:199)
+	at org.jboss.resteasy.core.SynchronousDispatcher.getResponse(SynchronousDispatcher.java:442)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:429)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:114)
+	at net.ion.radon.core.let.PathHandler.handleHttpRequest(PathHandler.java:95)
+	at net.ion.nradon.handler.URIPathMatchHandler.handleHttpRequest(URIPathMatchHandler.java:37)
+	at net.ion.nradon.netty.NettyHttpControl.nextHandler(NettyHttpControl.java:75)
+	at net.ion.nradon.netty.NettyHttpControl.nextHandler(NettyHttpControl.java:61)
+	at net.ion.nradon.wrapper.HttpControlWrapper.nextHandler(HttpControlWrapper.java:40)
+	at net.ion.nradon.handler.AbstractResourceHandler$IOWorker$1.run(AbstractResourceHandler.java:181)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:744)

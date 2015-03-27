@@ -362,7 +362,7 @@ public class DomainSampleMaster {
 									logger.warn(ignore.getMessage());
 								}
 							}
-							wnode.refTo("include", "/domain/" + did + "/gcat/" + catId) ;
+							wnode.refTos("include", "/domain/" + did + "/gcat/" + catId) ;
 						}
 						return null;
 					}
@@ -392,7 +392,7 @@ public class DomainSampleMaster {
 							continue;
 						wnode.property(colName, rs.getString(colName));
 					}
-					wnode.refTo("include", "/domain/" + did + refPath);
+					wnode.refTos("include", "/domain/" + did + refPath);
 				}
 				return null;
 			}
