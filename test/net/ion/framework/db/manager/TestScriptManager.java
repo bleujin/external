@@ -80,69 +80,6 @@ public class TestScriptManager extends TestCase {
 		assertEquals(true, notRows == null);
 		dc.close();  
 	}
-	
-	public void testICSProcedure() throws Exception {
-		ICSManager idbm = ICSManager.create(
-					new OracleDBManager("jdbc:oracle:thin:@dev-oracle.i-on.net:1521:dev10g", "bleu", "redf"), 
-					ScriptManager.create(craken, Executors.newScheduledThreadPool(1), new File("./resource/js"))) ;
-		DBController dc = new DBController(idbm) ;
-		dc.initSelf();
-		
-		
-		dc.createUserProcedure("sample@deleteWith(?)").addParam(100).execUpdate() ;
-		
-		dc.createUserProcedure("sample@insertWith(?,?)").addParam(100).addParam("bleujin").execUpdate() ;
-		
-		assertEquals(1, dc.createUserProcedure("sample@selectBy(?)").addParam(100).execQuery().getRowCount()) ;
-		
-		craken.login().pathBy("/sample").children().debugPrint();  
-		dc.close(); 
-	}
-
-	public void testICSProcedureBatch() throws Exception {
-		ICSManager idbm = ICSManager.create(
-					new OracleDBManager("jdbc:oracle:thin:@dev-oracle.i-on.net:1521:dev10g", "bleu", "redf"), 
-					ScriptManager.create(craken, Executors.newScheduledThreadPool(1), new File("./resource/js"))) ;
-
-		DBController dc = new DBController(idbm) ;
-		dc.initSelf();
-
-		dc.createUserProcedureBatch("sample@delBatchWith(?)").addParam(new int[]{100, 200}).execUpdate() ;
-
-		IUserProcedureBatch upts = dc.createUserProcedureBatch("sample@addBatchWith(?,?)") ; // .addParam(100).addParam("bleujin").execUpdate() ;
-		upts.addParam(new int[]{100, 200}).addParam(new String[]{"bleujin", "hero"}).execUpdate() ;
-		
-
-		craken.login().pathBy("/sample").children().debugPrint();  
-		dc.close(); 
-	}
-
-	
-	public void testICSProcedures() throws Exception {
-
-		ICSManager idbm = ICSManager.create(
-				new OracleDBManager("jdbc:oracle:thin:@dev-oracle.i-on.net:1521:dev10g", "bleu", "redf"), 
-				ScriptManager.create(craken, Executors.newScheduledThreadPool(1), new File("./resource/js"))) ;
-
-		DBController dc = new DBController(idbm) ;
-		dc.initSelf();
-	
-		dc.createUserProcedureBatch("sample@delBatchWith(?)").addParam(new int[]{100, 200, 300}).execUpdate() ;
-
-		
-		IUserProcedures uptcol = dc.createUserProcedures("upts") ;
-		uptcol.add(dc.createUserProcedureBatch("sample@addBatchWith(?,?)").addParam(new int[]{100, 200}).addParam(new String[]{"bleujin", "hero"}));
-		uptcol.add(dc.createUserProcedureBatch("sample@addBatchWith(?,?)").addParam(new int[]{300}).addParam(new String[]{"jin"})).execUpdate() ;
-		
-	
-		craken.login().pathBy("/sample").children().ascending("a").debugPrint();  
-		
-		
-		dc.close(); 
-
-		
-	}
-	
 
 
 }

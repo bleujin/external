@@ -287,7 +287,7 @@ public class DomainSampleMaster {
 					public Void handle(ResultSet rs) throws SQLException {
 						while (rs.next()) {
 							WriteNode articleNode = wsession.pathBy(rs.getString("articleFqn"));
-							articleNode.property(rs.getString("afieldid"), rs.getString("dvalue") + rs.getString("clobvalue"));
+							articleNode.property(rs.getString("afieldid"), StringUtil.toString(rs.getString("dvalue")) + StringUtil.toString(rs.getString("clobvalue")));
 
 							WriteNode afieldNode = wsession.pathBy(rs.getString("fqn"));
 							Def.AfieldValue.Properties(afieldNode, rs);

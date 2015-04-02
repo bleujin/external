@@ -118,6 +118,12 @@ public class AfieldValueX extends BeanX{
 		return meta().type();
 	}
 
+	public String afieldId() {
+		return node().fqn().name();
+	}
 
+	public String asStreamPath() {
+		return "afield/" + catId + "/" + artId + "/" + afieldId() + ".stream";
+	}
 
 }

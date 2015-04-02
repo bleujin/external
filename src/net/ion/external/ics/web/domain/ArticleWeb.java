@@ -165,18 +165,26 @@ public class ArticleWeb implements Webapp {
     @GET
     @Path("/{did}/view/{catid}/{artid}")
     @Produces(ExtMediaType.APPLICATION_JSON_UTF8)
-    public JsonObject viewArticle(@PathParam("did") String did, @PathParam("catid") String catid, @PathParam("artid") int artid) {
-        ArticleX article = dsub.findDomain(did).datas().article(catid, artid);
-        return JsonObject.create().put("subject", article.asString("subject")).put("content", article.asString("content"));
+    public StreamingOutput viewArticle(@PathParam("did") String did, @PathParam("catid") String catid, @PathParam("artid") int artid) {
+        final ArticleX article = dsub.findDomain(did).datas().article(catid, artid);
+        // return JsonObject.create().put("subject", article.asString("subject")).put("content", article.asString("content"));
+        return new StreamingOutput() {
+            @Override
+            public void write(OutputStream output) throws IOException, WebApplicationException {
+                OutputStreamWriter writer = new OutputStreamWriter(output);
+                article.jsonWrite(writer);
+                writer.flush();
+            }
+        };
     }
 
 
     @GET
-    @Path("/{did}/thubmnail/{artid}.{type}")
-    public UncertainOutput viewResourceAsImage() {
+    @Path("/{did}/thumbimg/{catid}/{artid}.stream")
+    public UncertainOutput viewThumbImage() {
         return new UncertainOutput() {
             @Override
-            public void write(OutputStream arg0) throws IOException, WebApplicationException {
+            public void write(OutputStream output) throws IOException, WebApplicationException {
             }
 
             @Override
@@ -186,6 +194,39 @@ public class ArticleWeb implements Webapp {
         };
     }
 
+    @GET
+    @Path("/{did}/afield/{catid}/{artid}/{aid}.stream")
+    public UncertainOutput viewAfieldResource() {
+        return new UncertainOutput() {
+            @Override
+            public void write(OutputStream output) throws IOException, WebApplicationException {
+            }
+
+            @Override
+            public MediaType getMediaType() {
+                return ExtMediaType.IMAGE_PNG_TYPE;
+            }
+        };
+    }
+
+    @GET
+    @Path("/{did}/content/{catid}/{artid}/{resourceid}.stream")
+    public UncertainOutput viewContentImage() {
+        return new UncertainOutput() {
+            @Override
+            public void write(OutputStream output) throws IOException, WebApplicationException {
+            }
+
+            @Override
+            public MediaType getMediaType() {
+                return ExtMediaType.IMAGE_PNG_TYPE;
+            }
+        };
+    }
+
+    
+    
+    
 
     @GET
     @Path("/{did}/storypage/{catid}/{artid}")

@@ -287,8 +287,22 @@
                         dataType: 'json',
                         success: function(data) {
                             var modal = $('#article-view-modal') ;
-                            modal.find('input[name=subject]').val(data.subject);
-                            modal.find('textarea[name=content]').text(data.content);
+                            modal.find('span[title=artid]').text(data.std_info.artid);
+                            modal.find('span[title=subject]').text(data.std_info.subject);
+                            modal.find('div[title=content]').text(data.std_info.content);
+
+                            modal.find('span[title=thumbnail]').text(data.add_info.thumbimg);
+                            modal.find('span[title=keyword]').text(data.add_info.keyword);
+
+                            modal.find('span[title=operday]').text(data.set_info.operday);
+                            modal.find('span[title=expireday]').text(data.set_info.expireday);
+                            modal.find('span[title=gorulloc]').text(data.set_info.gorulloc);
+                            modal.find('span[title=priority]').text(data.set_info.priority);
+
+                            for(var afieldid in data.afields){
+            					$('<dt>'+afieldid+'</dt><dd>'+data.afields[afieldid]+'</dd>').appendTo(modal.find('dl[title=afields]')) ;
+            				}
+                            // modal.find('textarea[name=content]').text(data.std_info.content);
                             $('#article-view-modal').modal({});
                         }
                     });

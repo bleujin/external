@@ -61,22 +61,43 @@
                 </ul>
                 <div id="myTabContent1" class="tab-content padding-10">
                     <div class="tab-pane fade in active" id="s1">
-                        <form class="smart-form" id="article-view-form" method="post" action="domain/article" novalidate="novalidate">
-                            <fieldset style="padding: 0px">
-                                <section>
-                                    <label class="label">${m.asString("domain.article.subject")}</label>
-                                    <label class="input">
-                                        <input type="text" name="subject" value="" readonly/>
-                                    </label>
-                                </section>
-                                <section>
-                                    <label class="label">${m.asString("domain.article.content")}</label>
-                                    <label class="input">
-                                        <textarea name="content" style="width: 70%" rows="10" readonly></textarea>
-                                    </label>
-                                </section>
-                            </fieldset>
-                        </form>
+                        
+                        <h3 class="title_h3">Std Info [<span title="artid"></span>]</h3>
+						<table class="table_info" cellpadding="0" cellspacing="0">
+						<tbody><tr><th class="info_th_bullet" width="120">regUser</th>
+							<td>yucea(Yucea)</td></tr>
+						<tr><th class="info_th_bullet">Subject</th>
+							<td><b><span title="subject"></span></b></td></tr>
+						<tr><th>content</th>
+							<td><div title="content" style="padding:3px;width:99%;height:200px;border:1px solid #B8B8B8;vertical-align:top;overflow:auto;"></div></td></tr>	
+						</tbody></table>
+						
+						
+						<h3 class="title_h3">Add Info</h3>
+						<table class="table_info" cellpadding="0" cellspacing="0">
+						<tr><th>Thumbnail</th>
+							<td><span title="thumbnail"></span><br></td></tr>
+						<tr><th>Keyword</th>
+							<td><span title="keyword"></span></td></tr>
+						</tbody></table>
+						
+						<h3 class="title_h3">Set Info</h3>
+						<table class="table_info" cellpadding="0" cellspacing="0">
+						<tbody><tr><th width="120">OperDay</th>
+							<td nowrap=""><span title="operday"></span></td></tr>
+						<tr><th>ExpireDay</th>
+							<td nowrap=""><span title="expireday"></span></td></tr>
+						<tr><th>Url Link</th>
+							<td><span title="gourlloc"></span><br></td></tr>
+						<tr><th>Priority</th>
+							<td><span title="priority"></span></td></tr>
+						<tr><th>FileName</th>
+							<td><span title="artfilenm"></span></td></tr>
+						</tbody></table>
+						
+						<h3 class="title_h3">Afield Info</h3>
+						<dl title="afields"></dl>
+                        
                     </div>
                     <div class="tab-pane fade" id="s2">
                         <table id="related_articles" class="table table-bordered table-hover" width="100%">
@@ -88,11 +109,6 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>101</td>
-                                <td>/ics/external/airkjh2</td>
-                                <td>This is article subject2</td>
-                            </tr>
                             </tbody>
                         </table>
                     </div>
