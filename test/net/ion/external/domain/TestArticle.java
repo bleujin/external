@@ -70,5 +70,5 @@ public class TestArticle extends TestBaseDomain {
         // then
         Debug.line(sw.toString());
     }
-	
+
 }

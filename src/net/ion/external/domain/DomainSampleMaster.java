@@ -11,7 +11,6 @@ import java.util.Map;
 
 import net.ion.cms.rest.sync.Def;
 import net.ion.cms.rest.sync.Def.Gallery;
-import net.ion.craken.ICSCraken;
 import net.ion.craken.listener.CDDHandler;
 import net.ion.craken.listener.CDDModifiedEvent;
 import net.ion.craken.listener.CDDRemovedEvent;
@@ -23,8 +22,10 @@ import net.ion.craken.node.WriteNode;
 import net.ion.craken.node.WriteSession;
 import net.ion.craken.node.crud.ChildQueryResponse;
 import net.ion.craken.tree.Fqn;
+import net.ion.external.ICSSubCraken;
 import net.ion.framework.db.DBController;
 import net.ion.framework.db.bean.ResultSetHandler;
+import net.ion.framework.db.manager.DBManager;
 import net.ion.framework.db.manager.OracleDBManager;
 import net.ion.framework.util.ArrayUtil;
 import net.ion.framework.util.Debug;
@@ -33,19 +34,19 @@ import net.ion.framework.util.ObjectId;
 import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.kr.utils.StringUtil;
 
-public class DomainMaster {
+public class DomainSampleMaster {
 
 	private DBController idc;
-	private ICSCraken ic;
+	private ICSSubCraken ic;
 	private SQLLoader sqlLoader;
 	private ReadSession session;
 	private File artImageDir;
 	private File galleryRoot;
 
-	private Logger logger = Logger.getLogger(DomainMaster.class);
+	private Logger logger = Logger.getLogger(DomainSampleMaster.class);
 	private File afieldRoot;
 
-	public DomainMaster(OracleDBManager dbm, ICSCraken ic) throws IOException {
+	public DomainSampleMaster(DBManager dbm, ICSSubCraken ic) throws IOException {
 		this.idc = new DBController(dbm);
 		this.ic = ic;
 		this.session = ic.login();
@@ -171,8 +172,6 @@ public class DomainMaster {
 				
 				if ("resetuser".equals(action)){
 					whenResetUser() ;
-				} else if ("removecategory".equals(action)) {
-					whenRemoveCategory(cevent.property("catid").asString(), cevent.property("includesub").asBoolean(), cevent.property("did").asString());
 				}
 				
 				return null;
@@ -189,8 +188,8 @@ public class DomainMaster {
 	
 	
 
-	public static DomainMaster create(OracleDBManager dbm, ICSCraken ic) throws IOException {
-		return new DomainMaster(dbm, ic);
+	public static DomainSampleMaster create(DBManager dbm, ICSSubCraken ic) throws IOException {
+		return new DomainSampleMaster(dbm, ic);
 	}
 
 	
@@ -288,7 +287,7 @@ public class DomainMaster {
 					public Void handle(ResultSet rs) throws SQLException {
 						while (rs.next()) {
 							WriteNode articleNode = wsession.pathBy(rs.getString("articleFqn"));
-							articleNode.property(rs.getString("afieldid"), rs.getString("dvalue") + rs.getString("clobvalue"));
+							articleNode.property(rs.getString("afieldid"), StringUtil.toString(rs.getString("dvalue")) + StringUtil.toString(rs.getString("clobvalue")));
 
 							WriteNode afieldNode = wsession.pathBy(rs.getString("fqn"));
 							Def.AfieldValue.Properties(afieldNode, rs);
@@ -363,7 +362,7 @@ public class DomainMaster {
 									logger.warn(ignore.getMessage());
 								}
 							}
-							wnode.refTo("include", "/domain/" + did + "/gcat/" + catId) ;
+							wnode.refTos("include", "/domain/" + did + "/gcat/" + catId) ;
 						}
 						return null;
 					}
@@ -393,31 +392,26 @@ public class DomainMaster {
 							continue;
 						wnode.property(colName, rs.getString(colName));
 					}
-					wnode.refTo("include", "/domain/" + did + refPath);
+					wnode.refTos("include", "/domain/" + did + refPath);
 				}
 				return null;
 			}
 		};
 	}
-	
-	private void whenRemoveCategory(String catId, Boolean includeSub, String did) {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 
-	public DomainMaster artImageRoot(File path) {
+	public DomainSampleMaster artImageRoot(File path) {
 		this.artImageDir = path;
 		return this;
 	}
 
-	public DomainMaster galleryRoot(File path) {
+	public DomainSampleMaster galleryRoot(File path) {
 		this.galleryRoot = path;
 		return this;
 	}
 
-	public DomainMaster afieldFileRoot(File path) {
+	public DomainSampleMaster afieldFileRoot(File path) {
 		this.afieldRoot = path;
 		return this;
 	}

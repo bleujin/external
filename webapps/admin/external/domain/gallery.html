@@ -267,7 +267,7 @@
                 var superbox = $('#superbox_body') ;
                 $.each(nodes, function(index) {
                     var gallery = nodes[index], galId = gallery[0], catId = gallery[1], fileName = gallery[2], type = fileName.substr(fileName.lastIndexOf('.') + 1) ;
-                    var url = '/admin/gallery/' + domainId + '/' + catId + '/' + galId + '.' + type ;
+                    var url = '/admin/gallery/' + domainId + '/resize/' + galId + '?width=137&height=137';
                     var el = '<div class="superbox-list"><img class="superbox-img" src="' + url + '" data-img="' + url + '" title="'+fileName+'"></div>' ;
                     $(el).appendTo(superbox) ;
                 });
@@ -421,7 +421,7 @@
                 var data = image.cropper('getData'), imageData = image.cropper('getImageData'), x = parseInt(data.x), y = parseInt(data.y), width = parseInt(data.width), height = parseInt(data.height);
                 var propId = $('#gallery-crop-modal input[name=propId]').val(), galId = image.attr('galid'), catId = image.attr('catid'), domainId = image.attr('did') ;
 
-                var url = '/admin/gallery/' + domainId + '/' + catId + '/' + galId + '/crop?propId=' + propId + '&x=' + x + '&y=' + y + '&width=' + width + '&height=' + height ;
+                var url = '/admin/gallery/' + domainId + '/crop/' + galId + '?x=' + x + '&y=' + y + '&width=' + width + '&height=' + height ;
 
                 $.ajax({
                             type: "GET",

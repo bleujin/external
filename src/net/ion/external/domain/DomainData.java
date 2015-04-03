@@ -3,7 +3,16 @@ package net.ion.external.domain;
 import java.io.IOException;
 
 import net.ion.craken.node.ReadNode;
-import net.ion.external.ics.bean.*;
+import net.ion.external.ics.bean.AfieldMetaX;
+import net.ion.external.ics.bean.ArticleChildrenX;
+import net.ion.external.ics.bean.ArticleX;
+import net.ion.external.ics.bean.CategoryChildrenX;
+import net.ion.external.ics.bean.GalleryCategoryX;
+import net.ion.external.ics.bean.GalleryChildrenX;
+import net.ion.external.ics.bean.GalleryX;
+import net.ion.external.ics.bean.SiteCategoryX;
+import net.ion.external.ics.bean.TemplateChildrenX;
+import net.ion.external.ics.bean.UserX;
 import net.ion.nsearcher.search.filter.TermFilter;
 
 public class DomainData {
@@ -32,11 +41,11 @@ public class DomainData {
 	
 	public ArticleChildrenX articles() throws IOException {
 		// /datas/article/{catid}/{artid}
-		return ArticleChildrenX.create(domain, domainNode().refsToChildren("include").fqnFilter("/datas/article"));
+		return ArticleChildrenX.create(domain, domainNode().refsToChildren("include").fqnFilter("/datas/article"));   // @TODO confirm oeprday, expireday
 	}
 	
 	public ArticleChildrenX articles(String catId) throws IOException {
-		return ArticleChildrenX.create(domain, domainNode().refsToChildren("include").fqnFilter("/datas/article").filter(new TermFilter("catid", catId)));
+		return ArticleChildrenX.create(domain, domainNode().refsToChildren("include").fqnFilter("/datas/article").filter(new TermFilter("catid", catId))); // @TODO confirm oeprday, expireday
 	}
 
 	public GalleryChildrenX gallerys() throws IOException {
@@ -56,6 +65,14 @@ public class DomainData {
 		return ArticleX.create(domain, ghostBy("/datas/article/" + catId + "/" + artId));
 	}
 
+	
+	public GalleryX findGallery(int galId) throws IOException{
+		ReadNode found = domain.session().ghostBy("/datas/gallery").childQuery("galid:" + galId, true).findOne() ;
+		if (found == null) {
+			return GalleryX.create(domain, ghostBy("/datas/gallery/notfound/" + galId)) ;
+		} return GalleryX.create(domain, found) ;
+	}
+	
     public GalleryX gallery(String gcatId, int galId) throws IOException {
         return GalleryX.create(domain, ghostBy("/datas/gallery/" + gcatId + "/" + galId)) ;
     }
@@ -64,8 +81,8 @@ public class DomainData {
 		return SiteCategoryX.create(domain, ghostBy("/datas/scat", catId));
 	}
 
-	public GalleryCategoryX gcategory(String catId) {
-		return GalleryCategoryX.create(domain, ghostBy("/datas/gcat", catId));
+	public GalleryCategoryX gcategory(String gcatId) {
+		return GalleryCategoryX.create(domain, ghostBy("/datas/gcat", gcatId));
 	}
 
 	public AfieldMetaX afieldMeta(String afieldid) {

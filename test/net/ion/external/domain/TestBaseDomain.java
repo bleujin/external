@@ -3,15 +3,15 @@ package net.ion.external.domain;
 import java.io.File;
 
 import junit.framework.TestCase;
-import net.ion.craken.ICSCraken;
+import net.ion.external.ICSSubCraken;
 import net.ion.framework.db.manager.OracleDBManager;
 
 public class TestBaseDomain extends TestCase {
 
 	private OracleDBManager dbm;
-	private DomainMaster dmaster;
+	private DomainSampleMaster dmaster;
 	
-	protected ICSCraken icraken ;
+	protected ICSSubCraken icraken ;
 	protected DomainSub dsub;
 	protected Domain domain;
 
@@ -20,8 +20,8 @@ public class TestBaseDomain extends TestCase {
 		super.setUp();
 		this.dbm = new OracleDBManager("jdbc:oracle:thin:@dev-oracle.i-on.net:1521:dev10g", "dev_ics6", "dev_ics6");
 		
-		this.icraken = ICSCraken.test() ;
-		this.dmaster = DomainMaster.create(dbm, icraken)
+		this.icraken = ICSSubCraken.test() ;
+		this.dmaster = DomainSampleMaster.create(dbm, icraken)
 					.artImageRoot(new File("./resource/uploadfiles/artimage"))
 					.galleryRoot(new File("./resource/uploadfiles/gallery"))
 					.afieldFileRoot(new File("./resource/uploadfiles/afieldfile"));

@@ -18,11 +18,13 @@ import net.ion.external.ics.web.Webapp;
 import net.ion.framework.parse.gson.JsonArray;
 import net.ion.framework.parse.gson.JsonObject;
 import net.ion.framework.parse.gson.JsonPrimitive;
+import net.ion.framework.util.Debug;
 import net.ion.framework.util.FileUtil;
 import net.ion.framework.util.IOUtil;
 import net.ion.framework.util.MapUtil;
 import net.ion.framework.util.NumberUtil;
 import net.ion.radon.core.ContextParam;
+
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.jboss.resteasy.plugins.providers.UncertainOutput;
 import org.jboss.resteasy.spi.HttpRequest;
@@ -32,6 +34,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.StreamingOutput;
+
 import java.io.*;
 
 @Path("/gallery")
@@ -75,14 +78,16 @@ public class GalleryWeb {
     }
 
     @GET
-    @Path("/{did}/{catid}/{galid}.{type}")
-    public UncertainOutput viewImage(@PathParam("did") final String did, @PathParam("catid") final String catid, @PathParam("galid") final int galid, @PathParam("type") final String type, @DefaultValue("data") @QueryParam("propId") final String propId){
+    @Path("/{did}/view/{galid}")
+    public UncertainOutput viewImage(@PathParam("did") final String did, @PathParam("galid") final int galid) throws IOException{
+
+    	final GalleryX gallery = dsub.findDomain(did).datas().findGallery(galid) ;
+    	if (! gallery.exists()) throw new WebApplicationException(404) ;
+    	
         return new UncertainOutput() {
             @Override
             public void write(OutputStream output) throws IOException, WebApplicationException {
-                GalleryX gallery = dsub.findDomain(did).datas().gallery(catid, galid) ;
-                InputStream input = gallery.asStream(propId) ;
-
+                InputStream input = gallery.dataStream() ;
                 try {
                     IOUtil.copy(input, output);
                 } finally {
@@ -92,21 +97,66 @@ public class GalleryWeb {
 
             @Override
             public MediaType getMediaType() {
-                return ExtMediaType.guessImageType(type) ;
+                return ExtMediaType.guessImageType(gallery.typeCd()) ;
             }
         } ;
     }
 
+    
     @GET
-    @Path("/{did}/{catid}/{galid}/crop")
-    @Produces(ExtMediaType.TEXT_PLAIN_UTF8)
-    public String crop(@PathParam("did") String did, @PathParam("catid") String catid, @PathParam("galid") int galid, @QueryParam("x") int x, @QueryParam("y") int y, @QueryParam("width") int width, @QueryParam("height") int height, @QueryParam("propId") String propId) throws IOException {
-        GalleryX gallery = dsub.findDomain(did).datas().gallery(catid, galid) ;
-        gallery.dataStreamWithCrop(propId, x, y, width, height) ;
+    @Path("/{did}/crop/{galid}")
+    public UncertainOutput crop(@PathParam("did") String did, @PathParam("galid") int galid, 
+    		final @DefaultValue("0") @QueryParam("x") int x, 
+    		final @DefaultValue("0") @QueryParam("y") int y, 
+    		final @DefaultValue("100") @QueryParam("width") int width, 
+    		final @DefaultValue("100") @QueryParam("height") int height) throws IOException {
+    	final GalleryX gallery = dsub.findDomain(did).datas().findGallery(galid) ;
+    	if (! gallery.exists()) throw new WebApplicationException(404) ;
 
-        return galid + " cropped" ;
+        return new UncertainOutput() {
+			public MediaType getMediaType() {
+                return ExtMediaType.guessImageType(gallery.typeCd()) ;
+			}
+			public void write(OutputStream output) throws IOException, WebApplicationException {
+				InputStream input = gallery.cropWith(x, y, width, height) ;
+                try {
+                    IOUtil.copy(input, output);
+                } finally {
+                    IOUtil.close(input);
+                }
+			}
+        } ;
     }
 
+    @GET
+    @Path("/{did}/resize/{galid}")
+    public UncertainOutput resize(@PathParam("did") String did, @PathParam("galid") int galid, 
+    		final @DefaultValue("100") @QueryParam("width") int width, 
+    		final @DefaultValue("100") @QueryParam("height") int height) throws IOException {
+    	final GalleryX gallery = dsub.findDomain(did).datas().findGallery(galid) ;
+    	if (! gallery.exists()) throw new WebApplicationException(404) ;
+
+        return new UncertainOutput() {
+			public MediaType getMediaType() {
+                return ExtMediaType.guessImageType(gallery.typeCd()) ;
+			}
+			public void write(OutputStream output) throws IOException, WebApplicationException {
+				InputStream input = gallery.resizeWith(width, height) ;
+                try {
+                    IOUtil.copy(input, output);
+                } finally {
+                    IOUtil.close(input);
+                }
+			}
+        } ;
+    }
+
+    
+    
+    
+    
+    
+    
 	// query
 	@GET
 	@Path("/{did}/query.json")
@@ -209,7 +259,7 @@ public class GalleryWeb {
 
 		result.put("info", session.ghostBy("/menus/domain").property("gallery").asString());
 		result.put("samples", WebUtil.findGalleryTemplates());
-		result.put("template", session.ghostBy(fqnBy(did, "/gallery/template")).property("template").asString());
+		result.put("template", session.ghostBy(fqnBy(did, "/gallery")).property("template").asString());
 		return result;
 	}
 
@@ -219,7 +269,7 @@ public class GalleryWeb {
 		dsub.craken().login().tran(new TransactionJob<Void>() {
 			@Override
 			public Void handle(WriteSession wsession) throws Exception {
-				WriteNode found = wsession.pathBy(fqnBy(did, "/gallery/template"));
+				WriteNode found = wsession.pathBy(fqnBy(did, "/gallery"));
 				FileUtil.forceWriteUTF8(new File(Webapp.REMOVED_DIR, did + ".gallery.template.bak"), found.property("template").asString());
 
 				found.property("template", template);

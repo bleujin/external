@@ -3,6 +3,8 @@ package net.ion.cms.rest.sync;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.lucene.analysis.kr.utils.StringUtil;
+
 import net.ion.craken.node.WriteNode;
 import net.ion.craken.tree.Fqn;
 
@@ -151,7 +153,7 @@ public class Def {
 				.property(ArtId, rs.getInt(ArtId))
 				.property(AfieldId, rs.getString(AfieldId))
 				.property(TypeCd, rs.getString(TypeCd))
-				.property(StringValue, rs.getString("dvalue") + rs.getString("clobvalue")) ;
+				.property(StringValue, StringUtil.toString(rs.getString("dvalue")) + StringUtil.toString(rs.getString("clobvalue"))) ;
 		}
 		
 	}

@@ -3,14 +3,18 @@ package net.ion.external.ics.web.domain;
 import java.io.StringWriter;
 import java.net.URLEncoder;
 
+import org.jboss.resteasy.util.HttpHeaderNames;
+
 import net.ion.external.domain.TestBaseDomain;
 import net.ion.external.ics.QueryTemplateEngine;
 import net.ion.external.ics.bean.GalleryX;
 import net.ion.external.ics.bean.OutputHandler;
 import net.ion.external.ics.bean.XIterable;
+import net.ion.external.ics.common.ExtMediaType;
 import net.ion.framework.parse.gson.GsonBuilder;
 import net.ion.framework.parse.gson.JsonObject;
 import net.ion.framework.util.Debug;
+import net.ion.nradon.stub.StubHttpResponse;
 import net.ion.radon.client.StubServer;
 
 public class TestGalleryWeb extends TestBaseDomain {
@@ -40,6 +44,21 @@ public class TestGalleryWeb extends TestBaseDomain {
 		String pjson = new GsonBuilder().setPrettyPrinting().create().toJson(JsonObject.fromString(json)) ;
 		Debug.line(pjson);
 	}
+	
+	
+	public void testViewImage() throws Exception {
+		 StubHttpResponse response = ss.request("/gallery/zdm/view/11000").get() ;
+		 assertEquals(200, response.status());
+		 assertEquals(ExtMediaType.IMAGE_JPEG.toString(), response.header(HttpHeaderNames.CONTENT_TYPE));
+
+		 
+		 // when not found
+		 response = ss.request("/gallery/zdm/view/11002").get() ;
+		 assertEquals(404, response.status());
+		 
+		 Debug.line(response.status(), response.header(HttpHeaderNames.CONTENT_TYPE));
+	}
+	
 	
 	public void testList() throws Exception {
 		

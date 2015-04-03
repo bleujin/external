@@ -1,8 +1,8 @@
 package net.ion.external.ics.common;
 
-import net.ion.craken.ICSCraken;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.util.StringInputStream;
+import net.ion.external.ICSSubCraken;
 import net.ion.external.ics.util.WebUtil;
 import net.ion.external.ics.web.Webapp;
 import net.ion.framework.db.ThreadFactoryBuilder;
@@ -13,6 +13,7 @@ import net.ion.nradon.handler.TemplateEngine;
 import net.ion.radon.cload.monitor.AbstractListener;
 import net.ion.radon.cload.monitor.FileAlterationMonitor;
 import net.ion.radon.core.TreeContext;
+
 import org.apache.commons.io.monitor.FileAlterationObserver;
 import org.apache.log4j.Logger;
 import org.apache.velocity.Template;
@@ -36,7 +37,7 @@ public class HTMLTemplateEngine implements TemplateEngine {
     private Charset utf8;
     private VelocityEngine ve;
     private ReadSession rsession;
-    private ICSCraken craken;
+    private ICSSubCraken craken;
     private ToJsonHandler handler;
 
     public HTMLTemplateEngine(TreeContext tcontext) throws Exception {
@@ -44,7 +45,7 @@ public class HTMLTemplateEngine implements TemplateEngine {
         this.ve = new VelocityEngine();
         this.vcontext = new VelocityContext();
         vcontext.put(TreeContext.class.getCanonicalName(), tcontext);
-        this.craken = tcontext.getAttributeObject(ICSCraken.EntryName, ICSCraken.class);
+        this.craken = tcontext.getAttributeObject(ICSSubCraken.EntryName, ICSSubCraken.class);
         this.rsession = craken.login();
 
         ve.setProperty("resource.loader", "file");

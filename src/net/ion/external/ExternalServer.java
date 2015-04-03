@@ -4,7 +4,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import net.ion.craken.ICSCraken;
 import net.ion.external.config.ESConfig;
 import net.ion.external.config.builder.ConfigBuilder;
 import net.ion.external.domain.DomainSub;
@@ -50,7 +49,7 @@ public class ExternalServer {
 
 	private NettyWebServer radon;
 	private Status status ;
-	private ICSCraken craken ;
+	private ICSSubCraken craken ;
 	private ESConfig econfig;
 	
 	private enum Status {
@@ -65,11 +64,11 @@ public class ExternalServer {
 	private void init(ESConfig econfig) throws Exception {
 		this.econfig = econfig ;
         RadonConfigurationBuilder builder = RadonConfiguration.newBuilder(econfig.serverConfig().port());
-        this.craken = ICSCraken.create() ;
+        this.craken = ICSSubCraken.create(econfig) ;
         final EventSourceEntry esentry = builder.context(EventSourceEntry.EntryName, EventSourceEntry.create());
         DomainEntry dentry = DomainEntry.test(DomainSub.create(craken));
         
-        builder.context(ICSCraken.EntryName, craken);
+        builder.context(ICSSubCraken.EntryName, craken);
         builder.context(DomainEntry.EntryName, dentry);
         
         final JScriptEngine jsentry = builder.context(JScriptEngine.EntryName, JScriptEngine.create("./resource/loader/lib", Executors.newSingleThreadScheduledExecutor(ThreadFactoryBuilder.createThreadFactory("script-monitor-thread-%d")), true));
@@ -171,7 +170,7 @@ public class ExternalServer {
 		return this ;
 	}
 
-	public ICSCraken craken() {
+	public ICSSubCraken craken() {
 		return craken;
 	}
 

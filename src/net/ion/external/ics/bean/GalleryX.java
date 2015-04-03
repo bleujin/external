@@ -1,6 +1,7 @@
 package net.ion.external.ics.bean;
 
 import com.google.common.base.Preconditions;
+
 import javaxt.io.Image;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Coordinate;
@@ -9,6 +10,7 @@ import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
 import net.ion.external.domain.Domain;
+import net.ion.framework.util.IOUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -45,35 +47,38 @@ public class GalleryX extends BeanX {
 		return asString(Gallery.TypeCd);
 	}
 
-	public InputStream dataStreamWithSize(final int width, final int height) throws IOException {
-        final String propId = String.format("data%sx%s", width, height) ;
+	public InputStream resizeWith(final int width, final int height) throws IOException {
+        final String propId = String.format("resize%s_%s", width, height) ;
 
         return handleImage(propId, new ImageHandler() {
             @Override
             public InputStream handle(Image image) {
-                int originalWidth = image.getWidth() ;
-                int originalHeight = image.getHeight() ;
-
-                Preconditions.checkArgument(width <= originalWidth, "width too large : " + width);
-                Preconditions.checkArgument(height <= originalHeight, "height too large : " + height);
-
+//                int originalWidth = image.getWidth() ;
+//                int originalHeight = image.getHeight() ;
+//                int validwidth = Math.min(width, originalWidth) ;
+//                int validheight = Math.min(height, originalHeight) ;
+                
                 image.resize(width, height) ;
                 return new ByteArrayInputStream(image.getByteArray()) ;
             }
         });
 	}
 
-    public InputStream dataStreamWithCrop(String propId, final int x, final int y, final int width, final int height) throws IOException {
+    public InputStream cropWith(final int x, final int y, final int width, final int height) throws IOException {
+    	final String propId = "crop"+x+"_"+y+"_"+width+"_"+height ;
+    	
         return handleImage(propId, new ImageHandler() {
             @Override
             public InputStream handle(Image image) {
                 int originalWidth = image.getWidth() ;
                 int originalHeight = image.getHeight() ;
 
-                Preconditions.checkArgument(x >= 0 && x + width <= originalWidth, "Invalid x position");
-                Preconditions.checkArgument(y >= 0 && y + height <= originalHeight, "Invalid y position");
-
-                image.crop(x, y, width, height) ;
+                int validx = Math.max(x, 0) ;
+                int validy = Math.max(y, 0) ;
+                int validwidth = Math.min(width, originalWidth - validx) ;
+                int validHeight = Math.min(height, originalHeight - validy) ;
+                
+                image.crop(validx , validy, validwidth, validHeight) ;
                 return new ByteArrayInputStream(image.getByteArray()) ;
             }
         });
@@ -98,6 +103,8 @@ public class GalleryX extends BeanX {
                 return null;
             }
         });
+        
+        IOUtil.close(in);
 
         return asStream(propId) ;
     }

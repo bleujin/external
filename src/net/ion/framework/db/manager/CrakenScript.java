@@ -14,8 +14,8 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-import net.ion.craken.ICSCraken;
 import net.ion.craken.node.ReadSession;
+import net.ion.external.ICSSubCraken;
 import net.ion.framework.db.Rows;
 import net.ion.framework.db.manager.script.FileAlterationMonitor;
 import net.ion.framework.util.ArrayUtil;
@@ -23,6 +23,7 @@ import net.ion.framework.util.Debug;
 import net.ion.framework.util.FileUtil;
 import net.ion.framework.util.ListUtil;
 import net.ion.framework.util.MapUtil;
+import net.ion.framework.util.ObjectUtil;
 import net.ion.framework.util.StringUtil;
 
 import org.apache.commons.io.DirectoryWalker;
@@ -31,12 +32,14 @@ import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.commons.io.monitor.FileAlterationListenerAdaptor;
 import org.apache.commons.io.monitor.FileAlterationObserver;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
+
 import sun.org.mozilla.javascript.internal.NativeObject;
 
 public class CrakenScript {
 
 	private ScriptEngine sengine;
-	private Map<String, Object> packages = MapUtil.newCaseInsensitiveMap();
+	private Map<String, NativeObject> packages = MapUtil.newCaseInsensitiveMap();
 	private FileAlterationMonitor monitor;
 	private ScheduledExecutorService ses;
 
@@ -47,7 +50,7 @@ public class CrakenScript {
 		sengine.put("session", session);
 	}
 
-	public static CrakenScript create(ICSCraken craken, ScheduledExecutorService ses) throws IOException {
+	public static CrakenScript create(ICSSubCraken craken, ScheduledExecutorService ses) throws IOException {
 		return new CrakenScript(craken.login(), ses);
 	}
 
@@ -126,7 +129,7 @@ public class CrakenScript {
 		try {
 			String script = FileUtil.readFileToString(file);
 			String packName = FilenameUtils.getBaseName(file.getName());
-			packages.put(packName, sengine.eval(script));
+			packages.put(packName, (NativeObject)(sengine.eval(script)));
 			return packName;
 		} catch (IOException e) {
 			throw new IllegalStateException(e) ;
@@ -135,7 +138,7 @@ public class CrakenScript {
 		}
 	}
 
-	public Map<String, Object> packages() {
+	public Map<String, NativeObject> packages() {
 		return Collections.unmodifiableMap(packages);
 	}
 
@@ -144,11 +147,11 @@ public class CrakenScript {
 			String packName = StringUtil.substringBefore(uptName, "@");
 			String fnName = StringUtil.lowerCase(StringUtil.substringAfter(uptName, "@"));
 
-			Object pack = packages.get(packName);
+			NativeObject pack = packages.get(packName);
 			if (pack == null)
 				throw new SQLException("not found package");
 
-			Object result = ((Invocable) sengine).invokeMethod(pack, fnName, params);
+			Object result = ((Invocable) sengine).invokeMethod(pack, matchedFnName(pack.getAllIds(), fnName), params);
 			return result;
 		} catch (ScriptException e) {
 			throw new SQLException(e);
@@ -162,11 +165,18 @@ public class CrakenScript {
 		String fnName = StringUtil.lowerCase(StringUtil.substringAfter(uptName, "@"));
 
 		
-		Object pack = packages.get(packName);
+		NativeObject pack = packages.get(packName);
 		if (pack == null) return false ;
 		
-		NativeObject no = (NativeObject) pack ;
-		return ArrayUtil.contains(no.getAllIds(), fnName) ;
+		return matchedFnName(pack.getAllIds(), fnName) != null ;
 	}
 
+	
+	private String matchedFnName(Object[] fns, String fnName){
+		for (Object fn : fns) {
+			if (fnName.equalsIgnoreCase(ObjectUtil.toString(fn))) return ObjectUtil.toString(fn) ;
+		}
+		return null ;
+	}
+	
 }

@@ -13,7 +13,7 @@ import javax.swing.plaf.ListUI;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Tables;
 
-import net.ion.craken.ICSCraken;
+import net.ion.external.ICSSubCraken;
 import net.ion.framework.db.Rows;
 import net.ion.framework.util.Debug;
 import net.ion.framework.util.ListUtil;
@@ -25,7 +25,7 @@ public class ScriptManager extends AbScriptManager {
 		this.cs = cs ;
 	}
 
-	public static ScriptManager create(ICSCraken craken, ScheduledExecutorService ses, File baseScriptDir) throws IOException {
+	public static ScriptManager create(ICSSubCraken craken, ScheduledExecutorService ses, File baseScriptDir) throws IOException {
 		CrakenScript cs = CrakenScript.create(craken, ses) ;
 		cs.readDir(baseScriptDir) ;
 		

@@ -2,7 +2,7 @@
 
 <root version="0.1">
     
-    <server-config id="es" port="9001" nodeid="mercury">
+    <server-config id="es" port="9001" clusterName="ics6working" cacheMode="REPL_SYNC">
 
 	</server-config>
 

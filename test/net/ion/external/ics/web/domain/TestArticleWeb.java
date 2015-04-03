@@ -1,5 +1,6 @@
 package net.ion.external.ics.web.domain;
 
+import java.io.StringWriter;
 import java.net.URLEncoder;
 
 import org.apache.http.client.utils.URLEncodedUtils;
@@ -9,6 +10,8 @@ import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
 import net.ion.external.domain.TestBaseDomain;
 import net.ion.external.ics.QueryTemplateEngine;
+import net.ion.external.ics.bean.ArticleX;
+import net.ion.external.ics.bean.OutputHandler;
 import net.ion.framework.parse.gson.Gson;
 import net.ion.framework.parse.gson.GsonBuilder;
 import net.ion.framework.parse.gson.JsonObject;
@@ -67,5 +70,21 @@ public class TestArticleWeb extends TestBaseDomain {
 	}
 	
 	
+	
+	public void testView() throws Exception {
+		ArticleX article = dsub.findDomain("zdm").datas().article("dynamic", 1207152); // 1206381, 1207152
+		
+		StringWriter writer = new StringWriter() ;
+		OutputHandler output = OutputHandler.createJson(writer, true) ;
+		article.out(output) ;
+		Debug.line(writer);
 
+		
+		StringWriter swriter = new StringWriter() ;
+		article.jsonWrite(swriter) ;
+
+		Debug.line(swriter);
+	}
+
+	
 }

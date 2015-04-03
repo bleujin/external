@@ -1,18 +1,17 @@
 package net.ion.external.domain;
 
-import net.ion.craken.ICSCraken;
 import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
 import net.ion.craken.tree.Fqn;
-import net.ion.framework.util.StringUtil;
+import net.ion.external.ICSSubCraken;
 
 public class Domain {
 
 	private ReadNode dnode;
 	private ReadSession session;
-	private ICSCraken ic ;
+	private ICSSubCraken ic ;
 	private String did;
 	private DomainInfo dinfo;
 	private DomainData ddata;
@@ -30,9 +29,13 @@ public class Domain {
 		public static Target create(String typeName){
 			return "scat".equals(typeName) ? SiteCategory : GalleryCategory ;
 		}
+		
+		public String toString(){
+			return typeName() ;
+		}
 	}
 	
-	private Domain(ICSCraken ic, ReadNode dnode) {
+	private Domain(ICSSubCraken ic, ReadNode dnode) {
 		this.dnode = dnode;
 		this.session = dnode.session() ;
 		this.ic = ic ;
@@ -41,7 +44,7 @@ public class Domain {
 		this.ddata = new DomainData(this) ;
 	}
 
-	public static Domain by(ICSCraken ic, ReadNode dnode) {
+	public static Domain by(ICSSubCraken ic, ReadNode dnode) {
 		return new Domain(ic, dnode);
 	}
 
@@ -55,7 +58,7 @@ public class Domain {
 		session.tran(new TransactionJob<Void>() {
 			@Override
 			public Void handle(WriteSession wsession) throws Exception {
-				wsession.pathBy("/domain/", did, target.typeName(), catId).property("includesub", includeSub) ;
+				wsession.pathBy("/domain/", did, target.typeName(), catId).property("catid", catId).property("includesub", includeSub) ;
 				return null;
 			}
 		}) ;
