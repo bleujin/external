@@ -15,9 +15,7 @@ import net.ion.external.ics.web.Webapp;
 import net.ion.framework.parse.gson.JsonArray;
 import net.ion.framework.parse.gson.JsonObject;
 import net.ion.framework.parse.gson.JsonPrimitive;
-import net.ion.framework.util.FileUtil;
-import net.ion.framework.util.MapUtil;
-import net.ion.framework.util.NumberUtil;
+import net.ion.framework.util.*;
 import net.ion.radon.core.ContextParam;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.jboss.resteasy.plugins.providers.UncertainOutput;
@@ -178,48 +176,61 @@ public class ArticleWeb implements Webapp {
         };
     }
 
+    private MediaType guessFromFileName(String fileName) {
+        return ExtMediaType.guessImageType(StringUtil.substringAfterLast(fileName, ".")) ;
+    }
 
     @GET
     @Path("/{did}/thumbimg/{catid}/{artid}.stream")
-    public UncertainOutput viewThumbImage() {
+    public UncertainOutput viewThumbImage(@PathParam("did") String did, @PathParam("catid") String catId, @PathParam("artid") int artId) {
+        final ArticleX article = dsub.findDomain(did).datas().article(catId, artId);
+
         return new UncertainOutput() {
             @Override
             public void write(OutputStream output) throws IOException, WebApplicationException {
+                IOUtil.copyNCloseSilent(article.thumbnailStream(), output);
             }
 
             @Override
             public MediaType getMediaType() {
-                return ExtMediaType.IMAGE_PNG_TYPE;
+                return guessFromFileName(article.asString("thumbimg"));
             }
         };
     }
 
     @GET
     @Path("/{did}/afield/{catid}/{artid}/{aid}.stream")
-    public UncertainOutput viewAfieldResource() {
+    public UncertainOutput viewAfieldResource(@PathParam("did") String did, @PathParam("catid") String catId, @PathParam("artid") int artId, @PathParam("aid") String afieldId) {
+        final AfieldValueX avalue = dsub.findDomain(did).datas().article(catId, artId).asAfield(afieldId);
+
         return new UncertainOutput() {
             @Override
             public void write(OutputStream output) throws IOException, WebApplicationException {
+                IOUtil.copy(avalue.dataStream(), output) ;
             }
 
             @Override
             public MediaType getMediaType() {
-                return ExtMediaType.IMAGE_PNG_TYPE;
+                String fileName = avalue.meta().asString("stringvalue") ;
+                return guessFromFileName(fileName);
             }
         };
     }
 
     @GET
     @Path("/{did}/content/{catid}/{artid}/{resourceid}.stream")
-    public UncertainOutput viewContentImage() {
+    public UncertainOutput viewContentImage(@PathParam("did") String did, @PathParam("catid") String catId, @PathParam("artid") int artId, @PathParam("resourceid") final String resourceId) {
+        final ArticleX article = dsub.findDomain(did).datas().article(catId, artId);
+
         return new UncertainOutput() {
             @Override
             public void write(OutputStream output) throws IOException, WebApplicationException {
+                IOUtil.copyNCloseSilent(article.asStream(resourceId), output);
             }
 
             @Override
             public MediaType getMediaType() {
-                return ExtMediaType.IMAGE_PNG_TYPE;
+                return ExtMediaType.APPLICATION_OCTET_STREAM_TYPE;
             }
         };
     }

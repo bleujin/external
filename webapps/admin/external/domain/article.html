@@ -25,11 +25,6 @@
 <section id="widget-grid" class="">
     <div class="row">
         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <!--<div class="jarviswidget jarviswidget-color-purple" id="domain-article-win" data-widget-editbutton="false" data-widget-deletebutton="false">-->
-                <!--<header>-->
-                    <!--<span class="widget-icon"> <i class="fa fa-table"></i> </span>-->
-                    <!--<h2>${m.asString("domain.article.table-header")}</h2>-->
-                <!--</header>-->
 
                 <div>
                     <div class="jarviswidget-editbox"></div>
@@ -289,9 +284,8 @@
                             var modal = $('#article-view-modal') ;
                             modal.find('span[title=artid]').text(data.std_info.artid);
                             modal.find('span[title=subject]').text(data.std_info.subject);
-                            modal.find('div[title=content]').text(data.std_info.content);
+                            modal.find('div[title=content]').html(data.std_info.content);
 
-                            modal.find('span[title=thumbnail]').text(data.add_info.thumbimg);
                             modal.find('span[title=keyword]').text(data.add_info.keyword);
 
                             modal.find('span[title=operday]').text(data.set_info.operday);
@@ -299,22 +293,37 @@
                             modal.find('span[title=gorulloc]').text(data.set_info.gorulloc);
                             modal.find('span[title=priority]').text(data.set_info.priority);
 
+                            var thumbPath = data.add_info.thumbimg ;
+                            if(thumbPath) {
+                                var thumbArea = modal.find('span[title=thumbnail]');
+                                var url = '/admin/article/' + domainId + thumbPath;
+                                thumbArea.text(thumbPath);
+                                thumbArea.parent().append('<a data-lightbox="' + thumbPath +'" href="' + url + '"><img src="' + url + '" width="137" height="137"></a>') ;
+                            }
+
+                            var tbody = $('#afield-table tbody') ;
+                            tbody.empty() ;
                             for(var afieldid in data.afields){
-            					$('<dt>'+afieldid+'</dt><dd>'+data.afields[afieldid]+'</dd>').appendTo(modal.find('dl[title=afields]')) ;
+                                var avalue = data.afields[afieldid] ;
+                                var ameta = data['afield.' + afieldid] ;
+
+                                if(avalue === 'null') avalue = '[EMPTY]' ;
+
+                                if(ameta.typecd === 'File' && ameta.stringvalue !== 'null') {
+                                    avalue += '<br><a href="/admin/article/' + domainId + '/' + ameta.streamvalue + '">Download</a>' ;
+                                } else if(ameta.typecd === 'Image' && ameta.stringvalue !== 'null') {
+                                    var url = '/admin/article/' + domainId + '/' + ameta.streamvalue ;
+                                    avalue += '<br><a data-lightbox="' + ameta.stringvalue + '" href="' + url + '"><img src="' + url + '" width="137" height="137"></a>' ;
+                                }
+
+                                tbody.append('<tr><td>' + afieldid + '</td><td>' + avalue + '</td></tr>') ;
             				}
-                            // modal.find('textarea[name=content]').text(data.std_info.content);
                             $('#article-view-modal').modal({});
                         }
                     });
 
                     event.stopPropagation() ;
                 });
-
-//                $('#article_view_modal').on('show.bs.modal', function(event) {
-//                    var modal = $(this) ;
-//                    var artData = articleData(table, $(this));
-//                    $.ajax()
-//                });
             }
         });
 
@@ -431,7 +440,9 @@
 
     loadScript("js/plugin/datatables/jquery.dataTables.min.js", function(){
         loadScript("js/plugin/datatables/dataTables.bootstrap.min.js", function() {
-            loadScript("js/plugin/summernote/summernote.min.js", pagefunction);
+            loadScript("js/plugin/summernote/summernote.min.js", function() {
+                loadScript("js/plugin/lightbox/lightbox.js", pagefunction) ;
+            });
         });
     });
 

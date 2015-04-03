@@ -1,14 +1,5 @@
 package net.ion.external.ics.bean;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Writer;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ExecutionException;
-
-import javax.swing.plaf.ListUI;
-
 import net.ion.cms.rest.sync.Def;
 import net.ion.craken.node.IteratorList;
 import net.ion.craken.node.ReadNode;
@@ -19,12 +10,17 @@ import net.ion.craken.tree.PropertyId.PType;
 import net.ion.external.domain.Domain;
 import net.ion.framework.parse.gson.GsonBuilder;
 import net.ion.framework.parse.gson.JsonObject;
-import net.ion.framework.parse.gson.stream.JsonWriter;
-import net.ion.framework.util.Debug;
 import net.ion.framework.util.ListUtil;
 import net.ion.framework.util.MapUtil;
 import net.ion.framework.util.SetUtil;
 import net.ion.framework.util.StringUtil;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Writer;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 public class ArticleX extends BeanX{
 
@@ -141,7 +137,8 @@ public class ArticleX extends BeanX{
 		List<String> replaces = ListUtil.newList() ;
 		for (String found : founds) {
 			searchs.add("[[--ArtInImage,fileLoc:" + found + "--]]") ;
-			replaces.add("image/" + catId() + "/" + artId() + "/img" + found.hashCode() + ".stream" ) ;
+            ///{did}/content/{catid}/{artid}/{resourceid}.stream
+			replaces.add("/admin/article/" + domainId() + "/content/" + catId() + "/" + artId() + "/img" + found.hashCode() + ".stream" ) ;
 		}
 		return StringUtil.replaceEach(content, searchs.toArray(new String[0]), replaces.toArray(new String[0])) ;
 	}
@@ -150,7 +147,7 @@ public class ArticleX extends BeanX{
         JsonObject result = JsonObject.create() ;
         
         result.put("std_info", JsonObject.create().put("artid", artId()).put("reguserid", asString("reguserid")).put("subject", asString("subject")).put("content", content())) ;
-        result.put("add_info", JsonObject.create().put("hasthumb", !asString("thumbimg").isEmpty()).put("thumbimg", asString("thumbimg").isEmpty() ? asStreamPath("thumbimg") : "").put("keyword", asString("keyword"))) ;
+        result.put("add_info", JsonObject.create().put("hasthumb", !asString("thumbimg").isEmpty()).put("thumbimg", !asString("thumbimg").isEmpty() ? asStreamPath("thumbimg") : "").put("keyword", asString("keyword"))) ;
         result.put("set_info", JsonObject.create().put("operday", asString("operday")).put("expireday", asString("expireday")).put("gourlloc", asString("gourlloc")).put("priority", asString("priority")).put("artfilenm", asString("artfilenm"))) ;
         
         JsonObject afields = JsonObject.create() ;
