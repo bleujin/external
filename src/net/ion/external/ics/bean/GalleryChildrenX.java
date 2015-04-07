@@ -15,6 +15,7 @@ import net.ion.framework.util.MapUtil;
 import net.ion.framework.util.ObjectUtil;
 
 import org.apache.lucene.analysis.kr.utils.StringUtil;
+import org.apache.lucene.queryparser.classic.ParseException;
 
 import com.google.common.base.Function;
 
@@ -115,5 +116,10 @@ public class GalleryChildrenX {
 	
 	private void putParam(String name, Object value) {
 		param.put(name, ObjectUtil.toString(value)) ;
+	}
+
+	public GalleryChildrenX query(String query) throws ParseException {
+		if (StringUtil.isNotBlank(query)) queryRequest.query(query) ;
+		return this;
 	}
 }

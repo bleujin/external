@@ -62,8 +62,8 @@ public class GalleryWeb {
     @GET
     @Path("/{did}/list")
     @Produces(ExtMediaType.APPLICATION_JSON_UTF8)
-    public JsonObject listGallery(@PathParam("did") final String did, @QueryParam("query") final String query, @DefaultValue("101") @QueryParam("offset") final int offset) throws IOException{
-        XIterable<GalleryX> gallerys = dsub.findDomain(did).datas().gallerys().where(query).offset(offset).find();;
+    public JsonObject listGallery(@PathParam("did") final String did, @QueryParam("query") final String query, @DefaultValue("101") @QueryParam("offset") final int offset) throws IOException, ParseException{
+        XIterable<GalleryX> gallerys = dsub.findDomain(did).datas().gallerys().query(query).offset(offset).find();
         JsonObject result = JsonObject.create() ;
         JsonArray jarray = new JsonArray();
         result.put("result", jarray) ;
@@ -228,23 +228,37 @@ public class GalleryWeb {
 
 	@GET
 	@Path("/{did}/query.template")
-	@Produces(ExtMediaType.TEXT_PLAIN_UTF8)
-	public String tquery(@PathParam("did") String did, @DefaultValue("") @QueryParam("query") String query, @DefaultValue("") @QueryParam("sort") String sort, @DefaultValue("0") @QueryParam("skip") String skip, @DefaultValue("10") @QueryParam("offset") String offset,
-			@QueryParam("indent") boolean indent, @QueryParam("debug") boolean debug, @Context HttpRequest request) throws IOException, ParseException {
+	public UncertainOutput tquery(@PathParam("did") final String did, @DefaultValue("") @QueryParam("query") final String query, @DefaultValue("") @QueryParam("sort") final String sort, @DefaultValue("0") @QueryParam("skip") final String skip, @DefaultValue("10") @QueryParam("offset") final String offset,
+			@QueryParam("indent") boolean indent, @QueryParam("debug") boolean debug, @Context final HttpRequest request, @DefaultValue("false") @QueryParam("html") final boolean isHtml) throws IOException {
 
-		try {
-			MultivaluedMap<String, String> map = request.getUri().getQueryParameters();
-			final XIterable<GalleryX> gallerys = findGallery(did, query, sort, skip, offset, request, map).find();
-
-			StringWriter writer = new StringWriter();
-			String resourceName = "/domain/"+ did + "/gallery" + ".template" ;
-			qengine.merge(resourceName, MapUtil.<String, Object> chainMap().put("gallerys", gallerys).put("params", map).toMap(), writer);
+		return new UncertainOutput() {
+			@Override
+			public void write(OutputStream output) throws IOException, WebApplicationException {
+				OutputStreamWriter writer = new OutputStreamWriter(output) ;
+				try {
+					MultivaluedMap<String, String> map = request.getUri().getQueryParameters();
+					final XIterable<GalleryX> gallerys = findGallery(did, query, sort, skip, offset, request, map).find();
+					
+					String resourceName = "/domain/"+ did + "/gallery" + ".template" ;
+					qengine.merge(resourceName, MapUtil.<String, Object> chainMap().put("gallerys", gallerys).put("params", map).toMap(), writer);
+					
+				} catch (org.apache.velocity.exception.ParseErrorException ex) {
+					ex.printStackTrace(); 
+					writer.write(ex.getMessage()) ;
+				} catch(ParseException ex){
+					ex.printStackTrace(); 
+					writer.write(ex.getMessage()) ;
+				} finally {
+					writer.flush();
+				}
+			}
 			
-			return writer.toString() ;
-		} catch (org.apache.velocity.exception.ParseErrorException tex) {
-			tex.printStackTrace(); 
-			return tex.getMessage();
-		}
+			@Override
+			public MediaType getMediaType() {
+				return isHtml ? MediaType.valueOf(ExtMediaType.TEXT_HTML_UTF8.toString()) :  MediaType.valueOf(ExtMediaType.TEXT_PLAIN_TYPE.toString());
+			}
+		};
+		
 	}	
 
 	// template
