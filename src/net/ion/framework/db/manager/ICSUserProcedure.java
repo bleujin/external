@@ -13,12 +13,13 @@ import net.ion.framework.db.procedure.UserProcedure;
 public class ICSUserProcedure extends UserProcedure {
 
 	private IUserProcedure dbupt;
-	private IUserProcedure smupt;
+	private ScriptManager smanager ;
+	private ICSUserProcedures uptsTran;
 
-	public ICSUserProcedure(IDBController idc, String psql, IUserProcedure dbupt, IUserProcedure smupt) {
+	public ICSUserProcedure(IDBController idc, String psql, IUserProcedure dbupt, ScriptManager smanager) {
 		super(idc, psql) ;
 		this.dbupt = dbupt ;
-		this.smupt = smupt ;
+		this.smanager = smanager ;
 	}
 
 	@Override
@@ -39,13 +40,38 @@ public class ICSUserProcedure extends UserProcedure {
 	}
 
 	@Override
-	public int myUpdate(Connection conn) throws SQLException {
+	public int myUpdate(final Connection conn) throws SQLException {
 		dbupt.setParamValues(this.getParams(), this.getTypes());
-		smupt.setParamValues(this.getParams(), this.getTypes());
 
 		int result = dbupt.myUpdate(conn);
-		smupt.myUpdate(conn) ;
+		if (! smanager.hasFn(getProcName())) return result ;
+
+		IUserProcedure smupt = smanager.getRepositoryService().createUserProcedure(this.getDBController(), getProcName()) ;
+		smupt.setParamValues(this.getParams(), this.getTypes());
+		if (this.uptsTran != null){
+			uptsTran.add(smupt) ;
+		} else {
+			smupt.myUpdate(conn) ;
+		}
+		
+		
+//		smanager.runASync(new Runnable(){
+//			public void run(){
+//				try {
+//					IUserProcedure smupt = smanager.getRepositoryService().createUserProcedure(ICSUserProcedure.this.getDBController(), getProcName()) ;
+//					smupt.setParamValues(ICSUserProcedure.this.getParams(), ICSUserProcedure.this.getTypes());
+//					smupt.myUpdate(conn) ;
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+		
 		return result;
+	}
+
+	public void ownerTran(ICSUserProcedures uptsTran) {
+		this.uptsTran = uptsTran ;
 	}
 
 }

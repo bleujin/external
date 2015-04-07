@@ -145,8 +145,9 @@ public class ArticleWeb implements Webapp {
     @GET
     @Path("/{did}/list")
     @Produces(ExtMediaType.APPLICATION_JSON_UTF8)
-    public JsonObject listArticle(@PathParam("did") final String did, @QueryParam("query") final String query, @DefaultValue("101") @QueryParam("offset") final int offset) throws IOException {
-        XIterable<ArticleX> articles = dsub.findDomain(did).datas().articles().where(query).offset(offset).find();
+    public JsonObject listArticle(@PathParam("did") final String did, @QueryParam("query") final String query, @DefaultValue("101") @QueryParam("offset") final int offset) throws IOException, ParseException {
+        XIterable<ArticleX> articles = dsub.findDomain(did).datas().articles().query(query).offset(offset).find();
+        
         JsonObject result = JsonObject.create();
         JsonArray jarray = new JsonArray();
         result.put("result", jarray);

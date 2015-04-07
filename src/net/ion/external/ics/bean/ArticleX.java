@@ -10,6 +10,7 @@ import net.ion.craken.tree.PropertyId.PType;
 import net.ion.external.domain.Domain;
 import net.ion.framework.parse.gson.GsonBuilder;
 import net.ion.framework.parse.gson.JsonObject;
+import net.ion.framework.util.Debug;
 import net.ion.framework.util.ListUtil;
 import net.ion.framework.util.MapUtil;
 import net.ion.framework.util.SetUtil;
@@ -131,6 +132,8 @@ public class ArticleX extends BeanX{
 
 	public String content(){
 		String content = asString("content") ;
+		
+		
 		String[] founds = StringUtil.substringsBetween(content, "[[--ArtInImage,fileLoc:", "--]]") ;
 		if (founds == null) return content ;
 		List<String> searchs = ListUtil.newList() ;
@@ -138,9 +141,22 @@ public class ArticleX extends BeanX{
 		for (String found : founds) {
 			searchs.add("[[--ArtInImage,fileLoc:" + found + "--]]") ;
             ///{did}/content/{catid}/{artid}/{resourceid}.stream
-			replaces.add("/admin/article/" + domainId() + "/content/" + catId() + "/" + artId() + "/img" + found.hashCode() + ".stream" ) ;
+			replaces.add("/admin/article/" + domainId() + "/content/" + catId() + "/" + artId() + "/img" + found.toLowerCase().hashCode() + ".stream" ) ;
 		}
-		return StringUtil.replaceEach(content, searchs.toArray(new String[0]), replaces.toArray(new String[0])) ;
+		String transed = StringUtil.replaceEach(content, searchs.toArray(new String[0]), replaces.toArray(new String[0])) ;
+		
+		
+		String[] gfounds = StringUtil.substringsBetween(transed, "/ics/galm/gallery.do?forwardName=resource_view&galId=", "\"");
+		
+		List<String> gsearchs = ListUtil.newList() ;
+		List<String> greplaces = ListUtil.newList() ;
+		for (String found : gfounds) {
+			gsearchs.add("/ics/galm/gallery.do?forwardName=resource_view&galId=" + found) ;
+            ///{did}/content/{catid}/{artid}/{resourceid}.stream
+			greplaces.add("/admin/gallery/" + domainId() + "/view/" + found) ;
+		}
+		
+		return StringUtil.replaceEachRepeatedly(transed, gsearchs.toArray(new String[0]), greplaces.toArray(new String[0])) ;
 	}
 	
 	public void jsonWrite(Writer writer) throws IOException {

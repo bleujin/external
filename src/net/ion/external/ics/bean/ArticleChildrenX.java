@@ -13,6 +13,9 @@ import net.ion.framework.util.MapUtil;
 import net.ion.framework.util.ObjectUtil;
 
 import org.apache.lucene.analysis.kr.utils.StringUtil;
+import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.lucene.queryparser.classic.QueryParser;
+import org.apache.lucene.search.QueryWrapperFilter;
 
 public class ArticleChildrenX {
 
@@ -36,6 +39,13 @@ public class ArticleChildrenX {
 		return this;
 	}
 
+	public ArticleChildrenX query(String query) throws ParseException{
+		if (StringUtil.isNotBlank(query)) queryRequest.query(query) ;
+		
+		return this ;
+	}
+	
+	
 	public ArticleChildrenX skip(int skip) {
 		queryRequest.skip(skip);
 		putParam("skip", skip);

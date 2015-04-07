@@ -53,7 +53,7 @@ public class DomainSub {
 	}
 
 
-	public <T> T domains(DomainHandler<T> dhandler) {
+	public <T> T domains(DomainInfoHandler<T> dhandler) {
 		final IteratorList<ReadNode> citer = session.ghostBy("/domain").children().iterator() ;
 		
 		return dhandler.handle(new Iterator<Domain>(){

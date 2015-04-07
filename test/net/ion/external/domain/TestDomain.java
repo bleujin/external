@@ -27,7 +27,7 @@ public class TestDomain extends TestBaseDomain{
 		
 		session.pathBy("/datas/log").walkChildren().debugPrint();
 		
-		Map<String, Boolean> resultMap = domain.info().siteCategory(new DomainInfoHandler<Map<String, Boolean>>(){
+		Map<String, Boolean> resultMap = domain.info().siteCategory(new DomainNodeInfoHandler<Map<String, Boolean>>(){
 			@Override
 			public Map<String, Boolean> handle(ReadChildren scats) {
 				Map<String, Boolean> result = MapUtil.newMap() ;

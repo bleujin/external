@@ -79,6 +79,7 @@ public class MiscWeb implements Webapp{
                 try {
                     Thread.sleep(time);
                     server.shutdown() ;
+                    System.exit(0);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

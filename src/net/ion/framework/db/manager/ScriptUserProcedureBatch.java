@@ -30,7 +30,7 @@ public class ScriptUserProcedureBatch extends UserProcedureBatch {
 	@Override
 	public int myUpdate(Connection conn) throws SQLException {
 		try {
-			return manager.updateWith(this);
+			return manager.updateWith(this, conn);
 		} catch (Exception e) {
 			throw new SQLException(ObjectUtil.coalesce(e.getCause(), e)) ;
 		} 

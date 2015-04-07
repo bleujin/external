@@ -18,8 +18,8 @@ import net.ion.craken.node.crud.ReadChildren;
 import net.ion.external.domain.Domain;
 import net.ion.external.domain.Domain.Target;
 import net.ion.external.domain.DomainData;
-import net.ion.external.domain.DomainHandler;
 import net.ion.external.domain.DomainInfoHandler;
+import net.ion.external.domain.DomainNodeInfoHandler;
 import net.ion.external.domain.DomainSub;
 import net.ion.external.ics.bean.TemplateX;
 import net.ion.external.ics.bean.XIterable;
@@ -64,7 +64,7 @@ public class DomainWeb implements Webapp {
 	@GET
 	@Produces(ExtMediaType.APPLICATION_JSON_UTF8)
 	public JsonArray list() {
-		return dsub.domains(new DomainHandler<JsonArray>() {
+		return dsub.domains(new DomainInfoHandler<JsonArray>() {
 			@Override
 			public JsonArray handle(Iterator<Domain> domains) {
 				JsonArray result = new JsonArray() ;
@@ -104,7 +104,7 @@ public class DomainWeb implements Webapp {
 	public JsonObject define(@PathParam("did") final String did) throws IOException{
 		JsonObject result = JsonObject.create() ;
 		
-		JsonArray scats = domain(did).info().siteCategory(new DomainInfoHandler<JsonArray>() {
+		JsonArray scats = domain(did).info().siteCategory(new DomainNodeInfoHandler<JsonArray>() {
 			@Override
 			public JsonArray handle(ReadChildren children) {
 				JsonArray result = new JsonArray() ;
@@ -115,7 +115,7 @@ public class DomainWeb implements Webapp {
 			}
 		}) ;
 		
-		JsonArray gcats = domain(did).info().galleryCategory(new DomainInfoHandler<JsonArray>() {
+		JsonArray gcats = domain(did).info().galleryCategory(new DomainNodeInfoHandler<JsonArray>() {
 			@Override
 			public JsonArray handle(ReadChildren children) {
 				JsonArray result = new JsonArray() ;

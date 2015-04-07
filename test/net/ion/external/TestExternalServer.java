@@ -31,6 +31,9 @@ public class TestExternalServer extends TestCase {
 		final ExternalServer server = ExternalServer.create(ConfigBuilder.create("./resource/config/es-config.xml").build()) ;
 
 		server.start() ;
+		
+		
+		
         new InfinityThread().startNJoin();
 	}
 }
