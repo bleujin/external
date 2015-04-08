@@ -1,0 +1,66 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+
+
+<img src="/admin/gallery/mdomain/resize/11027?width=100&height=100" align="left"><span><h2 id="tables-condensed">board sample</h2></span>
+
+<table class="table table-striped">
+<thead>
+<tr>
+	<th>Id</th>
+	<th>Title</th>
+</tr>
+</thead>
+<tbody>
+#foreach($article in $articles.iterator())
+<tr class="success">
+	<td>$article.asInt("artid")</td>
+	<td>$article.asString("subject")</td>
+</tr>
+#end
+
+#foreach($rnode in $session.ghostBy("/sample/board").children().descending("num").offset(10).toList())
+<tr>
+	<td>$rnode.property("num").asInt()</td>
+	<td>$rnode.property("title").asString()</td>
+</tr>
+#end
+</tbody>
+</table>
+
+
+<br/><br/><br/>
+
+<form action="/open/scripts/run/boardscript" name="boardform">
+	<input type="text" name="title" size="40" />
+	
+	<input type=button name="write" value="submit">
+</form>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script>
+	$(document).ready(function() {
+		var writeForm = $('form[name=boardform]');
+	
+		$('input[name=write]').click(function() {
+			$.ajax({
+				url:'/open/scripts/run/boardscript',
+				dataType:'json',
+				type:'POST',
+				data: { title: writeForm.find("input[name=title]").val()},  
+				success:function(data){
+					location.reload();
+				}, 
+				error:function(request,status,error){
+					console.log('response', request, status, error) ;
+				}
+			}) ;
+		});
+	});
+</script>

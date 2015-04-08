@@ -255,7 +255,7 @@ public class GalleryWeb {
 			
 			@Override
 			public MediaType getMediaType() {
-				return isHtml ? MediaType.valueOf(ExtMediaType.TEXT_HTML_UTF8.toString()) :  MediaType.valueOf(ExtMediaType.TEXT_PLAIN_TYPE.toString());
+				return isHtml ? MediaType.valueOf(ExtMediaType.TEXT_HTML_UTF8.toString()) :  MediaType.valueOf(ExtMediaType.TEXT_PLAIN_UTF8.toString());
 			}
 		};
 		

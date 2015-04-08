@@ -128,6 +128,7 @@ public class ArticleWeb implements Webapp {
     public UncertainOutput tquery(@PathParam("did") final String did, @DefaultValue("") @QueryParam("query") final String query, @DefaultValue("") @QueryParam("sort") final String sort, @DefaultValue("0") @QueryParam("skip") final String skip, @DefaultValue("10") @QueryParam("offset") final String offset,
                          @QueryParam("indent") boolean indent, @QueryParam("debug") boolean debug, @Context final HttpRequest request, @DefaultValue("false") @QueryParam("html") final boolean isHtml) throws IOException, ParseException {
 
+    	
         return new UncertainOutput() {
 			@Override
 			public void write(OutputStream output) throws IOException, WebApplicationException {
@@ -137,7 +138,7 @@ public class ArticleWeb implements Webapp {
 		            final XIterable<ArticleX> articles = findArticle(did, query, sort, skip, offset, request, map).find();
 
 		            String resourceName = "/domain/" + did + "/article" + ".template";
-		            qengine.merge(resourceName, MapUtil.<String, Object>chainMap().put("articles", articles).put("params", map).toMap(), writer);
+		            qengine.merge(resourceName, MapUtil.<String, Object>chainMap().put("articles", articles).put("params", map).put("session", session).toMap(), writer);
 					
 				} catch (org.apache.velocity.exception.ParseErrorException ex) {
 					ex.printStackTrace(); 
@@ -152,7 +153,7 @@ public class ArticleWeb implements Webapp {
 			
 			@Override
 			public MediaType getMediaType() {
-				return isHtml ? MediaType.valueOf(ExtMediaType.TEXT_HTML_UTF8.toString()) :  MediaType.valueOf(ExtMediaType.TEXT_PLAIN_TYPE.toString());
+				return isHtml ? MediaType.valueOf(ExtMediaType.TEXT_HTML_UTF8.toString()) :  MediaType.valueOf(ExtMediaType.TEXT_PLAIN_UTF8.toString());
 			}
 		};
 		
