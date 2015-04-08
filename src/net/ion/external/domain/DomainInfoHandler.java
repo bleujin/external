@@ -1,9 +1,8 @@
 package net.ion.external.domain;
 
-import net.ion.craken.node.crud.ReadChildren;
+import java.util.Iterator;
 
 public interface DomainInfoHandler<T> {
-	
-	public T handle(ReadChildren children)  ;
 
+	public T handle(Iterator<Domain> domains) ;
 }

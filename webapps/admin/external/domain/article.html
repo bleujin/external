@@ -231,6 +231,7 @@
                 var nodes = data['result'] ;
                 var table = $('#articles').DataTable({
                     data: nodes,
+                    searching:false, 
                     order: [[3, 'desc']],
                     columnDefs: [{
                         targets: '_all',
@@ -248,6 +249,65 @@
                     ]
                 });
 
+                var tableFoot = '<tfoot><tr><td colspan="5" class="col-xs-12">' +
+				'				<fieldset class="smart-form">' +
+				'					<div class="row">' +
+				'						<section class="col col-9"></section>' +
+				'						<section class="col col-3"><label class="input"><input type="text" name="searchQuery" placeholder="Search Query"></label></section>' +
+				'					</div>' +
+				'				</fieldset>' +
+				'				</td></tr></tfoot>' ;
+				
+				$(tableFoot).appendTo($("#articles")) ;
+                
+				
+				//var tableData = table.DataTable() ;
+				var articles = $("#articles") ;
+				var _searchQuery = articles.find("input[name=searchQuery]") ;
+				_searchQuery.on('keypress', function (event) {
+					if(event.which == '13'){
+						$.ajax({
+							url:"/admin/article/" + domainId + "/list",
+							type:'GET', 
+							dataType:'json',
+							data : {'query':_searchQuery.val()}, 
+							success:function(data){
+								table.clear() ;
+								table.destroy() ;
+								
+								var nodes = data['result'];
+								table = articles.DataTable({
+									"data":nodes,
+									"searching":false , 
+				                    order: [[3, 'desc']],
+				                    columnDefs: [{
+				                        targets: '_all',
+				                        orderable: false
+				                    }],
+				                    'columns': [
+				                        {'title':'artid'},
+				                        {'title':'catid'},
+				                        {'title':'subject'},
+				                        {'title':'modday'},
+				                        {
+				                            data: '',
+				                            defaultContent: '<button>link</button>'
+				                        }
+				                    ]
+								}) ;
+								
+								articles = $('#articles') ;
+							}, 
+							error:function(request,status,error){
+								console.log('response', request, status, error) ;
+							}
+						});
+						
+					}
+				});
+				
+				
+				
                 $('#articles tbody').on('click', 'button', function(event) {
                     event.preventDefault();
 
@@ -273,6 +333,7 @@
                     event.stopPropagation();
                 });
 
+                
                 $('#articles tbody').on('click', 'tr', function (event) {
                     event.preventDefault();
                     var artData = articleData(table, $(this)) ;

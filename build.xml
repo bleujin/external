@@ -79,6 +79,13 @@
 			<fileset dir="webapps/" includes="**"/>
 		</copy>
 	</target>
+	
+	<target name="copy_to_ics" depends="deploy_self">
+	    <echo>Copy To ICS</echo>
+	   <copy todir="../ics_work/lib/afterversion" overwrite="true">
+			<fileset file="publish/es_${version.number}.${build.number}.jar" />
+		</copy>
+	</target>
 
 	
 	<target name="make_zip" depends="copy_for_deploy">

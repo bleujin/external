@@ -42,7 +42,7 @@ public class ScriptUserProcedure extends UserProcedure implements QueryParam {
 	@Override
 	public Rows myQuery(Connection conn) throws SQLException {
 		try {
-			return manager.queryBy(this) ;
+			return manager.queryBy(this, conn) ;
 		} catch (Exception e) {
 			throw new SQLException(ObjectUtil.coalesce(e.getCause(), e)) ;
 		} 	
@@ -55,7 +55,7 @@ public class ScriptUserProcedure extends UserProcedure implements QueryParam {
 	@Override
 	public int myUpdate(Connection conn) throws SQLException {
 		try {
-			return manager.updateWith(this) ;
+			return manager.updateWith(this, conn) ;
 		} catch (Exception e) {
 			throw new SQLException(e) ;
 		} 

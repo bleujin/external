@@ -1,7 +1,9 @@
 package net.ion.framework.db.manager;
 
 import java.io.File;
+import java.net.URL;
 import java.util.Collection;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
@@ -17,8 +19,10 @@ import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
 import net.ion.craken.node.crud.util.TransactionJobs;
 import net.ion.external.ICSSubCraken;
+import net.ion.external.domain.IMirror;
 import net.ion.framework.db.DBController;
 import net.ion.framework.db.Rows;
+import net.ion.framework.db.manager.scriptfn.ScriptDummy;
 import net.ion.framework.db.procedure.IUserCommand;
 import net.ion.framework.db.procedure.IUserProcedureBatch;
 import net.ion.framework.db.procedure.IUserProcedures;
@@ -51,7 +55,8 @@ public class TestScriptManager extends TestCase {
 			}
 		}) ;
 		
-		ScriptManager sm = ScriptManager.create(craken, Executors.newScheduledThreadPool(1), new File("./resource/js")) ;
+		ScriptManager sm = ScriptManager.create(craken.login(), Executors.newScheduledThreadPool(1), IMirror.DUMMY, new File("./resource/js")) ;
+		sm.readJs(ScriptDummy.class, "sample") ;
 		DBController dc = new DBController(sm) ;
 		dc.initSelf(); 
 		
@@ -60,7 +65,8 @@ public class TestScriptManager extends TestCase {
 	}
 
 	public void testUserProcedureBatch() throws Exception {
-		ScriptManager sm = ScriptManager.create(craken, Executors.newScheduledThreadPool(1), new File("./resource/js")) ;
+		ScriptManager sm = ScriptManager.create(craken.login(), Executors.newScheduledThreadPool(1), IMirror.DUMMY, new File("./resource/js")) ;
+		sm.readJs(ScriptDummy.class, "sample") ;
 		DBController dc = new DBController(sm) ;
 		dc.initSelf(); 
 		
@@ -72,7 +78,8 @@ public class TestScriptManager extends TestCase {
 	
 	
 	public void testIFNotExist() throws Exception {
-		ScriptManager sm = ScriptManager.create(craken, Executors.newScheduledThreadPool(1), new File("./resource/js")) ;
+		ScriptManager sm = ScriptManager.create(craken.login(), Executors.newScheduledThreadPool(1), IMirror.DUMMY, new File("./resource/js")) ;
+		sm.readJs(ScriptDummy.class, "sample") ;
 		DBController dc = new DBController(sm) ;
 		dc.initSelf(); 
 		
@@ -80,6 +87,8 @@ public class TestScriptManager extends TestCase {
 		assertEquals(true, notRows == null);
 		dc.close();  
 	}
+
+	
 
 
 }

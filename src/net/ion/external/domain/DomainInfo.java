@@ -11,11 +11,11 @@ public class DomainInfo {
 	}
 	
 	
-	public <T> T siteCategory(DomainInfoHandler<T> nodeInfo) throws IOException{
+	public <T> T siteCategory(DomainNodeInfoHandler<T> nodeInfo) throws IOException{
 		return nodeInfo.handle(domain.session().ghostBy("/domain", domain.getId(), "scat").children()) ;
 	}
 	
-	public <T> T galleryCategory(DomainInfoHandler<T> nodeInfo) throws IOException{
+	public <T> T galleryCategory(DomainNodeInfoHandler<T> nodeInfo) throws IOException{
 		return nodeInfo.handle(domain.session().ghostBy("/domain", domain.getId(), "gcat").children()) ;
 	}
 	

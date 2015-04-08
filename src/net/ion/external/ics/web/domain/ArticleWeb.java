@@ -17,6 +17,7 @@ import net.ion.framework.parse.gson.JsonObject;
 import net.ion.framework.parse.gson.JsonPrimitive;
 import net.ion.framework.util.*;
 import net.ion.radon.core.ContextParam;
+
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.jboss.resteasy.plugins.providers.UncertainOutput;
 import org.jboss.resteasy.spi.HttpRequest;
@@ -26,6 +27,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.StreamingOutput;
+
 import java.io.*;
 import java.util.Iterator;
 
@@ -123,30 +125,48 @@ public class ArticleWeb implements Webapp {
     @GET
     @Path("/{did}/query.template")
     @Produces(ExtMediaType.TEXT_PLAIN_UTF8)
-    public String tquery(@PathParam("did") String did, @DefaultValue("") @QueryParam("query") String query, @DefaultValue("") @QueryParam("sort") String sort, @DefaultValue("0") @QueryParam("skip") String skip, @DefaultValue("10") @QueryParam("offset") String offset,
-                         @QueryParam("indent") boolean indent, @QueryParam("debug") boolean debug, @Context HttpRequest request) throws IOException, ParseException {
+    public UncertainOutput tquery(@PathParam("did") final String did, @DefaultValue("") @QueryParam("query") final String query, @DefaultValue("") @QueryParam("sort") final String sort, @DefaultValue("0") @QueryParam("skip") final String skip, @DefaultValue("10") @QueryParam("offset") final String offset,
+                         @QueryParam("indent") boolean indent, @QueryParam("debug") boolean debug, @Context final HttpRequest request, @DefaultValue("false") @QueryParam("html") final boolean isHtml) throws IOException, ParseException {
 
-        try {
-            MultivaluedMap<String, String> map = request.getUri().getQueryParameters();
-            final XIterable<ArticleX> articles = findArticle(did, query, sort, skip, offset, request, map).find();
+    	
+        return new UncertainOutput() {
+			@Override
+			public void write(OutputStream output) throws IOException, WebApplicationException {
+				OutputStreamWriter writer = new OutputStreamWriter(output) ;
+				try {
+		            MultivaluedMap<String, String> map = request.getUri().getQueryParameters();
+		            final XIterable<ArticleX> articles = findArticle(did, query, sort, skip, offset, request, map).find();
 
-            StringWriter writer = new StringWriter();
-            String resourceName = "/domain/" + did + "/article" + ".template";
-            qengine.merge(resourceName, MapUtil.<String, Object>chainMap().put("articles", articles).put("params", map).toMap(), writer);
-
-            return writer.toString();
-        } catch (org.apache.velocity.exception.ParseErrorException tex) {
-            tex.printStackTrace();
-            return tex.getMessage();
-        }
+		            String resourceName = "/domain/" + did + "/article" + ".template";
+		            qengine.merge(resourceName, MapUtil.<String, Object>chainMap().put("articles", articles).put("params", map).put("session", session).toMap(), writer);
+					
+				} catch (org.apache.velocity.exception.ParseErrorException ex) {
+					ex.printStackTrace(); 
+					writer.write(ex.getMessage()) ;
+				} catch(ParseException ex){
+					ex.printStackTrace(); 
+					writer.write(ex.getMessage()) ;
+				} finally {
+					writer.flush();
+				}
+			}
+			
+			@Override
+			public MediaType getMediaType() {
+				return isHtml ? MediaType.valueOf(ExtMediaType.TEXT_HTML_UTF8.toString()) :  MediaType.valueOf(ExtMediaType.TEXT_PLAIN_UTF8.toString());
+			}
+		};
+		
     }
+ 
 
 
     @GET
     @Path("/{did}/list")
     @Produces(ExtMediaType.APPLICATION_JSON_UTF8)
-    public JsonObject listArticle(@PathParam("did") final String did, @QueryParam("query") final String query, @DefaultValue("101") @QueryParam("offset") final int offset) throws IOException {
-        XIterable<ArticleX> articles = dsub.findDomain(did).datas().articles().where(query).offset(offset).find();
+    public JsonObject listArticle(@PathParam("did") final String did, @QueryParam("query") final String query, @DefaultValue("101") @QueryParam("offset") final int offset) throws IOException, ParseException {
+        XIterable<ArticleX> articles = dsub.findDomain(did).datas().articles().query(query).offset(offset).find();
+        
         JsonObject result = JsonObject.create();
         JsonArray jarray = new JsonArray();
         result.put("result", jarray);

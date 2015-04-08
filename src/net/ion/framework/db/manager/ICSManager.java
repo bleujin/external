@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import net.ion.framework.db.IDBController;
+import net.ion.framework.db.manager.scriptfn.ScriptDummy;
 import net.ion.framework.db.procedure.RepositoryService;
 
 public class ICSManager extends DBManager{
@@ -15,6 +16,10 @@ public class ICSManager extends DBManager{
 	public ICSManager(DBManager dbm, ScriptManager sm) {
 		this.dbm = dbm ;
 		this.sm = sm ;
+		
+		sm.readJs(ScriptDummy.class, "article", "content_extend", "content", "gallery", "sample", "site_category", "utils") ;
+		
+		
 		this.icsrs = new ICSRepositoryService(dbm, sm) ;
 	}
 
@@ -50,8 +55,8 @@ public class ICSManager extends DBManager{
 
 	@Override
 	protected void myInitPool() throws SQLException {
-		dbm.myInitPool(); 
-		sm.myInitPool(); 
+		if (! dbm.isCreated()) dbm.myInitPool(); 
+		if (! sm.isCreated()) sm.myInitPool(); 
 	}
 	
 	@Override

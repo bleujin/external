@@ -5,16 +5,18 @@ import net.ion.framework.db.procedure.IUserCommand;
 import net.ion.framework.db.procedure.IUserCommandBatch;
 import net.ion.framework.db.procedure.IUserProcedure;
 import net.ion.framework.db.procedure.IUserProcedureBatch;
+import net.ion.framework.db.procedure.IUserProcedures;
 import net.ion.framework.db.procedure.RepositoryService;
+import net.ion.framework.db.procedure.UserProcedures;
 
-public class ICSRepositoryService extends RepositoryService{
+public class ICSRepositoryService extends RepositoryService {
 
 	private RepositoryService dbmrs;
-	private RepositoryService smrs;
+	private ScriptManager sm;
 
 	public ICSRepositoryService(DBManager dbm, ScriptManager sm) {
-		this.dbmrs = dbm.getRepositoryService() ;
-		this.smrs = sm.getRepositoryService() ;
+		this.dbmrs = dbm.getRepositoryService();
+		this.sm = sm;
 	}
 
 	@Override
@@ -29,12 +31,16 @@ public class ICSRepositoryService extends RepositoryService{
 
 	@Override
 	public IUserProcedure createUserProcedure(IDBController idc, String psql) {
-		return new ICSUserProcedure(idc, psql, dbmrs.createUserProcedure(idc, psql), smrs.createUserProcedure(idc, psql));
+		return new ICSUserProcedure(idc, psql, dbmrs.createUserProcedure(idc, psql), sm);
 	}
 
 	@Override
 	public IUserProcedureBatch createUserProcedureBatch(IDBController idc, String psql) {
-		return new ICSUserProcedureBatch(idc, psql, dbmrs.createUserProcedureBatch(idc, psql), smrs.createUserProcedureBatch(idc, psql));
+		return new ICSUserProcedureBatch(idc, psql, dbmrs.createUserProcedureBatch(idc, psql), sm);
+	}
+
+	public IUserProcedures createUserProcedures(IDBController dc, String name) {
+		return new ICSUserProcedures(dc, name);
 	}
 
 }

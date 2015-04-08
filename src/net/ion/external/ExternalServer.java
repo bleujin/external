@@ -159,6 +159,7 @@ public class ExternalServer {
 		if (status != Status.STARTED) return this ;
 		
 		try {
+			craken.stop() ;
 			radon.stop().get();
 		} catch (InterruptedException e) {
 			e.printStackTrace();

@@ -251,8 +251,10 @@
             success: function(data) {
                 var nodes = data['result'] ;
 
-                $('#gallerys').DataTable({
+                var table = $('#gallerys').DataTable({
                     'data': nodes,
+                     searching:false, 
+                     order: [[0, 'desc']],
                     'columns': [
                         {'title':'galid'},
                         {'title':'catid'},
@@ -262,6 +264,67 @@
                         {'title':'filesize'},
                         {'title':'modday'}
                     ]
+                });
+                var tableFoot = '<tfoot><tr><td colspan="7" class="col-xs-12">' +
+				'				<fieldset class="smart-form">' +
+				'					<div class="row">' +
+				'						<section class="col col-9"></section>' +
+				'						<section class="col col-3"><label class="input"><input type="text" name="searchQuery" placeholder="Search Query"></label></section>' +
+				'					</div>' +
+				'				</fieldset>' +
+				'				</td></tr></tfoot>' ;
+				
+				$(tableFoot).appendTo($("#gallerys")) ;
+				
+				var gallerys = $("#gallerys") ;
+				var _searchQuery = gallerys.find("input[name=searchQuery]") ;
+				_searchQuery.on('keypress', function (event) {
+					if(event.which == '13'){
+						$.ajax({
+							type:'GET', 
+							url:"/admin/gallery/" + domainId + "/list",
+							dataType:'json',
+							data : {'query':_searchQuery.val()}, 
+							success:function(data){
+								table.clear() ;
+								table.destroy() ;
+								
+								var nodes = data['result'] ;
+								table = $('#gallerys').DataTable({
+					                    'data': nodes,
+					                     searching:false, 
+					                     order: [[0, 'desc']],
+					                    'columns': [
+					                        {'title':'galid'},
+					                        {'title':'catid'},
+					                        {'title':'subject'},
+					                        {'title':'width'},
+					                        {'title':'height'},
+					                        {'title':'filesize'},
+					                        {'title':'modday'}
+					                    ]
+					                });
+								
+								gallerys = $('#gallerys') ;
+				                $("#gallerys tbody tr").each(function() {
+				                   	var galId = $(this).find("td").eq(0).text() ;
+				                   	var url = "/admin/gallery/" + domainId + "/view/" + galId ;
+				                   	$(this).find("td").eq(0).html("<a data-lightbox='groupphoto' href=" + url + ">" + galId + "</a>")
+				                });
+							}, 
+							error:function(request,status,error){
+								console.log('response', request, status, error) ;
+							}
+						});
+						
+					}
+				});
+				
+
+                jQuery("#gallerys tbody tr").each(function() {
+                   	var galId = $(this).find("td").eq(0).text() ;
+                   	var url = "/admin/gallery/" + domainId + "/view/" + galId ;
+                   	$(this).find("td").eq(0).html("<a data-lightbox='groupphoto' href=" + url + ">" + galId + "</a>")
                 });
 
                 var superbox = $('#superbox_body') ;

@@ -23,11 +23,11 @@ public abstract class AbScriptManager extends DBManager {
 		this.cservice = new ScriptRepositoryService(this);
 	}
 	
-	public abstract Rows queryBy(ScriptUserProcedure crakenUserProcedure) throws Exception;
+	public abstract Rows queryBy(ScriptUserProcedure crakenUserProcedure, Connection conn) throws Exception;
 
-	public abstract int updateWith(ScriptUserProcedure crakenUserProcedure) throws Exception;
+	public abstract int updateWith(ScriptUserProcedure crakenUserProcedure, Connection conn) throws Exception;
 
-	public abstract int updateWith(ScriptUserProcedureBatch crakenUserProcedureBatch) throws Exception;
+	public abstract int updateWith(ScriptUserProcedureBatch crakenUserProcedureBatch, Connection conn) throws Exception;
 
 	
 

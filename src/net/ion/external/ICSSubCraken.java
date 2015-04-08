@@ -41,8 +41,9 @@ public class ICSSubCraken {
 		GlobalConfiguration gconfig = new GlobalConfigurationBuilder()
 		.transport().defaultTransport()
 				.clusterName(econfig.serverConfig().clusterName())
-				.nodeName("ics")
-				.addProperty("location", "./resource/config/craken-udp.xml")
+				.nodeName("external")
+				.addProperty("configurationFile", "./resource/config/craken-udp.xml")
+		.transport().asyncTransportExecutor().addProperty("maxThreads", "100").addProperty("threadNamePrefix", "mytransport-thread")
 			.build();
 		DefaultCacheManager dcm = new DefaultCacheManager(gconfig);
 		

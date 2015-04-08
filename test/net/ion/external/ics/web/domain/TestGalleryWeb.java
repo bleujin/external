@@ -3,6 +3,8 @@ package net.ion.external.ics.web.domain;
 import java.io.StringWriter;
 import java.net.URLEncoder;
 
+import javax.ws.rs.core.MediaType;
+
 import org.jboss.resteasy.util.HttpHeaderNames;
 
 import net.ion.external.domain.TestBaseDomain;
@@ -30,8 +32,16 @@ public class TestGalleryWeb extends TestBaseDomain {
 		domain.addGalleryCategory("aaaa", true) ;
 	}
 
-	public void testFirst() throws Exception {
+	public void testFirstWhere() throws Exception {
 		XIterable<GalleryX> gallerys = domain.datas().gallerys().where("catid=aaaa").sort("").skip(0).offset(10).find() ;
+		StringWriter sw = new StringWriter();
+		OutputHandler output = OutputHandler.createJson(sw, true) ;
+		output.out(gallerys, new JsonObject(), new JsonObject()) ;
+		Debug.line(sw);
+	}
+	
+	public void testQuery() throws Exception {
+		XIterable<GalleryX> gallerys = domain.datas().gallerys().query("530").sort("").skip(0).offset(10).find() ;
 		StringWriter sw = new StringWriter();
 		OutputHandler output = OutputHandler.createJson(sw, true) ;
 		output.out(gallerys, new JsonObject(), new JsonObject()) ;
@@ -61,7 +71,8 @@ public class TestGalleryWeb extends TestBaseDomain {
 	
 	
 	public void testList() throws Exception {
-		
+		MediaType mtype = MediaType.valueOf("text/plain; charset=utf-8") ;
+		Debug.line(mtype);
 	}
 	
 	

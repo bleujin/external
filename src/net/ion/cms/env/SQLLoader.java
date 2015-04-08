@@ -1,4 +1,4 @@
-package net.ion.external.domain;
+package net.ion.cms.env;
 
 import java.io.IOException;
 import java.io.InputStream;

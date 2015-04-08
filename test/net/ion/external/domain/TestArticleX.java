@@ -11,7 +11,7 @@ import net.ion.external.ics.bean.OutputHandler;
 import net.ion.framework.util.Debug;
 import net.ion.framework.util.IOUtil;
 
-public class TestArticle extends TestBaseDomain {
+public class TestArticleX extends TestBaseDomain {
 
 
 	public void testArticles() throws Exception {
@@ -71,4 +71,9 @@ public class TestArticle extends TestBaseDomain {
         Debug.line(sw.toString());
     }
 
+    
+    
+    
+    
+    
 }

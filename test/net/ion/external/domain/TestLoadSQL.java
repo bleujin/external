@@ -2,13 +2,17 @@ package net.ion.external.domain;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import junit.framework.TestCase;
+import net.ion.cms.env.SQLLoader;
 import net.ion.framework.db.DBController;
 import net.ion.framework.db.IDBController;
 import net.ion.framework.db.bean.ResultSetHandler;
 import net.ion.framework.db.manager.OracleDBManager;
 import net.ion.framework.util.Debug;
+import net.ion.framework.util.ListUtil;
+import net.ion.framework.util.StringUtil;
 
 public class TestLoadSQL extends TestCase{
 
@@ -29,7 +33,23 @@ public class TestLoadSQL extends TestCase{
 						return null;
 					}
 				}) ;
-		
-		
 	}
+	
+
+    public void testDyImage() throws Exception {
+		String imgSrc = "dddd <img src=\"/ics/galm/gallery.do?forwardName=resource_view&galId=10995\" alt=\"\"> dddddd" ;
+		String[] founds = StringUtil.substringsBetween(imgSrc, "/ics/galm/gallery.do?forwardName=resource_view&galId=", "\"");
+		Debug.line(founds);
+		
+		List<String> searchs = ListUtil.newList() ;
+		List<String> replaces = ListUtil.newList() ;
+		for (String found : founds) {
+			searchs.add("/ics/galm/gallery.do?forwardName=resource_view&galId=" + found) ;
+            ///{did}/content/{catid}/{artid}/{resourceid}.stream
+			replaces.add("/admin/gallery/did/" + found) ;
+		}
+		
+		Debug.line(StringUtil.replaceEachRepeatedly(imgSrc, searchs.toArray(new String[0]), replaces.toArray(new String[0]))) ;
+	}
+    
 }
