@@ -25,9 +25,9 @@
                 var basicData = basicInfoFromUrl(e) ;
 
                 // crop modal by airkjh. cropHandler defined in gallery.html
-                c.find('a.edit-image').click({basic: basicData, src: e, originalWidth: imgEl.naturalWidth, originalHeight: imgEl.naturalHeight}, cropHandler);
+                c.attr("src", e), a(".superbox-list").removeClass("active"), $this.addClass("active"), c.find("em").text(g), c.find(">:first-child").text(h), c.find(".superbox-img-description").text(f), 0 == a(".superbox-current-img").css("opacity") && a(".superbox-current-img").animate({opacity: 1}), a(this).next().hasClass("superbox-show") ? (a(".superbox-list").removeClass("active"), b.toggle()) : (b.insertAfter(this).css("display", "block"), $this.addClass("active")), a("html, body").animate({scrollTop: b.position().top - d.width()}, "medium");
+                c.find('a.edit-image').click({basic: basicData, src: e, originalWidth: c.naturalWidth, originalHeight: c.naturalHeight}, cropHandler);
 
-                c.attr("src", e), a(".superbox-list").removeClass("active"), $this.addClass("active"), c.find("em").text(g), c.find(">:first-child").text(h), c.find(".superbox-img-description").text(f), 0 == a(".superbox-current-img").css("opacity") && a(".superbox-current-img").animate({opacity: 1}), a(this).next().hasClass("superbox-show") ? (a(".superbox-list").removeClass("active"), b.toggle()) : (b.insertAfter(this).css("display", "block"), $this.addClass("active")), a("html, body").animate({scrollTop: b.position().top - d.width()}, "medium")
             }), a(".superbox").on("click", ".superbox-close", function () {
                 a(".superbox-list").removeClass("active"), a(".superbox-current-img").animate({opacity: 0}, 200, function () {
                     a(".superbox-show").slideUp()
