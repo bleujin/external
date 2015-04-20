@@ -1,0 +1,22 @@
+
+<ul>
+#foreach($pkey in $articles.paramKeys().iterator())
+	<li>$pkey : $articles.param($pkey)
+#end
+	<li>count : $articles.count()
+	<li>request params : $params
+</ul>
+
+<table>
+<tr>
+	<th>Id</th>
+	<th>Title</th>
+</tr>
+
+#foreach($article in $articles.iterator())
+<tr>
+	<td>$article.asInt("artid")</td>
+	<td>$article.asString("subject")</td>
+</tr>
+#end
+</table>

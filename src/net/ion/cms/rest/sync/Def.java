@@ -165,6 +165,12 @@ public class Def {
 		public static final String Running = "running" ;
 	}
 	
+	public static class ICommand {
+		public static final String Sid = "sid" ;
+		public static final String Content = "content" ;
+		public static final String Running = "running" ;
+	}
+	
 
 	public static class Schedule {
 		public static final String Sid = "sid" ;

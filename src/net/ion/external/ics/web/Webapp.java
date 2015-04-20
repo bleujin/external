@@ -9,5 +9,6 @@ public interface Webapp {
 
     
     public final static String SCRIPT_DIR = "./resource/script" ;
+    public final static String ICOMMAND_DIR = "./resource/icommand" ;
     public static final String REMOVED_DIR = "./resource/removed" ;
 }
