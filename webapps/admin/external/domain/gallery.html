@@ -330,8 +330,9 @@
                 var superbox = $('#superbox_body') ;
                 $.each(nodes, function(index) {
                     var gallery = nodes[index], galId = gallery[0], catId = gallery[1], fileName = gallery[2], type = fileName.substr(fileName.lastIndexOf('.') + 1) ;
-                    var url = '/admin/gallery/' + domainId + '/resize/' + galId + '?width=137&height=137';
-                    var el = '<div class="superbox-list"><img class="superbox-img" src="' + url + '" data-img="' + url + '" title="'+fileName+'"></div>' ;
+                    var turl = '/admin/gallery/' + domainId + '/resize/' + galId + '?width=137&height=137';
+                    var rurl = '/admin/gallery/' + domainId + '/view/' + galId ;
+                    var el = '<div class="superbox-list"><img class="superbox-img" src="' + turl + '" data-img="' + rurl + '" title="'+fileName+'"></div>' ;
                     $(el).appendTo(superbox) ;
                 });
             }
@@ -441,32 +442,24 @@
         });
 
         // crop part
-        var image = $('#cropContainer > img'), container = $('#cropContainer'), canvasData, cropBoxData ;
+        var image = $('#galleryImg'), jcrop_api ;
 
-        image.on('load', function(event) {
-            var img = $(this), originalWidth = img.attr('data-width'), originalHeight = img.attr('data-height'), maxWidth = 800, maxHeight = 800 ;
-            var ratio = Math.min(maxWidth / originalWidth, maxHeight / originalHeight) ;
+        image.on('load', function(e) {
 
-            img.attr('width', originalWidth * ratio) ;
-            img.attr('height',originalHeight * ratio) ;
-        });
+        }) ;
 
         $('#gallery-crop-modal').on('shown.bs.modal', function(event) {
-            image.cropper({
-                autoCrop: false,
-                guides: true,
-                highlight: true,
-                movable: true,
-                resizable: true,
-                zoomable: false,
-                dragCrop: true,
-                built: function() {
-                    image.cropper('setCanvasData', canvasData);
-                    image.cropper('setCropBoxData', cropBoxData) ;
-                }
+            var current = $('.superbox-current-img') ;
+            var originalWidth = current[0].naturalWidth, originalHeight = current[0].naturalHeight ;
+
+            image.Jcrop({
+                trueSize: [originalWidth, originalHeight],
+                boxWidth: 750
+            }, function() {
+                jcrop_api = this ;
             });
         }).on('hidden.bs.modal', function(event) {
-            image.cropper('destroy') ;
+            jcrop_api.destroy() ;
         });
 
         var _cropForm = $('#gallery-crop-modal form[name=crop-form]') ;
@@ -481,9 +474,10 @@
             },
 
             submitHandler : function(form) {
-                var data = image.cropper('getData'), imageData = image.cropper('getImageData'), x = parseInt(data.x), y = parseInt(data.y), width = parseInt(data.width), height = parseInt(data.height);
                 var propId = $('#gallery-crop-modal input[name=propId]').val(), galId = image.attr('galid'), catId = image.attr('catid'), domainId = image.attr('did') ;
 
+                console.log(x, y, width, height) ;
+                /*
                 var url = '/admin/gallery/' + domainId + '/crop/' + galId + '?x=' + x + '&y=' + y + '&width=' + width + '&height=' + height ;
 
                 $.ajax({
@@ -499,6 +493,7 @@
                             }}
                 ).done(function( msg ) {
                 });
+                */
             },
 
             errorPlacement : function(error, element) { // Do not change code below
@@ -511,12 +506,12 @@
         });
 
         $('#gallery-crop-modal button[name=reset]').click(function(event) {
-            image.cropper('clear') ;
+
         });
     };
 
     var cropHandler = function(event) {
-        var _data = event.data, image = $('#cropContainer > img');
+        var _data = event.data, image = $('#galleryImg');
 
         image.attr('src', _data.src) ;
         image.attr('data-width', _data.originalWidth) ;
@@ -532,7 +527,7 @@
         loadScript("js/plugin/datatables/dataTables.bootstrap.min.js", function() {
             loadScript("js/plugin/summernote/summernote.min.js", function() {
                 loadScript("js/plugin/superbox/superbox.min.custom.js", function() {
-                    loadScript("js/plugin/cropper/cropper.js", pagefunction) ;
+                    loadScript("js/plugin/jcrop/jquery.jcrop.min.js", pagefunction) ;
                 });
             });
         });
