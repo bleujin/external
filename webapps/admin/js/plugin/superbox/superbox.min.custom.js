@@ -8,7 +8,7 @@
         a(".superbox-imageinfo");
 
         var basicInfoFromUrl = function(url) {
-            var items = url.substr(0, url.lastIndexOf('.')).split('/') ;
+            var items = url.split('/') ;
             return {
                 domainid: items[3],
                 catid: items[4],

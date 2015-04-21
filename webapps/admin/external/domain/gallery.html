@@ -253,7 +253,7 @@
 
                 var table = $('#gallerys').DataTable({
                     'data': nodes,
-                     searching:false, 
+                     searching:false,
                      order: [[0, 'desc']],
                     'columns': [
                         {'title':'galid'},
@@ -273,26 +273,26 @@
 				'					</div>' +
 				'				</fieldset>' +
 				'				</td></tr></tfoot>' ;
-				
+
 				$(tableFoot).appendTo($("#gallerys")) ;
-				
+
 				var gallerys = $("#gallerys") ;
 				var _searchQuery = gallerys.find("input[name=searchQuery]") ;
 				_searchQuery.on('keypress', function (event) {
 					if(event.which == '13'){
 						$.ajax({
-							type:'GET', 
+							type:'GET',
 							url:"/admin/gallery/" + domainId + "/list",
 							dataType:'json',
-							data : {'query':_searchQuery.val()}, 
+							data : {'query':_searchQuery.val()},
 							success:function(data){
 								table.clear() ;
 								table.destroy() ;
-								
+
 								var nodes = data['result'] ;
 								table = $('#gallerys').DataTable({
 					                    'data': nodes,
-					                     searching:false, 
+					                     searching:false,
 					                     order: [[0, 'desc']],
 					                    'columns': [
 					                        {'title':'galid'},
@@ -304,22 +304,22 @@
 					                        {'title':'modday'}
 					                    ]
 					                });
-								
+
 								gallerys = $('#gallerys') ;
 				                $("#gallerys tbody tr").each(function() {
 				                   	var galId = $(this).find("td").eq(0).text() ;
 				                   	var url = "/admin/gallery/" + domainId + "/view/" + galId ;
 				                   	$(this).find("td").eq(0).html("<a data-lightbox='groupphoto' href=" + url + ">" + galId + "</a>")
 				                });
-							}, 
+							},
 							error:function(request,status,error){
 								console.log('response', request, status, error) ;
 							}
 						});
-						
+
 					}
 				});
-				
+
 
                 jQuery("#gallerys tbody tr").each(function() {
                    	var galId = $(this).find("td").eq(0).text() ;
@@ -444,10 +444,6 @@
         // crop part
         var image = $('#galleryImg'), jcrop_api ;
 
-        image.on('load', function(e) {
-
-        }) ;
-
         $('#gallery-crop-modal').on('shown.bs.modal', function(event) {
             var current = $('.superbox-current-img') ;
             var originalWidth = current[0].naturalWidth, originalHeight = current[0].naturalHeight ;
@@ -460,53 +456,54 @@
             });
         }).on('hidden.bs.modal', function(event) {
             jcrop_api.destroy() ;
+            image.css('width', '').css('height', '');
         });
 
-        var _cropForm = $('#gallery-crop-modal form[name=crop-form]') ;
-
-        _cropForm.validate({
-            rules : {
-                propId : { required : true }
-            },
-
-            messages : {
-                propId : { required : "${m.asString('validation.required', 'Property Id')}"}
-            },
-
-            submitHandler : function(form) {
-                var propId = $('#gallery-crop-modal input[name=propId]').val(), galId = image.attr('galid'), catId = image.attr('catid'), domainId = image.attr('did') ;
-
-                console.log(x, y, width, height) ;
-                /*
-                var url = '/admin/gallery/' + domainId + '/crop/' + galId + '?x=' + x + '&y=' + y + '&width=' + width + '&height=' + height ;
-
-                $.ajax({
-                            type: "GET",
-                            url: url,
-                            data: { },
-                            success :  function(data) {
-                                $("#save-message span").html(data) ;
-                                $("#save-message").removeClass("message") ;
-                                setTimeout(function() {
-                                    $("#save-message").addClass("message") ;
-                                }, 2000);
-                            }}
-                ).done(function( msg ) {
-                });
-                */
-            },
-
-            errorPlacement : function(error, element) { // Do not change code below
-                error.insertAfter(element.parent());
-            }
-        }) ;
-
         $('#gallery-crop-modal button[name=crop]').click(function(event) {
-            _cropForm.submit() ;
+            var galId = image.attr('galid'), domainId = image.attr('did') ;
+            var area = jcrop_api.tellSelect() ;
+            var x = area.x, y = area.y, width = area.x2 - area.x, height = area.y2 - area.y ;
+
+            if(width == 0 || height == 0) {
+                $.bigBox({
+                    title : "Crop error",
+                    content : "Crop area not selected",
+                    color : "#C46A69",
+                    icon : "fa fa-warning shake animated",
+                    timeout : 2000
+                });
+
+                return ;
+            }
+
+            var url = '/admin/gallery/' + domainId + '/crop/' + galId + '?x=' + x + '&y=' + y + '&width=' + width + '&height=' + height ;
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: { },
+                success :  function(data) {
+                    $("#save-message span").html(data) ;
+                    $("#save-message").removeClass("message") ;
+                    setTimeout(function() {
+                        $("#save-message").addClass("message") ;
+                    }, 2000);
+                }}
+            ).done(function( msg ) {
+                $.bigBox({
+                    title : "Success",
+                    content : "Cropped successfully",
+                    color : "#739E73",
+                    icon : "fa fa-check",
+                    timeout : 2000
+                });
+            });
         });
 
         $('#gallery-crop-modal button[name=reset]').click(function(event) {
-
+            if(jcrop_api) {
+                jcrop_api.release() ;
+                jcrop_api.setSelect([0, 0, 0, 0]) ;
+            }
         });
     };
 
@@ -520,14 +517,14 @@
         image.attr('catid', _data.basic.catid) ;
         image.attr('did', _data.basic.domainid) ;
 
-        $('#gallery-crop-modal').modal({});
+        $('#gallery-crop-modal').modal();
     }
 
     loadScript("js/plugin/datatables/jquery.dataTables.min.js", function(){
         loadScript("js/plugin/datatables/dataTables.bootstrap.min.js", function() {
             loadScript("js/plugin/summernote/summernote.min.js", function() {
                 loadScript("js/plugin/superbox/superbox.min.custom.js", function() {
-                    loadScript("js/plugin/jcrop/jquery.jcrop.min.js", pagefunction) ;
+                    loadScript("js/plugin/jcrop/jquery.jcrop.js", pagefunction) ;
                 });
             });
         });
