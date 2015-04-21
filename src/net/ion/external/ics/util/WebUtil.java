@@ -49,6 +49,15 @@ public class WebUtil {
 		return result ;
 	}
 
+	public static JsonArray findICommands(){
+		JsonArray result = new JsonArray() ;
+		for (File file : findFiles(Webapp.ICOMMAND_DIR, true, "icommand")) {
+			result.add(new JsonPrimitive(file.getName())) ;
+		}
+		return result ;
+	}
+
+
 	public static String viewScript(String fileName) throws IOException{
 		return IOUtil.toStringWithClose(new FileInputStream(new File(Webapp.SCRIPT_DIR, fileName))) ;
 	}

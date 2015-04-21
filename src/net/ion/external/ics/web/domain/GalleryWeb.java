@@ -47,138 +47,138 @@ public class GalleryWeb {
 	public GalleryWeb(@ContextParam(DomainEntry.EntryName) DomainEntry dentry, @ContextParam(QueryTemplateEngine.EntryName) QueryTemplateEngine qengine) throws IOException {
 		this.dsub = dentry.dsub();
 		this.session = dsub.craken().login();
-		this.qengine = qengine ;
+		this.qengine = qengine;
 	}
 
-    @GET
-    @Path("/{did}/gallery")
-    @Produces(ExtMediaType.APPLICATION_JSON_UTF8)
-    public JsonObject query() throws IOException {
-        JsonObject result = new JsonObject();
-        result.put("info", session.ghostBy("/menus/domain").property("gallery").asString());
-        return result;
-    }
-
-    @GET
-    @Path("/{did}/list")
-    @Produces(ExtMediaType.APPLICATION_JSON_UTF8)
-    public JsonObject listGallery(@PathParam("did") final String did, @QueryParam("query") final String query, @DefaultValue("101") @QueryParam("offset") final int offset) throws IOException, ParseException{
-        XIterable<GalleryX> gallerys = dsub.findDomain(did).datas().gallerys().query(query).offset(offset).find();
-        JsonObject result = JsonObject.create() ;
-        JsonArray jarray = new JsonArray();
-        result.put("result", jarray) ;
-
-        for(GalleryX gallery : gallerys) {
-            JsonArray rowArray = new JsonArray().add(new JsonPrimitive(gallery.galId())).add(new JsonPrimitive(gallery.catId())).add(new JsonPrimitive(gallery.asString(Def.Gallery.Subject)))
-                    .add(new JsonPrimitive(gallery.asString(Def.Gallery.Width))).add(new JsonPrimitive(gallery.asString(Def.Gallery.Height))).add(new JsonPrimitive(gallery.asString(Def.Gallery.FileSize)))
-                    .add(new JsonPrimitive(gallery.asString(Def.Gallery.ModDay))) ;
-            jarray.add(rowArray) ;
-        }
-        return result ;
-    }
-
-    @GET
-    @Path("/{did}/view/{galid}")
-    public UncertainOutput viewImage(@PathParam("did") final String did, @PathParam("galid") final int galid) throws IOException{
-
-    	final GalleryX gallery = dsub.findDomain(did).datas().findGallery(galid) ;
-    	if (! gallery.exists()) throw new WebApplicationException(404) ;
-    	
-        return new UncertainOutput() {
-            @Override
-            public void write(OutputStream output) throws IOException, WebApplicationException {
-                InputStream input = gallery.dataStream() ;
-                try {
-                    IOUtil.copy(input, output);
-                } finally {
-                    IOUtil.close(input);
-                }
-            }
-
-            @Override
-            public MediaType getMediaType() {
-                return ExtMediaType.guessImageType(gallery.typeCd()) ;
-            }
-        } ;
-    }
-
-    
-    @GET
-    @Path("/{did}/crop/{galid}")
-    public UncertainOutput crop(@PathParam("did") String did, @PathParam("galid") int galid, 
-    		final @DefaultValue("0") @QueryParam("x") int x, 
-    		final @DefaultValue("0") @QueryParam("y") int y, 
-    		final @DefaultValue("100") @QueryParam("width") int width, 
-    		final @DefaultValue("100") @QueryParam("height") int height) throws IOException {
-    	final GalleryX gallery = dsub.findDomain(did).datas().findGallery(galid) ;
-    	if (! gallery.exists()) throw new WebApplicationException(404) ;
-
-        return new UncertainOutput() {
-			public MediaType getMediaType() {
-                return ExtMediaType.guessImageType(gallery.typeCd()) ;
-			}
-			public void write(OutputStream output) throws IOException, WebApplicationException {
-				InputStream input = gallery.cropWith(x, y, width, height) ;
-                try {
-                    IOUtil.copy(input, output);
-                } finally {
-                    IOUtil.close(input);
-                }
-			}
-        } ;
-    }
-
-    @GET
-    @Path("/{did}/resize/{galid}")
-    public UncertainOutput resize(@PathParam("did") String did, @PathParam("galid") int galid, 
-    		final @DefaultValue("100") @QueryParam("width") int width, 
-    		final @DefaultValue("100") @QueryParam("height") int height) throws IOException {
-    	final GalleryX gallery = dsub.findDomain(did).datas().findGallery(galid) ;
-    	if (! gallery.exists()) throw new WebApplicationException(404) ;
-
-        return new UncertainOutput() {
-			public MediaType getMediaType() {
-                return ExtMediaType.guessImageType(gallery.typeCd()) ;
-			}
-			public void write(OutputStream output) throws IOException, WebApplicationException {
-				InputStream input = gallery.resizeWith(width, height) ;
-                try {
-                    IOUtil.copy(input, output);
-                } finally {
-                    IOUtil.close(input);
-                }
-			}
-        } ;
-    }
-
-    
-    
-    
-    
-    
-    
-	// query
 	@GET
-	@Path("/{did}/query.json")
+	@Path("/{did}/gallery")
 	@Produces(ExtMediaType.APPLICATION_JSON_UTF8)
-	public StreamingOutput jquery(@PathParam("did") String did, @DefaultValue("") @QueryParam("query") String query, @DefaultValue("") @QueryParam("sort") String sort, @DefaultValue("0") @QueryParam("skip") String skip, @DefaultValue("10") @QueryParam("offset") String offset,
-			@QueryParam("indent") final boolean indent, @QueryParam("debug") boolean debug, @Context HttpRequest request) throws IOException, ParseException {
+	public JsonObject query() throws IOException {
+		JsonObject result = new JsonObject();
+		result.put("info", session.ghostBy("/menus/domain").property("gallery").asString());
+		return result;
+	}
 
-		MultivaluedMap<String, String> map = request.getUri().getQueryParameters();
-		final XIterable<GalleryX> gallerys = findGallery(did, query, sort, skip, offset, request, map).find();
-		
-		return new StreamingOutput() {
+	@GET
+	@Path("/{did}/list")
+	@Produces(ExtMediaType.APPLICATION_JSON_UTF8)
+	public JsonObject listGallery(@PathParam("did") final String did, @QueryParam("query") final String query, @DefaultValue("101") @QueryParam("offset") final int offset) throws IOException, ParseException {
+		XIterable<GalleryX> gallerys = dsub.findDomain(did).datas().gallerys().query(query).offset(offset).find();
+		JsonObject result = JsonObject.create();
+		JsonArray jarray = new JsonArray();
+		result.put("result", jarray);
+
+		for (GalleryX gallery : gallerys) {
+			JsonArray rowArray = new JsonArray().add(new JsonPrimitive(gallery.galId())).add(new JsonPrimitive(gallery.catId())).add(new JsonPrimitive(gallery.asString(Def.Gallery.Subject))).add(new JsonPrimitive(gallery.asString(Def.Gallery.Width)))
+					.add(new JsonPrimitive(gallery.asString(Def.Gallery.Height))).add(new JsonPrimitive(gallery.asString(Def.Gallery.FileSize))).add(new JsonPrimitive(gallery.asString(Def.Gallery.ModDay)));
+			jarray.add(rowArray);
+		}
+		return result;
+	}
+
+	@GET
+	@Path("/{did}/view/{galid}")
+	public UncertainOutput viewImage(@PathParam("did") final String did, @PathParam("galid") final int galid) throws IOException {
+
+		final GalleryX gallery = dsub.findDomain(did).datas().findGallery(galid);
+		if (!gallery.exists())
+			throw new WebApplicationException(404);
+
+		return new UncertainOutput() {
 			@Override
 			public void write(OutputStream output) throws IOException, WebApplicationException {
-				OutputStreamWriter writer = new OutputStreamWriter(output);
-				OutputHandler ohandler = OutputHandler.createJson(writer, indent) ;
-				ohandler.out(gallerys, new JsonObject(), new JsonObject()) ;
-				writer.flush(); 
+				InputStream input = gallery.dataStream();
+				try {
+					IOUtil.copy(input, output);
+				} finally {
+					IOUtil.close(input);
+				}
+			}
+
+			@Override
+			public MediaType getMediaType() {
+				return ExtMediaType.guessImageType(gallery.typeCd());
 			}
 		};
 	}
 
-	private GalleryChildrenX findGallery(String did, String query, String sort, String skip, String offset, HttpRequest request, MultivaluedMap<String, String> map) throws IOException, ParseException {
+	@GET
+	@Path("/{did}/crop/{galid}")
+	public UncertainOutput crop(@PathParam("did") String did, @PathParam("galid") int galid, final @DefaultValue("0") @QueryParam("x") int x, final @DefaultValue("0") @QueryParam("y") int y, final @DefaultValue("100") @QueryParam("width") int width,
+			final @DefaultValue("100") @QueryParam("height") int height) throws IOException {
+		final GalleryX gallery = dsub.findDomain(did).datas().findGallery(galid);
+		if (!gallery.exists())
+			throw new WebApplicationException(404);
+
+		return new UncertainOutput() {
+			public MediaType getMediaType() {
+				return ExtMediaType.guessImageType(gallery.typeCd());
+			}
+
+			public void write(OutputStream output) throws IOException, WebApplicationException {
+				InputStream input = gallery.cropWith(x, y, width, height);
+				try {
+					IOUtil.copy(input, output);
+				} finally {
+					IOUtil.close(input);
+				}
+			}
+		};
+	}
+
+	@GET
+	@Path("/{did}/resize/{galid}")
+	public UncertainOutput resize(@PathParam("did") String did, @PathParam("galid") int galid, final @DefaultValue("100") @QueryParam("width") int width, final @DefaultValue("100") @QueryParam("height") int height) throws IOException {
+		final GalleryX gallery = dsub.findDomain(did).datas().findGallery(galid);
+		if (!gallery.exists())
+			throw new WebApplicationException(404);
+
+		return new UncertainOutput() {
+			public MediaType getMediaType() {
+				return ExtMediaType.guessImageType(gallery.typeCd());
+			}
+
+			public void write(OutputStream output) throws IOException, WebApplicationException {
+				InputStream input = gallery.resizeWith(width, height);
+				try {
+					IOUtil.copy(input, output);
+				} finally {
+					IOUtil.close(input);
+				}
+			}
+		};
+	}
+
+	// query
+	@GET
+	@Path("/{did}/query.json")
+	@Produces(ExtMediaType.APPLICATION_JSON_UTF8)
+	public StreamingOutput jquery(@PathParam("did") final String did, @DefaultValue("") @QueryParam("query") final String query, @DefaultValue("") @QueryParam("sort") final String sort, @DefaultValue("0") @QueryParam("skip") final String skip,
+			@DefaultValue("10") @QueryParam("offset") final String offset, @QueryParam("indent") final boolean indent, @QueryParam("debug") boolean debug, @Context final HttpRequest request) throws IOException {
+
+		return new StreamingOutput() {
+			@Override
+			public void write(OutputStream output) throws IOException, WebApplicationException {
+				OutputStreamWriter writer = new OutputStreamWriter(output);
+				try {
+					MultivaluedMap<String, String> map = request.getUri().getQueryParameters();
+					final XIterable<GalleryX> gallerys = findGallery(did, query, sort, skip, offset, request, map).find();
+					OutputHandler ohandler = OutputHandler.createJson(writer, indent);
+					ohandler.out(gallerys, new JsonObject(), new JsonObject());
+				} catch (IOException e) {
+					e.printStackTrace();
+					writer.write(e.getMessage());
+				} catch (net.ion.rosetta.error.ParserException ex) {
+					ex.printStackTrace();
+					writer.write(ex.getMessage());
+				} finally {
+					writer.flush();
+				}
+			}
+		};
+	}
+
+	private GalleryChildrenX findGallery(String did, String query, String sort, String skip, String offset, HttpRequest request, MultivaluedMap<String, String> map) throws IOException {
 		if (request.getHttpMethod().equalsIgnoreCase("POST") && request.getDecodedFormParameters().size() > 0)
 			map.putAll(request.getDecodedFormParameters());
 
@@ -188,20 +188,28 @@ public class GalleryWeb {
 	@GET
 	@Path("/{did}/query.xml")
 	@Produces(ExtMediaType.APPLICATION_XML_UTF8)
-	public StreamingOutput xquery(@PathParam("did") String did, @DefaultValue("") @QueryParam("query") String query, @DefaultValue("") @QueryParam("sort") String sort, @DefaultValue("0") @QueryParam("skip") String skip, @DefaultValue("10") @QueryParam("offset") String offset,
-			@QueryParam("indent") final boolean indent, @QueryParam("debug") boolean debug, @Context HttpRequest request) throws IOException, ParseException {
+	public StreamingOutput xquery(@PathParam("did") final String did, @DefaultValue("") @QueryParam("query") final String query, @DefaultValue("") @QueryParam("sort") final String sort, @DefaultValue("0") @QueryParam("skip") final String skip,
+			@DefaultValue("10") @QueryParam("offset") final String offset, @QueryParam("indent") final boolean indent, @QueryParam("debug") boolean debug, @Context final HttpRequest request) throws IOException {
 
-		MultivaluedMap<String, String> map = request.getUri().getQueryParameters();
-		final XIterable<GalleryX> gallerys = findGallery(did, query, sort, skip, offset, request, map).find();
-		
 		return new StreamingOutput() {
 			@Override
-			public void write(OutputStream output) throws IOException, WebApplicationException {
+			public void write(OutputStream output) throws IOException {
 				OutputStreamWriter writer = new OutputStreamWriter(output);
-				OutputHandler ohandler = OutputHandler.createXml(writer, indent) ;
-				ohandler.out(gallerys, new JsonObject(), new JsonObject()) ;
-				writer.flush(); 
-				
+				try {
+					MultivaluedMap<String, String> map = request.getUri().getQueryParameters();
+					final XIterable<GalleryX> gallerys = findGallery(did, query, sort, skip, offset, request, map).find();
+					OutputHandler ohandler = OutputHandler.createXml(writer, indent);
+					ohandler.out(gallerys, new JsonObject(), new JsonObject());
+				} catch (IOException e) {
+					e.printStackTrace();
+					writer.write(e.getMessage());
+				} catch (net.ion.rosetta.error.ParserException ex) {
+					ex.printStackTrace();
+					writer.write(ex.getMessage());
+				} finally {
+					writer.flush();
+				}
+
 			}
 		};
 	}
@@ -214,55 +222,55 @@ public class GalleryWeb {
 
 		MultivaluedMap<String, String> map = request.getUri().getQueryParameters();
 		final XIterable<GalleryX> gallerys = findGallery(did, query, sort, skip, offset, request, map).find();
-		
+
 		return new StreamingOutput() {
 			@Override
 			public void write(OutputStream output) throws IOException, WebApplicationException {
 				OutputStreamWriter writer = new OutputStreamWriter(output);
-				OutputHandler ohandler = OutputHandler.createCsv(writer) ;
-				ohandler.out(gallerys, new JsonObject(), new JsonObject()) ;
-				writer.flush(); 
+				OutputHandler ohandler = OutputHandler.createCsv(writer);
+				ohandler.out(gallerys, new JsonObject(), new JsonObject());
+				writer.flush();
 			}
 		};
 	}
 
 	@GET
 	@Path("/{did}/query.template")
-	public UncertainOutput tquery(@PathParam("did") final String did, @DefaultValue("") @QueryParam("query") final String query, @DefaultValue("") @QueryParam("sort") final String sort, @DefaultValue("0") @QueryParam("skip") final String skip, @DefaultValue("10") @QueryParam("offset") final String offset,
-			@QueryParam("indent") boolean indent, @QueryParam("debug") boolean debug, @Context final HttpRequest request, @DefaultValue("false") @QueryParam("html") final boolean isHtml) throws IOException {
+	public UncertainOutput tquery(@PathParam("did") final String did, @DefaultValue("") @QueryParam("query") final String query, @DefaultValue("") @QueryParam("sort") final String sort, @DefaultValue("0") @QueryParam("skip") final String skip,
+			@DefaultValue("10") @QueryParam("offset") final String offset, @QueryParam("indent") boolean indent, @QueryParam("debug") boolean debug, @Context final HttpRequest request, @DefaultValue("false") @QueryParam("html") final boolean isHtml) throws IOException {
 
 		return new UncertainOutput() {
 			@Override
 			public void write(OutputStream output) throws IOException, WebApplicationException {
-				OutputStreamWriter writer = new OutputStreamWriter(output) ;
+				OutputStreamWriter writer = new OutputStreamWriter(output);
 				try {
 					MultivaluedMap<String, String> map = request.getUri().getQueryParameters();
 					final XIterable<GalleryX> gallerys = findGallery(did, query, sort, skip, offset, request, map).find();
-					
-					String resourceName = "/domain/"+ did + "/gallery" + ".template" ;
+
+					String resourceName = "/domain/" + did + "/gallery" + ".template";
 					qengine.merge(resourceName, MapUtil.<String, Object> chainMap().put("gallerys", gallerys).put("params", map).toMap(), writer);
-					
+
 				} catch (org.apache.velocity.exception.ParseErrorException ex) {
-					ex.printStackTrace(); 
-					writer.write(ex.getMessage()) ;
-				} catch(ParseException ex){
-					ex.printStackTrace(); 
-					writer.write(ex.getMessage()) ;
+					ex.printStackTrace();
+					writer.write(ex.getMessage());
+				} catch (net.ion.rosetta.error.ParserException ex) {
+					ex.printStackTrace();
+					writer.write(ex.getMessage());
 				} finally {
 					writer.flush();
 				}
 			}
-			
+
 			@Override
 			public MediaType getMediaType() {
-				return isHtml ? MediaType.valueOf(ExtMediaType.TEXT_HTML_UTF8.toString()) :  MediaType.valueOf(ExtMediaType.TEXT_PLAIN_UTF8.toString());
+				return isHtml ? MediaType.valueOf(ExtMediaType.TEXT_HTML_UTF8.toString()) : MediaType.valueOf(ExtMediaType.TEXT_PLAIN_UTF8.toString());
 			}
 		};
-		
-	}	
+
+	}
 
 	// template
-	
+
 	@GET
 	@Path("/{did}/template")
 	@Produces(ExtMediaType.APPLICATION_JSON_UTF8)

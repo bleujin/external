@@ -124,7 +124,7 @@ public class MiscWeb implements Webapp{
     @GET
     @Path("/users")
     @Produces(ExtMediaType.APPLICATION_JSON_UTF8)
-    public JsonObject userList() throws IOException, ParseException{
+    public JsonObject userList() throws IOException {
 
         JsonArray jarray = rsession.ghostBy("/users").children().transform(new Function<Iterator<ReadNode>, JsonArray>(){
             @Override
@@ -144,6 +144,17 @@ public class MiscWeb implements Webapp{
         return new JsonObject().put("info", rsession.ghostBy("/menus/misc").property("user").asString())
                 .put("schemaName", JsonParser.fromString("[{'title':'Id'},{'title':'Name'}]").getAsJsonArray())
                 .put("users", jarray) ;
+    }
+    
+    
+    @POST
+    @Path("/icsusers")
+    @Produces(ExtMediaType.TEXT_PLAIN_UTF8)
+    public String mergeICSUser() throws IOException {
+    	
+    	
+    	
+    	return "merged" ;
     }
 
     @POST
@@ -204,15 +215,15 @@ public class MiscWeb implements Webapp{
 
     @DELETE
     @Path("/users/{uid}")
-    public String removeUser(@PathParam("uid") final String userId) throws InterruptedException, ExecutionException{
-        Boolean removed = rsession.tran(new TransactionJob<Boolean>() {
+    public String removeUser(@PathParam("uid") final String userId) {
+        rsession.tran(new TransactionJob<Boolean>() {
             @Override
             public Boolean handle(WriteSession wsession) throws Exception {
                 return wsession.pathBy("/users/" + userId).removeSelf() ;
             }
-        }).get() ;
+        }) ;
 
-        return removed ? "removed " + userId : "";
+        return "removed " + userId ;
     }
 
 
