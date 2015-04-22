@@ -46,7 +46,7 @@
 
                         <div>
                             <div class="btn-group" style="margin-bottom: 10px">
-                                <button type="button" class="btn btn-default view-icon"><i class="fa fa-picture-o"></i>
+                                <button type="button" class="btn btn-default view-icon active"><i class="fa fa-picture-o"></i>
                                 </button>
                                 <button type="button" class="btn btn-default view-list"><i class="fa fa-list"></i>
                                 </button>
@@ -220,11 +220,17 @@ var pagefunction = function () {
     $('.view-icon').click(function () {
         $('#table_list').hide();
         $('#icon_list').show();
+
+        $('.view-list').removeClass('active');
+        $(this).addClass('active')
     });
 
     $('.view-list').click(function () {
         $('#icon_list').hide();
         $('#table_list').show();
+
+        $('.view-icon').removeClass('active');
+        $(this).addClass('active') ;
     });
 
     $("#edit_explain").click(function () {
