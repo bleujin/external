@@ -286,6 +286,47 @@
     </div>
 </div>
 
+<div id="gallery-resize-modal" class="modal fade domain" tabindex="-1" role="dialog" aria-labelledby="myModalLabel7" aria-hidden="true">
+    <div class="modal-dialog" style="width: 800px">
+        <div class="modal-content">
+            <div class="modal-header"><h5 id="myModalLabel7">Resize</h5></div>
+            <div class="modal-body">
+                <div style="width: 750px; height: 400px; overflow: auto; border: 2px;">
+                    <img id="resizeImg" src="">
+                </div>
+                <form class="smart-form" id="resize-gallery-form" method="post" action="domain/source" novalidate="novalidate" external-target="gcat">
+                    <fieldset>
+                        <div class="row">
+                            <section class="col col-6">
+                                <label class="label">Width</label>
+                                <label class="input">
+                                    <input type="number" name="width"/>
+                                </label>
+                            </section>
+                            <section class="col col-6">
+                                <label class="label">Height</label>
+                                <label class="input">
+                                    <input type="number" name="height"/>
+                                </label>
+                            </section>
+                        </div>
+                        <section>
+                            <label class="check">
+                                <input type="checkbox" name="keepRatio"><i></i> Scale proportionally
+                            </label>
+                        </section>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                <button class="btn btn-info" name="reset">Reset</button>
+                <button class="btn btn-primary" name="resize">Resize</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript">
 
     pageSetUp();
