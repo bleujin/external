@@ -602,6 +602,7 @@ var pagefunction = function () {
 
     }).on('hide.bs.modal', function () {
         $('#resize-gallery-form').trigger('reset');
+        $('#resizeImg').css('width', '').css('height', '') ;
     });
 
     $('#gallery-resize-modal button[name=reset]').click(function (event) {
