@@ -353,10 +353,11 @@ var pagefunction = function () {
                 }
             });
 
-            jQuery("#gallerys tbody tr").each(function () {
-                var galId = $(this).find("td").eq(0).text();
+            $("#gallerys tbody tr").each(function () {
+                var tr = $(this) ;
+                var galId = tr.find("td").eq(0).text();
                 var url = "/admin/gallery/" + domainId + "/view/" + galId;
-                $(this).find("td").eq(0).html("<a data-lightbox='groupphoto' href=" + url + ">" + galId + "</a>")
+                tr.attr('data-lightbox', 'groupphoto').attr('href', url) ;
             });
 
             var superbox = $('#superbox_body');
@@ -511,20 +512,19 @@ var pagefunction = function () {
         }
 
         var url = '/admin/gallery/' + domainId + '/crop/' + galId + '?x=' + x + '&y=' + y + '&width=' + width + '&height=' + height;
-        console.log(url);
         $.ajax({
-                    type: "GET",
-                    url: url,
-                    data: { },
-                    success: function (data) {
-                        $.bigBox({
-                            title: "Success",
-                            content: "Cropped successfully",
-                            color: "#739E73",
-                            icon: "fa fa-check",
-                            timeout: 2000
-                        });
-                    }}
+            type: "GET",
+            url: url,
+            data: { },
+            success: function (data) {
+                $.bigBox({
+                    title: "Success",
+                    content: "Cropped successfully",
+                    color: "#739E73",
+                    icon: "fa fa-check",
+                    timeout: 2000
+                });
+            }}
         );
     });
 
@@ -654,7 +654,9 @@ loadScript("js/plugin/datatables/jquery.dataTables.min.js", function () {
     loadScript("js/plugin/datatables/dataTables.bootstrap.min.js", function () {
         loadScript("js/plugin/summernote/summernote.min.js", function () {
             loadScript("js/plugin/superbox/superbox.min.custom.js", function () {
-                loadScript("js/plugin/jcrop/jquery.jcrop.js", pagefunction);
+                loadScript("js/plugin/jcrop/jquery.jcrop.js", function() {
+                    loadScript("js/plugin/lightbox/lightbox.custom.js", pagefunction);
+                });
             });
         });
     });
