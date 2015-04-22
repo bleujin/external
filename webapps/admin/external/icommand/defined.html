@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
 		<h1 class="page-title txt-color-blueDark">
-			<i class="fa fa-edit fa-fw "></i>${m.asString("script.defined.title")}
+			<i class="fa fa-edit fa-fw "></i>${m.asString("icommand.defined.title")}
 		</h1>
 	</div>
 </div>
@@ -30,10 +30,10 @@
 		<!-- NEW WIDGET START -->
 		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<!-- Widget ID (each widget will need unique ID)-->
-			<div class="jarviswidget jarviswidget-color-blueLight" id="script-defined-win" data-widget-editbutton="false" data-widget-deletebutton="false">
+			<div class="jarviswidget jarviswidget-color-blueLight" id="icommand-defined-win" data-widget-editbutton="false" data-widget-deletebutton="false">
 				<header>
 					<span class="widget-icon"> <i class="fa fa-comments"></i> </span>
-					<h2>${m.asString("script.defined.table-header")}</h2>
+					<h2>${m.asString("icommand.defined.table-header")}</h2>
 				</header>
 
 
@@ -44,31 +44,23 @@
 
 					
 					<div class="widget-body">
-					<form class="smart-form" id="script-define-form" method="post" action="scripts/define" novalidate="novalidate">
+					<form class="smart-form" id="icommand-define-form" method="post" action="icommands/define" novalidate="novalidate">
 						<fieldset>
 							<section>
 								<label class="select">
-									<select name="script_samples"><option value=''>${m.asString("script.defined.view-sample")}</option></select>
+									<select name="icommand_samples"><option value=''>${m.asString("icommand.defined.view-sample")}</option></select>
 								</label>
 							</section>
 						
 							<section>
-								<label class="label">${m.asString("script.defined.content")}</label>
+								<label class="label">${m.asString("icommand.defined.content")}</label>
 								<label class="textarea textarea-resizable">
 									<i class="icon-append fa fa-question-circle"/> 										
-									<textarea rows="12" class="custom-scroll" placeholder="script content" name="scontent"></textarea>
-									<b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"/>${m.asString("script.defined.content")}</b>
+									<textarea rows="20" class="custom-scroll" placeholder="icommand content" name="scontent"></textarea>
+									<b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"/>${m.asString("icommand.defined.content")}</b>
 								</label>
 							</section>
 
-							<section>
-								<label class="label">${m.asString("script.defined.output")}</label>
-								<label class="textarea textarea-resizable" readonly="readonly">
-									<textarea rows="12" class="custom-scroll" id="script_output"></textarea>
-								</label>
-								
-							</section>
-							
 							<section>
 								<label class="label alert-info alert-block"><pre id="target_url"></pre></label>
 							</section>
@@ -82,10 +74,10 @@
 									
 						<footer>
 							<button class="btn btn-sm btn-success" type="button" name="btn_save">
-								<i class="fa fa-check"></i> ${m.asString("script.defined.buttons.save")}
+								<i class="fa fa-check"></i> ${m.asString("icommand.defined.buttons.save")}
 							</button>	
 							<button class="btn btn-sm btn-primary" type="button" name="btn_run">
-								<i class="fa fa-times"></i> ${m.asString("script.defined.buttons.run")}
+								<i class="fa fa-times"></i> ${m.asString("icommand.defined.buttons.run")}
 							</button>	
 						</footer>
 						
@@ -133,45 +125,24 @@
 			var aHTML = $('.click2edit').code() ;
 			$.ajax({
 				type: "POST",
-				url: "/admin/menus/script",
+				url: "/admin/menus/icommand",
 				data: { content: aHTML, field: "define" }
 			});
 			$('.click2edit').destroy();
 		});
 
-		var _defineForm = $("#script-define-form") ;
+		var _defineForm = $("#icommand-define-form") ;
 		var _scontent = _defineForm.find("textarea[name=scontent]") ;
 		var _runButton = _defineForm.find("button[name=btn_run]") ;
 		var _saveButton = _defineForm.find("button[name=btn_save]") ;
-		var _sampleLoader = _defineForm.find("select[name=script_samples]") ;
+		var _sampleLoader = _defineForm.find("select[name=icommand_samples]") ;
 		
 		
-		var scriptId = $("#scripts option:selected").val() ;
-		if (scriptId.indexOf('-') == 0) return ;
-		
-		$.browser.chrome = /chrom(e|ium)/.test(navigator.userAgent.toLowerCase());
-		var msgCall = function(sid, eventId){
-			$.ajax({
-				type: "POST",
-				dataType : 'text', 
-				url: "/admin/scripts/" + sid + "/instantrun/" + eventId,
-				data: { content: _scontent.val()}, 
-				complete : function(){ 
-					var result_text = 'Path : ' + this.url + '<br/>';
-					result_text += '<strong>External Run Path : ' + "/open/scripts/run/" + sid + '</strong><br/>';
-					result_text += 'Event Source : /event/' + eventId + '<br />' ;
-					result_text += 'Form parameter : <br />' ;
-					result_text += ' - paramname : ...<br />' ;
-					$("#target_url").html(result_text) ;
-				}, 
-				success :  function(data) {
-					// console.log(data) ;
-				}
-			}) ;
-		} ;
-		
+		var icommandId = $("#icommands option:selected").val() ;
+		if (icommandId.indexOf('-') == 0) return ;
+
 		$.ajax({
-			url:'/admin/scripts/' + scriptId + "/define",
+			url:'/admin/icommands/' + icommandId + "/define",
 			dataType:'json',
 			success:function(data){
 				var info = data['info'];
@@ -200,7 +171,7 @@
 			$.ajax({
 				type: "GET",
 				dataType : 'text', 
-				url: "/admin/scripts/" + scriptId + "/samplescript/" + fileName,
+				url: "/admin/icommands/" + icommandId + "/sampleicommand/" + fileName,
 				data: {}, 
 				complete : function(){ 
 				}, 
@@ -217,7 +188,7 @@
 			},
 
 			messages : {
-				scontent : { required : "${m.asString('validation.required', 'script content')}"}
+				scontent : { required : "${m.asString('validation.required', 'icommand content')}"}
 			},
 
 			submitHandler : function(form) {
@@ -226,7 +197,7 @@
 					$.ajax({
 						type: "POST",
 						dataType : 'text', 
-						url: "/admin/scripts/" + scriptId + "/define",
+						url: "/admin/icommands/" + icommandId + "/define",
 						data: { content: _scontent.val()}, 
 						complete : function(){ 
 							
@@ -241,38 +212,26 @@
 					}) ;
 				} else if (command == 'run'){
 					
-					var eventId =  Math.random().toString(36).substr(2, 9) + '_' + new Date().getTime() ;
-					var outputText = $('textarea#script_output');
-					
-					if(typeof(EventSource)!=="undefined") {
-						var es = new EventSource('/event/' + eventId);
-						es.onopen = function() {
-							console.log('OPEN');
-							outputText.text('') ;
-							if ($.browser.chrome) msgCall(scriptId, eventId) ;
-						};
-						es.onmessage = function(e) {
-							if (e.data == eventId) {
-								es.close();
-								_runButton.removeAttr("disabled");
-								return ;
-							}
-							outputText.append(e.data + '\n');
-							outputText.scrollTop(outputText.scrollHeight);
-						};
-						es.onerror = function(e) {
-							_runButton.removeAttr("disabled");
-							console.log('ERROR : ' + e);
-							// es.close() ;
-						};
-					} 
-					
-					outputText.text('') ;
-					if(typeof(EventSource)=="undefined") outputText.text("Whoops! Your browser doesn't receive server-sent events.[support browser : ff, chrome, safari]") ;
-					
-					_runButton.attr('disabled', 'disabled') ;
-					if (! $.browser.chrome) msgCall(scriptId, eventId) ;
-					
+					$.ajax({
+						type: "POST",
+						dataType : 'text', 
+						url: "/admin/icommands/" + icommandId + "/instantrun",
+						data: { content: _scontent.val()}, 
+						complete : function(){ 
+							var result_text = 'Path : ' + this.url + '<br/>';
+							result_text += '<strong>External Run Path : ' + "/open/icommands/run/" + icommandId + '</strong><br/>';
+							result_text += 'Form parameter : <br />' ;
+							result_text += ' - paramname : ...<br />' ;
+							$("#target_url").html(result_text) ;
+						}, 
+						success :  function(data) {
+							$("#save-message span").html(data) ;
+							$("#save-message").removeClass("message") ;
+							setTimeout(function() {
+								$("#save-message").addClass("message") ;
+							}, 2000);
+						}
+					}) ;
 				}
 			},
 

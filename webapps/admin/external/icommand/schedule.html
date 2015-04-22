@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
 		<h1 class="page-title txt-color-blueDark">
-			<i class="fa fa-edit fa-fw "></i>${m.asString("script.schedule.title")}
+			<i class="fa fa-edit fa-fw "></i>${m.asString("icommand.schedule.title")}
 		</h1>
 	</div>
 </div>
@@ -26,10 +26,10 @@
 <section id="widget-grid" class="">
 	<div class="row">
 		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="jarviswidget jarviswidget-color-blueLight" id="script-schedule-win" data-widget-editbutton="false" data-widget-deletebutton="false">
+			<div class="jarviswidget jarviswidget-color-blueLight" id="icommand-schedule-win" data-widget-editbutton="false" data-widget-deletebutton="false">
 			<header>
 				<span class="widget-icon"> <i class="fa fa-comments"></i> </span>
-				<h2>${m.asString("script.schedule.table-header")}</h2>				
+				<h2>${m.asString("icommand.schedule.table-header")}</h2>				
 			</header>
 
 			<div>
@@ -40,17 +40,17 @@
 				<div class="widget-body">
 						
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<form class="smart-form" id="script-schedule-form" method="post" action="script/query" novalidate="novalidate">
+						<form class="smart-form" id="icommand-schedule-form" method="post" action="icommand/query" novalidate="novalidate">
 							<fieldset style="padding: 0px">					
 								<div class="row">
 									<section class="col col-6">
-										<label class="label">${m.asString("script.schedule.minute")}</label>
+										<label class="label">${m.asString("icommand.schedule.minute")}</label>
 										<label class="input">
 											<input type="text" name="minute" placeholder="0-59" />
 										</label>
 									</section>
 									<section class="col col-6">
-										<label class="label">${m.asString("script.schedule.hour")}</label>
+										<label class="label">${m.asString("icommand.schedule.hour")}</label>
 										<label class="input">
 											<input type="text" name="hour" placeholder="0-23" />
 										</label>
@@ -58,13 +58,13 @@
 								</div>
 								<div class="row">
 									<section class="col col-6">
-										<label class="label">${m.asString("script.schedule.day")}</label>
+										<label class="label">${m.asString("icommand.schedule.day")}</label>
 										<label class="input">
 											<input type="text" name="day" placeholder="1-31" />
 										</label>
 									</section>
 									<section class="col col-6">
-										<label class="label">${m.asString("script.schedule.month")}</label>
+										<label class="label">${m.asString("icommand.schedule.month")}</label>
 										<label class="input">
 											<input type="text" name="month" placeholder="1-12" />
 										</label>
@@ -72,13 +72,13 @@
 								</div>
 								<div class="row">
 									<section class="col col-6">
-										<label class="label">${m.asString("script.schedule.week")}</label>
+										<label class="label">${m.asString("icommand.schedule.week")}</label>
 										<label class="input">
 											<input type="text" name="week" placeholder="1-7" />
 										</label>
 									</section>
 									<section class="col col-6">
-										<label class="label">${m.asString("script.schedule.year")}</label>
+										<label class="label">${m.asString("icommand.schedule.year")}</label>
 										<label class="input">
 											<input type="text" name="year" placeholder="2014-2020" />
 										</label>
@@ -87,7 +87,7 @@
 
 								<div class="row">
 									<section class="col col-6">
-										<label class="label">${m.asString("script.schedule.matchtime")}</label>
+										<label class="label">${m.asString("icommand.schedule.matchtime")}</label>
 										<label class="input">
 											<input type="text" name="matchtime" placeholder="-1" />
 										</label>
@@ -98,7 +98,7 @@
 								</div>
 								<div class="row">
 									<section class="col col-12">
-										<label class="checkbox"><input type="checkbox" name="enable" /><i></i>${m.asString("script.schedule.enable")}</label>
+										<label class="checkbox"><input type="checkbox" name="enable" /><i></i>${m.asString("icommand.schedule.enable")}</label>
 									</section>
 								</div>
 								
@@ -110,7 +110,7 @@
 							</div>
 														
 							<footer>
-								<button class="btn btn-primary" type="button" name="btn_set">${m.asString("script.schedule.buttons.set")}</button>
+								<button class="btn btn-primary" type="button" name="btn_set">${m.asString("icommand.schedule.buttons.set")}</button>
 							</footer>
 							
 						</form>
@@ -164,16 +164,16 @@
 			var aHTML = $('.click2edit').code() ;
 			$.ajax({
 				type: "POST",
-				url: "/admin/menus/scripts",
+				url: "/admin/menus/icommands",
 				data: { content: aHTML, field: "schedule" }
 			});
 			$('.click2edit').destroy();
 		});
 		
-		var scriptId = $("#scripts option:selected").val() ;
-		if (scriptId == undefined) return ;
+		var icommandId = $("#icommands option:selected").val() ;
+		if (icommandId == undefined) return ;
 
-		var _scheduleForm = $("#script-schedule-form") ;
+		var _scheduleForm = $("#icommand-schedule-form") ;
 		var _minute = _scheduleForm.find("input[name=minute]") ;
 		var _hour = _scheduleForm.find("input[name=hour]") ;
 		var _day = _scheduleForm.find("input[name=day]") ;
@@ -186,7 +186,7 @@
 		var _btn_set = _scheduleForm.find("button[name=btn_set]") ;
 		
 		$.ajax({
-			url:'/admin/scripts/' + scriptId + "/schedule",
+			url:'/admin/icommands/' + icommandId + "/schedule",
 			dataType:'json',
 			success:function(data){
 				var info = data['info'];
@@ -211,7 +211,7 @@
 			$.ajax({
 				type: "POST",
 				dataType : 'text', 
-				url: "/admin/scripts/" + scriptId + "/schedule",
+				url: "/admin/icommands/" + icommandId + "/schedule",
 				data: { minute: _minute.val(), hour: _hour.val(), day: _day.val(), month: _month.val(), week: _week.val(), matchtime: _matchtime.val(), year: _year.val(), enable: _enable.is(":checked") ? true : false}, 
 				success :  function(data) {
 					$("#save-message span").html(data) ;

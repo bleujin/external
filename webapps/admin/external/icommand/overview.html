@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
         <h1 class="page-title txt-color-blueDark">
-            <i class="fa fa-edit fa-fw "></i>${m.asString("script.overview.title")}
+            <i class="fa fa-edit fa-fw "></i>${m.asString("icommand.overview.title")}
         </h1>
     </div>
 </div>
@@ -25,10 +25,10 @@
 
 	<div class="row">
 		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="jarviswidget jarviswidget-color-blueLight" id="script-logs-win" data-widget-editbutton="false" data-widget-deletebutton="false">
+			<div class="jarviswidget jarviswidget-color-blueLight" id="icommand-logs-win" data-widget-editbutton="false" data-widget-deletebutton="false">
 				<header>
 					<span class="widget-icon"> <i class="fa fa-table"></i> </span>
-					<h2>${m.asString("scripters.overview.table-header")}</h2>
+					<h2>${m.asString("icommanders.overview.table-header")}</h2>
 				</header>
 				
 				<div>
@@ -81,40 +81,40 @@
             var aHTML = $('.click2edit').code() ;
             $.ajax({
                 type: "POST",
-                url: "/admin/menus/script",
+                url: "/admin/menus/icommand",
                 data: { content: aHTML, field: "overview" }
             });
             $('.click2edit').destroy();
         });
 
 
-        var scriptId = $("#scripts option:selected").val() ;
-        if (scriptId == undefined) return ;
+        var icommandId = $("#icommands option:selected").val() ;
+        if (icommandId == undefined) return ;
 
         $.ajax({
-            url:'/admin/scripts/' + scriptId + "/overview",
+            url:'/admin/icommands/' + icommandId + "/overview",
             dataType:'json',
             success:function(data){
                 $("#info").html(data['info']) ;
-                var nodes = data['status'];
+                var nodes = data['slogs'];
                 var table = $("#recent_logs").dataTable({
                     "data":nodes,
                     "paging":false,
                     "searching":false,
-                    "columns": [{'title':'${m.asString("script.overview.eventid")}'},{'title':'${m.asString("script.overview.time")}'},{'title':'${m.asString("script.overview.status")}'},{'title':'${m.asString("script.overview.result")}'}],
+                    "columns": [{'title':'${m.asString("icommand.overview.eventid")}'},{'title':'${m.asString("icommand.overview.time")}'},{'title':'${m.asString("icommand.overview.status")}'},{'title':'${m.asString("icommand.overview.result")}'}],
                     "order" : [[1, "desc"]]
                 }) ;
 
                 var tableFoot = '<tfoot><tr><td colspan="' + data['schemaName'].length + '" class="col-xs-12">' +
                         '				<fieldset class="smart-form">' +
                         '					<div class="row">' +
-                        '						<section class="col col-12"><input type="button" class="btn btn-primary btn-sm" name="btn_detail" value="${m.asString("script.overview.buttons.view-detail")}" disabled="disabled"/></section>' +
+                        '						<section class="col col-12"><input type="button" class="btn btn-primary btn-sm" name="btn_detail" value="${m.asString("icommand.overview.buttons.view-detail")}" disabled="disabled"/></section>' +
                         '					</div>' +
                         '				</fieldset>' +
                         '				</td></tr></tfoot>' ;
 
                 // $(tableFoot).appendTo($("#recent_logs")) ;
-                console.log(table) ;
+                // console.log(table) ;
             },
             error:function(request,status,error){
                 console.log('response', request, status, error) ;

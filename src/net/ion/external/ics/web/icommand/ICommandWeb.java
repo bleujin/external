@@ -26,6 +26,7 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import net.ion.cms.rest.sync.Def;
+import net.ion.cms.rest.sync.Def.ICommandLog;
 import net.ion.cms.rest.sync.Def.SLog;
 import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.ReadSession;
@@ -49,10 +50,13 @@ import net.ion.framework.parse.gson.stream.JsonWriter;
 import net.ion.framework.util.DateUtil;
 import net.ion.framework.util.FileUtil;
 import net.ion.framework.util.IOUtil;
+import net.ion.framework.util.MapUtil;
+import net.ion.framework.util.ObjectId;
 import net.ion.framework.util.ObjectUtil;
 import net.ion.framework.util.StringUtil;
 import net.ion.radon.core.ContextParam;
 
+import org.apache.ecs.xhtml.script;
 import org.jboss.resteasy.specimpl.MultivaluedMapImpl;
 import org.jboss.resteasy.spi.HttpRequest;
 
@@ -92,6 +96,7 @@ public class ICommandWeb implements Webapp{
 						result.add(userProp);
 					}
 				} catch (IOException ignore) {
+					ignore.printStackTrace(); 
 				}
 
 				return result;
@@ -107,7 +112,7 @@ public class ICommandWeb implements Webapp{
 	@Produces(ExtMediaType.APPLICATION_JSON_UTF8)
 	public JsonObject overview(@PathParam(Def.ICommand.Sid) final String sid) {
 
-		JsonArray slogs = rsession.ghostBy("/icommands/" + sid + "/slogs").children().descending(SLog.Runtime).transform(new Function<Iterator<ReadNode>, JsonArray>() {
+		JsonArray clogs = rsession.ghostBy(ICommandLog.path(sid)).children().descending(ICommandLog.Runtime).transform(new Function<Iterator<ReadNode>, JsonArray>() {
 			@Override
 			public JsonArray apply(Iterator<ReadNode> iter) {
 				JsonArray result = new JsonArray();
@@ -115,9 +120,9 @@ public class ICommandWeb implements Webapp{
 					ReadNode node = iter.next();
 					JsonArray userProp = new JsonArray();
 					userProp.add(new JsonPrimitive(node.fqn().name()));
-					userProp.add(new JsonPrimitive(DateUtil.timeMilliesToDay(node.property(SLog.Runtime).asLong(0))));
-					userProp.add(new JsonPrimitive(node.property(SLog.Status).asString()));
-					userProp.add(new JsonPrimitive(node.property(SLog.Result).asString()));
+					userProp.add(new JsonPrimitive(DateUtil.timeMilliesToDay(node.property(ICommandLog.Runtime).asLong(0))));
+					userProp.add(new JsonPrimitive(node.property(ICommandLog.Status).asString()));
+					userProp.add(new JsonPrimitive(node.property(ICommandLog.Result).asString()));
 					result.add(userProp);
 				}
 
@@ -126,7 +131,7 @@ public class ICommandWeb implements Webapp{
 		});
 
 		JsonObject result = new JsonObject();
-		result.add("slogs", slogs);
+		result.add("slogs", clogs);
 		result.put("schemaName", JsonParser.fromString("[{'title':'Id'},{'title':'Run Time'},{'title':'Status'},{'title':'Result'}]").getAsJsonArray());
 		result.put("info", rsession.ghostBy("/menus/icommand").property("overview").asString());
 
@@ -139,7 +144,8 @@ public class ICommandWeb implements Webapp{
 		rsession.tran(new TransactionJob<Void>() {
 			@Override
 			public Void handle(WriteSession wsession) throws Exception {
-				WriteNode found = wsession.pathBy("/icommands/" + sid);
+				wsession.pathBy(ICommandLog.path(sid)).removeSelf() ;
+				WriteNode found = Def.ICommand.pathBy(wsession, sid) ;
 				FileUtil.forceWriteUTF8(new File(Webapp.REMOVED_DIR, sid + ".misc.icommand.bak"), found.property(Def.ICommand.Content).asString());
 				found.removeSelf();
 				return null;
@@ -152,7 +158,7 @@ public class ICommandWeb implements Webapp{
 	@GET
 	@Produces(ExtMediaType.APPLICATION_JSON_UTF8)
 	public JsonObject viewICommand(@PathParam(Def.ICommand.Sid) final String sid) {
-		ReadNode found = rsession.ghostBy("/icommands/" + sid);
+		ReadNode found = Def.ICommand.ghostBy(rsession, sid) ;
 		return new JsonObject().put("sid", found.fqn().name()).put("samples", WebUtil.findICommands()).put("info", rsession.ghostBy("/menus/icommand").property("define").asString()).put("content", found.property("content").asString());
 	}
 
@@ -162,37 +168,38 @@ public class ICommandWeb implements Webapp{
 		rsession.tran(new TransactionJob<Void>() {
 			@Override
 			public Void handle(WriteSession wsession) throws Exception {
-				WriteNode found = wsession.pathBy("/icommands/" + sid);
+				WriteNode found = Def.ICommand.pathBy(wsession, sid);
+				wsession.pathBy("/icommands", sid, "slogs") ;
 				FileUtil.forceWriteUTF8(new File(Webapp.REMOVED_DIR, sid + ".misc.icommand.bak"), found.property(Def.ICommand.Content).asString());
 
 				found.property(Def.ICommand.Content, content);
 				return null;
 			}
 		});
-		return sid + " created";
+		return sid + " defined";
 	}
 
-	@Path("/{sid}/samplescript/{fileName}")
+	@Path("/{sid}/sampleicommand/{fileName}")
 	@GET
 	@Produces(ExtMediaType.TEXT_PLAIN_UTF8)
 	public String sampleICommand(@PathParam("fileName") String fileName) throws IOException {
-		return WebUtil.viewScript(fileName);
+		return WebUtil.viewICommand(fileName);
 	}
 
 	@POST
 	@Path("/{sid}/removes")
-	public String removeICommands(@FormParam("icommands") final String scripts) {
+	public String removeICommands(@FormParam("icommands") final String icommands) {
 		rsession.tran(new TransactionJob<Void>() {
 			@Override
 			public Void handle(WriteSession wsession) throws Exception {
-				String[] targets = StringUtil.split(scripts, ",");
-				for (String userId : targets) {
-					wsession.pathBy("/icommands/" + userId).removeSelf();
+				String[] targets = StringUtil.split(icommands, ",");
+				for (String icommandid : targets) {
+					Def.ICommand.pathBy(wsession, icommandid).removeSelf();
 				}
 				return null;
 			}
 		});
-		return "removed " + scripts;
+		return "removed " + icommands;
 	}
 
 	@Path("/{sid}/run")
@@ -210,60 +217,16 @@ public class ICommandWeb implements Webapp{
 				params.put(entry.getKey(), entry.getValue());
 		}
 
-		String content = rsession.ghostBy("/icommands/" + sid).property(Def.ICommand.Content).asString();
-		StringWriter writer = new StringWriter();
-		return runICommand(sid, writer, params, content);
+		String content = Def.ICommand.ghostBy(rsession, sid).property(Def.ICommand.Content).asString();
+		return runICommand(sid, params, content);
 	}
 
-	public Response runTestICommand(@PathParam(Def.ICommand.Sid) String sid, MultivaluedMap<String, String> params, String content) throws IOException, ScriptException {
-		StringWriter writer = new StringWriter();
-		return runICommand(sid, writer, params, content);
-	}
-
-	@Path("/{sid}/instantrun/{eventid}")
+	@Path("/{sid}/instantrun")
 	@POST
-	public Response instantRunICommand(@PathParam("sid") final String sid, @PathParam("eventid") String eventId, @DefaultValue("") @FormParam("content") String content) throws IOException, ScriptException {
-
-		final MultivaluedMap<String, String> params = new MultivaluedMapImpl<String, String>();
-
-		final CountDownLatch latch = esentry.createEvent(eventId);
-		final ScriptOutWriter writer = new ScriptOutWriter(esentry, eventId, latch);
-
-		InstantJavaScript script = jengine.createScript(IdString.create(sid), "", new StringReader(content));
-		script.execAsync(new ResultHandler<Void>() {
-			@Override
-			public Void onSuccess(Object result, Object... args) {
-				try {
-					writer.write("\ncomplete :\n");
-					writer.write(ObjectUtil.toString(result));
-					writer.flush();
-				} catch (IOException e) {
-					e.printStackTrace();
-				} finally {
-					IOUtil.closeQuietly(writer);
-					rsession.tran(end(sid, "instant success", result));
-				}
-
-				return null;
-			}
-
-			@Override
-			public Void onFail(Exception ex, Object... args) {
-				try {
-					writer.write("\nexception occured : " + ex.getMessage() + "\n");
-					writer.flush();
-					ex.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				} finally {
-					IOUtil.closeQuietly(writer);
-					rsession.tran(end(sid, "instant fail", ex.getMessage()));
-				}
-				return null;
-			}
-		}, writer, rsession, params, rentry, jengine);
-
-		return Response.ok().build();
+	public String instantRunICommand(@PathParam("sid") final String sid, @DefaultValue("") @FormParam("content") String content) throws IOException, ScriptException {
+		
+		runICommand(sid, new MultivaluedMapImpl<String, String>(), content) ;
+		return sid + " called";
 	}
 
 	public static TransactionJob<Void> end(final String sid, final String status, final Object result) {
@@ -279,66 +242,35 @@ public class ICommandWeb implements Webapp{
 		};
 	}
 
-	private Response runICommand(final String scriptId, Writer writer, MultivaluedMap<String, String> params, String content) throws IOException, ScriptException {
-		InstantJavaScript script = jengine.createScript(IdString.create(scriptId), "", new StringReader(content));
-
-		StringWriter result = new StringWriter();
-		final JsonWriter jwriter = new JsonWriter(result);
-		script.exec(new ResultHandler<Void>() {
+	private Response runICommand(final String sid, final MultivaluedMap<String, String> params, final String content) throws IOException, ScriptException {
+		this.rsession.tran(new TransactionJob<Void>() {
 			@Override
-			public Void onSuccess(Object result, Object... args) {
-				try {
-					jwriter.beginObject().name("return").value(ObjectUtil.toString(result));
-				} catch (IOException ignore) {
-				} finally {
-					rsession.tran(end(scriptId, "run success", result));
+			public Void handle(WriteSession wsession) throws Exception {
+				WriteNode wnode = wsession.pathBy("/icommands", sid, "run") ;
+				
+				wnode.property("scriptid", sid).property("content", content).increase("count") ;
+				for (Entry<String, List<String>> entry : params.entrySet()) {
+					wnode.property("param_" + entry.getKey(), entry.getValue()) ;
 				}
 				return null;
 			}
+		}) ;
+		
 
-			@Override
-			public Void onFail(Exception ex, Object... args) {
-				try {
-					jwriter.beginObject().name("return").value("").name("exception").value(ex.getMessage());
-				} catch (IOException e) {
-				} finally {
-					rsession.tran(end(scriptId, "run fail", ex.getMessage()));
-				}
-				return null;
-			}
-		}, writer, rsession, params, rentry, jengine);
-
-		jwriter.name("writer").value(writer.toString());
-
-		jwriter.name("params");
-		jwriter.beginArray();
-		for (Entry<String, List<String>> entry : params.entrySet()) {
-			jwriter.beginObject().name(entry.getKey()).beginArray();
-			for (String val : entry.getValue()) {
-				jwriter.value(val);
-			}
-			jwriter.endArray().endObject();
-		}
-		jwriter.endArray();
-		jwriter.endObject();
-		jwriter.close();
-
-		// write log
-
-		return Response.ok(result.toString(), ExtMediaType.APPLICATION_JSON_UTF8).build();
+		return Response.ok("", ExtMediaType.TEXT_PLAIN_UTF8).build();
 	}
 
 	@Path("/{sid}/schedule")
 	@GET
 	@Produces(ExtMediaType.APPLICATION_JSON_UTF8)
 	public JsonObject viewScheduleInfo(@PathParam(Def.ICommand.Sid) final String sid) {
-		ReadNode sinfo = rsession.ghostBy("/icommands/" + sid + "/schedule");
+		ReadNode sinfo = rsession.ghostBy("/icommands", sid, "schedule");
 
 		JsonObject sinfoJson = new JsonObject().put(Def.Schedule.MINUTE, sinfo.property(Def.Schedule.MINUTE).defaultValue("")).put(Def.Schedule.HOUR, sinfo.property(Def.Schedule.HOUR).defaultValue("")).put(Def.Schedule.DAY, sinfo.property(Def.Schedule.DAY).defaultValue(""))
 				.put(Def.Schedule.MONTH, sinfo.property(Def.Schedule.MONTH).defaultValue("")).put(Def.Schedule.WEEK, sinfo.property(Def.Schedule.WEEK).defaultValue("")).put(Def.Schedule.MATCHTIME, sinfo.property(Def.Schedule.MATCHTIME).defaultValue(""))
 				.put(Def.Schedule.YEAR, sinfo.property(Def.Schedule.YEAR).defaultValue("")).put(Def.Schedule.ENABLE, sinfo.property(Def.Schedule.ENABLE).defaultValue(false));
 
-		JsonArray slogs = rsession.ghostBy("/icommands/" + sid + "/slogs").children().transform(new Function<Iterator<ReadNode>, JsonArray>() {
+		JsonArray slogs = rsession.ghostBy("/icommands", sid, "slogs").children().transform(new Function<Iterator<ReadNode>, JsonArray>() {
 			@Override
 			public JsonArray apply(Iterator<ReadNode> iter) {
 				JsonArray result = new JsonArray();
@@ -366,7 +298,7 @@ public class ICommandWeb implements Webapp{
 		rsession.tran(new TransactionJob<Void>() {
 			@Override
 			public Void handle(WriteSession wsession) throws Exception {
-				WriteNode found = wsession.pathBy("/icommands/" + sid + "/schedule");
+				WriteNode found = wsession.pathBy("/icommands", sid, "schedule");
 				found.property(Def.Schedule.MINUTE, minute).property(Def.Schedule.HOUR, hour).property(Def.Schedule.DAY, day).property(Def.Schedule.MONTH, month).property(Def.Schedule.WEEK, week).property(Def.Schedule.MATCHTIME, matchtime).property(Def.Schedule.YEAR, year)
 						.property(Def.Schedule.ENABLE, enable);
 				return null;

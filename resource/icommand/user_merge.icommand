@@ -1,0 +1,26 @@
+// merge ics user sample
+new function(){
+
+	importPackage(java.lang) 
+
+	this.handle = function(writer, session, cmscontext, params){
+		var dc = cmscontext.getIDBController() ;
+		dc.createUserCommand("select userid, usernm, userid password from user_tblc where isUser = 'T' and to_char(sysdate, 'YYYYMMDD') between enrolday and retireDay").execHandlerQuery(
+			new net.ion.framework.db.bean.ResultSetHandler({
+				handle : function(rs) {
+					session.tran( new net.ion.craken.node.TransactionJob({
+						
+						handle : function(wsession){
+							while(rs.next()){
+								if (wsession.exists('/users/' + rs.getString('userid'))) continue ;
+								wsession.pathBy('/users', rs.getString('userid')).property('name', rs.getString('usernm')).encrypt('password', rs.getString('password')) ;
+							}
+						}
+					})) ;
+				}
+			})
+		) ;
+		return null ;
+	}
+
+} ;
