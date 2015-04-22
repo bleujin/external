@@ -35,11 +35,13 @@ public class WorkspaceConfigBuilder {
 
 			meta_configBuilder = new ConfigurationBuilder().persistence().passivation(false)
 				.addSingleFileStore().fetchPersistentState(false).preload(true).shared(false).purgeOnStartup(false).ignoreModifications(false).location(path)
-				.async().disable().flushLockTimeout(300000).shutdownTimeout(2000).modificationQueueSize(10).threadPoolSize(3).clustering() ;
+				.async().disable().flushLockTimeout(300000).shutdownTimeout(2000)
+				.modificationQueueSize(100).threadPoolSize(10).clustering() ;
 
 			chunk_configBuilder = new ConfigurationBuilder().persistence().passivation(false)
 				.addSingleFileStore().fetchPersistentState(false).preload(true).shared(false).purgeOnStartup(false).ignoreModifications(false).location(path)
-				.async().disable().flushLockTimeout(300000).shutdownTimeout(2000).modificationQueueSize(10).threadPoolSize(3).clustering() ; 
+				.async().disable().flushLockTimeout(300000).shutdownTimeout(2000)
+				.modificationQueueSize(100).threadPoolSize(10).clustering() ; 
 //				.eviction().maxEntries(50)
 			
 			blob_metaBuilder = new ConfigurationBuilder() // .clustering().cacheMode(CacheMode.REPL_SYNC)
@@ -53,7 +55,7 @@ public class WorkspaceConfigBuilder {
 				.persistence().passivation(false)
 				.addSingleFileStore().fetchPersistentState(true).preload(false).shared(false).purgeOnStartup(false).ignoreModifications(false).location(path)
 				.async().disable().flushLockTimeout(300000).shutdownTimeout(2000)
-				.modificationQueueSize(100).threadPoolSize(3).clustering();
+				.modificationQueueSize(50).threadPoolSize(3).clustering();
 			
 			
 			if (cacheMode.isClustered() && cacheMode.isReplicated()){

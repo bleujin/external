@@ -5,7 +5,10 @@ import java.sql.SQLException;
 
 import org.apache.lucene.analysis.kr.utils.StringUtil;
 
+import net.ion.craken.node.ReadNode;
+import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.WriteNode;
+import net.ion.craken.node.WriteSession;
 import net.ion.craken.tree.Fqn;
 
 public class Def {
@@ -169,6 +172,19 @@ public class Def {
 		public static final String Sid = "sid" ;
 		public static final String Content = "content" ;
 		public static final String Running = "running" ;
+		
+		public static String path(String sid){
+			return "/icommands/" + sid ;
+		}
+
+		public static WriteNode pathBy(WriteSession wsession, String sid) {
+			return wsession.pathBy(path(sid));
+		}
+
+		public static ReadNode ghostBy(ReadSession rsession, String sid) {
+			return rsession.ghostBy(path(sid));
+		}
+
 	}
 	
 
@@ -197,6 +213,24 @@ public class Def {
 		
 		public static String path(String sid){
 			return "/scripts/" + sid + "/slogs" ;
+		}
+	}
+	
+	public static class ICommandLog {
+		public static final String Sid = "sid" ;
+		public static final String Content = "content" ;
+		public static final String Runtime = "runtime" ;
+		public static final String Status = "status" ;
+		public static final String Success = "success";
+		public static final String Fail = "fail";
+		public static final String Result = "result";
+		
+		public static String path(String sid){
+			return "/icommands/" + sid + "/slogs";
+		}
+
+		public static WriteNode pathBy(WriteSession wsession, String sid, String runid) {
+			return wsession.pathBy("/icommands", sid, "slogs", runid) ;
 		}
 	}
 }

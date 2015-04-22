@@ -134,7 +134,7 @@
             url: '/admin/icommands',
             dataType: 'json',
             success: function (data) {
-            	var icommanders = data['icommanders'] ;
+            	var icommanders = data['icommands'] ;
 				for(var idx in icommanders ){
 					var icommander = icommanders [idx] ;
 					var option = $('<option value="'+icommander[0]+'">'+icommander[0]+'</option>') ;

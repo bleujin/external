@@ -62,6 +62,12 @@ public class WebUtil {
 		return IOUtil.toStringWithClose(new FileInputStream(new File(Webapp.SCRIPT_DIR, fileName))) ;
 	}
 
+
+	public static String viewICommand(String fileName) throws IOException{
+		return IOUtil.toStringWithClose(new FileInputStream(new File(Webapp.ICOMMAND_DIR, fileName))) ;
+	}
+
+
     public static String viewArticleTemplate(String fileName) throws IOException {
         return IOUtil.toStringWithClose(new FileInputStream(new File(Webapp.ARTICLE_TEMPLAGE_DIR, fileName))) ;
     }
