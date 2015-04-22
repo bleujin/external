@@ -9,28 +9,39 @@
 	<menu>
 		<domain kr="도메인">Domain
 			<overview kr="오버뷰">Overview</overview>
-			<define kr="정의">Define</define>
+			<defined kr="정의">Defined</defined>
 			<article kr="아티클">Article</article>
 			<gallery kr="갤러리">Gallery</gallery>
 			<query kr="쿼리">Query</query>
 			<template kr="템플릿">Template</template>
+
+			
+			<choose>Choose Domain</choose>
+			<create>Create Domain</create>
+			<remove>Remove Domain</remove>
 		</domain>
-		<scripter>Script
+		<icommand>ICS Command
 			<overview>Overview</overview>
 			<defined>Defined</defined>
-			<create>Create script</create>
-			<choose>Choose script</choose>
+			<schedule>Schedule</schedule>
+			
+			<choose>Choose ICS Command</choose>
+			<create>Create ICS Command</create>
+			<remove>Remove ICS Command</remove>
+		</icommand>
+		<script>Craken Script
 			<overview>Overview</overview>
 			<defined>Defined</defined>
-			<remove>Remove</remove>
-		</scripter>
+			<schedule>Schedule</schedule>
+			
+			<choose>Choose Craken Script</choose>
+			<create>Create Craken Script</create>
+			<remove>Remove Craken Script</remove>
+		</script>
 		<misc kr="기타">Miscellaneous
 			<properties kr="자바 속성">Java Properties</properties>
 			<threaddump kr="쓰레드 덤프">Thread Dump</threaddump>
-			<analyzer kr="분석기 확인">Analyzer Confirm</analyzer>
-			<history kr="로더 사용 내역">Loader History</history>
 			<logging kr="모니터링">Logging</logging>
-			<script kr="스크립트">Craken Script</script>
 			<user kr="사용자">System User</user>
 		</misc>
 
@@ -42,18 +53,27 @@
 		<create>Create Domain
 			<button>Create</button>
 		</create>
+		<remove>Domain to remove
+			<title>Remove domain</title>
+		</remove>
+		
 		<overview>
 			<title>Domain Overview</title>
 			<status>Domain Status</status>
 		</overview>
-		<defined>Define Source
-			<scat>Site category
-				<catid>Category ID</catid>
-				<path>Category path</path>
+		
+		<defined>Define Domain
+			<scat>Site Category Info
+				<catid>Category Id</catid>
+				<path>Category Path</path>
+				<includesub>Include Sub</includesub>
 				<link>Link</link>
+				<below>Below Category</below>
+				
+				
 				<template>
-					<tplid>Tpl Id</tplid>
-					<tplname>Tpl name</tplname>
+					<tplid>Template Id</tplid>
+					<tplname>Template Name</tplname>
 					<form>Form</form>
 					<link>Link</link>
 					<listpage>List pages</listpage>
@@ -62,39 +82,39 @@
 					<add>Add</add>
 					<remove>Remove</remove>
 				</buttons>
-				<below>Below</below>
+				
 			</scat>
-			<gcat>Gallery category
-				<catid>category ID</catid>
-				<path>Category path</path>
+			<gcat>Gallery Category Info
+				<catid>Category Id</catid>
+				<path>Category Path</path>
+				<includesub>Include Sub</includesub>
 				<buttons>
 					<add>Add</add>
 					<remove>Remove</remove>
 				</buttons>
-				<below>Below</below>
 				<link>Link</link>
+				<below>Below Category</below>
 			</gcat>
-			<below>Include sub categories</below>
-			<create>
-				<button>Create source</button>
-			</create>
 		</defined>
-		<choose>Choose Domain</choose>
+
 		<article>Article
-            <list>Articles
+            <articles>Articles
                 <table-header>Articles</table-header>
-            </list>
+            </articles>
+            
 			<data>Data</data>
 			<title>Articles</title>
 			<related>Related</related>
-			<subject>Subject</subject>
 			<content>Content</content>
 			<storypage>Story pages</storypage>
 			<table-header>Detail</table-header>
+			
 			<artid>Article Id</artid>
 			<catid>Category Id</catid>
+			<subject>Subject</subject>
 			<lastmodified>Last modified</lastmodified>
 			<link>Link</link>
+			
             <query>Query
     			<title>Query</title>
     			<table-header>Detail</table-header>
@@ -105,32 +125,36 @@
     			<query-parameter>Parameter</query-parameter>
     			<document-type>Document Type</document-type>
     			<indent>Indent</indent>
+    			<html>Html</html>
     			<buttons>
     				<execute>Execute</execute>
     			</buttons>
     		</query>
+    		
 			<template>Template
                 <table-header>Edit Template(Velocity)</table-header>
                 <view-sample>View samples</view-sample>
-                <storypage>Story pages</storypage>
-				<tplid>Tpl Id</tplid>
-				<tplname>Tpl name</tplname>
-				<form>Form</form>
-				<link>Link</link>
                 <content>Content</content>
-			</template>
+				<buttons>
+					<save>Save</save>
+				</buttons>
+                </template>
 		</article>
         <gallery>
-            <list>Galleries
+            <galleries>Galleries
                 <table-header>Galleries</table-header>
-            </list>
-            <subject>Subject</subject>
+            </galleries>
+            
+            <title>Galleries</title>
+            
             <galid>Gallery Id</galid>
             <catid>Category Id</catid>
-            <lastmodified>Last modified</lastmodified>
+            <subject>Subject</subject>
             <width>Width</width>
             <height>Height</height>
             <filesize>File size</filesize>
+            <lastmodified>Last modified</lastmodified>
+            
             <query>Query
     			<title>Query</title>
     			<table-header>Detail</table-header>
@@ -141,6 +165,7 @@
     			<query-parameter>Parameter</query-parameter>
     			<document-type>Document Type</document-type>
     			<indent>Indent</indent>
+    			<html>Html</html>
     			<buttons>
     				<execute>Execute</execute>
     			</buttons>
@@ -148,11 +173,9 @@
 			<template>Template
                 <table-header>Edit Template(Velocity)</table-header>
                 <view-sample>View samples</view-sample>
-				<storypage>Story pages</storypage>
-				<tplid>Tpl Id</tplid>
-				<tplname>Tpl name</tplname>
-				<form>Form</form>
-				<link>Link</link>
+				<buttons>
+					<save>Save</save>
+				</buttons>
                 <content>Content</content>
 			</template>
         </gallery>
@@ -165,11 +188,33 @@
 				<save>Save template</save>
 			</buttons>
 		</template>
-		<remove>Remove Domain</remove>
 	</domain>
 
-	<scripter>
-		<choose>Choose script</choose>
+	<icommand>
+	    <id>Command Id</id>
+		<create>Create ICS Command
+			<button>Create</button>
+		</create>
+		<remove>Command to remove
+			<title>Remove command</title>
+		</remove>
+		
+		<overview>
+			<title>ICS Command Overview</title>
+			<table-header>Run Log</table-header>
+		</overview>
+	    
+		<defined>
+		    
+		</defined>
+		
+		<schedule>
+		    
+		</schedule>
+		
+	</icommand>
+	
+	<script>
 		<remove>Script to remove
 			<title>Remove script</title>
 		</remove>
@@ -198,7 +243,7 @@
 				<view-detail>View detail</view-detail>
 			</buttons>
 		</overview>
-	</scripter>
+	</script>
 
 	<misc>
         <properties>

@@ -27,8 +27,6 @@
             <div class="widget-body">
                 <ul id="myTab1" class="nav nav-tabs bordered">
                     <li class="active"><a href="#summary" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> ${m.asString("domain.overview.status")}</a></li>
-                    <li><a href="#recent_article" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> ${m.asString("domain.overview.recentarticle")}</a></li>
-                    <li><a href="#recent_gallery" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> ${m.asString("domain.overview.recentgallery")}</a></li>
                 </ul>
 
                 <div id="myContent1" class="tab-content padding-10">
@@ -36,45 +34,6 @@
                         <dl class="dl-horizontal" id="overview_status">
                            
                         </dl>
-                    </div>
-                    <div class="tab-pane fade" id="recent_article">
-                        <table id="articles" class="table table-bordered table-hover" width="100%">
-                            <thead>
-                            <tr>
-                                <th>${m.asString("domain.article.artid")}</th>
-                                <th>${m.asString("domain.article.catid")}</th>
-                                <th>${m.asString("domain.article.subject")}</th>
-                                <th>${m.asString("domain.article.lastmodified")}</th>
-                                <th>${m.asString("domain.article.link")}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>100</td>
-                                <td>/ics/external/airkjh1</td>
-                                <td>This is article subject</td>
-                                <td>airkjh</td>
-                                <td><button onclick="javascript:showStoryPages('airkjh1', 100);">story pages</button></td>
-                            </tr>
-                            <tr>
-                                <td>101</td>
-                                <td>/ics/external/airkjh2</td>
-                                <td>This is article subject</td>
-                                <td>airkjh</td>
-                                <td><button onclick="javascript:showStoryPages('airkjh2', 101);">story pages</button></td>
-                            </tr>
-                            <tr>
-                                <td>102</td>
-                                <td>/ics/external/airkjh3</td>
-                                <td>This is article subject</td>
-                                <td>bleujin</td>
-                                <td><button onclick="javascript:showStoryPages('airkjh3', 102);">story pages</button></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div clas="tab-pane fade" id="recent_gallery">
-
                     </div>
                 </div>
             </div>

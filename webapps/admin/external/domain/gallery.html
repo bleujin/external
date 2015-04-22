@@ -27,7 +27,7 @@
         <div class="widget-body">
             <ul id="myTab1" class="nav nav-tabs bordered">
                 <li class="active"><a href="#list" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i>
-                    ${m.asString("domain.gallery.list")}</a></li>
+                    ${m.asString("domain.gallery.galleries")}</a></li>
                 <li><a href="#query" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i>
                     ${m.asString("domain.gallery.query")}</a></li>
                 <li><a href="#template" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i>
@@ -36,12 +36,11 @@
 
             <div id="myContent1" class="tab-content padding-10">
                 <div class="tab-pane fade in active" id="list">
-                    <div class="jarviswidget jarviswidget-color-purple" id="gallery-list-win"
-                         data-widget-editbutton="false" data-widget-deletebutton="false">
+                    <div class="jarviswidget jarviswidget-color-purple" id="gallery-list-win" data-widget-editbutton="false" data-widget-deletebutton="false">
                         <header>
                             <span class="widget-icon"> <i class="fa fa-table"></i> </span>
 
-                            <h2>${m.asString("domain.gallery.list.table-header")}</h2>
+                            <h2>${m.asString("domain.gallery.galleries.table-header")}</h2>
                         </header>
 
                         <div>
@@ -82,10 +81,7 @@
                                       novalidate="novalidate">
                                     <fieldset style="padding: 0px">
                                         <section>
-                                            <label class="label">${m.asString("domain.gallery.query.query")}<a
-                                                    href="http://lucene.apache.org/core/2_9_4/queryparsersyntax.html"
-                                                    target="_blank"><span
-                                                    class="label pull-right">operator</span></a></label>
+                                            <label class="label">${m.asString("domain.gallery.query.query")}</label>
                                             <label class="textarea textarea-resizable">
                                                 <textarea name="query" rows="3"></textarea>
                                             </label>
@@ -128,8 +124,8 @@
                                             </label>
                                         </section>
                                         <section>
-                                            <label class="checkbox"><input type="checkbox" name="indent"
-                                                                           checked="false"/><i></i>${m.asString("domain.gallery.query.indent")}</label>
+                                            <label class="checkbox"><input type="checkbox" name="indent" checked /><i></i>${m.asString("domain.gallery.query.indent")}</label>
+                                            <label class="checkbox"><input type="checkbox" name="html" /><i></i>${m.asString("domain.gallery.query.html")}</label>
                                         </section>
 
                                     </fieldset>
@@ -281,13 +277,13 @@ var pagefunction = function () {
                     [0, 'desc']
                 ],
                 'columns': [
-                    {'title': 'galid'},
-                    {'title': 'catid'},
-                    {'title': 'subject'},
-                    {'title': 'width'},
-                    {'title': 'height'},
-                    {'title': 'filesize'},
-                    {'title': 'modday'}
+                    {'title': '${m.asString("domain.gallery.galid")}'},
+                    {'title': '${m.asString("domain.gallery.catid")}'},
+                    {'title': '${m.asString("domain.gallery.subject")}'},
+                    {'title': '${m.asString("domain.gallery.width")}'},
+                    {'title': '${m.asString("domain.gallery.height")}'},
+                    {'title': '${m.asString("domain.gallery.filesize")}'},
+                    {'title': '${m.asString("domain.gallery.lastmodified")}'}
                 ]
             });
             var tableFoot = '<tfoot><tr><td colspan="7" class="col-xs-12">' +
@@ -322,13 +318,13 @@ var pagefunction = function () {
                                     [0, 'desc']
                                 ],
                                 'columns': [
-                                    {'title': 'galid'},
-                                    {'title': 'catid'},
-                                    {'title': 'subject'},
-                                    {'title': 'width'},
-                                    {'title': 'height'},
-                                    {'title': 'filesize'},
-                                    {'title': 'modday'}
+                                   {'title': '${m.asString("domain.gallery.galid")}'},
+                                   {'title': '${m.asString("domain.gallery.catid")}'},
+                                   {'title': '${m.asString("domain.gallery.subject")}'},
+                                   {'title': '${m.asString("domain.gallery.width")}'},
+                                   {'title': '${m.asString("domain.gallery.height")}'},
+                                   {'title': '${m.asString("domain.gallery.filesize")}'},
+                                   {'title': '${m.asString("domain.gallery.lastmodified")}'}
                                 ]
                             });
 
@@ -374,6 +370,7 @@ var pagefunction = function () {
     var _skip = _queryForm.find("input[name=skip]");
     var _offset = _queryForm.find("input[name=offset]");
     var _indent = _queryForm.find("input[name=indent]");
+    var _html = _queryForm.find("input[name=html]");
     var _debug = _queryForm.find("input[name=debug]");
     var _btn_exec = _queryForm.find("button[name=btn_exec]");
 
@@ -382,7 +379,7 @@ var pagefunction = function () {
             type: "GET",
             dataType: 'text',
             url: "/admin/gallery/" + domainId + "/query." + _rtype.val() + (  _parameter.val() ? "?" + _parameter.val() : ""),
-            data: { query: _query.val(), sort: _sort.val(), skip: _skip.val(), offset: _offset.val(), indent: _indent.is(":checked") ? true : false, debug: _debug.is(":checked") ? true : false},
+            data: { query: _query.val(), sort: _sort.val(), skip: _skip.val(), offset: _offset.val(), indent: _indent.is(":checked") ? true : false, html: _html.is(":checked") ? true : false, debug: _debug.is(":checked") ? true : false},
             complete: function () {
                 var targetURL = "<a href='http://" + document.location.host + this.url + "' target='_blank'>" + this.url + "</a>";
                 $("#query-url").html(targetURL);

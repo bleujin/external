@@ -86,7 +86,6 @@ public class ScriptWeb implements Webapp {
 						ReadNode node = iter.next();
 						JsonArray userProp = new JsonArray();
 						userProp.add(new JsonPrimitive(node.fqn().name()));
-						// userProp.add(new JsonPrimitive("/open/script/run/" + node.fqn().name()));
 						String firstLine = new BufferedReader(new StringReader(node.property(Def.Script.Content).asString())).readLine();
 						userProp.add(new JsonPrimitive(StringUtil.defaultString(firstLine, "")));
 						result.add(userProp);
@@ -99,7 +98,6 @@ public class ScriptWeb implements Webapp {
 		});
 		return new JsonObject().put("info", rsession.ghostBy("/menus/script").property("overview").asString())
 				.put("schemaName", JsonParser.fromString("[{'title':'Id'},{'title':'Run Path'},{'title':'Explain'}]").getAsJsonArray())
-		// .put("samples", WebUtil.findScripts())
 				.put("scripters", jarray);
 	}
 

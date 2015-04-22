@@ -66,7 +66,6 @@ public class DomainReal {
 	private SQLLoader sqlLoader;
 	private File galleryRoot;
 	private Logger logger = Logger.getLogger(DomainReal.class);
-	private NScheduler scheduler ;
 
 	public void init(final ReadSession session, final IContext icontext, DBController idc, ICSFileSystem icsfs, File galleryRoot) throws IOException {
 	
@@ -75,9 +74,6 @@ public class DomainReal {
 		this.icsfs = icsfs ;
 		this.sqlLoader = SQLLoader.create(getClass().getResourceAsStream("esql.sql"));
 		this.galleryRoot = galleryRoot ;
-		this.scheduler = new NScheduler("scripter", Executors.newCachedThreadPool(ThreadFactoryBuilder.createThreadFactory("scripters-thread-%d")));
-
-		final JScriptEngine jsengine = JScriptEngine.create();
 		
 		
 		// when addCategory
@@ -244,181 +240,8 @@ public class DomainReal {
 		
 		
 		
-		// when mod scripts schedule
-		final ReadSession rsession = session ;
-		session.workspace().cddm().add(new CDDHandler() {
-			@Override
-			public String pathPattern() {
-				return "/scripts/{sid}/schedule";
-			}
-
-			@Override
-			public TransactionJob<Void> deleted(Map<String, String> rmap, CDDRemovedEvent cevent) {
-				String sid = rmap.get("sid");
-				scheduler.removeJob(sid);
-				
-				return null;
-			}
-
-			@Override
-			public TransactionJob<Void> modified(Map<String, String> rmap, CDDModifiedEvent cevent) {
-				EventPropertyReadable rnode = new EventPropertyReadable(cevent);
-				String jobId = rmap.get("sid");
-				if (rnode.property(Def.Schedule.ENABLE).asBoolean()) {
-					ReadNode sinfo = rsession.ghostBy("/scripts/" + jobId + "/schedule");
-					scheduler.removeJob(jobId);
-					AtTime at = makeAtTime(sinfo);
-					scheduler.addJob(new Job(jobId, makeCallable(jobId), at));
-				} else {
-					scheduler.removeJob(jobId);
-				}
-
-				return null;
-			}
-
-			private ScheduledRunnable makeCallable(final String scriptId) {
-				return new ScheduledRunnable() {
-					@Override
-					public void run() {
-						final ReadNode scriptNode = rsession.ghostBy("/scripts/" + scriptId);
-
-						// should check running(in distribute mode)
-						if (scriptNode.property(Def.Script.Running).asBoolean()) return ;
-						rsession.tran(new TransactionJob<Void>() {
-							@Override
-							public Void handle(WriteSession wsession) throws Exception {
-								wsession.pathBy(scriptNode.fqn()).property(Def.Script.Running, true) ;
-								return null;
-							}
-						}) ;
-						// 
-						
-						
-						
-						String scriptContent = scriptNode.property(Def.Script.Content).asString();
-						StringWriter result = new StringWriter();
-						final JsonWriter jwriter = new JsonWriter(result);
-
-						
-						
-						try {
-							StringWriter writer = new StringWriter();
-							MultivaluedMap<String, String> params = new MultivaluedMapImpl<String, String>();
-							InstantJavaScript script = jsengine.createScript(IdString.create(scriptId), "", new StringReader(scriptContent));
-
-							String[] execResult = script.exec(new ResultHandler<String[]>() {
-								@Override
-								public String[] onSuccess(Object result, Object... args) {
-									try {
-										jwriter.beginObject().name("return").value(ObjectUtil.toString(result));
-									} catch (IOException ignore) {
-									} finally {
-										rsession.tran(new TransactionJob<Void>() {
-											@Override
-											public Void handle(WriteSession wsession) throws Exception {
-												wsession.pathBy(scriptNode.fqn()).property(Def.Script.Running, false) ;
-												return null;
-											}
-										}) ;
-									}
-									return new String[]{"schedule success", ObjectUtil.toString(result)};
-								}
-
-								@Override
-								public String[] onFail(Exception ex, Object... args) {
-									try {
-										jwriter.beginObject().name("return").value("").name("exception").value(ex.getMessage());
-									} catch (IOException e) {
-									} finally {
-										rsession.tran(new TransactionJob<Void>() {
-											@Override
-											public Void handle(WriteSession wsession) throws Exception {
-												wsession.pathBy(scriptNode.fqn()).property(Def.Script.Running, false) ;
-												return null;
-											}
-										}) ;
-									}
-									return new String[]{"schedule fail", ex.getMessage()};
-								}
-							}, writer, rsession, params, DomainReal.this, jsengine);
-
-							jwriter.name("writer").value(writer.toString());
-
-							jwriter.name("params");
-							jwriter.beginArray();
-							for (Entry<String, List<String>> entry : params.entrySet()) {
-								jwriter.beginObject().name(entry.getKey()).beginArray();
-								for (String val : entry.getValue()) {
-									jwriter.value(val);
-								}
-								jwriter.endArray().endObject();
-							}
-							jwriter.endArray();
-							jwriter.endObject();
-							jwriter.close();
-							rsession.tran(DomainReal.end(scriptId, execResult[0], execResult[1])) ;
-						} catch (IOException ex) {
-							rsession.tran(DomainReal.end(scriptId, "schedule fail", ex.getMessage())) ; 
-						} catch(ScriptException ex){
-							rsession.tran(DomainReal.end(scriptId, "schedule fail", ex.getMessage())) ;
-						} finally {
-							IOUtil.close(jwriter);
-						}
-						// write log
-
-					}
-				};
-			}
-
-			private AtTime makeAtTime(ReadNode sinfo) {
-				String expr = StringUtil.coalesce(sinfo.property("minute").asString(), "*") + " " 
-						+ StringUtil.coalesce(sinfo.property("hour").asString(), "*") + " " 
-						+ StringUtil.coalesce(sinfo.property("day").asString(), "*") + " " 
-						+ StringUtil.coalesce(sinfo.property("month").asString(), "*") + " " 
-						+ StringUtil.coalesce(sinfo.property("week").asString(), "*") + " "
-						+ StringUtil.coalesce(sinfo.property("matchtime").asString(), "*") + " " 
-						+ StringUtil.coalesce(sinfo.property("year").asString(), "*");
-
-				return new AtTime(expr);
-			}
-
-		});
-		
-		scheduler.start(); 
-		
-		// register schedule job
-		session.tran(new TransactionJob<Void>() {
-			@Override
-			public Void handle(WriteSession wsession) throws Exception {
-				IteratorList<WriteNode> scripts = wsession.pathBy("/scripts").children().iterator() ;
-				while(scripts.hasNext()){
-					WriteNode wnode = scripts.next() ;
-					wnode.property(Def.Script.Running, false) ;
-					if (wnode.hasChild("schedule")){
-						WriteNode scheduleNode = wnode.child("schedule");
-						if (scheduleNode.property(Def.Schedule.ENABLE).asBoolean()){
-							scheduleNode.property(Def.Schedule.ENABLE, true) ;
-						}
-					}
-				}
-				return null;
-			}
-		}) ;
 	}
-	
-	private static TransactionJob<Void> end(final String sid, final String status, final Object result){
-		return new TransactionJob<Void>() {
-			@Override
-			public Void handle(WriteSession wsession) throws Exception {
-				WriteNode logNode = wsession.pathBy(SLog.path(sid));
-				long cindex = logNode.property(SLog.CIndex).asLong(0) ;
-				logNode.child("c" + cindex).property(SLog.Runtime, System.currentTimeMillis()).property(SLog.Status, status).property(SLog.Result, ObjectUtil.toString(result)) ;
-				logNode.property(SLog.CIndex, (++cindex) % 101) ;
-				return null;
-			}
-		} ;
-	}
-	
+
 
 	private void whenResetUser() {
 		session.tran(new TransactionJob<Void>() {
@@ -605,59 +428,4 @@ public class DomainReal {
 		}) ;
 	}
 	
-}
-
-
-interface PropertyReadable {
-	public PropertyValue property(String propId);
-
-	public PropertyValue property(PropertyId propId);
-
-	public Fqn fqn();
-}
-
-class EventPropertyReadable implements PropertyReadable {
-
-	private CDDModifiedEvent event;
-
-	public EventPropertyReadable(CDDModifiedEvent event) {
-		this.event = event;
-	}
-
-	@Override
-	public PropertyValue property(String propId) {
-		return event.property(propId);
-	}
-
-	@Override
-	public PropertyValue property(PropertyId propId) {
-		return event.property(propId);
-	}
-
-	public Fqn fqn() {
-		return event.getKey().getFqn();
-	}
-}
-
-class RNodePropertyReadable implements PropertyReadable {
-
-	private ReadNode rnode;
-
-	public RNodePropertyReadable(ReadNode node) {
-		this.rnode = node;
-	}
-
-	@Override
-	public PropertyValue property(String propId) {
-		return rnode.property(propId);
-	}
-
-	@Override
-	public PropertyValue property(PropertyId propId) {
-		return rnode.propertyId(propId);
-	}
-
-	public Fqn fqn() {
-		return rnode.fqn();
-	}
 }

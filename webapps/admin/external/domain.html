@@ -6,7 +6,7 @@
             <form class="smart-form no-padding" method="post" action="domain/left" novalidate="novalidate">
                 <fieldset>
                     <section class="no-padding">
-                        <label class="label">${m.asString("domain.choose")}</label>
+                        <label class="label">${m.asString("menu.domain.choose")}</label>
                         <label class="select">
                             <select class="input-sm choose-sub form-control" id="domains">
                             </select>
@@ -18,7 +18,7 @@
 
         <ul class="inbox-menu-lg">
             <li class="submenu active"><a class="overview-load" href="javascript:void(0);">${m.asString("menu.domain.overview")}</a></li>
-            <li class="submenu"><a class="define-load" href="javascript:void(0);">${m.asString("menu.domain.define")}</a></li>
+            <li class="submenu"><a class="defined-load" href="javascript:void(0);">${m.asString("menu.domain.defined")}</a></li>
             <li class="submenu"><a class="article-load" href="javascript:void(0);">${m.asString("menu.domain.article")}</a></li>
             <li class="submenu"><a class="gallery-load" href="javascript:void(0);">${m.asString("menu.domain.gallery")}</a></li>
 
@@ -26,7 +26,7 @@
             <li>
             <li class="dd-item" data-id="1">
                 <div class="dd-handle create-open">
-                    <span>${m.asString("domain.create")}</span>
+                    <span>${m.asString("menu.domain.create")}</span>
                 </div>
             </li>
         </ul>
@@ -217,25 +217,25 @@
 <div id="create-domain-scat-modal" class="modal fade domain" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header"><h5 id="myModalLabel4">${m.asString("domain.source.scat")}</h5></div>
+            <div class="modal-header"><h5 id="myModalLabel4">${m.asString("domain.defined.scat")}</h5></div>
             <div class="modal-body">
                 <form class="smart-form" id="create-domain-scat-form" method="post" action="domain/" novalidate="novalidate" external-target="scat">
                     <fieldset style="padding: 0px">
                         <section>
-                            <label class="label">${m.asString("domain.scat.catid")}</label>
+                            <label class="label">${m.asString("domain.defined.scat.catid")}</label>
                             <label class="input">
                                 <input type="text" name="catid" placeholder="site category id"/>
                             </label>
                         </section>
                         <section>
-                            <label class="checkbox"><input type="checkbox" name="includeSub"/><i></i>${m.asString("domain.source.below")}</label>
+                            <label class="checkbox"><input type="checkbox" name="includeSub"/><i></i>${m.asString("domain.defined.scat.below")}</label>
                         </section>
                     </fieldset>
                 </form>
             </div>
             <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">${m.asString("buttons.modal.close")}</button>
-                <button class="btn btn-primary" name="create">${m.asString("domain.source.create.button")}</button>
+                <button class="btn btn-primary" name="create">${m.asString("domain.defined.scat.buttons.add")}</button>
             </div>
         </div>
     </div>
@@ -244,25 +244,25 @@
 <div id="create-domain-gcat-modal" class="modal fade domain" tabindex="-1" role="dialog" aria-labelledby="myModalLabel5" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header"><h5 id="myModalLabel5">${m.asString("domain.source.gcat")}</h5></div>
+            <div class="modal-header"><h5 id="myModalLabel5">${m.asString("domain.defined.gcat")}</h5></div>
             <div class="modal-body">
                 <form class="smart-form" id="create-domain-gcat-form" method="post" action="domain/source" novalidate="novalidate" external-target="gcat">
                     <fieldset style="padding: 0px">
                         <section>
-                            <label class="label">${m.asString("domain.source.gcat.catid")}</label>
+                            <label class="label">${m.asString("domain.defined.gcat.catid")}</label>
                             <label class="input">
                                 <input type="text" name="catid" placeholder="gallery category id"/>
                             </label>
                         </section>
                         <section>
-                            <label class="checkbox"><input type="checkbox" name="includeSub"/><i></i>${m.asString("domain.source.below")}</label>
+                            <label class="checkbox"><input type="checkbox" name="includeSub"/><i></i>${m.asString("domain.defined.gcat.below")}</label>
                         </section>
                     </fieldset>
                 </form>
             </div>
             <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">${m.asString("buttons.modal.close")}</button>
-                <button class="btn btn-primary" name="create">${m.asString("domain.source.create.button")}</button>
+                <button class="btn btn-primary" name="create">${m.asString("domain.defined.gcat.buttons.add")}</button>
             </div>
         </div>
     </div>
@@ -477,9 +477,9 @@
             lastMenuHTML = "overview.html";
         });        
 
-        $(".define-load").click(function () {
-            loadURL("external/domain/define.html", $('#inbox-content > .table-wrap'));
-            lastMenuHTML = "define.html";
+        $(".defined-load").click(function () {
+            loadURL("external/domain/defined.html", $('#inbox-content > .table-wrap'));
+            lastMenuHTML = "defined.html";
         });
 
         $(".article-load").click(function () {
