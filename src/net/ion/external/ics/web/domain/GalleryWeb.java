@@ -53,7 +53,7 @@ public class GalleryWeb {
 	@GET
 	@Path("/{did}/gallery")
 	@Produces(ExtMediaType.APPLICATION_JSON_UTF8)
-	public JsonObject query() throws IOException {
+	public JsonObject info() throws IOException {
 		JsonObject result = new JsonObject();
 		result.put("info", session.ghostBy("/menus/domain").property("gallery").asString());
 		return result;

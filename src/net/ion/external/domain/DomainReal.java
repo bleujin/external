@@ -4,26 +4,21 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.StringReader;
 import java.io.StringWriter;
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicReference;
 
 import javax.script.ScriptException;
-import javax.ws.rs.core.MultivaluedMap;
 
 import net.ion.cms.env.ICSFileSystem;
 import net.ion.cms.env.SQLLoader;
 import net.ion.cms.rest.sync.Def;
 import net.ion.cms.rest.sync.Def.Gallery;
 import net.ion.cms.rest.sync.Def.ICommandLog;
-import net.ion.cms.rest.sync.Def.SLog;
 import net.ion.craken.listener.CDDHandler;
 import net.ion.craken.listener.CDDModifiedEvent;
 import net.ion.craken.listener.CDDRemovedEvent;
@@ -33,30 +28,16 @@ import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteNode;
 import net.ion.craken.node.WriteSession;
-import net.ion.craken.tree.Fqn;
 import net.ion.craken.tree.PropertyId;
 import net.ion.craken.tree.PropertyValue;
 import net.ion.framework.db.DBController;
-import net.ion.framework.db.ThreadFactoryBuilder;
 import net.ion.framework.db.bean.ResultSetHandler;
-import net.ion.framework.db.manager.script.IdString;
-import net.ion.framework.db.manager.script.InstantJavaScript;
-import net.ion.framework.db.manager.script.JScriptEngine;
-import net.ion.framework.db.manager.script.ResultHandler;
-import net.ion.framework.parse.gson.stream.JsonWriter;
-import net.ion.framework.schedule.AtTime;
-import net.ion.framework.schedule.Job;
-import net.ion.framework.schedule.ScheduledRunnable;
-import net.ion.framework.schedule.NScheduler;
 import net.ion.framework.util.ArrayUtil;
 import net.ion.framework.util.Debug;
-import net.ion.framework.util.IOUtil;
 import net.ion.framework.util.MapUtil;
-import net.ion.framework.util.ObjectUtil;
 import net.ion.framework.util.StringUtil;
 
 import org.apache.log4j.Logger;
-import org.jboss.resteasy.specimpl.MultivaluedMapImpl;
 
 public class DomainReal {
 	
@@ -154,30 +135,6 @@ public class DomainReal {
 			}
 		});
 
-		// etc
-		session.workspace().cddm().add(new CDDHandler() {
-			@Override
-			public String pathPattern() {
-				return "/command/domain/{action}";
-			}
-
-			@Override
-			public TransactionJob<Void> modified(Map<String, String> resolveMap, CDDModifiedEvent cevent) {
-				final String action = resolveMap.get("action");
-
-				if ("resetuser".equals(action)) {
-					whenResetUser();
-				}
-
-				return null;
-			}
-
-			@Override
-			public TransactionJob<Void> deleted(Map<String, String> resolveMap, CDDRemovedEvent cevent) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-		});
 		
 		// when add icommand
 		final InstantScript iscript = InstantScript.create() ;
@@ -195,7 +152,8 @@ public class DomainReal {
 				if (StringUtil.isNotBlank(cevent.property(ICommandLog.Status).asString())) return null ;
 				
 				final String content = cevent.property("content").asString() ;
-				final int count = cevent.property("count").asInt() ;
+				final String runid = cevent.property("runid").defaultValue("c00") ;
+				
 				final Map<String, String> params = MapUtil.newMap() ;
 				for(Entry<PropertyId, PropertyValue> entry : cevent.getValue().entrySet()){
 					if (entry.getKey().idString().startsWith("param_")) {
@@ -207,7 +165,7 @@ public class DomainReal {
 				final AtomicReference<String> status = new AtomicReference<String>() ;
 				try {
 					iscript.run(content, swriter, session, icontext, params) ;
-					swriter.append("completed") ;
+					swriter.append("\n") ;
 					status.set("success");
 				} catch (NoSuchMethodException e) {
 					swriter.append(e.getMessage()) ;
@@ -220,7 +178,7 @@ public class DomainReal {
 				DomainReal.this.session.tran(new TransactionJob<Void>() {
 					@Override
 					public Void handle(WriteSession wsession) throws Exception {
-						WriteNode wnode = ICommandLog.pathBy(wsession, sid, "c" + (count % 100)) ;
+						WriteNode wnode = ICommandLog.pathBy(wsession, sid, runid) ;
 						wnode.property(ICommandLog.Content, content) ;
 						for (Entry<String, String> entry : params.entrySet()) {
 							wnode.property("param_" + entry.getKey(), entry.getValue()) ;
@@ -242,27 +200,6 @@ public class DomainReal {
 		
 	}
 
-
-	private void whenResetUser() {
-		session.tran(new TransactionJob<Void>() {
-			@Override
-			public Void handle(final WriteSession wsession) throws Exception {
-				sqlLoader.query(idc, "user").execHandlerQuery(new ResultSetHandler<Void>() {
-					public Void handle(ResultSet rs) throws SQLException {
-						while (rs.next()) {
-							if (wsession.exists(rs.getString("fqn")))
-								continue;
-
-							WriteNode wnode = wsession.pathBy(rs.getString("fqn"));
-							Def.User.Properties(wnode, rs);
-						}
-						return null;
-					}
-				});
-				return null;
-			}
-		});
-	}
 
 	private void whenAddCategory(final String catId, final Boolean includeSub, final String did) {
 		session.tran(new TransactionJob<Void>() {

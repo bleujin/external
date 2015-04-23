@@ -1,0 +1,14 @@
+// db handling sample
+new function(){
+
+	importPackage(java.lang) 
+	importPackage(net.ion.craken.node.convert)
+
+	this.handle = function(writer, session, cmscontext, params){
+		// System.out.println(net.ion.framework.db.IDBController.class) ;
+		var dc = cmscontext.getIDBController() ;
+		dc.createUserCommand("select userId from user_tblc where rownum <= 5").execQuery().writeXml(writer) ;
+		return null ;
+	}
+
+} ;

@@ -65,12 +65,15 @@ public class ScriptWeb implements Webapp {
 	private JScriptEngine jengine;
 	private ICSSubCraken rentry;
 	private EventSourceEntry esentry;
+	private ScriptContext scontext;
 
-	public ScriptWeb(@ContextParam(ICSSubCraken.EntryName) ICSSubCraken icraken, @ContextParam("jsentry") JScriptEngine jengine, @ContextParam("esentry") EventSourceEntry esentry) throws IOException {
+	public ScriptWeb(@ContextParam(ICSSubCraken.EntryName) ICSSubCraken icraken, @ContextParam("jsentry") JScriptEngine jengine, @ContextParam("esentry") EventSourceEntry esentry
+			, @ContextParam(ScriptContext.EntryName) ScriptContext scontext) throws IOException {
 		this.rentry = icraken;
 		this.rsession = icraken.login();
 		this.jengine = jengine;
 		this.esentry = esentry;
+		this.scontext = scontext ;
 	}
 
 	@Path("")
@@ -209,19 +212,14 @@ public class ScriptWeb implements Webapp {
 				params.put(entry.getKey(), entry.getValue());
 		}
 
-		String content = rsession.ghostBy("/scripts/" + sid).property(Def.Script.Content).asString();
-		StringWriter writer = new StringWriter();
-		return runScript(sid, writer, params, content);
+		
+		return runScript(sid, params, request);
 	}
 
-	public Response runTestScript(@PathParam(Def.Script.Sid) String sid, MultivaluedMap<String, String> params, String content) throws IOException, ScriptException {
-		StringWriter writer = new StringWriter();
-		return runScript(sid, writer, params, content);
-	}
 
 	@Path("/{sid}/instantrun/{eventid}")
 	@POST
-	public Response instantRunScript(@PathParam("sid") final String sid, @PathParam("eventid") String eventId, @DefaultValue("") @FormParam("content") String content) throws IOException, ScriptException {
+	public Response instantRunScript(@PathParam("sid") final String sid, @PathParam("eventid") String eventId, @DefaultValue("") @FormParam("content") String content, @Context HttpRequest request) throws IOException, ScriptException {
 
 		final MultivaluedMap<String, String> params = new MultivaluedMapImpl<String, String>();
 
@@ -260,7 +258,7 @@ public class ScriptWeb implements Webapp {
 				}
 				return null;
 			}
-		}, writer, rsession, params, rentry, jengine);
+		}, writer, rsession, params, request.getHttpMethod(), this.scontext);
 
 		return Response.ok().build();
 	}
@@ -278,7 +276,10 @@ public class ScriptWeb implements Webapp {
 		};
 	}
 
-	private Response runScript(final String scriptId, Writer writer, MultivaluedMap<String, String> params, String content) throws IOException, ScriptException {
+	Response runScript(final String scriptId, MultivaluedMap<String, String> params, HttpRequest request) throws IOException, ScriptException {
+		String content = rsession.ghostBy("/scripts/" + scriptId).property(Def.Script.Content).asString();
+		StringWriter writer = new StringWriter();
+		
 		InstantJavaScript script = jengine.createScript(IdString.create(scriptId), "", new StringReader(content));
 
 		StringWriter result = new StringWriter();
@@ -305,7 +306,7 @@ public class ScriptWeb implements Webapp {
 				}
 				return null;
 			}
-		}, writer, rsession, params, rentry, jengine);
+		}, writer, rsession, params, request.getHttpMethod(), this.scontext);
 
 		jwriter.name("writer").value(writer.toString());
 

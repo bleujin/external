@@ -378,7 +378,7 @@ var pagefunction = function () {
         $.ajax({
             type: "GET",
             dataType: 'text',
-            url: "/admin/gallery/" + domainId + "/query." + _rtype.val() + (  _parameter.val() ? "?" + _parameter.val() : ""),
+            url: "/open/gallery/" + domainId + "/query." + _rtype.val() + (  _parameter.val() ? "?" + _parameter.val() : ""),
             data: { query: _query.val(), sort: _sort.val(), skip: _skip.val(), offset: _offset.val(), indent: _indent.is(":checked") ? true : false, html: _html.is(":checked") ? true : false, debug: _debug.is(":checked") ? true : false},
             complete: function () {
                 var targetURL = "<a href='http://" + document.location.host + this.url + "' target='_blank'>" + this.url + "</a>";

@@ -33,6 +33,7 @@ import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteNode;
 import net.ion.craken.node.WriteSession;
+import net.ion.craken.tree.PropertyValue;
 import net.ion.external.ICSSubCraken;
 import net.ion.external.ics.EventSourceEntry;
 import net.ion.external.ics.common.ExtMediaType;
@@ -153,6 +154,10 @@ public class ICommandWeb implements Webapp{
 		});
 		return sid + " removed";
 	}
+	
+	protected ReadSession session(){
+		return rsession ;
+	}
 
 	@Path("/{sid}/define")
 	@GET
@@ -218,14 +223,14 @@ public class ICommandWeb implements Webapp{
 		}
 
 		String content = Def.ICommand.ghostBy(rsession, sid).property(Def.ICommand.Content).asString();
-		return runICommand(sid, params, content);
+		return runICommand(sid, params, content, request.getHttpMethod());
 	}
 
 	@Path("/{sid}/instantrun")
 	@POST
-	public String instantRunICommand(@PathParam("sid") final String sid, @DefaultValue("") @FormParam("content") String content) throws IOException, ScriptException {
+	public String instantRunICommand(@PathParam("sid") final String sid, @DefaultValue("") @FormParam("content") String content, @Context HttpRequest request) throws IOException, ScriptException {
 		
-		runICommand(sid, new MultivaluedMapImpl<String, String>(), content) ;
+		runICommand(sid, new MultivaluedMapImpl<String, String>(), content, request.getHttpMethod()) ;
 		return sid + " called";
 	}
 
@@ -242,13 +247,14 @@ public class ICommandWeb implements Webapp{
 		};
 	}
 
-	private Response runICommand(final String sid, final MultivaluedMap<String, String> params, final String content) throws IOException, ScriptException {
+	private Response runICommand(final String sid, final MultivaluedMap<String, String> params, final String content, final String method) throws IOException, ScriptException {
 		this.rsession.tran(new TransactionJob<Void>() {
 			@Override
 			public Void handle(WriteSession wsession) throws Exception {
 				WriteNode wnode = wsession.pathBy("/icommands", sid, "run") ;
 				
-				wnode.property("scriptid", sid).property("content", content).increase("count") ;
+				PropertyValue countValue = wnode.property("scriptid", sid).property("content", content).property("method", method).increase("count") ;
+				wnode.property("runid", "c" + countValue.asInt()) ;
 				for (Entry<String, List<String>> entry : params.entrySet()) {
 					wnode.property("param_" + entry.getKey(), entry.getValue()) ;
 				}

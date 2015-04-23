@@ -2,7 +2,8 @@
 
 <messages>
     <main>
-        <webapp>External</webapp>
+        <webapp>External for ICS6</webapp>
+        <recent>Recent Activity</recent>
     </main>
 
 	<!-- menuname -->
@@ -46,6 +47,8 @@
 		</misc>
 
 	</menu>
+
+	    
 
 	<!-- page -->
 	<domain>
@@ -138,7 +141,7 @@
 				<buttons>
 					<save>Save</save>
 				</buttons>
-                </template>
+            </template>
 		</article>
         <gallery>
             <galleries>Galleries
@@ -202,14 +205,37 @@
 		<overview>
 			<title>ICS Command Overview</title>
 			<table-header>Run Log</table-header>
+			<eventid>Event Id</eventid>
+			<time>Time</time>
+			<status>Status</status>
+			<result>Result</result>
 		</overview>
 	    
 		<defined>
-		    
+		    <title>ICS Command Defined</title>
+		    <table-header>Detail</table-header>
+		    <view-sample>View script sample</view-sample>
+		    <content>Script content</content>
+		    <buttons>
+		        <run>Run</run>
+		        <save>Save</save>
+		    </buttons>
 		</defined>
 		
 		<schedule>
-		    
+		    <title>ICS Command Schedule</title>
+		    <table-header kr="스케쥴 정보">Schedule Info(Cron Style)</table-header>
+		    <minute kr="분">Minute</minute>
+		    <day kr="일">Day</day>
+		    <week kr="주">Week</week>
+		    <matchtime kr="횟수">MatchTime</matchtime>
+		    <enable kr="설정 여부">Enable</enable>
+		    <hour kr="시">Hour</hour>
+		    <month kr="월">Month</month>
+		    <year kr="년">Year</year>
+		    <buttons>
+		        <set kr="저장">Set</set>
+		    </buttons>
 		</schedule>
 		
 	</icommand>
@@ -222,18 +248,9 @@
 			<id>Script Id</id>
 			<button>Create</button>
 		</create>
-		<defined>
-			<view-sample>View script sample</view-sample>
-			<content>Script content</content>
-			<output>Output</output>
-            <table-header>Detail</table-header>
-			<buttons>
-				<save>Save</save>
-				<run>Run</run>
-			</buttons>
-		</defined>
 		<overview>
 			<title>Script overview</title>
+			<table-header>Run Log</table-header>
 			<status>Status</status>
 			<recent>Recent</recent>
 			<eventid>Event ID</eventid>
@@ -243,6 +260,32 @@
 				<view-detail>View detail</view-detail>
 			</buttons>
 		</overview>
+		<defined>
+		    <title>Script Defined</title>
+			<view-sample>View script sample</view-sample>
+			<content>Script content</content>
+			<output>Output</output>
+            <table-header>Detail</table-header>
+			<buttons>
+				<save>Save</save>
+				<run>Run</run>
+			</buttons>
+		</defined>
+		<schedule>
+		    <title>Script Schedule</title>
+		    <table-header kr="스케쥴 정보">Schedule Info(Cron Style)</table-header>
+		    <minute kr="분">Minute</minute>
+		    <day kr="일">Day</day>
+		    <week kr="주">Week</week>
+		    <matchtime kr="횟수">MatchTime</matchtime>
+		    <enable kr="설정 여부">Enable</enable>
+		    <hour kr="시">Hour</hour>
+		    <month kr="월">Month</month>
+		    <year kr="년">Year</year>
+		    <buttons>
+		        <set kr="저장">Set</set>
+		    </buttons>
+		</schedule>
 	</script>
 
 	<misc>

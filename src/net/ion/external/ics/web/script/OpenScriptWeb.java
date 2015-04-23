@@ -1,4 +1,4 @@
-package net.ion.external.ics.openweb;
+package net.ion.external.ics.web.script;
 
 import java.io.IOException;
 
@@ -14,7 +14,6 @@ import net.ion.craken.node.ReadSession;
 import net.ion.external.ICSSubCraken;
 import net.ion.external.ics.EventSourceEntry;
 import net.ion.external.ics.web.Webapp;
-import net.ion.external.ics.web.script.ScriptWeb;
 import net.ion.framework.db.manager.script.JScriptEngine;
 import net.ion.radon.core.ContextParam;
 
@@ -24,17 +23,8 @@ import org.jboss.resteasy.spi.HttpRequest;
 public class OpenScriptWeb implements Webapp{
 
 	private ScriptWeb refWeb;
-	private ICSSubCraken icraken;
-	private ReadSession rsession;
-	private JScriptEngine jengine;
-	private EventSourceEntry esentry;
-
-	public OpenScriptWeb(@ContextParam(ICSSubCraken.EntryName) ICSSubCraken icraken, @ContextParam("jsentry") JScriptEngine jengine, @ContextParam("esentry") EventSourceEntry esentry ) throws IOException{
-		this.refWeb = new ScriptWeb(icraken, jengine, esentry) ;
-		this.icraken = icraken ;
-		this.rsession = icraken.login() ;
-		this.jengine = jengine ;
-		this.esentry = esentry ;
+	public OpenScriptWeb(@ContextParam(ICSSubCraken.EntryName) ICSSubCraken icraken, @ContextParam("jsentry") JScriptEngine jengine, @ContextParam("esentry") EventSourceEntry esentry, @ContextParam(ScriptContext.EntryName) ScriptContext scontext ) throws IOException{
+		this.refWeb = new ScriptWeb(icraken, jengine, esentry, scontext) ;
 	}
 
 	@Path("/run/{sid}")
