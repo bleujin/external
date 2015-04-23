@@ -571,7 +571,7 @@ var pagefunction = function () {
             }
         });
 
-        form.validate({
+        var validator = form.validate({
             rules: {
                 width: { required: true },
                 height: { required: true}
@@ -605,6 +605,8 @@ var pagefunction = function () {
                 error.insertAfter(element.parent());
             }
         });
+
+        validator.resetForm() ;
 
     }).on('hide.bs.modal', function () {
         $('#resize-gallery-form').trigger('reset');

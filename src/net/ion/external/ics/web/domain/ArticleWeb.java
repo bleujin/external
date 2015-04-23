@@ -1,25 +1,5 @@
 package net.ion.external.ics.web.domain;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.util.Iterator;
-
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.StreamingOutput;
-
 import net.ion.cms.rest.sync.Def;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
@@ -28,28 +8,26 @@ import net.ion.craken.node.WriteSession;
 import net.ion.external.domain.Domain;
 import net.ion.external.domain.DomainSub;
 import net.ion.external.ics.QueryTemplateEngine;
-import net.ion.external.ics.bean.AfieldValueX;
-import net.ion.external.ics.bean.ArticleChildrenX;
-import net.ion.external.ics.bean.ArticleX;
-import net.ion.external.ics.bean.OutputHandler;
-import net.ion.external.ics.bean.TemplateX;
-import net.ion.external.ics.bean.XIterable;
+import net.ion.external.ics.bean.*;
 import net.ion.external.ics.common.ExtMediaType;
 import net.ion.external.ics.util.WebUtil;
 import net.ion.external.ics.web.Webapp;
 import net.ion.framework.parse.gson.JsonArray;
 import net.ion.framework.parse.gson.JsonObject;
 import net.ion.framework.parse.gson.JsonPrimitive;
-import net.ion.framework.util.FileUtil;
-import net.ion.framework.util.IOUtil;
-import net.ion.framework.util.MapUtil;
-import net.ion.framework.util.NumberUtil;
-import net.ion.framework.util.StringUtil;
+import net.ion.framework.util.*;
 import net.ion.radon.core.ContextParam;
-
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.jboss.resteasy.plugins.providers.UncertainOutput;
 import org.jboss.resteasy.spi.HttpRequest;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.util.Iterator;
 
 @Path("/article")
 public class ArticleWeb implements Webapp {
@@ -261,7 +239,7 @@ public class ArticleWeb implements Webapp {
 
 	@GET
 	@Path("/{did}/afield/{catid}/{artid}/{aid}.stream")
-	public UncertainOutput viewAfieldResource(@PathParam("did") String did, @PathParam("catid") String catId, @PathParam("artid") int artId, @PathParam("aid") String afieldId) {
+	public UncertainOutput viewAfieldResource(@PathParam("did") String did, @PathParam("catid") String catId, @PathParam("artid") int artId, @PathParam("aid") final String afieldId) {
 		final AfieldValueX avalue = dsub.findDomain(did).datas().article(catId, artId).asAfield(afieldId);
 
 		return new UncertainOutput() {
@@ -272,11 +250,28 @@ public class ArticleWeb implements Webapp {
 
 			@Override
 			public MediaType getMediaType() {
-				String fileName = avalue.meta().asString("stringvalue");
+				String fileName = avalue.asString(afieldId);
 				return guessFromFileName(fileName);
 			}
 		};
 	}
+
+    @GET
+    @Path("/{did}/afield/{catid}/{artid}/{aid}.download")
+    public Response downloadAfieldResource(@PathParam("did") String did, @PathParam("catid") String catId, @PathParam("artid") int artId, @PathParam("aid") final String afieldId) throws IOException {
+        final AfieldValueX avalue = dsub.findDomain(did).datas().article(catId, artId).asAfield(afieldId);
+
+        if(!"File".equals(avalue.typeCd()) && !"Image".equals(avalue.typeCd())) {
+            return Response.status(Response.Status.BAD_REQUEST).build() ;
+        }
+
+        String fileName = StringUtil.substringAfterLast(avalue.asString("stringvalue"), "/");
+        Response.ResponseBuilder respBuilder = Response.ok(avalue.dataStream());
+        respBuilder.type(guessFromFileName(fileName)) ;
+        respBuilder.header("Content-Disposition", "attachment; filename=\"" + fileName + "\"") ;
+
+        return respBuilder.build() ;
+    }
 
 	@GET
 	@Path("/{did}/content/{catid}/{artid}/{resourceid}.stream")

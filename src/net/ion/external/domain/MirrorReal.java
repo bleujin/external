@@ -7,14 +7,12 @@ import java.lang.reflect.Method;
 import java.sql.SQLException;
 import java.util.List;
 
+import net.ion.cms.rest.sync.Def;
+import net.ion.craken.node.*;
 import org.apache.log4j.Logger;
 
 import net.ion.cms.env.ICSFileSystem;
 import net.ion.cms.env.SQLLoader;
-import net.ion.craken.node.ReadNode;
-import net.ion.craken.node.ReadSession;
-import net.ion.craken.node.TransactionJob;
-import net.ion.craken.node.WriteSession;
 import net.ion.craken.tree.Fqn;
 import net.ion.framework.db.DBController;
 import net.ion.framework.db.Rows;
@@ -184,9 +182,14 @@ public class MirrorReal implements IMirror{
 		icsSession.tran(new TransactionJob<Void>() {
 			@Override
 			public Void handle(WriteSession wsession) throws Exception {
-				wsession.pathBy("/datas/gallery/", gi.gcatId(), galId).property("galid", galId).property("catid", gi.gcatId())
-					.property("filename", ginfo.fileName()).property("width", ginfo.width()).property("height", ginfo.height()).property("typecd", ginfo.imgType())
-					.property("reguserid", regUserId).property("regday", DateUtil.currentSeoulToString())
+                WriteNode gnode = wsession.pathBy("/datas/gallery/", gi.gcatId(), galId);
+                String subject = gnode.property(Def.Gallery.Subject).asString() ;
+                String content = gnode.property(Def.Gallery.Content).asString() ;
+
+                gnode.clear() ;
+                gnode.property("galid", galId).property("catid", gi.gcatId())
+					.property("subject", subject).property("content", content).property("filename", ginfo.fileName()).property("width", ginfo.width()).property("height", ginfo.height())
+                    .property("typecd", ginfo.imgType()).property("reguserid", regUserId).property("regday", DateUtil.currentSeoulToString()).property("filesize", ginfo.size())
 					.blob("data", ginfo.asResourceStream())
 					.refTos("include", gi.targetFqns());
 				return null;
@@ -341,16 +344,17 @@ class GalleryBean {
 	private String imgType;
 	private int height;
 	private int width;
+    private int size;
 
-	public GalleryBean(String fileName, InputStream resource, String imgType, int height, int width){
+	public GalleryBean(String fileName, InputStream resource, String imgType, int height, int width, int size){
 		this.fileName = fileName ;
 		this.resource = resource ;
 		this.imgType = imgType ;
 		this.height = height ;
 		this.width = width ;
+        this.size = size ;
 	}
-	
-	
+
 	public String fileName() {
 		return fileName;
 	}
@@ -370,6 +374,9 @@ class GalleryBean {
 	public int width() {
 		return width;
 	}
-	
+
+    public int size() {
+        return size;
+    }
 }
 

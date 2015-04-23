@@ -346,9 +346,7 @@
                             modal.find('span[title=artid]').text(data.std_info.artid);
                             modal.find('span[title=subject]').text(data.std_info.subject);
                             modal.find('div[title=content]').html(data.std_info.content);
-
                             modal.find('span[title=keyword]').text(data.add_info.keyword);
-
                             modal.find('span[title=operday]').text(data.set_info.operday);
                             modal.find('span[title=expireday]').text(data.set_info.expireday);
                             modal.find('span[title=gorulloc]').text(data.set_info.gorulloc);
@@ -370,8 +368,8 @@
 
                                 if(avalue === 'null') avalue = '[EMPTY]' ;
 
-                                if(ameta.typecd === 'File' && ameta.stringvalue !== 'null') {
-                                    avalue += '<br><a href="/admin/article/' + domainId + '/' + ameta.streamvalue + '">Download</a>' ;
+                                if(ameta.typecd === 'File' && (ameta.stringvalue !== 'null' && ameta.stringvalue !== '')) {
+                                    avalue += '<br><a href="/admin/article/' + domainId + '/afield/' + artData.catid + '/' + artData.artid + '/' + afieldid + '.download">Download</a>' ;
                                 } else if(ameta.typecd === 'Image' && ameta.stringvalue !== 'null') {
                                     var url = '/admin/article/' + domainId + '/' + ameta.streamvalue ;
                                     avalue += '<br><a data-lightbox="' + ameta.stringvalue + '" href="' + url + '"><img src="' + url + '" width="137" height="137"></a>' ;
@@ -380,6 +378,9 @@
                                 tbody.append('<tr><td>' + afieldid + '</td><td>' + avalue + '</td></tr>') ;
             				}
                             $('#article-view-modal').modal({});
+                        },
+                        error: function(xhr, textStatus, error) {
+                            console.log('failure', textStatus);
                         }
                     });
 
