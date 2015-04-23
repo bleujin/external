@@ -25,10 +25,10 @@
 
 	<div class="row">
 		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="jarviswidget jarviswidget-color-blueLight" id="script-logs-win" data-widget-editbutton="false" data-widget-deletebutton="false">
+			<div class="jarviswidget jarviswidget-color-blue" id="script-logs-win" data-widget-editbutton="false" data-widget-deletebutton="false">
 				<header>
 					<span class="widget-icon"> <i class="fa fa-table"></i> </span>
-					<h2>${m.asString("scripters.overview.table-header")}</h2>
+					<h2>${m.asString("script.overview.table-header")}</h2>
 				</header>
 				
 				<div>
@@ -99,7 +99,7 @@
                 var nodes = data['slogs'];
                 var table = $("#recent_logs").dataTable({
                     "data":nodes,
-                    "paging":false,
+                    "paging":true,
                     "searching":false,
                     "columns": [{'title':'${m.asString("script.overview.eventid")}'},{'title':'${m.asString("script.overview.time")}'},{'title':'${m.asString("script.overview.status")}'},{'title':'${m.asString("script.overview.result")}'}],
                     "order" : [[1, "desc"]]
@@ -114,7 +114,7 @@
                         '				</td></tr></tfoot>' ;
 
                 // $(tableFoot).appendTo($("#recent_logs")) ;
-                console.log(table) ;
+                // console.log(table) ;
             },
             error:function(request,status,error){
                 console.log('response', request, status, error) ;

@@ -30,7 +30,7 @@
 		<!-- NEW WIDGET START -->
 		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<!-- Widget ID (each widget will need unique ID)-->
-			<div class="jarviswidget jarviswidget-color-blueLight" id="script-defined-win" data-widget-editbutton="false" data-widget-deletebutton="false">
+			<div class="jarviswidget jarviswidget-color-blue" id="script-defined-win" data-widget-editbutton="false" data-widget-deletebutton="false">
 				<header>
 					<span class="widget-icon"> <i class="fa fa-comments"></i> </span>
 					<h2>${m.asString("script.defined.table-header")}</h2>
@@ -157,12 +157,6 @@
 				url: "/admin/scripts/" + sid + "/instantrun/" + eventId,
 				data: { content: _scontent.val()}, 
 				complete : function(){ 
-					var result_text = 'Path : ' + this.url + '<br/>';
-					result_text += '<strong>External Run Path : ' + "/open/scripts/run/" + sid + '</strong><br/>';
-					result_text += 'Event Source : /event/' + eventId + '<br />' ;
-					result_text += 'Form parameter : <br />' ;
-					result_text += ' - paramname : ...<br />' ;
-					$("#target_url").html(result_text) ;
 				}, 
 				success :  function(data) {
 					// console.log(data) ;
@@ -186,6 +180,12 @@
 				
 				$("#info").html(info) ;
 				_scontent.val(data["content"]) ;
+				
+				var result_text = '';
+				result_text += '<strong>External Run Path : ' + "/open/scripts/run/" + scriptId + '</strong><br/>';
+				result_text += 'Form parameter : <br />' ;
+				result_text += ' - paramname : ...<br />' ;
+				$("#target_url").html(result_text) ;
 			}, 
 			error:function(request,status,error){
 				console.log('response', request, status, error) ;

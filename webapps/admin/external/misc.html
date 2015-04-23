@@ -63,34 +63,6 @@
 	</div>
 </div>
 
-<div id="merge-icsuser-modal" class="modal fade domain" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header"><h5 id="myModalLabel4">${m.asString("merge.icsuser")}</h5></div>
-            <div class="modal-body">
-                <form class="smart-form" id="merge-icsuser-form" method="post" action="misc/" novalidate="novalidate" external-target="scat">
-                    <fieldset style="padding: 0px">
-                        <section>
-                            <label class="label">${m.asString("ics.groupid")}</label>
-                            <label class="input">
-                                <input type="text" name="groupid" placeholder="ics groupid"/>
-                            </label>
-                        </section>
-                        <section>
-                            <label class="checkbox"><input type="checkbox" name="includeSub"/><i></i>${m.asString("include.sub.below")}</label>
-                        </section>
-                    </fieldset>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">${m.asString("buttons.modal.close")}</button>
-                <button class="btn btn-success" name="merge_icsuser">${m.asString("misc.user.merge")}</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <script type="text/javascript">
 
 	pageSetUp();
@@ -143,45 +115,6 @@
 		
 
 
-		$("#merge-icsuser-form").validate({
-			rules : {
-				groupid : { required : true, pattern:"^[a-z][a-z0-9_]*$", minlength : 4, maxlength : 15 } 
-			},
-
-			messages : {
-				groupid : { 	required : "${m.asString('validation.required', 'your userid')}", pattern : "${m.asString('validation.idpattern')}", minlength : "${m.asString('validation.minlength', 4)}", maxlength:"${m.asString('validation.maxlength', 15)}"} 
-			},
-
-			submitHandler : function(form) {
-				var _form = $(form) ;
-                var _groupid = _form.find('input[name=groupid]').val() ;
-                var _includeSub = _form.find('input[name=includeSub]').is(':checked') ;
-                
-				$.ajax({
-					type: "POST",
-					dataType:"text", 
-					url: "/admin/misc/icsusers",
-					data: { 'groupid': _groupid, 'password': _includeSub}, 
-					success : function(msg){
-						loadURL("external/misc/user.html", $('#inbox-content > .table-wrap')) ;
-						$('#merge-icsuser-modal').modal('hide');
-					}
-				});
-			},
-
-			errorPlacement : function(error, element) { // Do not change code below
-				error.insertAfter(element.parent());
-			}
-		});
-		
-
-		$("#merge-icsuser-form button[name=merge_icsuser]").click(function(){
-			$("#merge-icsuser-form").submit() ;
-		});
-		
-
-		
-		
 		
 		
 		

@@ -1,20 +1,49 @@
-// write to craken sample
+// read from db
 new function(){
+	importPackage(java.sql)
+	importPackage(net.ion.framework.db) 
+	importPackage(net.ion.framework.db.bean)  
+	importPackage(net.ion.framework.db.manager)
+	importPackage(net.ion.framework.db.procedure)
+	importPackage(net.ion.framework.parse.gson.stream)
+	importPackage(net.ion.niss.webapp.loaders)
+	
+	this.rshandler = function(writer){
+	 	var jwriter = new JsonWriter(writer)
+		return new ResultSetHandler({
+			handle : function(rs){
+				try {
+					jwriter.beginArray() ;
+					while(rs.next()){
+						jwriter.beginObject() ;
+						jwriter.name("table_name").value(rs.getString("table_name")) ;
+						jwriter.endObject() ;
+						jwriter.flush() ;
+					}
+					jwriter.endArray() ;
+					// jwriter.close() ;
+					return null ;
+				} catch(ex){
+					// throw new SQLException(ex) ;
+					jwriter.name('exception').value(ex) ;
+				} finally {
+					// jwriter.close() ;
+				}
+			} 
+		});
+	}, 
 
-	importPackage(java.lang) 
-	importPackage(net.ion.craken.node)
+	this.handle = function(writer, rsession, params, method){
+		try {
 
-	this.handle = function(writer, session, param){
-
-		session.tranSync(new TransactionJob( {
-			handle : function(wsession) {
-				var num = wsession.pathBy("/sample/board").increase("num").asInt() ;
-				wsession.pathBy("/sample/board/" + num)
-					.property("num", num).property("title", param.getFirst("title")).property("content", param.getFirst("content")) ;
-				return null;
-			}
-		})) ;
-		return null ;
+			RDB.oracle("61.250.201.239:1521:qm10g", "bleujin", "redf")
+				.query("select * from tabs")
+				.handle(this.rshandler(writer)) ;
+		} catch(ex){
+			// writer.write(ex.toString()) ;
+			writer.write(ex) ;
+			// writer.close() ;
+		}
 	}
 
 } ;

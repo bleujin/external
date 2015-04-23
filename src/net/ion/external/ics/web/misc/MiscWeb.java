@@ -165,7 +165,7 @@ public class MiscWeb implements Webapp{
             public Void handle(WriteSession wsession) throws Exception {
                 wsession.pathBy("/users/" + userId)
                         .property("name", name)
-                        .property("password", password)
+                        .encrypt("password", password)
                         .property("registered", System.currentTimeMillis()) ;
                 return null ;
             }

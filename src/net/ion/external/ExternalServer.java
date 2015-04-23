@@ -18,17 +18,20 @@ import net.ion.external.ics.common.MyStaticFileHandler;
 import net.ion.external.ics.common.MyVerifier;
 import net.ion.external.ics.common.TraceHandler;
 import net.ion.external.ics.misc.MenuWeb;
-import net.ion.external.ics.openweb.OpenDomainWeb;
-import net.ion.external.ics.openweb.OpenScriptWeb;
 import net.ion.external.ics.web.domain.ArticleWeb;
 import net.ion.external.ics.web.domain.DomainEntry;
 import net.ion.external.ics.web.domain.DomainWeb;
 import net.ion.external.ics.web.domain.GalleryWeb;
+import net.ion.external.ics.web.domain.OpenArticleWeb;
+import net.ion.external.ics.web.domain.OpenGalleryWeb;
 import net.ion.external.ics.web.icommand.ICommandWeb;
+import net.ion.external.ics.web.icommand.OpenICommandWeb;
 import net.ion.external.ics.web.misc.CrakenLet;
 import net.ion.external.ics.web.misc.ExportWeb;
 import net.ion.external.ics.web.misc.MiscWeb;
 import net.ion.external.ics.web.misc.TraceWeb;
+import net.ion.external.ics.web.script.OpenScriptWeb;
+import net.ion.external.ics.web.script.ScriptContext;
 import net.ion.external.ics.web.script.ScriptWeb;
 import net.ion.framework.db.ThreadFactoryBuilder;
 import net.ion.framework.db.manager.script.JScriptEngine;
@@ -77,8 +80,8 @@ public class ExternalServer {
 
 		ExecutorService nworker = Executors.newCachedThreadPool(ThreadFactoryBuilder.createThreadFactory("nworker-thread-%d")) ;
         
-        final QueryTemplateEngine ve = builder.context(QueryTemplateEngine.EntryName, QueryTemplateEngine.create("my.craken", craken.login()));
-        
+        builder.context(QueryTemplateEngine.EntryName, QueryTemplateEngine.create("my.craken", craken.login()));
+        builder.context(ScriptContext.EntryName, ScriptContext.create()) ;
 
         final MyEventLog elogger = MyEventLog.create(System.out);
         this.radon = builder.createRadon();
@@ -88,7 +91,7 @@ public class ExternalServer {
 			.add(new LoggingHandler(new AppLogSink(elogger)))
 			.add(new MyStaticFileHandler("./webapps/admin/", Executors.newCachedThreadPool(ThreadFactoryBuilder.createThreadFactory("static-io-thread-%d")), new HTMLTemplateEngine(radon.getConfig().getServiceContext())).welcomeFile("index.html"))
             .add("/admin/*", new PathHandler(DomainWeb.class, ICommandWeb.class, ArticleWeb.class, GalleryWeb.class, ScriptWeb.class, MiscWeb.class, TraceWeb.class, MenuWeb.class, CrakenLet.class, ExportWeb.class).prefixURI("/admin"))
-            .add("/open/*", new PathHandler(OpenDomainWeb.class, OpenScriptWeb.class).prefixURI("open"))
+            .add("/open/*", new PathHandler(OpenArticleWeb.class, OpenGalleryWeb.class, OpenScriptWeb.class, OpenICommandWeb.class).prefixURI("/open"))
             .add("/logging/event/*", new EventSourceHandler() {
 					@Override
 					public void onOpen(EventSourceConnection econn) throws Exception {

@@ -157,6 +157,13 @@
 				
 				$("#info").html(info) ;
 				_scontent.val(data["content"]) ;
+				
+				var result_text = '';
+				result_text += '<strong>External Run Path : ' + "/open/icommands/" + icommandId + '/run/{runid}</strong><br/>';
+				result_text += 'Form parameter : <br />' ;
+				result_text += ' - paramname : ...<br />' ;
+				result_text += '<strong>View Result Path(GET) : ' + "/open/icommands/" + icommandId + '/result/{runid}</strong><br/>';
+				$("#target_url").html(result_text) ;
 			}, 
 			error:function(request,status,error){
 				console.log('response', request, status, error) ;
@@ -218,11 +225,7 @@
 						url: "/admin/icommands/" + icommandId + "/instantrun",
 						data: { content: _scontent.val()}, 
 						complete : function(){ 
-							var result_text = 'Path : ' + this.url + '<br/>';
-							result_text += '<strong>External Run Path : ' + "/open/icommands/run/" + icommandId + '</strong><br/>';
-							result_text += 'Form parameter : <br />' ;
-							result_text += ' - paramname : ...<br />' ;
-							$("#target_url").html(result_text) ;
+							
 						}, 
 						success :  function(data) {
 							$("#save-message span").html(data) ;
