@@ -1,5 +1,6 @@
 package net.ion.external.ics.bean;
 
+import com.google.common.collect.Lists;
 import net.ion.cms.rest.sync.Def;
 import net.ion.craken.node.IteratorList;
 import net.ion.craken.node.ReadNode;
@@ -19,6 +20,8 @@ import net.ion.framework.util.StringUtil;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
@@ -147,15 +150,17 @@ public class ArticleX extends BeanX{
 		
 		
 		String[] gfounds = StringUtil.substringsBetween(transed, "/ics/galm/gallery.do?forwardName=resource_view&galId=", "\"");
-		
-		List<String> gsearchs = ListUtil.newList() ;
-		List<String> greplaces = ListUtil.newList() ;
-		for (String found : gfounds) {
-			gsearchs.add("/ics/galm/gallery.do?forwardName=resource_view&galId=" + found) ;
-            ///{did}/content/{catid}/{artid}/{resourceid}.stream
-			greplaces.add("/admin/gallery/" + domainId() + "/view/" + found) ;
-		}
-		
+        List<String> gsearchs = ListUtil.newList();
+        List<String> greplaces = ListUtil.newList();
+
+        if(gfounds != null) {
+            for (String found : gfounds) {
+                gsearchs.add("/ics/galm/gallery.do?forwardName=resource_view&galId=" + found);
+                // /{did}/content/{catid}/{artid}/{resourceid}.stream
+                greplaces.add("/admin/gallery/" + domainId() + "/view/" + found);
+            }
+        }
+
 		return StringUtil.replaceEachRepeatedly(transed, gsearchs.toArray(new String[0]), greplaces.toArray(new String[0])) ;
 	}
 	

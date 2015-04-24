@@ -72,8 +72,6 @@
             $('.click2edit').destroy();
         });
 
-    
-
         var domainId = $("#domains option:selected").val() ;
         if (domainId == undefined) return ;
 
@@ -92,11 +90,7 @@
                 console.log('response', request, status, error) ;
             }
         }) ;
-
     };
-
-    
-
 
     loadScript("js/plugin/summernote/summernote.min.js", pagefunction) ;
 
