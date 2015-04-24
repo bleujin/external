@@ -1,17 +1,11 @@
 package net.ion.external.domain;
 
-import java.io.PrintStream;
-
-import javax.script.Bindings;
 import javax.script.Invocable;
 import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import javax.script.SimpleBindings;
-
-import net.ion.framework.util.ArrayUtil;
-import sun.org.mozilla.javascript.internal.NativeObject;
 
 public class InstantScript {
 
@@ -36,7 +30,7 @@ public class InstantScript {
 	}
 
 	public Object run(String script, Object... sparam) throws ScriptException, NoSuchMethodException {
-		NativeObject pack = (NativeObject) sengine.eval(script) ;
+		Object pack = sengine.eval(script) ;
 		
 		return ((Invocable) sengine).invokeMethod(pack, "handle", sparam);
 	}

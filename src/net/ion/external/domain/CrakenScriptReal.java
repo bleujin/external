@@ -20,6 +20,7 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
 import net.ion.craken.node.ReadSession;
+import net.ion.external.util.ScriptJDK;
 import net.ion.framework.db.manager.script.FileAlterationMonitor;
 import net.ion.framework.util.ArrayUtil;
 import net.ion.framework.util.Debug;
@@ -35,13 +36,13 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.commons.io.monitor.FileAlterationListenerAdaptor;
 import org.apache.commons.io.monitor.FileAlterationObserver;
+import org.apache.commons.lang.SystemUtils;
 
-import sun.org.mozilla.javascript.internal.NativeObject;
 
 public class CrakenScriptReal {
 
 	private ScriptEngine sengine;
-	private Map<String, NativeObject> packages = MapUtil.newCaseInsensitiveMap();
+	private Map<String, Object> packages = MapUtil.newCaseInsensitiveMap();
 	private FileAlterationMonitor monitor;
 	private ScheduledExecutorService ses;
 	private IMirror imirror;
@@ -151,9 +152,10 @@ public class CrakenScriptReal {
 	
 	private String loadPackageScript(String name, InputStream input)  {
 		try {
-			String script = IOUtil.toStringWithClose(input);
+			String script = ScriptJDK.trans(input);
+			
 			String packName = FilenameUtils.getBaseName(name);
-			packages.put(packName, (NativeObject)(sengine.eval(script)));
+			packages.put(packName, (Object)(sengine.eval(script)));
 			return packName;
 		} catch (IOException e) {
 			throw new IllegalStateException(e) ;
@@ -163,7 +165,7 @@ public class CrakenScriptReal {
 	}
 	
 
-	public Map<String, NativeObject> packages() {
+	public Map<String, Object> packages() {
 		return Collections.unmodifiableMap(packages);
 	}
 
@@ -174,12 +176,12 @@ public class CrakenScriptReal {
 			String packName = StringUtil.substringBefore(uptName, "@");
 			String fnName = StringUtil.lowerCase(StringUtil.substringAfter(uptName, "@"));
 
-			NativeObject pack = packages.get(packName);
+			Object pack = packages.get(packName);
 			if (pack == null)
 				throw new SQLException("not found package");
 
 			Object pmirror = MethodUtils.invokeMethod(imirror, "instant", conn); // for not share connection
-			Object result = ((Invocable) sengine).invokeMethod(pack, matchedFnName(pack.getAllIds(), fnName), ArrayUtil.add(params, 0, pmirror));
+			Object result = ((Invocable) sengine).invokeMethod(pack, matchedFnName(pack, fnName), ArrayUtil.add(params, 0, pmirror));
 			return result;
 		} catch (ScriptException e) {
 			throw new SQLException(e);
@@ -197,16 +199,25 @@ public class CrakenScriptReal {
 		String fnName = StringUtil.lowerCase(StringUtil.substringAfter(uptName, "@"));
 
 		
-		NativeObject pack = packages.get(packName);
+		Object pack = packages.get(packName);
 		if (pack == null) return false ;
 		
-		return matchedFnName(pack.getAllIds(), fnName) != null ;
+		return matchedFnName(pack, fnName) != null ;
 	}
 
 	
-	private String matchedFnName(Object[] fns, String fnName){
-		for (Object fn : fns) {
-			if (fnName.equalsIgnoreCase(ObjectUtil.toString(fn))) return ObjectUtil.toString(fn) ;
+	private String matchedFnName(Object pack, String fnName){
+		try {
+			Object[] fns = (Object[]) org.apache.commons.lang.reflect.MethodUtils.invokeMethod(pack, "getAllIds", new Object[0]);
+			for (Object fn : fns) {
+				if (fnName.equalsIgnoreCase(ObjectUtil.toString(fn))) return ObjectUtil.toString(fn) ;
+			}
+		} catch (NoSuchMethodException e) {
+			return null ;
+		} catch (IllegalAccessException e) {
+			return null ;
+		} catch (InvocationTargetException e) {
+			return null ;
 		}
 		return null ;
 	}

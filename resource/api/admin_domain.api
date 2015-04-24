@@ -1,0 +1,45 @@
+path : /admin/domain/{did}
+httpMethod : POST 
+javaMethod : public java.lang.String net.ion.external.ics.web.domain.DomainWeb.createDomain(java.lang.String)
+  {@javax.ws.rs.PathParam(value=did)}
+
+path : /admin/domain/{did}
+httpMethod : DELETE 
+javaMethod : public java.lang.String net.ion.external.ics.web.domain.DomainWeb.removeDomain(java.lang.String)
+  {@javax.ws.rs.PathParam(value=did)}
+
+path : /admin/domain/{did}/overview
+httpMethod : GET 
+javaMethod : public net.ion.framework.parse.gson.JsonObject net.ion.external.ics.web.domain.DomainWeb.overview(java.lang.String) throws java.io.IOException
+  {@javax.ws.rs.PathParam(value=did)}
+
+path : /admin/domain/{did}/define
+httpMethod : GET 
+javaMethod : public net.ion.framework.parse.gson.JsonObject net.ion.external.ics.web.domain.DomainWeb.define(java.lang.String) throws java.io.IOException
+  {@javax.ws.rs.PathParam(value=did)}
+
+path : /admin/domain/{did}/define
+httpMethod : POST 
+javaMethod : public java.lang.String net.ion.external.ics.web.domain.DomainWeb.addCategory(java.lang.String,java.lang.String,java.lang.String,boolean)
+  {@javax.ws.rs.PathParam(value=did)}
+  {@javax.ws.rs.DefaultValue(value=scat),@javax.ws.rs.FormParam(value=target)}
+  {@javax.ws.rs.FormParam(value=catid)}
+  {@javax.ws.rs.DefaultValue(value=false),@javax.ws.rs.FormParam(value=includeSub)}
+
+path : /admin/domain/{did}/listpage/{catid}
+httpMethod : GET 
+javaMethod : public net.ion.framework.parse.gson.JsonObject net.ion.external.ics.web.domain.DomainWeb.storyPage(java.lang.String,java.lang.String) throws java.io.IOException
+  {@javax.ws.rs.PathParam(value=did)}
+  {@javax.ws.rs.PathParam(value=catid)}
+
+path : /admin/domain/{did}/define
+httpMethod : DELETE 
+javaMethod : public java.lang.String net.ion.external.ics.web.domain.DomainWeb.removeCategory(java.lang.String,java.lang.String,java.lang.String)
+  {@javax.ws.rs.PathParam(value=did)}
+  {@javax.ws.rs.DefaultValue(value=scat),@javax.ws.rs.FormParam(value=target)}
+  {@javax.ws.rs.FormParam(value=catid)}
+
+path : /admin/domain/list
+httpMethod : GET 
+javaMethod : public net.ion.framework.parse.gson.JsonArray net.ion.external.ics.web.domain.DomainWeb.list()
+

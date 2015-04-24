@@ -1,0 +1,80 @@
+path : /open/gallery/{did}/query.json
+httpMethod : GET 
+javaMethod : public javax.ws.rs.core.StreamingOutput net.ion.external.ics.web.domain.OpenGalleryWeb.jquery(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean,boolean,org.jboss.resteasy.spi.HttpRequest) throws java.io.IOException
+  {@javax.ws.rs.PathParam(value=did)}
+  {@javax.ws.rs.DefaultValue(value=),@javax.ws.rs.QueryParam(value=query)}
+  {@javax.ws.rs.DefaultValue(value=),@javax.ws.rs.QueryParam(value=sort)}
+  {@javax.ws.rs.DefaultValue(value=0),@javax.ws.rs.QueryParam(value=skip)}
+  {@javax.ws.rs.DefaultValue(value=10),@javax.ws.rs.QueryParam(value=offset)}
+  {@javax.ws.rs.QueryParam(value=indent)}
+  {@javax.ws.rs.QueryParam(value=debug)}
+  {@javax.ws.rs.core.Context()}
+
+path : /open/gallery/{did}/query.xml
+httpMethod : GET 
+javaMethod : public javax.ws.rs.core.StreamingOutput net.ion.external.ics.web.domain.OpenGalleryWeb.xquery(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean,boolean,org.jboss.resteasy.spi.HttpRequest) throws java.io.IOException
+  {@javax.ws.rs.PathParam(value=did)}
+  {@javax.ws.rs.DefaultValue(value=),@javax.ws.rs.QueryParam(value=query)}
+  {@javax.ws.rs.DefaultValue(value=),@javax.ws.rs.QueryParam(value=sort)}
+  {@javax.ws.rs.DefaultValue(value=0),@javax.ws.rs.QueryParam(value=skip)}
+  {@javax.ws.rs.DefaultValue(value=10),@javax.ws.rs.QueryParam(value=offset)}
+  {@javax.ws.rs.QueryParam(value=indent)}
+  {@javax.ws.rs.QueryParam(value=debug)}
+  {@javax.ws.rs.core.Context()}
+
+path : /open/gallery/{did}/query.csv
+httpMethod : GET 
+javaMethod : public javax.ws.rs.core.StreamingOutput net.ion.external.ics.web.domain.OpenGalleryWeb.cquery(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean,boolean,org.jboss.resteasy.spi.HttpRequest) throws java.io.IOException,org.apache.lucene.queryparser.classic.ParseException
+  {@javax.ws.rs.PathParam(value=did)}
+  {@javax.ws.rs.DefaultValue(value=),@javax.ws.rs.QueryParam(value=query)}
+  {@javax.ws.rs.DefaultValue(value=),@javax.ws.rs.QueryParam(value=sort)}
+  {@javax.ws.rs.DefaultValue(value=0),@javax.ws.rs.QueryParam(value=skip)}
+  {@javax.ws.rs.DefaultValue(value=10),@javax.ws.rs.QueryParam(value=offset)}
+  {@javax.ws.rs.QueryParam(value=indent)}
+  {@javax.ws.rs.QueryParam(value=debug)}
+  {@javax.ws.rs.core.Context()}
+
+path : /open/gallery/{did}/query.template
+httpMethod : GET 
+javaMethod : public org.jboss.resteasy.plugins.providers.UncertainOutput net.ion.external.ics.web.domain.OpenGalleryWeb.tquery(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean,boolean,org.jboss.resteasy.spi.HttpRequest,boolean) throws java.io.IOException
+  {@javax.ws.rs.PathParam(value=did)}
+  {@javax.ws.rs.DefaultValue(value=),@javax.ws.rs.QueryParam(value=query)}
+  {@javax.ws.rs.DefaultValue(value=),@javax.ws.rs.QueryParam(value=sort)}
+  {@javax.ws.rs.DefaultValue(value=0),@javax.ws.rs.QueryParam(value=skip)}
+  {@javax.ws.rs.DefaultValue(value=10),@javax.ws.rs.QueryParam(value=offset)}
+  {@javax.ws.rs.QueryParam(value=indent)}
+  {@javax.ws.rs.QueryParam(value=debug)}
+  {@javax.ws.rs.core.Context()}
+  {@javax.ws.rs.DefaultValue(value=false),@javax.ws.rs.QueryParam(value=html)}
+
+path : /open/gallery/{did}/list
+httpMethod : GET 
+javaMethod : public net.ion.framework.parse.gson.JsonObject net.ion.external.ics.web.domain.OpenGalleryWeb.listGallery(java.lang.String,java.lang.String,int) throws java.io.IOException,org.apache.lucene.queryparser.classic.ParseException
+  {@javax.ws.rs.PathParam(value=did)}
+  {@javax.ws.rs.QueryParam(value=query)}
+  {@javax.ws.rs.DefaultValue(value=101),@javax.ws.rs.QueryParam(value=offset)}
+
+path : /open/gallery/{did}/view/{galid}
+httpMethod : GET 
+javaMethod : public org.jboss.resteasy.plugins.providers.UncertainOutput net.ion.external.ics.web.domain.OpenGalleryWeb.viewImage(java.lang.String,int) throws java.io.IOException
+  {@javax.ws.rs.PathParam(value=did)}
+  {@javax.ws.rs.PathParam(value=galid)}
+
+path : /open/gallery/{did}/crop/{galid}
+httpMethod : GET 
+javaMethod : public org.jboss.resteasy.plugins.providers.UncertainOutput net.ion.external.ics.web.domain.OpenGalleryWeb.crop(java.lang.String,int,int,int,int,int) throws java.io.IOException
+  {@javax.ws.rs.PathParam(value=did)}
+  {@javax.ws.rs.PathParam(value=galid)}
+  {@javax.ws.rs.DefaultValue(value=0),@javax.ws.rs.QueryParam(value=x)}
+  {@javax.ws.rs.DefaultValue(value=0),@javax.ws.rs.QueryParam(value=y)}
+  {@javax.ws.rs.DefaultValue(value=100),@javax.ws.rs.QueryParam(value=width)}
+  {@javax.ws.rs.DefaultValue(value=100),@javax.ws.rs.QueryParam(value=height)}
+
+path : /open/gallery/{did}/resize/{galid}
+httpMethod : GET 
+javaMethod : public org.jboss.resteasy.plugins.providers.UncertainOutput net.ion.external.ics.web.domain.OpenGalleryWeb.resize(java.lang.String,int,int,int) throws java.io.IOException
+  {@javax.ws.rs.PathParam(value=did)}
+  {@javax.ws.rs.PathParam(value=galid)}
+  {@javax.ws.rs.DefaultValue(value=100),@javax.ws.rs.QueryParam(value=width)}
+  {@javax.ws.rs.DefaultValue(value=100),@javax.ws.rs.QueryParam(value=height)}
+

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.StringReader;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
@@ -19,6 +20,7 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import javax.script.SimpleBindings;
 
+import net.ion.external.util.ScriptJDK;
 import net.ion.framework.util.IOUtil;
 import net.ion.framework.util.WithinThreadExecutor;
 import net.ion.radon.cload.cloader.OuterClassLoader;
@@ -98,11 +100,11 @@ public class JScriptEngine {
 	}
 	
 	public InstantJavaScript createScript(IdString lid, String explain, InputStream input) throws IOException, ScriptException{
-		return createScript(lid, explain, new BufferedReader(new InputStreamReader(input, "UTF-8"))) ;
+		return createScript(lid, explain, new StringReader(ScriptJDK.trans(input))) ;
 	}
 	
 	public InstantJavaScript createScript(IdString lid, String explain, Reader reader) throws IOException, ScriptException{
-		String script = IOUtil.toStringWithClose(reader) ;
+		String script = ScriptJDK.trans(reader) ;
 
 		Object compiledScript = sengine.eval(script);
 		InstantJavaScript result = InstantJavaScript.create(this, explain, compiledScript) ;

@@ -48,7 +48,7 @@ import net.ion.framework.util.NumberUtil;
 import net.ion.radon.core.ContextParam;
 
 @Path("/gallery")
-public class OpenGalleryWeb {
+public class OpenGalleryWeb implements Webapp {
 	private GalleryWeb rweb;
 
 	public OpenGalleryWeb(@ContextParam(DomainEntry.EntryName) DomainEntry dentry, @ContextParam(QueryTemplateEngine.EntryName) QueryTemplateEngine qengine) throws IOException {

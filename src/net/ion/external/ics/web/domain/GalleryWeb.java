@@ -36,9 +36,12 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.StreamingOutput;
 
 import java.io.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 @Path("/gallery")
-public class GalleryWeb {
+public class GalleryWeb implements Webapp {
 
 	private DomainSub dsub;
 	private ReadSession session;
@@ -164,7 +167,7 @@ public class GalleryWeb {
 					MultivaluedMap<String, String> map = request.getUri().getQueryParameters();
 					final XIterable<GalleryX> gallerys = findGallery(did, query, sort, skip, offset, request, map).find();
 					OutputHandler ohandler = OutputHandler.createJson(writer, indent);
-					ohandler.out(gallerys, new JsonObject(), new JsonObject());
+					ohandler.out(gallerys, createRequest(request.getUri().getQueryParameters(), "json"), createResponse(gallerys));
 				} catch (IOException e) {
 					e.printStackTrace();
 					writer.write(e.getMessage());
@@ -178,6 +181,21 @@ public class GalleryWeb {
 		};
 	}
 
+	private JsonObject createRequest(MultivaluedMap<String, String> queryParameters, String dtype) {
+		Map mvmap = MapUtil.newMap() ;
+		for (Entry<String, List<String>> entry : queryParameters.entrySet()) {
+			mvmap.put(entry.getKey(), entry.getValue().size() <= 1 ? queryParameters.getFirst(entry.getKey()) : queryParameters.get(entry.getKey())) ;
+		}
+		mvmap.put("dtype", dtype) ;
+		
+		
+		return JsonObject.fromObject(mvmap);
+	}
+
+	private JsonObject createResponse(XIterable iters) {
+		return JsonObject.create().put("count", iters.count());
+	}
+	
 	private GalleryChildrenX findGallery(String did, String query, String sort, String skip, String offset, HttpRequest request, MultivaluedMap<String, String> map) throws IOException {
 		if (request.getHttpMethod().equalsIgnoreCase("POST") && request.getDecodedFormParameters().size() > 0)
 			map.putAll(request.getDecodedFormParameters());
@@ -199,7 +217,7 @@ public class GalleryWeb {
 					MultivaluedMap<String, String> map = request.getUri().getQueryParameters();
 					final XIterable<GalleryX> gallerys = findGallery(did, query, sort, skip, offset, request, map).find();
 					OutputHandler ohandler = OutputHandler.createXml(writer, indent);
-					ohandler.out(gallerys, new JsonObject(), new JsonObject());
+					ohandler.out(gallerys, createRequest(request.getUri().getQueryParameters(), "xml"), createResponse(gallerys));
 				} catch (IOException e) {
 					e.printStackTrace();
 					writer.write(e.getMessage());
