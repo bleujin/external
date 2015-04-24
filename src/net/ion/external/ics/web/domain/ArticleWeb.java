@@ -21,6 +21,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
 
 import net.ion.cms.rest.sync.Def;
@@ -285,7 +286,7 @@ public class ArticleWeb implements Webapp {
 
 	@GET
 	@Path("/{did}/afield/{catid}/{artid}/{aid}.stream")
-	public UncertainOutput viewAfieldResource(@PathParam("did") String did, @PathParam("catid") String catId, @PathParam("artid") int artId, @PathParam("aid") String afieldId) {
+	public UncertainOutput viewAfieldResource(@PathParam("did") String did, @PathParam("catid") String catId, @PathParam("artid") int artId, @PathParam("aid") final String afieldId) {
 		final AfieldValueX avalue = dsub.findDomain(did).datas().article(catId, artId).asAfield(afieldId);
 
 		return new UncertainOutput() {
@@ -296,11 +297,28 @@ public class ArticleWeb implements Webapp {
 
 			@Override
 			public MediaType getMediaType() {
-				String fileName = avalue.meta().asString("stringvalue");
+				String fileName = avalue.asString(afieldId);
 				return guessFromFileName(fileName);
 			}
 		};
 	}
+
+    @GET
+    @Path("/{did}/afield/{catid}/{artid}/{aid}.download")
+    public Response downloadAfieldResource(@PathParam("did") String did, @PathParam("catid") String catId, @PathParam("artid") int artId, @PathParam("aid") final String afieldId) throws IOException {
+        final AfieldValueX avalue = dsub.findDomain(did).datas().article(catId, artId).asAfield(afieldId);
+
+        if(!"File".equals(avalue.typeCd()) && !"Image".equals(avalue.typeCd())) {
+            return Response.status(Response.Status.BAD_REQUEST).build() ;
+        }
+
+        String fileName = StringUtil.substringAfterLast(avalue.asString("stringvalue"), "/");
+        Response.ResponseBuilder respBuilder = Response.ok(avalue.dataStream());
+        respBuilder.type(guessFromFileName(fileName)) ;
+        respBuilder.header("Content-Disposition", "attachment; filename=\"" + fileName + "\"") ;
+
+        return respBuilder.build() ;
+    }
 
 	@GET
 	@Path("/{did}/content/{catid}/{artid}/{resourceid}.stream")
