@@ -62,43 +62,43 @@
                 <div id="myTabContent1" class="tab-content padding-10">
                     <div class="tab-pane fade in active" id="s1">
                         
-                        <h3 class="title_h3">Std Info [<span title="artid"></span>]</h3>
+                        <h3 class="title_h3">${m.asString("domain.article.data.ginfo")} [<span title="artid"></span>]</h3>
 						<table class="table_info" cellpadding="0" cellspacing="0">
-						<tbody><tr><th class="info_th_bullet" width="120">regUser</th>
-							<td>yucea(Yucea)</td></tr>
-						<tr><th class="info_th_bullet">Subject</th>
+						<tbody><tr><th class="info_th_bullet" width="120">${m.asString("domain.article.data.ginfo.reguser")}</th>
+							<td><span title="reguserid"></span></td></tr>
+						<tr><th class="info_th_bullet">${m.asString("domain.article.data.ginfo.title")}</th>
 							<td><b><span title="subject"></span></b></td></tr>
-						<tr><th>content</th>
+						<tr><th>${m.asString("domain.article.data.ginfo.content")}</th>
 							<td><div title="content" style="padding:3px;width:600px;height:200px;border:1px solid #B8B8B8;vertical-align:top; overflow:auto;"></div></td></tr>
 						</tbody></table>
 						
 						
-						<h3 class="title_h3">Add Info</h3>
+						<h3 class="title_h3">${m.asString("domain.article.data.addinfo")}</h3>
 						<table class="table table_info" cellpadding="0" cellspacing="0">
-						<tr><th>Thumbnail</th>
+						<tr><th>${m.asString("domain.article.data.addinfo.thumbnail")}</th>
 							<td><span title="thumbnail"></span><br></td></tr>
-						<tr><th>Keyword</th>
+						<tr><th>${m.asString("domain.article.data.addinfo.keyword")}</th>
 							<td><span title="keyword"></span></td></tr>
 						</tbody></table>
 						
-						<h3 class="title_h3">Set Info</h3>
+						<h3 class="title_h3">${m.asString("domain.article.data.sinfo")}</h3>
 						<table class="table table-striped table_info" cellpadding="0" cellspacing="0">
-						<tbody><tr><th width="120">OperDay</th>
+						<tbody><tr><th width="120">${m.asString("domain.article.data.sinfo.operday")}</th>
 							<td nowrap=""><span title="operday"></span></td></tr>
-						<tr><th>ExpireDay</th>
+						<tr><th>${m.asString("domain.article.data.sinfo.expireday")}</th>
 							<td nowrap=""><span title="expireday"></span></td></tr>
-						<tr><th>Url Link</th>
+						<tr><th>${m.asString("domain.article.data.sinfo.urllink")}</th>
 							<td><span title="gourlloc"></span><br></td></tr>
-						<tr><th>Priority</th>
+						<tr><th>${m.asString("domain.article.data.sinfo.priority")}</th>
 							<td><span title="priority"></span></td></tr>
-						<tr><th>FileName</th>
+						<tr><th>${m.asString("domain.article.data.sinfo.artfilenm")}</th>
 							<td><span title="artfilenm"></span></td></tr>
 						</tbody></table>
 						
-						<h3 class="title_h3">Afield Info</h3>
+						<h3 class="title_h3">${m.asString("domain.article.data.afieldinfo")}</h3>
                         <table id="afield-table" class="table table-striped table_info" cellpadding="0" cellspacing="0">
-                            <thead><tr><th>Field Id</th>
-                            <th>Field Value</th></tr></thead>
+                            <thead><tr><th>${m.asString("domain.article.data.afieldinfo.id")}</th>
+                            <th>${m.asString("domain.article.data.afieldinfo.value")}</th></tr></thead>
                             <tbody></table>
                         
                     </div>
@@ -172,7 +172,7 @@
                     <tr>
                         <th>${m.asString("domain.article.template.tplid")}</th>
                         <th>${m.asString("domain.article.template.tplname")}</th>
-                        <th>${m.asString("domain.article.template.form")}</th>
+                        <th class="col-md-2">${m.asString("domain.article.template.form")}</th>
                         <th>${m.asString("domain.article.template.link")}</th>
                     </tr>
                     </thead>
@@ -271,16 +271,16 @@
 <div id="gallery-crop-modal" class="modal fade domain" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6" aria-hidden="true">
     <div class="modal-dialog" style="width: 800px">
         <div class="modal-content">
-            <div class="modal-header"><h5 id="myModalLabel6">Crop</h5></div>
+            <div class="modal-header"><h5 id="myModalLabel6">${m.asString("domain.gallery.crop")}</h5></div>
             <div class="modal-body">
                 <div style="width: 750px">
                     <img id="galleryImg" src="">
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                <button class="btn btn-info" name="reset">Reset</button>
-                <button class="btn btn-primary" name="crop">Save</button>
+                <button class="btn" data-dismiss="modal" aria-hidden="true">${m.asString("buttons.modal.close")}</button>
+                <button class="btn btn-info" name="reset">${m.asString("buttons.form.reset")}</button>
+                <button class="btn btn-primary" name="crop">${m.asString("buttons.info.save")}</button>
             </div>
         </div>
     </div>
@@ -289,7 +289,7 @@
 <div id="gallery-resize-modal" class="modal fade domain" tabindex="-1" role="dialog" aria-labelledby="myModalLabel7" aria-hidden="true">
     <div class="modal-dialog" style="width: 800px">
         <div class="modal-content">
-            <div class="modal-header"><h5 id="myModalLabel7">Resize</h5></div>
+            <div class="modal-header"><h5 id="myModalLabel7">${m.asString("domain.gallery.resize")}</h5></div>
             <div class="modal-body">
                 <div style="width: 750px; height: 400px; overflow: auto; border: 2px;">
                     <img id="resizeImg" src="">
@@ -298,13 +298,13 @@
                     <fieldset>
                         <div class="row">
                             <section class="col col-6">
-                                <label class="label">Width</label>
+                                <label class="label">${m.asString("domain.gallery.resize.width")}</label>
                                 <label class="input">
                                     <input type="number" name="width"/>
                                 </label>
                             </section>
                             <section class="col col-6">
-                                <label class="label">Height</label>
+                                <label class="label">${m.asString("domain.gallery.resize.height")}</label>
                                 <label class="input">
                                     <input type="number" name="height"/>
                                 </label>
@@ -312,16 +312,16 @@
                         </div>
                         <section>
                             <label class="check">
-                                <input type="checkbox" name="keepRatio"><i></i> Scale proportionally
+                                <input type="checkbox" name="keepRatio"><i></i> ${m.asString("domain.gallery.resize.scaleratio")}
                             </label>
                         </section>
                     </fieldset>
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                <button class="btn btn-info" name="reset">Reset</button>
-                <button class="btn btn-primary" name="resize">Resize</button>
+                <button class="btn" data-dismiss="modal" aria-hidden="true">${m.asString("buttons.modal.close")}</button>
+                <button class="btn btn-info" name="reset">${m.asString("buttons.form.reset")}</button>
+                <button class="btn btn-primary" name="resize">${m.asString("buttons.info.save")}</button>
             </div>
         </div>
     </div>

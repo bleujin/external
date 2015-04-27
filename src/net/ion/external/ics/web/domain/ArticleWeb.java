@@ -307,7 +307,7 @@ public class ArticleWeb implements Webapp {
         final AfieldValueX avalue = dsub.findDomain(did).datas().article(catId, artId).asAfield(afieldId);
 
         if(!"File".equals(avalue.typeCd()) && !"Image".equals(avalue.typeCd())) {
-            return Response.status(Response.Status.BAD_REQUEST).build() ;
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
 
         String fileName = StringUtil.substringAfterLast(avalue.asString("stringvalue"), "/");

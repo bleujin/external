@@ -18,11 +18,7 @@ import net.ion.external.ics.web.Webapp;
 import net.ion.framework.parse.gson.JsonArray;
 import net.ion.framework.parse.gson.JsonObject;
 import net.ion.framework.parse.gson.JsonPrimitive;
-import net.ion.framework.util.Debug;
-import net.ion.framework.util.FileUtil;
-import net.ion.framework.util.IOUtil;
-import net.ion.framework.util.MapUtil;
-import net.ion.framework.util.NumberUtil;
+import net.ion.framework.util.*;
 import net.ion.radon.core.ContextParam;
 
 import org.apache.lucene.queryparser.classic.ParseException;
@@ -66,7 +62,7 @@ public class GalleryWeb implements Webapp {
 	@Path("/{did}/list")
 	@Produces(ExtMediaType.APPLICATION_JSON_UTF8)
 	public JsonObject listGallery(@PathParam("did") final String did, @QueryParam("query") final String query, @DefaultValue("101") @QueryParam("offset") final int offset) throws IOException, ParseException {
-		XIterable<GalleryX> gallerys = dsub.findDomain(did).datas().gallerys().query(query).offset(offset).find();
+		XIterable<GalleryX> gallerys = dsub.findDomain(did).datas().gallerys().query(query).offset(offset).sort("galid=asc").find();
 		JsonObject result = JsonObject.create();
 		JsonArray jarray = new JsonArray();
 		result.put("result", jarray);
@@ -109,8 +105,10 @@ public class GalleryWeb implements Webapp {
 	@Path("/{did}/crop/{galid}")
 	public UncertainOutput crop(@PathParam("did") String did, @PathParam("galid") int galid, final @DefaultValue("0") @QueryParam("x") int x, final @DefaultValue("0") @QueryParam("y") int y, final @DefaultValue("100") @QueryParam("width") int width,
 			final @DefaultValue("100") @QueryParam("height") int height) throws IOException {
-		final GalleryX gallery = dsub.findDomain(did).datas().findGallery(galid);
-		if (!gallery.exists())
+
+        final GalleryX gallery = dsub.findDomain(did).datas().findGallery(galid);
+
+        if (!gallery.exists())
 			throw new WebApplicationException(404);
 
 		return new UncertainOutput() {
@@ -129,9 +127,24 @@ public class GalleryWeb implements Webapp {
 		};
 	}
 
+    @POST
+    @Path("/{did}/crop/{galid}")
+    public String updateCropped(@PathParam("did") String did, @PathParam("galid") int galid, final @DefaultValue("0") @QueryParam("x") int x, final @DefaultValue("0") @QueryParam("y") int y, final @DefaultValue("100") @QueryParam("width") int width,
+                                final @DefaultValue("100") @QueryParam("height") int height) throws IOException {
+
+        final GalleryX gallery = dsub.findDomain(did).datas().findGallery(galid);
+
+        if (!gallery.exists())
+            throw new WebApplicationException(404);
+
+        gallery.cropAs(x, y, width, height);
+
+        return "" ;
+    }
+
 	@GET
 	@Path("/{did}/resize/{galid}")
-	public UncertainOutput resize(@PathParam("did") String did, @PathParam("galid") int galid, final @DefaultValue("100") @QueryParam("width") int width, final @DefaultValue("100") @QueryParam("height") int height) throws IOException {
+	public UncertainOutput resize(@PathParam("did") String did, @PathParam("galid") int galid, final @DefaultValue("100") @QueryParam("width") int width, final @DefaultValue("100") @QueryParam("height") int height, final @QueryParam("propId") String propId) throws IOException {
 		final GalleryX gallery = dsub.findDomain(did).datas().findGallery(galid);
 		if (!gallery.exists())
 			throw new WebApplicationException(404);
@@ -142,7 +155,7 @@ public class GalleryWeb implements Webapp {
 			}
 
 			public void write(OutputStream output) throws IOException, WebApplicationException {
-				InputStream input = gallery.resizeWith(width, height);
+                InputStream input = gallery.resizeWith(width, height);
 				try {
 					IOUtil.copy(input, output);
 				} finally {
@@ -152,7 +165,20 @@ public class GalleryWeb implements Webapp {
 		};
 	}
 
-	// query
+    @POST
+    @Path("/{did}/resize/{galid}")
+    public String updateResized(@PathParam("did") String did, @PathParam("galid") int galid, final @DefaultValue("100") @QueryParam("width") int width, final @DefaultValue("100") @QueryParam("height") int height, final @QueryParam("propId") String propId) throws IOException {
+        final GalleryX gallery = dsub.findDomain(did).datas().findGallery(galid);
+
+        if (!gallery.exists())
+            throw new WebApplicationException(404);
+
+        gallery.resizeAs(width, height);
+
+        return " " ;
+    }
+
+    // query
 	@GET
 	@Path("/{did}/query.json")
 	@Produces(ExtMediaType.APPLICATION_JSON_UTF8)

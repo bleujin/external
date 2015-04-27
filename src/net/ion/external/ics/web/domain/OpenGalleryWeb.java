@@ -78,7 +78,7 @@ public class OpenGalleryWeb implements Webapp {
 	@GET
 	@Path("/{did}/resize/{galid}")
 	public UncertainOutput resize(@PathParam("did") String did, @PathParam("galid") int galid, final @DefaultValue("100") @QueryParam("width") int width, final @DefaultValue("100") @QueryParam("height") int height) throws IOException {
-		return rweb.resize(did, galid, width, height) ;
+		return rweb.resize(did, galid, width, height, null) ;
 	}
 
 	// query

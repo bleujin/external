@@ -16,7 +16,7 @@
 			<query kr="쿼리">Query</query>
 			<template kr="템플릿">Template</template>
 
-			
+
 			<choose>Choose Domain</choose>
 			<create>Create Domain</create>
 			<remove>Remove Domain</remove>
@@ -25,7 +25,7 @@
 			<overview>Overview</overview>
 			<defined>Defined</defined>
 			<schedule>Schedule</schedule>
-			
+
 			<choose>Choose ICS Command</choose>
 			<create>Create ICS Command</create>
 			<remove>Remove ICS Command</remove>
@@ -34,7 +34,7 @@
 			<overview>Overview</overview>
 			<defined>Defined</defined>
 			<schedule>Schedule</schedule>
-			
+
 			<choose>Choose Craken Script</choose>
 			<create>Create Craken Script</create>
 			<remove>Remove Craken Script</remove>
@@ -48,7 +48,7 @@
 
 	</menu>
 
-	    
+
 
 	<!-- page -->
 	<domain>
@@ -59,12 +59,12 @@
 		<remove>Domain to remove
 			<title>Remove domain</title>
 		</remove>
-		
+
 		<overview>
 			<title>Domain Overview</title>
 			<status>Domain Status</status>
 		</overview>
-		
+
 		<defined>Define Domain
 			<scat>Site Category Info
 				<catid>Category Id</catid>
@@ -72,8 +72,8 @@
 				<includesub>Include Sub</includesub>
 				<link>Link</link>
 				<below>Below Category</below>
-				
-				
+
+
 				<template>
 					<tplid>Template Id</tplid>
 					<tplname>Template Name</tplname>
@@ -85,7 +85,7 @@
 					<add>Add</add>
 					<remove>Remove</remove>
 				</buttons>
-				
+
 			</scat>
 			<gcat>Gallery Category Info
 				<catid>Category Id</catid>
@@ -104,20 +104,41 @@
             <articles>Articles
                 <table-header>Articles</table-header>
             </articles>
-            
-			<data>Data</data>
+
+			<data>Data
+                <ginfo>General Information
+                    <reguser>Registrant</reguser>
+                    <title>Title</title>
+                    <content>Content</content>
+                </ginfo>
+                <addinfo>Additional Information
+                    <thumbnail>Thumbnail Image</thumbnail>
+                    <keyword>Keyword</keyword>
+                </addinfo>
+                <sinfo>Article Properties
+                    <operday>Publishing Date</operday>
+                    <expireday>Expired Date</expireday>
+                    <urllink>URL Link</urllink>
+                    <priority>Priority</priority>
+                    <artfilenm>Publishing Filename</artfilenm>
+                </sinfo>
+                <afieldinfo>ActionField Information
+                    <id>Field ID</id>
+                    <value>Field value</value>
+                </afieldinfo>
+            </data>
+
 			<title>Articles</title>
-			<related>Related</related>
 			<content>Content</content>
 			<storypage>Story pages</storypage>
 			<table-header>Detail</table-header>
-			
+
 			<artid>Article Id</artid>
 			<catid>Category Id</catid>
 			<subject>Subject</subject>
 			<lastmodified>Last modified</lastmodified>
 			<link>Link</link>
-			
+
             <query>Query
     			<title>Query</title>
     			<table-header>Detail</table-header>
@@ -133,8 +154,13 @@
     				<execute>Execute</execute>
     			</buttons>
     		</query>
-    		
+
 			<template>Template
+                <storypage>Story pages</storypage>
+                <tplid>ID</tplid>
+                <tplname>Name</tplname>
+                <form>Sequence</form>
+                <link>Link</link>
                 <table-header>Edit Template(Velocity)</table-header>
                 <view-sample>View samples</view-sample>
                 <content>Content</content>
@@ -147,9 +173,9 @@
             <galleries>Galleries
                 <table-header>Galleries</table-header>
             </galleries>
-            
+
             <title>Galleries</title>
-            
+
             <galid>Gallery Id</galid>
             <catid>Category Id</catid>
             <subject>Subject</subject>
@@ -157,7 +183,13 @@
             <height>Height</height>
             <filesize>File size</filesize>
             <lastmodified>Last modified</lastmodified>
-            
+            <crop>Crop</crop>
+            <resize>Resize
+                <width>Width</width>
+                <height>Height</height>
+                <scaleratio>Scale proportionally</scaleratio>
+            </resize>
+
             <query>Query
     			<title>Query</title>
     			<table-header>Detail</table-header>
@@ -201,7 +233,7 @@
 		<remove>Command to remove
 			<title>Remove command</title>
 		</remove>
-		
+
 		<overview>
 			<title>ICS Command Overview</title>
 			<table-header>Run Log</table-header>
@@ -210,7 +242,7 @@
 			<status>Status</status>
 			<result>Result</result>
 		</overview>
-	    
+
 		<defined>
 		    <title>ICS Command Defined</title>
 		    <table-header>Detail</table-header>
@@ -221,7 +253,7 @@
 		        <save>Save</save>
 		    </buttons>
 		</defined>
-		
+
 		<schedule>
 		    <title>ICS Command Schedule</title>
 		    <table-header kr="스케쥴 정보">Schedule Info(Cron Style)</table-header>
@@ -237,9 +269,9 @@
 		        <set kr="저장">Set</set>
 		    </buttons>
 		</schedule>
-		
+
 	</icommand>
-	
+
 	<script>
 		<remove>Script to remove
 			<title>Remove script</title>
@@ -363,6 +395,9 @@
     	    <close kr="닫기">Close</close>
     	    <cancel kr="취소">Cancel</cancel>
     	</modal>
+        <form>
+            <reset>Reset</reset>
+        </form>
 	</buttons>
 
 

@@ -344,6 +344,7 @@
                         dataType: 'json',
                         success: function(data) {
                             var modal = $('#article-view-modal') ;
+                            modal.find('span[title=reguserid]').text(data.std_info.reguserid);
                             modal.find('span[title=artid]').text(data.std_info.artid);
                             modal.find('span[title=subject]').text(data.std_info.subject);
                             modal.find('div[title=content]').html(data.std_info.content);
