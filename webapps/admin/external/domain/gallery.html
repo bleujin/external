@@ -54,7 +54,6 @@
                             <!-- SuperBox -->
                             <div id="icon_list" style="display: none;">
                                 <div class="superbox col-sm-12" id="superbox_body">
-
                                     <div class="superbox-float"></div>
                                 </div>
                                 <div class="superbox-show" style="height:300px; display: none"></div>
@@ -198,13 +197,7 @@
 
         </div>
     </gallery>
-    <!-- /SuperBox -->
-
-
 </div>
-
-<!-- end row -->
-
 <script type="text/javascript">
 
 pageSetUp();
@@ -279,9 +272,6 @@ var pagefunction = function () {
             var table = $('#gallerys').DataTable({
                 'data': nodes,
                 searching: false,
-                order: [
-                    [0, 'desc']
-                ],
                 'columns': [
                     {'title': '${m.asString("domain.gallery.galid")}'},
                     {'title': '${m.asString("domain.gallery.catid")}'},
@@ -320,9 +310,6 @@ var pagefunction = function () {
                             table = $('#gallerys').DataTable({
                                 'data': nodes,
                                 searching: false,
-                                order: [
-                                    [0, 'desc']
-                                ],
                                 'columns': [
                                    {'title': '${m.asString("domain.gallery.galid")}'},
                                    {'title': '${m.asString("domain.gallery.catid")}'},
@@ -361,7 +348,7 @@ var pagefunction = function () {
                 var gallery = nodes[index], galId = gallery[0], fileName = gallery[2];
                 var turl = '/admin/gallery/' + domainId + '/resize/' + galId + '?width=137&height=137';
                 var rurl = '/admin/gallery/' + domainId + '/view/' + galId;
-                var el = '<div class="superbox-list"><img class="superbox-img" src="' + turl + '" data-img="' + rurl + '" title="' + fileName + '"></div>';
+                var el = '<div class="superbox-list"><img class="superbox-img" data-galid="' + galId+ '" src="' + turl + '" data-img="' + rurl + '" title="' + fileName + '"></div>';
                 $(el).appendTo(superbox);
             });
 
@@ -508,9 +495,9 @@ var pagefunction = function () {
             return;
         }
 
-        var url = '/admin/gallery/' + domainId + '/crop/' + galId + '?x=' + x + '&y=' + y + '&width=' + width + '&height=' + height;
+        var url = '/admin/gallery/' + domainId + '/crop/' + galId + '?x=' + x + '&y=' + y + '&width=' + width + '&height=' + height + '&propId=data';
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: url,
             data: { },
             success: function (data) {
@@ -521,6 +508,7 @@ var pagefunction = function () {
                     icon: "fa fa-check",
                     timeout: 2000
                 });
+                refreshImage(galId);
             }}
         );
     });
@@ -533,45 +521,51 @@ var pagefunction = function () {
     });
 
     // resize part
+    var resizeValidator ;
+
     $('#gallery-resize-modal').on('show.bs.modal', function (event) {
         var resizeImg = $('#resizeImg'), originalWidth = resizeImg[0].naturalWidth, originalHeight = resizeImg[0].naturalHeight,
                 form = $('#resize-gallery-form'), width = form.find('input[name=width]'),
                 height = form.find('input[name=height]');
 
+        width.val(originalWidth) ;
+        height.val(originalHeight) ;
 
         width.on('change keyup', function (e) {
-            var value = $(this).val(), keepRatio = $('#resize-gallery-form input[name=keepRatio]').is(':checked');
+            var wval = $(this).val(), hval = height.val(), keepRatio = $('#resize-gallery-form input[name=keepRatio]').is(':checked');
 
-            if ($.isNumeric(value) && value > 0) {
-                resizeImg.css('width', value);
+            if ($.isNumeric(wval) && wval > 0) {
+                var scaled = parseInt((wval / originalWidth) * originalHeight) ;
+                resizeImg.css('width', wval).css('height', keepRatio ? scaled : hval);
 
-                if (keepRatio) {
-                    var scaledHeight = parseInt((value / originalWidth) * originalHeight);
-                    resizeImg.css('height', scaledHeight);
-                    height.val(scaledHeight);
+                if(keepRatio) {
+                    height.val(scaled);
                 }
             }
         });
 
         height.on('change keyup', function (e) {
-            var value = $(this).val(), keepRatio = $('#resize-gallery-form input[name=keepRatio]').is(':checked');
+            var wval = width.val(), hval = $(this).val(), keepRatio = $('#resize-gallery-form input[name=keepRatio]').is(':checked');
 
-            if ($.isNumeric(value) && value > 0) {
-                resizeImg.css('height', value);
+            if ($.isNumeric(hval) && hval > 0) {
+                var scaled = parseInt((hval / originalHeight) * originalWidth);
+                resizeImg.css('height', hval).css('width', keepRatio ? scaled : wval);
 
-                if (keepRatio) {
-                    var scaledWidth = parseInt((value / originalHeight) * originalWidth);
-                    resizeImg.css('width', scaledWidth);
-                    width.val(scaledWidth);
+                if(keepRatio) {
+                    width.val(scaled);
                 }
 
             }
         });
 
-        var validator = form.validate({
+        $('#resize-gallery-form input[name=keepRatio]').change(function(event) {
+            resetForm();
+        });
+
+        resizeValidator = form.validate({
             rules: {
                 width: { required: true },
-                height: { required: true}
+                height: { required: true }
             },
             messages: {
                 width: { required: 'Width is empty'},
@@ -581,9 +575,9 @@ var pagefunction = function () {
                 var form = $('#resize-gallery-form'), width = form.find('input[name=width]').val(), height = form.find('input[name=height]').val();
                 var image = $('#resizeImg'), galId = image.attr('galid'), domainId = image.attr('did');
 
-                var url = '/admin/gallery/' + domainId + '/resize/' + galId + '?width=' + width + '&height=' + height;
+                var url = '/admin/gallery/' + domainId + '/resize/' + galId + '?width=' + width + '&height=' + height + '&propId=data';
                 $.ajax({
-                    type: "GET",
+                    type: "POST",
                     url: url,
                     data: { },
                     success: function (data) {
@@ -594,25 +588,22 @@ var pagefunction = function () {
                             icon: "fa fa-check",
                             timeout: 2000
                         });
+
+                        refreshImage(galId) ;
                     }
                 });
             },
-
             errorPlacement: function (error, element) { // Do not change code below
                 error.insertAfter(element.parent());
             }
         });
 
-        validator.resetForm() ;
-
     }).on('hide.bs.modal', function () {
-        $('#resize-gallery-form').trigger('reset');
-        $('#resizeImg').css('width', '').css('height', '') ;
+        resetForm() ;
     });
 
     $('#gallery-resize-modal button[name=reset]').click(function (event) {
-        $('#resizeImg').css('width', '').css('height', '');
-        $('#resize-gallery-form').trigger('reset');
+        resetForm() ;
     });
 
     $('#gallery-resize-modal button[name=resize]').click(function (event) {
@@ -621,7 +612,31 @@ var pagefunction = function () {
 
     $('#table_list').hide();
     $('#icon_list').show();
+
+    var refreshImage = function(galId) {
+        var time = new Date().getTime();
+        var image = $('img[data-galid=' + galId + ']');
+
+        var src = image.attr('data-img') + '?_time=' + time ;
+        image.attr('src', image.attr('src') + '&_time=' + time).attr('data-img', src) ;
+        $('.superbox-current-img').attr('src', src) ;
+    };
+
+    var resetForm = function() {
+        var form = $('#resize-gallery-form'), img = $('#resizeImg');
+
+        img.css('width', '').css('height', '');
+
+        if(resizeValidator) {
+            resizeValidator.resetForm() ;
+            form.find('label.input').removeClass('state-success').removeClass('state-error');
+        }
+
+        form.find('input[name=width]').val(img[0].naturalWidth);
+        form.find('input[name=height]').val(img[0].naturalHeight);
+    };
 };
+
 
 var cropHandler = function (event) {
     var _data = event.data, image = $('#galleryImg');
