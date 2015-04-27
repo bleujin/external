@@ -1,5 +1,29 @@
 package net.ion.external.ics.web.domain;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.StreamingOutput;
+
 import net.ion.cms.rest.sync.Def;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
@@ -8,26 +32,28 @@ import net.ion.craken.node.WriteSession;
 import net.ion.external.domain.Domain;
 import net.ion.external.domain.DomainSub;
 import net.ion.external.ics.QueryTemplateEngine;
-import net.ion.external.ics.bean.*;
+import net.ion.external.ics.bean.AfieldValueX;
+import net.ion.external.ics.bean.ArticleChildrenX;
+import net.ion.external.ics.bean.ArticleX;
+import net.ion.external.ics.bean.OutputHandler;
+import net.ion.external.ics.bean.TemplateX;
+import net.ion.external.ics.bean.XIterable;
 import net.ion.external.ics.common.ExtMediaType;
 import net.ion.external.ics.util.WebUtil;
 import net.ion.external.ics.web.Webapp;
 import net.ion.framework.parse.gson.JsonArray;
 import net.ion.framework.parse.gson.JsonObject;
 import net.ion.framework.parse.gson.JsonPrimitive;
-import net.ion.framework.util.*;
+import net.ion.framework.util.FileUtil;
+import net.ion.framework.util.IOUtil;
+import net.ion.framework.util.MapUtil;
+import net.ion.framework.util.NumberUtil;
+import net.ion.framework.util.StringUtil;
 import net.ion.radon.core.ContextParam;
+
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.jboss.resteasy.plugins.providers.UncertainOutput;
 import org.jboss.resteasy.spi.HttpRequest;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.*;
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.util.Iterator;
 
 @Path("/article")
 public class ArticleWeb implements Webapp {
@@ -66,7 +92,8 @@ public class ArticleWeb implements Webapp {
 					MultivaluedMap<String, String> map = request.getUri().getQueryParameters();
 					final XIterable<ArticleX> articles = findArticle(did, query, sort, skip, offset, request, map).find();
 					OutputHandler ohandler = OutputHandler.createJson(writer, indent);
-					ohandler.out(articles, new JsonObject(), new JsonObject());
+					
+					ohandler.out(articles, createRequest(request.getUri().getQueryParameters(), "json"), createResponse(articles));
 					writer.flush();
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -78,9 +105,27 @@ public class ArticleWeb implements Webapp {
 					writer.flush();
 				}
 			}
+
 		};
 	}
 
+	private JsonObject createRequest(MultivaluedMap<String, String> queryParameters, String dtype) {
+		Map mvmap = MapUtil.newMap() ;
+		for (Entry<String, List<String>> entry : queryParameters.entrySet()) {
+			mvmap.put(entry.getKey(), entry.getValue().size() <= 1 ? queryParameters.getFirst(entry.getKey()) : queryParameters.get(entry.getKey())) ;
+		}
+		mvmap.put("dtype", dtype) ;
+		
+		
+		return JsonObject.fromObject(mvmap);
+	}
+
+	private JsonObject createResponse(XIterable iters) {
+		return JsonObject.create().put("count", iters.count());
+	}
+
+
+	
 	private ArticleChildrenX findArticle(String did, String query, String sort, String skip, String offset, HttpRequest request, MultivaluedMap<String, String> map) throws IOException {
 		if (request.getHttpMethod().equalsIgnoreCase("POST") && request.getDecodedFormParameters().size() > 0)
 			map.putAll(request.getDecodedFormParameters());
@@ -102,7 +147,7 @@ public class ArticleWeb implements Webapp {
 					MultivaluedMap<String, String> map = request.getUri().getQueryParameters();
 					final XIterable<ArticleX> articles = findArticle(did, query, sort, skip, offset, request, map).find();
 					OutputHandler ohandler = OutputHandler.createXml(writer, indent);
-					ohandler.out(articles, new JsonObject(), new JsonObject());
+					ohandler.out(articles, createRequest(request.getUri().getQueryParameters(), "xml"), createResponse(articles));
 					writer.flush();
 				} catch (IOException e) {
 					e.printStackTrace();

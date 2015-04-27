@@ -1,0 +1,114 @@
+path : /admin/article/{did}/query.json
+httpMethod : GET 
+javaMethod : public javax.ws.rs.core.StreamingOutput net.ion.external.ics.web.domain.ArticleWeb.jquery(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean,boolean,org.jboss.resteasy.spi.HttpRequest)
+  {@javax.ws.rs.PathParam(value=did)}
+  {@javax.ws.rs.DefaultValue(value=),@javax.ws.rs.QueryParam(value=query)}
+  {@javax.ws.rs.DefaultValue(value=),@javax.ws.rs.QueryParam(value=sort)}
+  {@javax.ws.rs.DefaultValue(value=0),@javax.ws.rs.QueryParam(value=skip)}
+  {@javax.ws.rs.DefaultValue(value=10),@javax.ws.rs.QueryParam(value=offset)}
+  {@javax.ws.rs.QueryParam(value=indent)}
+  {@javax.ws.rs.QueryParam(value=debug)}
+  {@javax.ws.rs.core.Context()}
+
+path : /admin/article/{did}/query.xml
+httpMethod : GET 
+javaMethod : public javax.ws.rs.core.StreamingOutput net.ion.external.ics.web.domain.ArticleWeb.xquery(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean,boolean,org.jboss.resteasy.spi.HttpRequest)
+  {@javax.ws.rs.PathParam(value=did)}
+  {@javax.ws.rs.DefaultValue(value=),@javax.ws.rs.QueryParam(value=query)}
+  {@javax.ws.rs.DefaultValue(value=),@javax.ws.rs.QueryParam(value=sort)}
+  {@javax.ws.rs.DefaultValue(value=0),@javax.ws.rs.QueryParam(value=skip)}
+  {@javax.ws.rs.DefaultValue(value=10),@javax.ws.rs.QueryParam(value=offset)}
+  {@javax.ws.rs.QueryParam(value=indent)}
+  {@javax.ws.rs.QueryParam(value=debug)}
+  {@javax.ws.rs.core.Context()}
+
+path : /admin/article/{did}/query.csv
+httpMethod : GET 
+javaMethod : public javax.ws.rs.core.StreamingOutput net.ion.external.ics.web.domain.ArticleWeb.cquery(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean,boolean,org.jboss.resteasy.spi.HttpRequest)
+  {@javax.ws.rs.PathParam(value=did)}
+  {@javax.ws.rs.DefaultValue(value=),@javax.ws.rs.QueryParam(value=query)}
+  {@javax.ws.rs.DefaultValue(value=),@javax.ws.rs.QueryParam(value=sort)}
+  {@javax.ws.rs.DefaultValue(value=0),@javax.ws.rs.QueryParam(value=skip)}
+  {@javax.ws.rs.DefaultValue(value=10),@javax.ws.rs.QueryParam(value=offset)}
+  {@javax.ws.rs.QueryParam(value=indent)}
+  {@javax.ws.rs.QueryParam(value=debug)}
+  {@javax.ws.rs.core.Context()}
+
+path : /admin/article/{did}/query.template
+httpMethod : GET 
+javaMethod : public org.jboss.resteasy.plugins.providers.UncertainOutput net.ion.external.ics.web.domain.ArticleWeb.tquery(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean,boolean,org.jboss.resteasy.spi.HttpRequest,boolean) throws java.io.IOException,org.apache.lucene.queryparser.classic.ParseException
+  {@javax.ws.rs.PathParam(value=did)}
+  {@javax.ws.rs.DefaultValue(value=),@javax.ws.rs.QueryParam(value=query)}
+  {@javax.ws.rs.DefaultValue(value=),@javax.ws.rs.QueryParam(value=sort)}
+  {@javax.ws.rs.DefaultValue(value=0),@javax.ws.rs.QueryParam(value=skip)}
+  {@javax.ws.rs.DefaultValue(value=10),@javax.ws.rs.QueryParam(value=offset)}
+  {@javax.ws.rs.QueryParam(value=indent)}
+  {@javax.ws.rs.QueryParam(value=debug)}
+  {@javax.ws.rs.core.Context()}
+  {@javax.ws.rs.DefaultValue(value=false),@javax.ws.rs.QueryParam(value=html)}
+
+path : /admin/article/{did}/list
+httpMethod : GET 
+javaMethod : public net.ion.framework.parse.gson.JsonObject net.ion.external.ics.web.domain.ArticleWeb.listArticle(java.lang.String,java.lang.String,int) throws java.io.IOException,org.apache.lucene.queryparser.classic.ParseException
+  {@javax.ws.rs.PathParam(value=did)}
+  {@javax.ws.rs.QueryParam(value=query)}
+  {@javax.ws.rs.DefaultValue(value=101),@javax.ws.rs.QueryParam(value=offset)}
+
+path : /admin/article/{did}/view/{catid}/{artid}
+httpMethod : GET 
+javaMethod : public javax.ws.rs.core.StreamingOutput net.ion.external.ics.web.domain.ArticleWeb.viewArticle(java.lang.String,java.lang.String,int)
+  {@javax.ws.rs.PathParam(value=did)}
+  {@javax.ws.rs.PathParam(value=catid)}
+  {@javax.ws.rs.PathParam(value=artid)}
+
+path : /admin/article/{did}/template
+httpMethod : GET 
+javaMethod : public net.ion.framework.parse.gson.JsonObject net.ion.external.ics.web.domain.ArticleWeb.viewTemplate(java.lang.String) throws java.io.IOException
+  {@javax.ws.rs.PathParam(value=did)}
+
+path : /admin/article/{did}/template
+httpMethod : POST 
+javaMethod : public java.lang.String net.ion.external.ics.web.domain.ArticleWeb.editTemplate(java.lang.String,java.lang.String) throws java.io.IOException
+  {@javax.ws.rs.PathParam(value=did)}
+  {@javax.ws.rs.FormParam(value=template)}
+
+path : /admin/article/{did}/storypage/{catid}/{artid}
+httpMethod : GET 
+javaMethod : public net.ion.framework.parse.gson.JsonObject net.ion.external.ics.web.domain.ArticleWeb.storyPage(java.lang.String,java.lang.String,int) throws java.io.IOException
+  {@javax.ws.rs.PathParam(value=did)}
+  {@javax.ws.rs.PathParam(value=catid)}
+  {@javax.ws.rs.PathParam(value=artid)}
+
+path : /admin/article/{did}/thumbimg/{catid}/{artid}.stream
+httpMethod : GET 
+javaMethod : public org.jboss.resteasy.plugins.providers.UncertainOutput net.ion.external.ics.web.domain.ArticleWeb.viewThumbImage(java.lang.String,java.lang.String,int)
+  {@javax.ws.rs.PathParam(value=did)}
+  {@javax.ws.rs.PathParam(value=catid)}
+  {@javax.ws.rs.PathParam(value=artid)}
+
+path : /admin/article/{did}/afield/{catid}/{artid}/{aid}.stream
+httpMethod : GET 
+javaMethod : public org.jboss.resteasy.plugins.providers.UncertainOutput net.ion.external.ics.web.domain.ArticleWeb.viewAfieldResource(java.lang.String,java.lang.String,int,java.lang.String)
+  {@javax.ws.rs.PathParam(value=did)}
+  {@javax.ws.rs.PathParam(value=catid)}
+  {@javax.ws.rs.PathParam(value=artid)}
+  {@javax.ws.rs.PathParam(value=aid)}
+
+path : /admin/article/{did}/content/{catid}/{artid}/{resourceid}.stream
+httpMethod : GET 
+javaMethod : public org.jboss.resteasy.plugins.providers.UncertainOutput net.ion.external.ics.web.domain.ArticleWeb.viewContentImage(java.lang.String,java.lang.String,int,java.lang.String)
+  {@javax.ws.rs.PathParam(value=did)}
+  {@javax.ws.rs.PathParam(value=catid)}
+  {@javax.ws.rs.PathParam(value=artid)}
+  {@javax.ws.rs.PathParam(value=resourceid)}
+
+path : /admin/article/{did}/samples/{filename}
+httpMethod : GET 
+javaMethod : public java.lang.String net.ion.external.ics.web.domain.ArticleWeb.viewSampleTemplate(java.lang.String,java.lang.String) throws java.io.IOException
+  {@javax.ws.rs.PathParam(value=did)}
+  {@javax.ws.rs.PathParam(value=filename)}
+
+path : /admin/article/{did}/article
+httpMethod : GET 
+javaMethod : public net.ion.framework.parse.gson.JsonObject net.ion.external.ics.web.domain.ArticleWeb.query() throws java.io.IOException
+

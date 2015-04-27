@@ -1,0 +1,9 @@
+path : /admin/export
+httpMethod : GET 
+javaMethod : public javax.ws.rs.core.StreamingOutput net.ion.external.ics.web.misc.ExportWeb.rootExprore() throws java.io.IOException
+
+path : /admin/export/{remain: ^[^\.]*$}
+httpMethod : GET 
+javaMethod : public javax.ws.rs.core.StreamingOutput net.ion.external.ics.web.misc.ExportWeb.htmlExprore(java.lang.String) throws java.io.IOException
+  {@javax.ws.rs.PathParam(value=remain)}
+

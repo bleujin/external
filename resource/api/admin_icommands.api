@@ -1,0 +1,66 @@
+path : /admin/icommands
+httpMethod : GET 
+javaMethod : public net.ion.framework.parse.gson.JsonObject net.ion.external.ics.web.icommand.ICommandWeb.listICommand()
+
+path : /admin/icommands/{sid}/define
+httpMethod : GET 
+javaMethod : public net.ion.framework.parse.gson.JsonObject net.ion.external.ics.web.icommand.ICommandWeb.viewICommand(java.lang.String)
+  {@javax.ws.rs.PathParam(value=sid)}
+
+path : /admin/icommands/{sid}/run
+httpMethod : POST 
+javaMethod : public javax.ws.rs.core.Response net.ion.external.ics.web.icommand.ICommandWeb.runICommand(java.lang.String,org.jboss.resteasy.spi.HttpRequest) throws java.io.IOException,javax.script.ScriptException
+  {@javax.ws.rs.PathParam(value=sid)}
+  {@javax.ws.rs.core.Context()}
+
+path : /admin/icommands/{sid}/overview
+httpMethod : GET 
+javaMethod : public net.ion.framework.parse.gson.JsonObject net.ion.external.ics.web.icommand.ICommandWeb.overview(java.lang.String)
+  {@javax.ws.rs.PathParam(value=sid)}
+
+path : /admin/icommands/{sid}
+httpMethod : DELETE 
+javaMethod : public java.lang.String net.ion.external.ics.web.icommand.ICommandWeb.removeICommand(java.lang.String)
+  {@javax.ws.rs.PathParam(value=sid)}
+
+path : /admin/icommands/{sid}/define
+httpMethod : POST 
+javaMethod : public java.lang.String net.ion.external.ics.web.icommand.ICommandWeb.defineICommand(java.lang.String,java.lang.String)
+  {@javax.ws.rs.PathParam(value=sid)}
+  {@javax.ws.rs.DefaultValue(value=),@javax.ws.rs.FormParam(value=content)}
+
+path : /admin/icommands/{sid}/sampleicommand/{fileName}
+httpMethod : GET 
+javaMethod : public java.lang.String net.ion.external.ics.web.icommand.ICommandWeb.sampleICommand(java.lang.String) throws java.io.IOException
+  {@javax.ws.rs.PathParam(value=fileName)}
+
+path : /admin/icommands/{sid}/removes
+httpMethod : POST 
+javaMethod : public java.lang.String net.ion.external.ics.web.icommand.ICommandWeb.removeICommands(java.lang.String)
+  {@javax.ws.rs.FormParam(value=icommands)}
+
+path : /admin/icommands/{sid}/instantrun
+httpMethod : POST 
+javaMethod : public java.lang.String net.ion.external.ics.web.icommand.ICommandWeb.instantRunICommand(java.lang.String,java.lang.String,org.jboss.resteasy.spi.HttpRequest) throws java.io.IOException,javax.script.ScriptException
+  {@javax.ws.rs.PathParam(value=sid)}
+  {@javax.ws.rs.DefaultValue(value=),@javax.ws.rs.FormParam(value=content)}
+  {@javax.ws.rs.core.Context()}
+
+path : /admin/icommands/{sid}/schedule
+httpMethod : GET 
+javaMethod : public net.ion.framework.parse.gson.JsonObject net.ion.external.ics.web.icommand.ICommandWeb.viewScheduleInfo(java.lang.String)
+  {@javax.ws.rs.PathParam(value=sid)}
+
+path : /admin/icommands/{sid}/schedule
+httpMethod : POST 
+javaMethod : public java.lang.String net.ion.external.ics.web.icommand.ICommandWeb.editScheduleInfo(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean)
+  {@javax.ws.rs.PathParam(value=sid)}
+  {@javax.ws.rs.DefaultValue(value=0-59),@javax.ws.rs.FormParam(value=minute)}
+  {@javax.ws.rs.DefaultValue(value=0-23),@javax.ws.rs.FormParam(value=hour)}
+  {@javax.ws.rs.DefaultValue(value=1-31),@javax.ws.rs.FormParam(value=day)}
+  {@javax.ws.rs.DefaultValue(value=1-12),@javax.ws.rs.FormParam(value=month)}
+  {@javax.ws.rs.DefaultValue(value=1-7),@javax.ws.rs.FormParam(value=week)}
+  {@javax.ws.rs.DefaultValue(value=-1),@javax.ws.rs.FormParam(value=matchtime)}
+  {@javax.ws.rs.DefaultValue(value=2014-2020),@javax.ws.rs.FormParam(value=year)}
+  {@javax.ws.rs.DefaultValue(value=false),@javax.ws.rs.FormParam(value=enable)}
+

@@ -45,7 +45,7 @@
          oob_thread_pool.rejection_policy="discard"/>
 
    <MPING break_on_coord_rsp="true"
-          mcast_addr="228.2.4.7"
+          mcast_addr="228.2.4.6"
           mcast_port="43365"
           ip_ttl="2"
           num_initial_members="1" timeout="2000"/>

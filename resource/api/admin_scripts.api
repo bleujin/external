@@ -1,0 +1,67 @@
+path : /admin/scripts/{sid}/overview
+httpMethod : GET 
+javaMethod : public net.ion.framework.parse.gson.JsonObject net.ion.external.ics.web.script.ScriptWeb.overview(java.lang.String)
+  {@javax.ws.rs.PathParam(value=sid)}
+
+path : /admin/scripts/{sid}/schedule
+httpMethod : GET 
+javaMethod : public net.ion.framework.parse.gson.JsonObject net.ion.external.ics.web.script.ScriptWeb.viewScheduleInfo(java.lang.String)
+  {@javax.ws.rs.PathParam(value=sid)}
+
+path : /admin/scripts/{sid}/schedule
+httpMethod : POST 
+javaMethod : public java.lang.String net.ion.external.ics.web.script.ScriptWeb.editScheduleInfo(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean)
+  {@javax.ws.rs.PathParam(value=sid)}
+  {@javax.ws.rs.DefaultValue(value=0-59),@javax.ws.rs.FormParam(value=minute)}
+  {@javax.ws.rs.DefaultValue(value=0-23),@javax.ws.rs.FormParam(value=hour)}
+  {@javax.ws.rs.DefaultValue(value=1-31),@javax.ws.rs.FormParam(value=day)}
+  {@javax.ws.rs.DefaultValue(value=1-12),@javax.ws.rs.FormParam(value=month)}
+  {@javax.ws.rs.DefaultValue(value=1-7),@javax.ws.rs.FormParam(value=week)}
+  {@javax.ws.rs.DefaultValue(value=-1),@javax.ws.rs.FormParam(value=matchtime)}
+  {@javax.ws.rs.DefaultValue(value=2014-2020),@javax.ws.rs.FormParam(value=year)}
+  {@javax.ws.rs.DefaultValue(value=false),@javax.ws.rs.FormParam(value=enable)}
+
+path : /admin/scripts
+httpMethod : GET 
+javaMethod : public net.ion.framework.parse.gson.JsonObject net.ion.external.ics.web.script.ScriptWeb.listScript()
+
+path : /admin/scripts/{sid}
+httpMethod : DELETE 
+javaMethod : public java.lang.String net.ion.external.ics.web.script.ScriptWeb.removeScript(java.lang.String)
+  {@javax.ws.rs.PathParam(value=sid)}
+
+path : /admin/scripts/{sid}/define
+httpMethod : GET 
+javaMethod : public net.ion.framework.parse.gson.JsonObject net.ion.external.ics.web.script.ScriptWeb.viewScript(java.lang.String)
+  {@javax.ws.rs.PathParam(value=sid)}
+
+path : /admin/scripts/{sid}/define
+httpMethod : POST 
+javaMethod : public java.lang.String net.ion.external.ics.web.script.ScriptWeb.defineScript(java.lang.String,java.lang.String)
+  {@javax.ws.rs.PathParam(value=sid)}
+  {@javax.ws.rs.DefaultValue(value=),@javax.ws.rs.FormParam(value=content)}
+
+path : /admin/scripts/{sid}/samplescript/{fileName}
+httpMethod : GET 
+javaMethod : public java.lang.String net.ion.external.ics.web.script.ScriptWeb.sampleScript(java.lang.String) throws java.io.IOException
+  {@javax.ws.rs.PathParam(value=fileName)}
+
+path : /admin/scripts/{sid}/removes
+httpMethod : POST 
+javaMethod : public java.lang.String net.ion.external.ics.web.script.ScriptWeb.removeScripts(java.lang.String)
+  {@javax.ws.rs.FormParam(value=scripts)}
+
+path : /admin/scripts/{sid}/run
+httpMethod : POST 
+javaMethod : public javax.ws.rs.core.Response net.ion.external.ics.web.script.ScriptWeb.runScript(java.lang.String,org.jboss.resteasy.spi.HttpRequest) throws java.io.IOException,javax.script.ScriptException
+  {@javax.ws.rs.PathParam(value=sid)}
+  {@javax.ws.rs.core.Context()}
+
+path : /admin/scripts/{sid}/instantrun/{eventid}
+httpMethod : POST 
+javaMethod : public javax.ws.rs.core.Response net.ion.external.ics.web.script.ScriptWeb.instantRunScript(java.lang.String,java.lang.String,java.lang.String,org.jboss.resteasy.spi.HttpRequest) throws java.io.IOException,javax.script.ScriptException
+  {@javax.ws.rs.PathParam(value=sid)}
+  {@javax.ws.rs.PathParam(value=eventid)}
+  {@javax.ws.rs.DefaultValue(value=),@javax.ws.rs.FormParam(value=content)}
+  {@javax.ws.rs.core.Context()}
+

@@ -17,7 +17,7 @@
 <tr>
 	<td>$gallery.asInt("galid")</td>
 	<td>$gallery.asString("subject")</td>
-	<td><img src='/admin/gallery/$gallery.domainId()/resize/$gallery.asInt("galid")' /></td>
+	<td><img src='/open/gallery/$gallery.domainId()/resize/$gallery.asInt("galid")' /></td>
 </tr>
 #end
 </table>

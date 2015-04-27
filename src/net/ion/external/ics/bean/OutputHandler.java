@@ -170,6 +170,7 @@ class XmlOutputHandler extends OutputHandler {
 			XML el = new XML("property");
 			el.addAttribute("name", key);
 			el.addElement(StringEscapeUtils.escapeXml(StringUtil.toString(json.asString(key), "")));
+			xml.addElement(el) ;
 		}
 		return xml ;
 	}

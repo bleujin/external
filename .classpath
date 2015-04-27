@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_45"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="lib" path="lib/common/common_apache_fat.jar"/>
 	<classpathentry kind="lib" path="lib/common/log4j-1.2.14.jar"/>
@@ -27,5 +26,6 @@
 	<classpathentry kind="lib" path="lib/reflib/crawl_parse.jar"/>
 	<classpathentry kind="lib" path="lib/reflib/guava-15.0.jar"/>
 	<classpathentry kind="lib" path="lib/reflib/crawl_apache_common.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_45"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
