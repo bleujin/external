@@ -28184,3 +28184,4 @@ javax.ws.rs.WebApplicationException
 [main] INFO  net.ion.framework.db.manager.script.JScriptEngine  - Has not Extension libPath : ./resource/loader/lib
 [RADON-STARTUP-THREAD] WARN  net.ion.nradon.netty.NettyWebServer  - PORT 9001
 [INT-2,ics6working,external-11365] WARN  org.jgroups.protocols.TCP  - JGRP000031: external-11365: dropping unicast message to wrong destination fd7da1d7-9020-c91c-3cad-e13a59690d6b
+[monitor-message-thread-0] INFO  net.ion.external.ics.common.HTMLTemplateEngine  - .\resource\message\messages.utf8.xml changed
