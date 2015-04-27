@@ -28099,3 +28099,88 @@ javax.ws.rs.WebApplicationException
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
 	at java.lang.Thread.run(Thread.java:744)
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] INFO  net.ion.craken.node.Repository  - Workspace[test, LOCAL] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  net.ion.craken.node.Repository  - emanon shutdowned
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] INFO  net.ion.craken.node.Repository  - Workspace[ics, REPL_SYNC] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000078: Starting JGroups Channel
+[main] WARN  org.jgroups.protocols.TCP  - JGRP000028: bundler_type sender-sends-with-timer not known; using default bundler (new3)
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000094: Received new cluster view: [icsmain-57241|1] (2) [icsmain-57241, external-32656]
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000079: Cache local address is external-32656, physical addresses are [61.250.201.157:7801]
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[scripter] INFO  net.ion.framework.schedule.NScheduler  - NScheduler started. :{name=scripter,jobs={}}
+[main] INFO  net.ion.framework.db.manager.script.JScriptEngine  - Has not Extension libPath : ./resource/loader/lib
+[RADON-STARTUP-THREAD] WARN  net.ion.nradon.netty.NettyWebServer  - PORT 9001
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] INFO  net.ion.craken.node.Repository  - Workspace[ics, REPL_SYNC] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000078: Starting JGroups Channel
+[main] WARN  org.jgroups.protocols.TCP  - JGRP000028: bundler_type sender-sends-with-timer not known; using default bundler (new3)
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000094: Received new cluster view: [icsmain-57241|3] (2) [icsmain-57241, external-11365]
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000079: Cache local address is external-11365, physical addresses are [61.250.201.157:7801]
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[scripter] INFO  net.ion.framework.schedule.NScheduler  - NScheduler started. :{name=scripter,jobs={}}
+[main] INFO  net.ion.framework.db.manager.script.JScriptEngine  - Has not Extension libPath : ./resource/loader/lib
+[RADON-STARTUP-THREAD] WARN  net.ion.nradon.netty.NettyWebServer  - PORT 9001
+[INT-2,ics6working,external-11365] WARN  org.jgroups.protocols.TCP  - JGRP000031: external-11365: dropping unicast message to wrong destination fd7da1d7-9020-c91c-3cad-e13a59690d6b

@@ -65,6 +65,10 @@
 								<label class="label alert-info alert-block"><pre id="target_url"></pre></label>
 							</section>
 
+							<section>
+								<label class="label alert-info alert-block"><pre id="run-result"></pre></label>
+							</section>
+
 						</fieldset>
 						
 						<div id="save-message" class="alert alert-success fade in message">
@@ -228,11 +232,13 @@
 							
 						}, 
 						success :  function(data) {
-							$("#save-message span").html(data) ;
+							$("#save-message span").text("called " + icommandId) ;
+							$("#run-result").text(data) ;
 							$("#save-message").removeClass("message") ;
 							setTimeout(function() {
 								$("#save-message").addClass("message") ;
-							}, 2000);
+							}, 2000); 
+							
 						}
 					}) ;
 				}

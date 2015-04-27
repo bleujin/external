@@ -1,0 +1,159 @@
+
+AField
+	- createWith
+	- updateWith
+	- delLowerAfieldWith
+	- addLowerAfieldWith
+	- removeWith
+	
+	
+	
+	= unloadWith - category_afield_tblc
+	= loadWith
+	= addMappingWith
+	= delMappingWith
+	
+
+AFieldCont
+	- 단독으로 사용되는 경우가 없을 듯. 
+
+Article
+	- updateWith
+	- removeWith
+	- copyWith
+	- moveWith
+	- useWith
+	- notUseWith
+	- relationWith
+	- relationRemoveWith
+	- setOperdyaWith
+	- setOrderWith
+
+
+Category
+	- createWith
+	- updateWith
+	- removeWith
+	- recoverWith
+	- moveWith
+	- copyWith
+	- clearWith, clearPreProcess
+
+
+Content
+	- createWith
+	- rewriteWith
+	- rewriteAndApproveWith
+	- rewriteAndReApproveWith
+	- removeWith
+	- recoverWith
+	
+	= addThumbImageWith
+	= addImageInfoWith
+	
+	- clearWith
+	- 
+	
+
+Content_Extend
+	- approveWith
+	- setActiveVersionWith
+	- 
+	
+	= execApproveProcess
+	= copyWith ?
+	= moveWith ?
+	
+
+Gallery
+
+Migration
+
+Restlet
+
+Template
+
+Template_Extend
+
+
+Site_Category
+
+
+
+
+
+Sentinel
+	- 정보에 대한 것이므로 관련 없음. 
+
+Tag
+	- 정보에 대한 것이므로 관련 없음. 
+
+TextRawIO
+	- 정보에 대한 것이므로 관련 없음. 
+
+Thoth
+	- 정보에 대한 것이므로 관련 없음. 
+
+AdSearch
+	- 정보에 대한 것이므로 관련 없음. 
+
+Deploy
+	- 정보에 대한 것이므로 관련 없음. 
+
+Deploy_Extend
+	- 정보에 대한 것이므로 관련 없음. 
+
+CMSGroup
+	- 정보에 대한 것이므로 관련 없음. 
+
+CMSHost
+	- 정보에 대한 것이므로 관련 없음. 
+
+CMSResource
+	- 정보에 대한 것이므로 관련 없음. 
+
+CMSUser
+	- 정보에 대한 것이므로 관련 없음. 
+
+CODE
+	- 정보에 대한 것이므로 관련 없음. 
+
+Constrants
+	- 정보에 대한 것이므로 관련 없음. 
+
+OnlyAdmin
+	- 정보에 대한 것이므로 관련 없음. 
+
+Personal
+	- 정보에 대한 것이므로 관련 없음. 
+
+Publisher
+	- 정보에 대한 것이므로 관련 없음. 
+
+Random
+	- 정보에 대한 것이므로 관련 없음. 
+
+Report
+	- 정보에 대한 것이므로 관련 없음. 
+
+Schedule
+	- 정보에 대한 것이므로 관련 없음. 
+
+Trace
+	- 정보에 대한 것이므로 관련 없음. 
+
+Types
+	- 정보에 대한 것이므로 관련 없음. 
+
+UTils
+	- 정보에 대한 것이므로 관련 없음. 
+
+Approval
+	- 승인룰 정보에 대한 것이므로 관련 없음. 
+
+Authority
+	- 정보에 대한 것이므로 관련 없음. 
+
+Bulletin
+	- 정보에 대한 것이므로 관련 없음. 
+	
