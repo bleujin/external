@@ -17,6 +17,7 @@ import net.ion.framework.util.StringUtil;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.regex.Pattern;
 
 public class TestDumb extends TestCase {
 
@@ -76,5 +77,10 @@ public class TestDumb extends TestCase {
         String[] results = StringUtil.substringsBetween(src, "a", "d");
 
         assertEquals(null, results) ;
+    }
+
+    public void testRE() {
+        Pattern p = Pattern.compile("^(resize|crop)[0-9]+\\_[0-9]+$") ;
+        assertTrue(p.matcher("resize137_137").matches());
     }
 }
