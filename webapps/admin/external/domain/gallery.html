@@ -481,7 +481,7 @@ var pagefunction = function () {
     $('#gallery-crop-modal button[name=crop]').click(function (event) {
         var galId = image.attr('galid'), domainId = image.attr('did');
         var area = jcrop_api.tellSelect();
-        var x = area.x, y = area.y, width = area.x2 - area.x, height = area.y2 - area.y;
+        var x = parseInt(area.x), y = parseInt(area.y), width = parseInt(area.x2 - area.x), height = parseInt(area.y2 - area.y);
 
         if (width == 0 || height == 0) {
             $.bigBox({
@@ -669,7 +669,7 @@ loadScript("js/plugin/datatables/jquery.dataTables.min.js", function () {
         loadScript("js/plugin/summernote/summernote.min.js", function () {
             loadScript("js/plugin/superbox/superbox.min.custom.js", function () {
                 loadScript("js/plugin/jcrop/jquery.jcrop.js", function() {
-                    loadScript("js/plugin/lightbox/lightbox.custom.js", pagefunction);
+                    loadScript("js/plugin/lightbox/lightbox.js", pagefunction);
                 });
             });
         });
