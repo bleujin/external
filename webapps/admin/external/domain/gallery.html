@@ -272,6 +272,7 @@ var pagefunction = function () {
             var table = $('#gallerys').DataTable({
                 'data': nodes,
                 searching: false,
+                order: [[0, 'desc']],
                 'columns': [
                     {'title': '${m.asString("domain.gallery.galid")}'},
                     {'title': '${m.asString("domain.gallery.catid")}'},
@@ -310,6 +311,7 @@ var pagefunction = function () {
                             table = $('#gallerys').DataTable({
                                 'data': nodes,
                                 searching: false,
+                                order: [[0, 'desc']],
                                 'columns': [
                                    {'title': '${m.asString("domain.gallery.galid")}'},
                                    {'title': '${m.asString("domain.gallery.catid")}'},
