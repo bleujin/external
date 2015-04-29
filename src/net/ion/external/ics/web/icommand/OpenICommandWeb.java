@@ -3,6 +3,7 @@ package net.ion.external.ics.web.icommand;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.concurrent.ExecutionException;
 
 import javax.script.ScriptException;
 import javax.ws.rs.GET;
@@ -43,7 +44,7 @@ public class OpenICommandWeb implements Webapp{
 	@Path("/{sid}/run/{runid}")
 	@GET @POST
 	@Produces(ExtMediaType.TEXT_PLAIN_UTF8)
-	public Response runICommand(final @PathParam(Def.ICommand.Sid) String sid, @Context HttpRequest request, final @PathParam("runid") String runid) throws IOException, ScriptException {
+	public Response runICommand(final @PathParam(Def.ICommand.Sid) String sid, @Context HttpRequest request, final @PathParam("runid") String runid) throws IOException, ScriptException, InterruptedException, ExecutionException {
 		ReadSession rsession = rweb.session() ;
 		
 		final MultivaluedMap<String, String> params = new MultivaluedMapImpl<String, String>();
@@ -69,10 +70,10 @@ public class OpenICommandWeb implements Webapp{
 				}
 				return null;
 			}
-		}) ;
+		}).get() ;
 		
-
-		return Response.ok("", ExtMediaType.TEXT_PLAIN_UTF8).build();
+		String resultValue = rsession.ghostBy("/icommands", sid, "slogs", runid).property("result").asString() ;
+		return Response.ok(resultValue, ExtMediaType.TEXT_PLAIN_UTF8).build();
 	}
 	
 	

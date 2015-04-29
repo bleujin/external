@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import javax.script.ScriptException;
@@ -64,8 +65,7 @@ import org.jboss.resteasy.spi.HttpRequest;
 import com.google.common.base.Function;
 
 @Path("/icommands")
-public class ICommandWeb implements Webapp{
-
+public class ICommandWeb implements Webapp {
 
 	private ReadSession rsession;
 	private JScriptEngine jengine;
@@ -97,15 +97,13 @@ public class ICommandWeb implements Webapp{
 						result.add(userProp);
 					}
 				} catch (IOException ignore) {
-					ignore.printStackTrace(); 
+					ignore.printStackTrace();
 				}
 
 				return result;
 			}
 		});
-		return new JsonObject().put("info", rsession.ghostBy("/menus/icommand").property("overview").asString())
-				.put("schemaName", JsonParser.fromString("[{'title':'Id'},{'title':'Run Path'},{'title':'Explain'}]").getAsJsonArray())
-				.put("icommands", jarray);
+		return new JsonObject().put("info", rsession.ghostBy("/menus/icommand").property("overview").asString()).put("schemaName", JsonParser.fromString("[{'title':'Id'},{'title':'Run Path'},{'title':'Explain'}]").getAsJsonArray()).put("icommands", jarray);
 	}
 
 	@Path("/{sid}/overview")
@@ -145,8 +143,8 @@ public class ICommandWeb implements Webapp{
 		rsession.tran(new TransactionJob<Void>() {
 			@Override
 			public Void handle(WriteSession wsession) throws Exception {
-				wsession.pathBy(ICommandLog.path(sid)).removeSelf() ;
-				WriteNode found = Def.ICommand.pathBy(wsession, sid) ;
+				wsession.pathBy(ICommandLog.path(sid)).removeSelf();
+				WriteNode found = Def.ICommand.pathBy(wsession, sid);
 				FileUtil.forceWriteUTF8(new File(Webapp.REMOVED_DIR, sid + ".misc.icommand.bak"), found.property(Def.ICommand.Content).asString());
 				found.removeSelf();
 				return null;
@@ -154,16 +152,16 @@ public class ICommandWeb implements Webapp{
 		});
 		return sid + " removed";
 	}
-	
-	protected ReadSession session(){
-		return rsession ;
+
+	protected ReadSession session() {
+		return rsession;
 	}
 
 	@Path("/{sid}/define")
 	@GET
 	@Produces(ExtMediaType.APPLICATION_JSON_UTF8)
 	public JsonObject viewICommand(@PathParam(Def.ICommand.Sid) final String sid) {
-		ReadNode found = Def.ICommand.ghostBy(rsession, sid) ;
+		ReadNode found = Def.ICommand.ghostBy(rsession, sid);
 		return new JsonObject().put("sid", found.fqn().name()).put("samples", WebUtil.findICommands()).put("info", rsession.ghostBy("/menus/icommand").property("define").asString()).put("content", found.property("content").asString());
 	}
 
@@ -174,7 +172,7 @@ public class ICommandWeb implements Webapp{
 			@Override
 			public Void handle(WriteSession wsession) throws Exception {
 				WriteNode found = Def.ICommand.pathBy(wsession, sid);
-				wsession.pathBy("/icommands", sid, "slogs") ;
+				wsession.pathBy("/icommands", sid, "slogs");
 				FileUtil.forceWriteUTF8(new File(Webapp.REMOVED_DIR, sid + ".misc.icommand.bak"), found.property(Def.ICommand.Content).asString());
 
 				found.property(Def.ICommand.Content, content);
@@ -228,10 +226,10 @@ public class ICommandWeb implements Webapp{
 
 	@Path("/{sid}/instantrun")
 	@POST
-	public String instantRunICommand(@PathParam("sid") final String sid, @DefaultValue("") @FormParam("content") String content, @Context HttpRequest request) throws IOException, ScriptException {
-		
-		runICommand(sid, new MultivaluedMapImpl<String, String>(), content, request.getHttpMethod()) ;
-		return sid + " called";
+	public Response instantRunICommand(@PathParam("sid") final String sid, @DefaultValue("") @FormParam("content") String content, @Context HttpRequest request) throws IOException, ScriptException {
+
+		return runICommand(sid, new MultivaluedMapImpl<String, String>(), content, request.getHttpMethod());
+		// return sid + " called";
 	}
 
 	public static TransactionJob<Void> end(final String sid, final String status, final Object result) {
@@ -248,22 +246,30 @@ public class ICommandWeb implements Webapp{
 	}
 
 	private Response runICommand(final String sid, final MultivaluedMap<String, String> params, final String content, final String method) throws IOException, ScriptException {
-		this.rsession.tran(new TransactionJob<Void>() {
-			@Override
-			public Void handle(WriteSession wsession) throws Exception {
-				WriteNode wnode = wsession.pathBy("/icommands", sid, "run") ;
-				
-				PropertyValue countValue = wnode.property("scriptid", sid).property("content", content).property("method", method).increase("count") ;
-				wnode.property("runid", "c" + countValue.asInt()) ;
-				for (Entry<String, List<String>> entry : params.entrySet()) {
-					wnode.property("param_" + entry.getKey(), entry.getValue()) ;
-				}
-				return null;
-			}
-		}) ;
-		
+		try {
+			String runId = this.rsession.tran(new TransactionJob<String>() {
+				@Override
+				public String handle(WriteSession wsession) throws Exception {
+					WriteNode wnode = wsession.pathBy("/icommands", sid, "run");
 
-		return Response.ok("", ExtMediaType.TEXT_PLAIN_UTF8).build();
+					PropertyValue countValue = wnode.property("scriptid", sid).property("content", content).property("method", method).increase("count");
+					String runid = "c" + countValue.asInt();
+					wnode.property("runid", runid);
+					for (Entry<String, List<String>> entry : params.entrySet()) {
+						wnode.property("param_" + entry.getKey(), entry.getValue());
+					}
+					return runid;
+				}
+			}).get();
+
+			String resultValue = rsession.ghostBy("/icommands", sid, "slogs", runId).property("result").asString() ;
+
+			return Response.ok(resultValue, ExtMediaType.TEXT_PLAIN_UTF8).build();
+		} catch (InterruptedException ex) {
+			throw new IOException(ex);
+		} catch (ExecutionException ex) {
+			throw new IOException(ex);
+		}
 	}
 
 	@Path("/{sid}/schedule")
@@ -356,5 +362,5 @@ class ScriptOutWriter extends Writer {
 		flush();
 		ese.closeEvent(eventId);
 	}
-	
+
 }
