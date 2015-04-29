@@ -1,19 +1,22 @@
 
-category
+category_tblc
 
-category_afield
+category_afield_tblc
 
-template
+afield_tblc
 
-afield
+article_tblc
 
-article
+article_afield_tblc
 
-article_afield
-
-article_image
+article_image_tblc
 
 gallery_tblc
 
 gallery_category_tblc
+
+
+
+
+template_tblc -_-?
 

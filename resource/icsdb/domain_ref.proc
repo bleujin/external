@@ -6,8 +6,6 @@ AField
 	- addLowerAfieldWith
 	- removeWith
 	
-	
-	
 	= unloadWith - category_afield_tblc
 	= loadWith
 	= addMappingWith
@@ -52,7 +50,6 @@ Content
 	= addImageInfoWith
 	
 	- clearWith
-	- 
 	
 
 Content_Extend
@@ -64,22 +61,70 @@ Content_Extend
 	= copyWith ?
 	= moveWith ?
 	
+	
+
+
+
 
 Gallery
+	- createWith
+	- updateWith
+	- updateFieldMetaWith
+	- removeWith
+	
+	= clearWith
 
-Migration
+	- createCategoryWith
+	- removeCategoryWith
 
-Restlet
-
-Template
-
-Template_Extend
-
+Migration(template ignore)
+	- importArticle
+	= addImageWith
+	= addAfieldWith
+	= commitNewContent
+	= commitUpdateContent
+	- importSiteCategory
+	- importSiteWith	
+	- importCategoryAfield
+	- importActionField
+	- importActionSubField
+	- importGallery
+	- forwardArticlcWith
+	
 
 Site_Category
+	- createWith
+	= createSiteWith
+	- updateWith
+	= moveWith
+	= copyWith
+	= deliveryArticleWith
+	= deliveryAllArticleWith
+	= fetchArticleWith
+	= subFetchArticleWith
+	= fetchAllArticleWith
+	
+	
+	
+	
+
+Template
+	- .... template 을 sync 할 필요가 있을까 ?
+
+
+Template_Extend
+	- .... template 을 sync 할 필요가 있을까 ?
 
 
 
+
+
+
+
+
+
+Restlet
+	= 영향이 있지만 이것을 대체하는 목적이므로 필요 없음. 
 
 
 Sentinel
