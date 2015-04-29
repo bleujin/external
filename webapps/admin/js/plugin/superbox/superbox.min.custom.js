@@ -25,14 +25,22 @@
 
                 var basicData = basicInfoFromUrl(e) ;
 
+                c.on('load', function() {
+                    var el = $(this)[0] ;
+                    var w = el.naturalWidth;
+                    var h = el.naturalHeight ;
+
+                    var description = 'Width: ' + w + '<p>Height: ' + h  + '<p>' + f;
+                    c.find(".superbox-img-description").html(description);
+                    c.find('a.crop-image').click({basic: basicData, src: e, originalWidth: c.naturalWidth, originalHeight: c.naturalHeight}, cropHandler);
+                    c.find('a.resize-image').click({basic: basicData, src: e, originalWidth: c.naturalWidth, originalHeight: c.naturalHeight}, resizeHandler) ;
+                });
+
                 // crop modal by airkjh. cropHandler defined in gallery.html
-                c.attr("src", e + '?_time=' + new Date().getTime()), a(".superbox-list").removeClass("active"), $this.addClass("active"), c.find("em").text(g), c.find(">:first-child").text(h), c.find(".superbox-img-description").text(f),
+                c.attr("src", e + '?_time=' + new Date().getTime()), a(".superbox-list").removeClass("active"), $this.addClass("active"), c.find("em").text(g), c.find(">:first-child").text(h),
                     0 == a(".superbox-current-img").css("opacity") && a(".superbox-current-img").animate({opacity: 1}),
                     a(this).next().hasClass("superbox-show") ? (a(".superbox-list").removeClass("active"), b.toggle()) : (b.insertAfter(this).css("display", "block"),
                     $this.addClass("active")), a("html, body").animate({scrollTop: b.position().top - d.width()}, "medium");
-
-                c.find('a.crop-image').click({basic: basicData, src: e, originalWidth: c.naturalWidth, originalHeight: c.naturalHeight}, cropHandler);
-                c.find('a.resize-image').click({basic: basicData, src: e, originalWidth: c.naturalWidth, originalHeight: c.naturalHeight}, resizeHandler) ;
 
             }), a(".superbox").on("click", ".superbox-close", function () {
                 a(".superbox-list").removeClass("active"), a(".superbox-current-img").animate({opacity: 0}, 200, function () {

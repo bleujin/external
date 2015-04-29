@@ -528,8 +528,14 @@ var pagefunction = function () {
                 form = $('#resize-gallery-form'), width = form.find('input[name=width]'),
                 height = form.find('input[name=height]');
 
-        width.val(originalWidth) ;
-        height.val(originalHeight) ;
+        resizeImg.on('load', function() {
+            var img = $(this)[0] ;
+
+            originalWidth = img.naturalWidth, originalHeight = img.naturalHeight;
+
+            width.val(originalWidth) ;
+            height.val(originalHeight) ;
+        });
 
         width.on('change keyup', function (e) {
             var wval = $(this).val(), hval = height.val(), keepRatio = $('#resize-gallery-form input[name=keepRatio]').is(':checked');
