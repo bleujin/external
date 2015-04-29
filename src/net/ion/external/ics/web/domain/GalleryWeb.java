@@ -62,7 +62,7 @@ public class GalleryWeb implements Webapp {
 	@Path("/{did}/list")
 	@Produces(ExtMediaType.APPLICATION_JSON_UTF8)
 	public JsonObject listGallery(@PathParam("did") final String did, @QueryParam("query") final String query, @DefaultValue("101") @QueryParam("offset") final int offset) throws IOException, ParseException {
-		XIterable<GalleryX> gallerys = dsub.findDomain(did).datas().gallerys().query(query).offset(offset).sort("galid=asc").find();
+		XIterable<GalleryX> gallerys = dsub.findDomain(did).datas().gallerys().query(query).offset(offset).descendingNum("galid").find();
 		JsonObject result = JsonObject.create();
 		JsonArray jarray = new JsonArray();
 		result.put("result", jarray);

@@ -93,6 +93,16 @@ public class GalleryChildrenX {
 		return this;
 	}
 
+    public GalleryChildrenX descendingNum(String field) {
+        queryRequest.descendingNum(field) ;
+        return this ;
+    }
+
+    public GalleryChildrenX ascendingNum(String field) {
+        queryRequest.ascendingNum(field) ;
+        return this ;
+    }
+
 	public void debugPrint() throws IOException {
 		each(new Function<Iterator<ArticleX>, Void>() {
 			@Override

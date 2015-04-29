@@ -272,17 +272,17 @@ var pagefunction = function () {
             var table = $('#gallerys').DataTable({
                 'data': nodes,
                 searching: false,
+                order: [[0, 'desc']],
                 'columns': [
                     {'title': '${m.asString("domain.gallery.galid")}'},
                     {'title': '${m.asString("domain.gallery.catid")}'},
                     {'title': '${m.asString("domain.gallery.subject")}'},
                     {'title': '${m.asString("domain.gallery.width")}'},
                     {'title': '${m.asString("domain.gallery.height")}'},
-                    {'title': '${m.asString("domain.gallery.filesize")}'},
-                    {'title': '${m.asString("domain.gallery.lastmodified")}'}
+                    {'title': '${m.asString("domain.gallery.filesize")}'}
                 ]
             });
-            var tableFoot = '<tfoot><tr><td colspan="7" class="col-xs-12">' +
+            var tableFoot = '<tfoot><tr><td colspan="6" class="col-xs-12">' +
                     '				<fieldset class="smart-form">' +
                     '					<div class="row">' +
                     '						<section class="col col-9"></section>' +
@@ -310,14 +310,14 @@ var pagefunction = function () {
                             table = $('#gallerys').DataTable({
                                 'data': nodes,
                                 searching: false,
+                                order: [[0, 'desc']],
                                 'columns': [
                                    {'title': '${m.asString("domain.gallery.galid")}'},
                                    {'title': '${m.asString("domain.gallery.catid")}'},
                                    {'title': '${m.asString("domain.gallery.subject")}'},
                                    {'title': '${m.asString("domain.gallery.width")}'},
                                    {'title': '${m.asString("domain.gallery.height")}'},
-                                   {'title': '${m.asString("domain.gallery.filesize")}'},
-                                   {'title': '${m.asString("domain.gallery.lastmodified")}'}
+                                   {'title': '${m.asString("domain.gallery.filesize")}'}
                                 ]
                             });
 
@@ -481,7 +481,7 @@ var pagefunction = function () {
     $('#gallery-crop-modal button[name=crop]').click(function (event) {
         var galId = image.attr('galid'), domainId = image.attr('did');
         var area = jcrop_api.tellSelect();
-        var x = area.x, y = area.y, width = area.x2 - area.x, height = area.y2 - area.y;
+        var x = parseInt(area.x), y = parseInt(area.y), width = parseInt(area.x2 - area.x), height = parseInt(area.y2 - area.y);
 
         if (width == 0 || height == 0) {
             $.bigBox({
@@ -528,8 +528,14 @@ var pagefunction = function () {
                 form = $('#resize-gallery-form'), width = form.find('input[name=width]'),
                 height = form.find('input[name=height]');
 
-        width.val(originalWidth) ;
-        height.val(originalHeight) ;
+        resizeImg.on('load', function() {
+            var img = $(this)[0] ;
+
+            originalWidth = img.naturalWidth, originalHeight = img.naturalHeight;
+
+            width.val(originalWidth) ;
+            height.val(originalHeight) ;
+        });
 
         width.on('change keyup', function (e) {
             var wval = $(this).val(), hval = height.val(), keepRatio = $('#resize-gallery-form input[name=keepRatio]').is(':checked');
@@ -669,7 +675,7 @@ loadScript("js/plugin/datatables/jquery.dataTables.min.js", function () {
         loadScript("js/plugin/summernote/summernote.min.js", function () {
             loadScript("js/plugin/superbox/superbox.min.custom.js", function () {
                 loadScript("js/plugin/jcrop/jquery.jcrop.js", function() {
-                    loadScript("js/plugin/lightbox/lightbox.custom.js", pagefunction);
+                    loadScript("js/plugin/lightbox/lightbox.js", pagefunction);
                 });
             });
         });

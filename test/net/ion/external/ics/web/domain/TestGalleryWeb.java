@@ -47,7 +47,20 @@ public class TestGalleryWeb extends TestBaseDomain {
 		output.out(gallerys, new JsonObject(), new JsonObject()) ;
 		Debug.line(sw);
 	}
-	
+
+    public void testSort() throws Exception {
+        // given
+        this.domain.addGalleryCategory("airkjh", false) ;
+
+        // when
+        XIterable<GalleryX> gallerys = this.domain.datas().gallerys().sort("galid=asc").find();
+
+        // then
+        for(GalleryX gallery : gallerys) {
+            System.out.println(gallery.galId()) ;
+        }
+    }
+
 	public void testJsonQuery() throws Exception {
 		String encoded = URLEncoder.encode("catid=aaaa") ;
 		String json = ss.request("/gallery/zdm/query.json?query=" + encoded).get().contentsString() ;

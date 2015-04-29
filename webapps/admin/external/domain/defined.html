@@ -147,7 +147,14 @@
         $('table.display tbody').on('click', 'tr', function()  {
             var tableId = $(this).parents('table').attr('id');
             var removeBtn = $('#' + tableId + ' input[name=btn_remove]');
-            $(this).toggleClass('selected2');
+
+            if($(this).hasClass('selected2')) {                         // select same row again
+                $(this).removeClass('selected2') ;
+            } else {
+                // select another row
+                $('table.display tbody tr').removeClass('selected2');
+                $(this).addClass('selected2');
+            }
             $('#' + tableId + ' tr.selected2').length > 0 ? removeBtn.removeAttr('disabled') : removeBtn.attr('disabled', 'disabled');
         });
     }
