@@ -7,7 +7,6 @@ import net.ion.framework.db.procedure.IUserProcedure;
 import net.ion.framework.db.procedure.IUserProcedureBatch;
 import net.ion.framework.db.procedure.IUserProcedures;
 import net.ion.framework.db.procedure.RepositoryService;
-import net.ion.framework.db.procedure.UserProcedures;
 
 public class ICSRepositoryService extends RepositoryService {
 

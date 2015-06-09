@@ -2,25 +2,25 @@ package net.ion.external.ics.web.icommand;
 
 import java.util.Map;
 
+import junit.framework.TestCase;
 import net.ion.craken.listener.CDDHandler;
 import net.ion.craken.listener.CDDModifiedEvent;
 import net.ion.craken.listener.CDDRemovedEvent;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
-import net.ion.craken.node.crud.RepositoryImpl;
+import net.ion.craken.node.crud.Craken;
 import net.ion.framework.util.Debug;
-import junit.framework.TestCase;
 
 public class TestICommand extends TestCase {
 
-	private RepositoryImpl r;
+	private Craken r;
 	private ReadSession session;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		this.r = RepositoryImpl.inmemoryCreateWithTest() ;
+		this.r = Craken.inmemoryCreateWithTest() ;
 		this.session = r.login("test") ;
 	}
 	

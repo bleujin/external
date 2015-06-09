@@ -13,8 +13,8 @@ import net.ion.framework.db.Page;
 import net.ion.framework.util.Debug;
 import net.ion.framework.util.MapUtil;
 import net.ion.framework.util.ObjectUtil;
+import net.ion.framework.util.StringUtil;
 
-import org.apache.lucene.analysis.kr.utils.StringUtil;
 import org.apache.lucene.queryparser.classic.ParseException;
 
 import com.google.common.base.Function;

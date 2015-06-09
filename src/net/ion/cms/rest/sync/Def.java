@@ -3,13 +3,12 @@ package net.ion.cms.rest.sync;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.apache.lucene.analysis.kr.utils.StringUtil;
-
 import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.WriteNode;
 import net.ion.craken.node.WriteSession;
-import net.ion.craken.tree.Fqn;
+import net.ion.craken.node.crud.tree.Fqn;
+import net.ion.framework.util.StringUtil;
 
 public class Def {
 

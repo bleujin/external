@@ -17,13 +17,13 @@
 
 package net.ion.framework.db.manager.script;
 
-import org.apache.commons.io.monitor.FileAlterationObserver;
-
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.io.monitor.FileAlterationObserver;
 
 /**
  * It's a runnable that spawns of a monitoring thread triggering the

@@ -1,10 +1,8 @@
 package net.ion.framework.db.manager.script;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.concurrent.Callable;
@@ -21,7 +19,6 @@ import javax.script.ScriptException;
 import javax.script.SimpleBindings;
 
 import net.ion.external.util.ScriptJDK;
-import net.ion.framework.util.IOUtil;
 import net.ion.framework.util.WithinThreadExecutor;
 import net.ion.radon.cload.cloader.OuterClassLoader;
 import net.ion.radon.cload.monitor.AbstractListener;

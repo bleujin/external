@@ -1,16 +1,17 @@
 package net.ion.external.ics.common;
 
-import net.ion.framework.parse.gson.JsonElement;
-import net.ion.framework.parse.gson.JsonObject;
-import net.ion.framework.parse.gson.JsonPrimitive;
-import net.ion.framework.parse.gson.stream.JsonWriter;
-
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.StreamingOutput;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.Map.Entry;
+
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.StreamingOutput;
+
+import net.ion.framework.parse.gson.JsonElement;
+import net.ion.framework.parse.gson.JsonObject;
+import net.ion.framework.parse.gson.JsonPrimitive;
+import net.ion.framework.parse.gson.stream.JsonWriter;
 
 public class JsonStreamOut implements StreamingOutput {
 

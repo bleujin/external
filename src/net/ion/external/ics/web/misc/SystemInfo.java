@@ -1,11 +1,5 @@
 package net.ion.external.ics.web.misc;
 
-import net.ion.framework.parse.gson.JsonObject;
-import net.ion.framework.util.IOUtil;
-import net.ion.nsearcher.config.Central;
-import org.apache.log4j.Logger;
-import org.apache.lucene.LucenePackage;
-
 import java.io.DataInputStream;
 import java.io.InputStreamReader;
 import java.lang.management.ManagementFactory;
@@ -19,6 +13,13 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Date;
 import java.util.Locale;
+
+import net.ion.framework.parse.gson.JsonObject;
+import net.ion.framework.util.IOUtil;
+import net.ion.nsearcher.config.Central;
+
+import org.apache.log4j.Logger;
+import org.apache.lucene.LucenePackage;
 
 public class SystemInfo {
 

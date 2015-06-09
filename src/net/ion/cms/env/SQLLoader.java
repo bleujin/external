@@ -10,8 +10,7 @@ import net.ion.framework.db.IDBController;
 import net.ion.framework.db.procedure.IUserCommand;
 import net.ion.framework.util.IOUtil;
 import net.ion.framework.util.MapUtil;
-
-import org.apache.lucene.analysis.kr.utils.StringUtil;
+import net.ion.framework.util.StringUtil;
 
 public class SQLLoader {
 

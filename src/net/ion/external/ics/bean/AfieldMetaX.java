@@ -2,18 +2,14 @@ package net.ion.external.ics.bean;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigInteger;
 import java.text.ParseException;
-import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.logging.impl.AvalonLogger;
-import org.apache.lucene.analysis.kr.utils.StringUtil;
 
 import net.ion.cms.rest.sync.Def;
 import net.ion.craken.node.ReadNode;
 import net.ion.external.domain.Domain;
 import net.ion.framework.util.DateUtil;
+import net.ion.framework.util.StringUtil;
 
 public class AfieldMetaX extends BeanX{
 

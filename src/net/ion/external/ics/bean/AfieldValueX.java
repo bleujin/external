@@ -2,25 +2,15 @@ package net.ion.external.ics.bean;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import javax.swing.plaf.ListUI;
-
-import org.apache.lucene.analysis.kr.utils.StringUtil;
 
 import net.ion.cms.rest.sync.Def;
 import net.ion.craken.node.ReadNode;
-import net.ion.craken.tree.Fqn;
 import net.ion.external.domain.Domain;
 import net.ion.external.ics.bean.AfieldMetaX.Type;
-import net.ion.framework.util.Debug;
-import net.ion.framework.util.ListUtil;
 import net.ion.framework.util.MapUtil;
 import net.ion.framework.util.NumberUtil;
-import net.ion.framework.util.ObjectUtil;
-import net.ion.framework.util.SetUtil;
+import net.ion.framework.util.StringUtil;
 
 public class AfieldValueX extends BeanX{
 

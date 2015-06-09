@@ -19,9 +19,7 @@ import net.ion.framework.db.procedure.IUserProcedureBatch;
 import net.ion.framework.db.procedure.IUserProcedures;
 import net.ion.framework.db.procedure.QueryType;
 import net.ion.framework.db.procedure.Queryable;
-import net.ion.framework.db.procedure.SerializedQuery;
 import net.ion.framework.db.xa.XAUserProcedure;
-import net.ion.framework.util.Debug;
 
 import org.apache.commons.lang.ArrayUtils;
 

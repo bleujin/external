@@ -1,10 +1,16 @@
 package net.ion.airkjh;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.regex.Pattern;
+
 import junit.framework.TestCase;
-import net.ion.craken.node.*;
-import net.ion.craken.node.crud.ChildQueryRequest;
-import net.ion.craken.node.crud.ChildQueryResponse;
-import net.ion.craken.node.crud.RepositoryImpl;
+import net.ion.craken.node.IteratorList;
+import net.ion.craken.node.ReadNode;
+import net.ion.craken.node.ReadSession;
+import net.ion.craken.node.TransactionJob;
+import net.ion.craken.node.WriteSession;
+import net.ion.craken.node.crud.Craken;
 import net.ion.framework.db.DBController;
 import net.ion.framework.db.Rows;
 import net.ion.framework.db.manager.OracleDBManager;
@@ -13,20 +19,15 @@ import net.ion.framework.util.Debug;
 import net.ion.framework.util.IOUtil;
 import net.ion.framework.util.StringUtil;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.List;
-import java.util.regex.Pattern;
-
 public class TestDumb extends TestCase {
 
-    private RepositoryImpl r;
+    private Craken r;
     private ReadSession session;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        this.r = RepositoryImpl.inmemoryCreateWithTest();
+        this.r = Craken.inmemoryCreateWithTest();
         this.session = r.login("test");
     }
 

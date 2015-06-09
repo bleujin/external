@@ -1,11 +1,11 @@
 package net.ion.external.ics.common;
 
+import java.io.IOException;
+import java.util.concurrent.CopyOnWriteArraySet;
+
 import net.ion.framework.util.ObjectUtil;
 import net.ion.nradon.EventSourceConnection;
 import net.ion.nradon.EventSourceMessage;
-
-import java.io.IOException;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 public class MyEventLog implements Appendable{
 

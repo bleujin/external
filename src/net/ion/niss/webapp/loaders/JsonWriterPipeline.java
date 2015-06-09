@@ -1,16 +1,16 @@
 package net.ion.niss.webapp.loaders;
 
+import java.io.IOException;
+import java.io.Writer;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import net.ion.framework.parse.gson.stream.JsonWriter;
 import net.ion.framework.util.ObjectUtil;
 import net.ion.icrawler.Request;
 import net.ion.icrawler.ResultItems;
 import net.ion.icrawler.Task;
 import net.ion.icrawler.pipeline.Pipeline;
-
-import java.io.IOException;
-import java.io.Writer;
-import java.util.Map;
-import java.util.Map.Entry;
 
 public class JsonWriterPipeline implements Pipeline{
 

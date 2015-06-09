@@ -1,18 +1,19 @@
 package net.ion.external.ics.common;
 
-import net.ion.framework.util.ListUtil;
-import net.ion.framework.util.SetUtil;
-import net.ion.nsearcher.common.ReadDocument;
-import net.ion.nsearcher.search.SearchResponse;
-import net.ion.radon.util.csv.CsvWriter;
-
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.StreamingOutput;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.Set;
+
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.StreamingOutput;
+
+import net.ion.framework.util.ListUtil;
+import net.ion.framework.util.SetUtil;
+import net.ion.nsearcher.common.ReadDocument;
+import net.ion.nsearcher.search.SearchResponse;
+import net.ion.radon.util.csv.CsvWriter;
 
 public class CSVStreamOut implements StreamingOutput {
 

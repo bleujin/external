@@ -2,7 +2,6 @@ package net.ion.external.ics.util;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import net.ion.external.ics.web.Webapp;

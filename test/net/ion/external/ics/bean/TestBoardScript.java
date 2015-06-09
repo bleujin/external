@@ -7,7 +7,7 @@ import junit.framework.TestCase;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
-import net.ion.craken.node.crud.RepositoryImpl;
+import net.ion.craken.node.crud.Craken;
 import net.ion.framework.util.Debug;
 import net.ion.framework.util.IOUtil;
 
@@ -20,18 +20,16 @@ import org.apache.velocity.runtime.resource.loader.StringResourceLoader;
 import org.apache.velocity.runtime.resource.util.StringResourceRepository;
 import org.apache.velocity.runtime.resource.util.StringResourceRepositoryImpl;
 
-import com.sun.crypto.provider.RSACipher;
-
 public class TestBoardScript extends TestCase{
 	
 
-	private RepositoryImpl r;
+	private Craken r;
 	private ReadSession session;
 	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		this.r = RepositoryImpl.inmemoryCreateWithTest();
+		this.r = Craken.inmemoryCreateWithTest();
 		this.session = r.login("test");
 	}
 	

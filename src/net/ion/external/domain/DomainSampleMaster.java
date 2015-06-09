@@ -26,9 +26,9 @@ import net.ion.framework.db.DBController;
 import net.ion.framework.db.bean.ResultSetHandler;
 import net.ion.framework.db.manager.DBManager;
 import net.ion.framework.util.ArrayUtil;
+import net.ion.framework.util.StringUtil;
 
 import org.apache.log4j.Logger;
-import org.apache.lucene.analysis.kr.utils.StringUtil;
 
 public class DomainSampleMaster {
 

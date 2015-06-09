@@ -10,7 +10,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
-import net.ion.craken.node.ReadSession;
 import net.ion.external.ICSSubCraken;
 import net.ion.external.ics.EventSourceEntry;
 import net.ion.external.ics.web.Webapp;

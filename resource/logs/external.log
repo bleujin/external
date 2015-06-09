@@ -28429,3 +28429,57 @@ Caused by: java.lang.NumberFormatException: For input string: "188.416"
 	at net.ion.radon.core.RadonMethodInjectorImpl.injectArguments(RadonMethodInjectorImpl.java:117)
 	... 16 more
 [Incoming-2,ics6working,external-56193] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000094: Received new cluster view: [external-56193|8] (1) [external-56193]
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] INFO  net.ion.craken.node.Repository  - Workspace[ics, REPL_SYNC] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000078: Starting JGroups Channel
+[main] WARN  org.jgroups.protocols.TCP  - JGRP000028: bundler_type sender-sends-with-timer not known; using default bundler (new3)
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000094: Received new cluster view: [external-58803|0] (1) [external-58803]
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000079: Cache local address is external-58803, physical addresses are [61.250.201.157:7800]
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[scripter] INFO  net.ion.framework.schedule.NScheduler  - NScheduler started. :{name=scripter,jobs={}}
+[main] INFO  net.ion.framework.db.manager.script.JScriptEngine  - Has not Extension libPath : ./resource/loader/lib
+[RADON-STARTUP-THREAD] WARN  net.ion.nradon.netty.NettyWebServer  - PORT 9001
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] WARN  org.infinispan.configuration.cache.AbstractStoreConfigurationBuilder  - ISPN000149: Fetch persistent state and purge on startup are both disabled, cache may contain stale entries on startup
+[main] INFO  net.ion.craken.node.Repository  - Workspace[ics, REPL_SYNC] defined
+[main] INFO  net.ion.craken.node.Repository  - emanon started
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000078: Starting JGroups Channel
+[main] WARN  org.jgroups.protocols.TCP  - JGRP000028: bundler_type sender-sends-with-timer not known; using default bundler (new3)
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000094: Received new cluster view: [icsmain-49620|1] (2) [icsmain-49620, external-57406]
+[main] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000079: Cache local address is external-57406, physical addresses are [61.250.201.157:7801]
+[main] INFO  org.infinispan.factories.GlobalComponentRegistry  - ISPN000128: Infinispan version: Infinispan 'Infinium' 6.0.2.Final
+[main] WARN  org.infinispan.transaction.lookup.GenericTransactionManagerLookup  - ISPN000104: Falling back to DummyTransactionManager from Infinispan
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[main] INFO  org.infinispan.jmx.CacheJmxRegistration  - ISPN000031: MBeans were successfully registered to the platform MBean server.
+[scripter] INFO  net.ion.framework.schedule.NScheduler  - NScheduler started. :{name=scripter,jobs={}}
+[main] INFO  net.ion.framework.db.manager.script.JScriptEngine  - Has not Extension libPath : ./resource/loader/lib
+[RADON-STARTUP-THREAD] WARN  net.ion.nradon.netty.NettyWebServer  - PORT 9001
+[ViewHandler,ics6working,external-57406] WARN  org.jgroups.protocols.pbcast.GMS  - external-57406: failed to collect all ACKs (expected=1) for view [external-57406|2] after 2000ms, missing 1 ACKs from external-57406
+[Incoming-2,ics6working,external-57406] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000094: Received new cluster view: [external-57406|2] (1) [external-57406]
+[Incoming-1,ics6working,external-57406] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000094: Received new cluster view: [external-57406|3] (2) [external-57406, icsmain-14508]
+[Incoming-2,ics6working,external-57406] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000094: Received new cluster view: [external-57406|4] (1) [external-57406]
+[Incoming-1,ics6working,external-57406] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000094: Received new cluster view: [external-57406|5] (2) [external-57406, icsmain-48108]
+[Incoming-2,ics6working,external-57406] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000094: Received new cluster view: [external-57406|6] (1) [external-57406]
+[Incoming-1,ics6working,external-57406] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000094: Received new cluster view: [external-57406|7] (2) [external-57406, icsmain-56305]
+[Incoming-2,ics6working,external-57406] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000094: Received new cluster view: [external-57406|8] (1) [external-57406]
+[Incoming-1,ics6working,external-57406] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000094: Received new cluster view: [external-57406|9] (2) [external-57406, icsmain-43481]
+[Incoming-2,ics6working,external-57406] INFO  org.infinispan.remoting.transport.jgroups.JGroupsTransport  - ISPN000094: Received new cluster view: [external-57406|10] (1) [external-57406]

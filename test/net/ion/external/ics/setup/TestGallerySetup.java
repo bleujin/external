@@ -1,5 +1,12 @@
 package net.ion.external.ics.setup;
 
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
 import net.ion.framework.db.bean.ResultSetHandler;
@@ -7,16 +14,10 @@ import net.ion.framework.parse.gson.JsonObject;
 import net.ion.framework.util.Debug;
 import net.ion.framework.util.FileUtil;
 import net.ion.framework.util.IOUtil;
+import net.ion.framework.util.StringUtil;
+
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
-import org.apache.lucene.analysis.kr.utils.StringUtil;
-
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class TestGallerySetup extends TestSetup {
 

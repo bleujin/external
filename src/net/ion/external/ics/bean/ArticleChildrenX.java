@@ -11,11 +11,9 @@ import net.ion.external.domain.Domain;
 import net.ion.framework.db.Page;
 import net.ion.framework.util.MapUtil;
 import net.ion.framework.util.ObjectUtil;
+import net.ion.framework.util.StringUtil;
 
-import org.apache.lucene.analysis.kr.utils.StringUtil;
 import org.apache.lucene.queryparser.classic.ParseException;
-import org.apache.lucene.queryparser.classic.QueryParser;
-import org.apache.lucene.search.QueryWrapperFilter;
 
 public class ArticleChildrenX {
 

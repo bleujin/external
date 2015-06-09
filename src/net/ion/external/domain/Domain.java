@@ -4,7 +4,7 @@ import net.ion.craken.node.ReadNode;
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.node.TransactionJob;
 import net.ion.craken.node.WriteSession;
-import net.ion.craken.tree.Fqn;
+import net.ion.craken.node.crud.tree.Fqn;
 import net.ion.external.ICSSubCraken;
 
 public class Domain {

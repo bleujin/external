@@ -8,8 +8,7 @@ import net.ion.craken.node.ReadNode;
 import net.ion.external.domain.Domain;
 import net.ion.framework.parse.gson.stream.JsonWriter;
 import net.ion.framework.util.ListUtil;
-
-import org.apache.lucene.analysis.kr.utils.StringUtil;
+import net.ion.framework.util.StringUtil;
 
 public class AbCategory<T extends AbCategory> extends BeanX{
 

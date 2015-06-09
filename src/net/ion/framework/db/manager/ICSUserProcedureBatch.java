@@ -3,7 +3,6 @@ package net.ion.framework.db.manager;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.concurrent.Callable;
 
 import net.ion.framework.db.IDBController;
 import net.ion.framework.db.bean.ResultSetHandler;

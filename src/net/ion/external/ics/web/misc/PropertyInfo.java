@@ -1,9 +1,9 @@
 package net.ion.external.ics.web.misc;
 
-import net.ion.framework.parse.gson.JsonObject;
-
 import java.util.Map.Entry;
 import java.util.Properties;
+
+import net.ion.framework.parse.gson.JsonObject;
 
 public class PropertyInfo {
 	public JsonObject list() {

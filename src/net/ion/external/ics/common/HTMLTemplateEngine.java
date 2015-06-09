@@ -1,5 +1,12 @@
 package net.ion.external.ics.common;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.nio.charset.Charset;
+import java.util.concurrent.Executors;
+
 import net.ion.craken.node.ReadSession;
 import net.ion.craken.util.StringInputStream;
 import net.ion.external.ICSSubCraken;
@@ -23,13 +30,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.nio.charset.Charset;
-import java.util.concurrent.Executors;
 
 public class HTMLTemplateEngine implements TemplateEngine {
 
